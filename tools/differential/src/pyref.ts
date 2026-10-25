@@ -10,7 +10,7 @@ export class PyRef {
   #stderr = '';
 
   constructor() {
-    this.#child = spawn('uv', ['run', '--quiet', '--project', PY_DIR, 'python', `${PY_DIR}cross.py`], {
+    this.#child = spawn('uv', ['run', '--quiet', '--group', 'diff', '--project', PY_DIR, 'python', `${PY_DIR}cross.py`], {
       cwd: PY_DIR,
       env: { ...process.env, VIRTUAL_ENV: '' },
     });
