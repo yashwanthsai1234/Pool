@@ -252,7 +252,7 @@ describe('E2E-P1-01 a whole deal, pure functions only', () => {
   });
 
   it('stage 7 to 10: lock checker, bar, credentials, operations and post-quantum bindings, the gate, the record and the memo', async () => {
-    // all 15 codes, in the DESIGN 6.17 order, every one passing
+    // all 17 codes, in the DESIGN 6.17 order, every one passing
     expect(d.findings.map((f) => f.code)).toEqual([...GATE_CODES]);
     expect(d.findings.filter((f) => !f.ok)).toEqual([]);
     for (const c of [

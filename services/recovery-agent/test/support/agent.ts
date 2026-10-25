@@ -109,6 +109,7 @@ export async function makeAgentWorld(w: World): Promise<AgentWorld> {
   const payoutB = Wallet.generate(ECDSA.ed25519).classicAddress;
   const lawyerSlots = Object.fromEntries(['B', 'LA', 'LB'].map((s) => [s, new Uint8Array([0xed, ...rnd(32)])]));
   const sealed: SealedDeal = {
+    dealId: w.dealId,
     walletAddress: wallet.classicAddress,
     contractRoot: rnd(32),
     payoutA: { account: payoutA, tag: 7 },

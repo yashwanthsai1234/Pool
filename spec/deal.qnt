@@ -11,7 +11,7 @@ module deal {
 
   // DESIGN 5.1. Names match packages/core/src/machine.ts, so traces replay one to one.
   type St = DRAFT | CONTRACT_SIGNED | SHELL_OPEN | QUARANTINED | KEYS_READY | WALLET_LOCKED
-          | VERIFIED | FUNDED | PAID_OUT | REFUNDED | DISPUTED | EXPIRED | CLOSED
+          | VERIFIED | SHIPPED | RECEIVED | FUNDED | PAID_OUT | REFUNDED | DISPUTED | EXPIRED | CLOSED
 
   // DESIGN 6.10: "zkpassport" (method A) or "nfc-chip" (method B). The seal's identityPolicy allows one or both.
   type IdMethod = Zk | Chip
@@ -153,7 +153,7 @@ module deal {
   pure def gatePasses(g: str -> bool): bool = CHECKS.forall(c => g.get(c))
 
   pure def isFundedLike(s: St): bool = s.in(Set(FUNDED, DISPUTED))
-  pure def hasEscrow(s: St): bool = s.in(Set(QUARANTINED, KEYS_READY, WALLET_LOCKED, VERIFIED))
+  pure def hasEscrow(s: St): bool = s.in(Set(QUARANTINED, KEYS_READY, WALLET_LOCKED, VERIFIED, SHIPPED, RECEIVED))
   pure def hasSlots(s: St): bool = not(s.in(Set(DRAFT, CONTRACT_SIGNED, SHELL_OPEN, QUARANTINED, CLOSED)))
 
   // XRPL multisign (DESIGN 6.8, 7.5): every signature must be by a key in the current signer list,
@@ -336,6 +336,17 @@ module deal {
     go({ ...d, st: VERIFIED, ev: ev("VERIFY_OK") }),
   }
 
+  // OD-37: Bob's slot-B shipment, then Alice's slot-A receipt (condition ok). Release is legal only from RECEIVED (OD-38).
+  action ship = all {
+    d.st == VERIFIED,
+    go({ ...d, st: SHIPPED, ev: ev("SHIP_SIGNED") }),
+  }
+
+  action receive = all {
+    d.st == SHIPPED,
+    go({ ...d, st: RECEIVED, ev: ev("RECEIPT_SIGNED") }),
+  }
+
   // ---------- Identity and the release gate (DESIGN 6.10, 6.15, 6.17) ----------
 
   // A client does the release-time passport check. A new attestation makes the old gate result stale.
@@ -343,7 +354,7 @@ module deal {
     val a = { present: true, valid: valid, method: m }
     val good = attOk(d.policy, d.onboard.get(side), a)
     all {
-      d.st == VERIFIED,
+      d.st == RECEIVED,
       not(attOk(d.policy, d.onboard.get(side), d.att.get(side))),
       good or d.faults < MAX_FAULTS,
       go({ ...d,
@@ -357,7 +368,7 @@ module deal {
 
   // An attestation becomes older than its freshness window (DESIGN 5.4).
   action attestExpire(side: str): bool = all {
-    d.st == VERIFIED,
+    d.st == RECEIVED,
     d.att.get(side).valid,
     d.faults < MAX_FAULTS,
     go({ ...d,
@@ -381,7 +392,7 @@ module deal {
   // checkRelease on one validated ledger. `bad` is an evidence check that fails ("" for none).
   // A gate with several failing checks blocks just like a gate with one, so one is enough.
   action evalGate(bad: str): bool = all {
-    d.st == VERIFIED,
+    d.st == RECEIVED,
     bad == "" or d.faults < MAX_FAULTS,
     go({ ...d,
       gate: CHECKS.mapBy(c => if (DERIVED_CHECKS.contains(c)) derivedCheck(d, c) else c != bad),
@@ -407,9 +418,9 @@ module deal {
     }),
   }
 
-  // Lawyer B's console releases only from VERIFIED, and only when every gate check passes (I8).
+  // Lawyer B's console releases only from RECEIVED, and only when every gate check passes (I8).
   action release = all {
-    d.st == VERIFIED,
+    d.st == RECEIVED,
     gatePasses(d.gate),
     finish(Releaser),
   }
@@ -724,7 +735,7 @@ module deal {
     { nondet mA = METHODS.oneOf()
       nondet mB = METHODS.oneOf()
       keysMade(mA, mB) },
-    lockWallet, verifyOk,
+    lockWallet, verifyOk, ship, receive,
     { nondet side = CLIENTS.oneOf()
       attest(side, d.onboard.get(side), true) },
     evalGate(""), release, escrowCancel, openDispute,
@@ -895,8 +906,10 @@ module deal {
       .then(lockWallet).then(verifyOk)
       .expect(d.st == VERIFIED)
 
+  run toReceivedTest = toVerifiedTest.then(ship).then(receive).expect(d.st == RECEIVED)
+
   run happyPathTest =
-    toVerifiedTest
+    toReceivedTest
       .then(attest("A", Zk, true)).then(attest("B", Chip, true)).then(evalGate("")).then(release)
       .expect(d == funded(PolicyZkOrChip, Zk, Chip))
 
@@ -946,7 +959,7 @@ module deal {
   // P5.1-03: strangerFinish and skipPassport.
   run strangerFinishTest = toVerifiedTest.then(leakCode).then(strangerFinish.fail())
 
-  run oneAttestation = toVerifiedTest.then(attest("A", Zk, true)).then(evalGate(""))
+  run oneAttestation = toReceivedTest.then(attest("A", Zk, true)).then(evalGate(""))
 
   run skipPassportReleaseTest = oneAttestation.then(release.fail())
 
@@ -956,7 +969,7 @@ module deal {
     initWith(PolicyZk).then(signContract).then(openShell).then(fundQuarantine).then(keysMade(Zk, Chip).fail())
 
   run wrongMethod =
-    toVerifiedTest.then(attest("A", Zk, true)).then(attest("B", Zk, true)).then(evalGate(""))
+    toReceivedTest.then(attest("A", Zk, true)).then(attest("B", Zk, true)).then(evalGate(""))
       .expect(not(d.gate.get("PASSPORT_B_OK")) and not(d.gate.get("IDENTITY_POLICY_OK")))
 
   run wrongMethodAtReleaseTest = wrongMethod.then(release.fail())

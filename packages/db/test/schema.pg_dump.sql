@@ -160,7 +160,7 @@ CREATE TABLE public.deal (
     CONSTRAINT deal_network_check CHECK ((network = ANY (ARRAY['standalone'::text, 'testnet'::text, 'devnet'::text, 'mainnet'::text]))),
     CONSTRAINT deal_releaser_is_ops_b CHECK (((releaser_account IS NULL) OR (NOT (releaser_account IS DISTINCT FROM lawyer_ops_b)))),
     CONSTRAINT deal_signed_contract_seal_check CHECK ((length(signed_contract_seal) = 32)),
-    CONSTRAINT deal_state_check CHECK ((state = ANY (ARRAY['DRAFT'::text, 'CONTRACT_SIGNED'::text, 'SHELL_OPEN'::text, 'QUARANTINED'::text, 'KEYS_READY'::text, 'WALLET_LOCKED'::text, 'VERIFIED'::text, 'FUNDED'::text, 'PAID_OUT'::text, 'REFUNDED'::text, 'DISPUTED'::text, 'EXPIRED'::text, 'CLOSED'::text])))
+    CONSTRAINT deal_state_check CHECK ((state = ANY (ARRAY['DRAFT'::text, 'CONTRACT_SIGNED'::text, 'SHELL_OPEN'::text, 'QUARANTINED'::text, 'KEYS_READY'::text, 'WALLET_LOCKED'::text, 'VERIFIED'::text, 'SHIPPED'::text, 'RECEIVED'::text, 'FUNDED'::text, 'PAID_OUT'::text, 'REFUNDED'::text, 'DISPUTED'::text, 'EXPIRED'::text, 'CLOSED'::text])))
 );
 
 

@@ -1,7 +1,9 @@
 import { EmptyState } from '@legx/ui';
 import { createFileRoute } from '@tanstack/react-router';
 import { lazy, Suspense } from 'react';
+import { NETWORKS } from '../dashboard/-explorer.ts';
 import { LawyerConsolePage, useConsoleWiring } from './-console/ui.tsx';
+import { Walkthrough } from './-walkthrough/ui.tsx';
 
 // The vault frame client and the signed API client stay out of the first download.
 const LawyerConsoleHost = lazy(() => import('./-console-host.tsx').then((m) => ({ default: m.LawyerConsoleHost })));
@@ -15,8 +17,10 @@ function Lawyers() {
   const [vaultOrigin, rpcUrl] = [str(import.meta.env.VITE_VAULT_ORIGIN), str(import.meta.env.VITE_LEGX_XRPL_RPC)];
   const params = new URLSearchParams(location.search);
   const dealId = str(params.get('deal'));
+  const network = NETWORKS.find((n) => n === params.get('network')) ?? 'standalone';
   return (
     <main className="min-h-dvh bg-bg text-fg">
+      <Walkthrough network={network} />
       {vaultOrigin && rpcUrl && dealId ? (
         <Suspense fallback={<p className="p-4">Loading</p>}>
           <LawyerConsoleHost

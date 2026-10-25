@@ -81,6 +81,16 @@
         "ok": true,
         "level": "block",
         "code": "SLOT_SETUP_OK"
+      },
+      {
+        "ok": true,
+        "level": "block",
+        "code": "SHIPMENT_SIGNED_OK"
+      },
+      {
+        "ok": true,
+        "level": "block",
+        "code": "RECEIPT_SIGNED_OK"
       }
     ],
     "relied_on": [

@@ -48,6 +48,12 @@ export interface DemoState {
   observer: DemoKeyState;
   /** The other demo enrollment keys the server pins: `lawyer-a`, `lawyer-b` (deal creation) and `operator`. */
   keys: Record<string, DemoKeyState>;
+  /** OD-37: the demo shipment (Bob's goods), signed in the dry run with the `slot-a` and `slot-b` demo keys. */
+  delivery?: {
+    carrier: string;
+    trackingId: string;
+    items: { sku: string; description: string; qty: number; weight_g: number }[];
+  };
   lawyersOnboarded: Record<string, boolean>;
   frostDkg: Record<string, boolean>;
   pqBound: boolean;

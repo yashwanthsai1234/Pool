@@ -1,7 +1,7 @@
 // P4.2-01 to 04, 06, 07, 09, 11, 15, the property and the fault tests (Chromium and WebKit, fake PRF authenticator).
 // The real WebAuthn PRF runs in webauthn.browser.test.ts (Chromium, CDP virtual authenticators).
 import { slotAddress, slotPolicy, slotPubkey, verifyEd25519Strict } from '@legx/core/frost';
-import type { SealedDeal } from '@legx/core/frostRules';
+import type { SealedDeal, SignRequest } from '@legx/core/frostRules';
 import { verifyMultisigned } from '@legx/core/verify';
 import { bytesToHex, hexToBytes, randomBytes } from '@noble/hashes/utils.js';
 import fc from 'fast-check';
@@ -416,4 +416,69 @@ it('a ciphertext moved to another entry does not open (AAD names the entry)', as
   });
   await expect(vault.signFrost(id2, binding(s.deal, 'A'))).rejects.toThrow('DECRYPT_FAILED');
   await expect(vault.signFrost(s.id, binding(s.deal, 'A'))).resolves.toHaveLength(64);
+});
+
+describe('OD-37 shipment and receipt need a confirmation that shows what is signed', () => {
+  const seal = new Uint8Array(32).fill(7);
+  const enc = (t: string) => new TextEncoder().encode(t);
+  const shipment = (s: Setup): SignRequest => ({
+    kind: 'tagged',
+    tag: 'legx/shipment/v1',
+    parts: [enc(s.id), seal, new Uint8Array(32).fill(9), enc('DHL'), enc('TRK1'), Uint8Array.of(0, 0, 0, 5)],
+  });
+  const receipt = (s: Setup): SignRequest => ({
+    kind: 'tagged',
+    tag: 'legx/receipt/v1',
+    parts: [
+      enc(s.id),
+      seal,
+      new Uint8Array(32).fill(1),
+      new Uint8Array(32).fill(9),
+      Uint8Array.of(1),
+      Uint8Array.of(0, 0, 0, 6),
+    ],
+  });
+  it('shows the manifest root, carrier and tracking, signs after yes, and signs nothing after no', async () => {
+    const shown: unknown[] = [];
+    let answer = true;
+    const s = setup({
+      role: 'bob',
+      confirm: async (_d, what) => {
+        shown.push(what);
+        return answer;
+      },
+    });
+    const deal = { ...s.deal, dealId: s.id, dealSeal: seal, slotPubs: { ...s.deal.slotPubs, B: slotPubkey(s.pub) } };
+    s.deps.deals = async () => deal;
+    await s.vault.storeShares({
+      dealId: s.id,
+      pub: s.pub,
+      share1: copy(s.shares[0]),
+      share2: { mode: 'security-key', credential: { id: 'cred', transports: [] }, share: copy(s.shares[1]) },
+    });
+    const sig = await s.vault.signFrost(s.id, shipment(s));
+    expect(sig).toHaveLength(64);
+    expect(shown).toEqual([{ kind: 'shipment', manifestRoot: '09'.repeat(32), carrier: 'DHL', trackingId: 'TRK1' }]);
+    answer = false;
+    await expect(s.vault.signFrost(s.id, shipment(s))).rejects.toMatchObject({ code: 'APPROVAL_REFUSED' });
+  });
+
+  it('refuses a shipment when the frame has no confirm callback, and decodes a receipt for the screen', async () => {
+    const s = setup({ role: 'bob' });
+    s.deps.deals = async () => ({
+      ...s.deal,
+      dealId: s.id,
+      dealSeal: seal,
+      slotPubs: { ...s.deal.slotPubs, B: slotPubkey(s.pub) },
+    });
+    await store(s);
+    await expect(s.vault.signFrost(s.id, shipment(s))).rejects.toMatchObject({ code: 'APPROVAL_REFUSED' });
+    const { confirmationFor } = await import('../src/confirmation.ts');
+    expect(confirmationFor(receipt(s))).toEqual({
+      kind: 'receipt',
+      manifestRoot: '09'.repeat(32),
+      condition: 'damaged',
+    });
+    expect(confirmationFor(binding(s.deal, 'A'))).toBeUndefined();
+  });
 });

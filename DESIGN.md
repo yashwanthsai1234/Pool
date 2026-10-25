@@ -1042,6 +1042,8 @@ Rules that bite:
 | `IDENTITY_POLICY_OK` | each side's release attestation uses a method the sealed `identityPolicy` allows, and the same method as the onboarding attestation |
 | `PQ_BINDINGS_OK` | all four post-quantum bindings verify: two holder ML-DSA-65 signatures each, plus the slot key's cross-signature; each `pqKeyHash` matches the seal (6.13) |
 | `SLOT_SETUP_OK` | each slot has a `frost.dkg.completed` record whose holders all signed the transcript hash, whose three test signatures verify under the slot key, and whose roles give the sealed `slotPolicy` (6.4) |
+| `SHIPMENT_SIGNED_OK` | exactly one `shipment.signed` for the deal; its `slot_sig` verifies under slot B's sealed key over `shipMsg`, rebuilt from the event fields and the deal (6.17a); its `ledger_index` is not later than the gate's ledger |
+| `RECEIPT_SIGNED_OK` | the latest `receipt.signed` verifies under slot A's sealed key over `rcptMsg` (6.17a); its `shipment_hash` and `manifest_root` equal the shipment's; its `condition` is `ok`; its `ledger_index` is not earlier than the shipment's nor later than the gate's ledger |
 
 **When all pass,** lawyer B signs a `release.gate.passed` record: a hybrid envelope (Ed25519 and ML-DSA-65) by lawyer B's enrollment keys, which also carries a FROST signature by lawyer slot B over the record's hash. It lists the validated ledger index and hash that the gate read, and the SHA-256 of every record the gate relied on. Its leaf hash goes in the `EscrowFinish` memo (D22):
 ```
@@ -1056,6 +1058,17 @@ After the finish validates, write `release.performed`.
 
 ---
 ## 7. XRPL integration
+
+
+### 6.17a Shipment and delivery receipt (OD-37, `src/shipment.ts`)
+
+Alice (buyer, slot A) funds the escrow; Bob (seller, slot B) is paid on release. The binding spec is `build/SHIP_RECEIPT.md`.
+
+- **Manifest root.** Items `{sku, description, qty, weight_g}`; each item is serialized with JCS ([RFC 8785](https://www.rfc-editor.org/rfc/rfc8785.html)); `manifestRoot` = the [RFC 9162](https://www.rfc-editor.org/rfc/rfc9162.html#section-2.1.1) tree hash over those bytes, in list order (the `mth` of 6.1). The full manifest (`Manifest`: items, `packed_at`, `total_weight_g`) is an evidence attachment; only the root is signed.
+- **Shipment.** `shipMsg = tupleHash("legx/shipment/v1", [utf8(dealId), dealSeal, manifestRoot, utf8(carrier), utf8(trackingId), u32(ledgerIndex)])`, signed by slot B's FROST pair; `shipmentHash = SHA-256(shipMsg)`. The coordinator accepts a `ledgerIndex` at most 20 ledgers old (`SHIP_LEDGER_MAX_AGE`). Event `shipment.signed {manifest_root, carrier, tracking_id, ledger_index, ship_msg_hash, slot_sig}`.
+- **Receipt.** `rcptMsg = tupleHash("legx/receipt/v1", [utf8(dealId), dealSeal, shipmentHash, manifestRoot, u8(condition), u32(ledgerIndex)])`, condition 0 `ok`, 1 `damaged`, 2 `missing`, signed by slot A's FROST pair. Event `receipt.signed {shipment_hash, manifest_root, condition, ledger_index, rcpt_msg_hash, slot_sig}`.
+- **Allow-list (6.4).** The `tagged` kind `legx/shipment/v1` is allowed for slot B only and `legx/receipt/v1` for slot A only; parts 0 and 1 must equal the sealed deal ID and deal seal, hashes are 32 bytes, the ledger index 4 bytes, the condition 0 to 2.
+- **State machine (5.1).** `VERIFIED -SHIP_SIGNED-> SHIPPED -RECEIPT_SIGNED(ok)-> RECEIVED -RELEASE_ESCROW-> FUNDED`. A `damaged` or `missing` receipt is refused: the deal stays `SHIPPED` and the dispute path or the CancelAfter refund applies. `SHIPPED` and `RECEIVED` also allow `CANCEL_AFTER_PASSED`.
 
 ### 7.1 What the ledger must support (checked 24 Oct 2026)
 

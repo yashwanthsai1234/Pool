@@ -2,10 +2,13 @@
 // failing step is printed with its exact error and the walk goes on. Writes demo/dry-run.json (for build/ISSUES.md I-D-*).
 // Needs the stack from `node scripts/dev.ts` and a seeded demo/state.json.
 // Source: IMPLEMENTATION.md section 3 (demo profile); xrpl.js https://js.xrpl.org/
+import { createHash, createPrivateKey, sign as edSign } from 'node:crypto';
 import { existsSync, readdirSync, writeFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
+import { verifyReceipt, verifyShipment } from '../../packages/core/src/shipment.ts';
+import { shipBuilders } from '../../packages/core/test/helpers/ship.ts';
 import { demoPassport } from '../../packages/fixtures/src/index.ts';
 import { connect, standaloneEnv, testnetEnv } from '../../packages/xrpl/src/index.ts';
 import { PORTS, probe, ROOT, readState, registryUrl, serverUrl } from './lib.ts';
@@ -152,6 +155,58 @@ await step('dashboard receives the new deal as observer (live feed row)', 'proje
   ws.close();
   return `row ${row}`;
 });
+// OD-37: Bob's shipment and Alice's receipt, signed with the demo slot keys and checked with the gate's own verifiers.
+const slotKey = (name: string) => {
+  const k = key(name);
+  const pkcs8 = createPrivateKey({ key: Buffer.from(k.ed25519Private, 'hex'), format: 'der', type: 'pkcs8' });
+  return {
+    pub: new Uint8Array(Buffer.from(`ED${k.ed25519Public.slice(-64)}`, 'hex')),
+    sign: (m: Uint8Array) => new Uint8Array(edSign(null, m, pkcs8)),
+  };
+};
+const demoDelivery = () => {
+  if (!state.delivery) throw new Error('no demo delivery in demo/state.json: run node scripts/demo/seed.ts');
+  const seal = new Uint8Array(createHash('sha256').update('demo-deal-seal').digest());
+  const at = 1000;
+  const ship = shipBuilders('demo-deal', seal, at);
+  const b = slotKey('slot-b');
+  const a = slotKey('slot-a');
+  const ctx = (slotPub: Uint8Array) => ({ dealId: 'demo-deal', dealSeal: seal, slotPub, atLedger: at });
+  return { ship, a, b, ctx };
+};
+await step('shipment: Bob signs, the gate verifier accepts (SHIPMENT_SIGNED_OK)', 'phones', async () => {
+  const d = demoDelivery();
+  const r = verifyShipment(d.ship.shipmentData(d.b.sign), d.ctx(d.b.pub));
+  if (!r.ok) throw new Error(`shipment refused: ${r.code}`);
+  return `manifest root ${Buffer.from(r.manifestRoot).toString('hex').slice(0, 12)}`;
+});
+await step(
+  'receipt: Alice signs, the gate verifier accepts it bound to the shipment (RECEIPT_SIGNED_OK)',
+  'phones',
+  async () => {
+    const d = demoDelivery();
+    const s = verifyShipment(d.ship.shipmentData(d.b.sign), d.ctx(d.b.pub));
+    if (!s.ok) throw new Error(`shipment refused: ${s.code}`);
+    const r = verifyReceipt(d.ship.receiptData(d.a.sign), { ...d.ctx(d.a.pub), shipment: s });
+    if (!r.ok || r.condition !== 'ok') throw new Error(`receipt not ok: ${JSON.stringify(r)}`);
+    const forged = verifyReceipt(d.ship.receiptData(d.b.sign), { ...d.ctx(d.a.pub), shipment: s });
+    if (forged.ok || forged.code !== 'BAD_SIGNATURE') throw new Error(`forged receipt: ${JSON.stringify(forged)}`);
+    return 'ok receipt accepted; a receipt signed by Bob key is BAD_SIGNATURE';
+  },
+);
+await step(
+  'delivery attacks are defeated on the server (forged, swapped manifest, release before receipt)',
+  'laptop',
+  async () => {
+    for (const name of ['forged-receipt', 'swapped-manifest', 'release-before-receipt']) {
+      const r = await probe(`${S}/demo/attack/${name}`, { method: 'POST' });
+      const body = JSON.parse(r.body) as { defeated?: boolean; code?: string };
+      if (r.status !== 200 || body.defeated !== true || body.code !== 'RECEIPT_SIGNED_OK')
+        throw new Error(`${name}: HTTP ${r.status} ${r.body.slice(0, 160)}`);
+    }
+    return '3 attacks defeated with RECEIPT_SIGNED_OK';
+  },
+);
 await step('zk.verify answers a signed request (not 501): bad proof refused', 'phones', async () => {
   const s = await lawyerA.request(S, 'POST', `/deals/${dealId}/zk/verify`, {
     side: 'A',

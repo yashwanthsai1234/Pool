@@ -102,3 +102,8 @@
 - https://datatracker.ietf.org/doc/draft-ietf-lamps-pq-composite-sigs/ and https://www.rfc-editor.org/rfc/rfc9794 — both components of a hybrid signature bound to one identity; `hybridEnvelope.ts` `pair` (I-S-P1).
 - https://www.icao.int/publications/Documents/9303_p11_cons_en.pdf (6.1 AA, 6.2 CA) — `chip_auth_available` (OD-22, I-S-G5).
 - https://www.unicode.org/reports/tr15/ (NFC) and https://www.rfc-editor.org/rfc/rfc3629 (UTF-8 has no surrogates) — `contract.ts` `clauseBytes` (I-E1).
+
+## OD-37 shipment and receipt (`src/shipment.ts`)
+- https://www.rfc-editor.org/rfc/rfc8785.html: JCS of each manifest item (3.2.2.2 strings, lone surrogates refused; 3.2.3 key sorting by UTF-16 code units). Implemented with `canonicalize@5.1.0` (already used by services/evidence).
+- https://www.rfc-editor.org/rfc/rfc9162.html#section-2.1.1: the manifest root is MTH over the items' JCS bytes (`mth` in dealcore.ts).
+- build/SHIP_RECEIPT.md: shipMsg, rcptMsg, the allow-list tags, the two gate codes, the SHIPPED and RECEIVED states.

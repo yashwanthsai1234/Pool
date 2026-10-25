@@ -44,6 +44,9 @@ describe('P1.2-06 EventKind', () => {
       'frost.recovery.signed',
       'release_code.handed_over',
       'checkpoint.anchored',
+      // OD-37: the shipment and the delivery receipt (build/SHIP_RECEIPT.md).
+      'shipment.signed',
+      'receipt.signed',
     ];
     expect(new Set(EventKind.options)).toEqual(new Set(design));
     expect(EventKind.options).toHaveLength(design.length);
@@ -68,10 +71,38 @@ describe('P1.2-06 EventKind', () => {
     expect(LegxEvent.safeParse({ ...a, predicate: noAlgs }).success).toBe(false);
   });
 
-  it('the release gate record lists all 15 gate codes of DESIGN 6.17', () => {
-    expect(GATE_CODES).toHaveLength(15);
+  it('the release gate record lists all 17 gate codes of DESIGN 6.17', () => {
+    expect(GATE_CODES).toHaveLength(17);
+    expect(GATE_CODES.slice(-2)).toEqual(['SHIPMENT_SIGNED_OK', 'RECEIPT_SIGNED_OK']);
     const gate = events.find((e: { predicate: { kind: string } }) => e.predicate.kind === 'release.gate.passed');
     const codes = gate.predicate.data.gate.findings.map((f: { code: string }) => f.code);
     expect(new Set(codes)).toEqual(new Set(GATE_CODES));
+  });
+});
+
+describe('OD-37 shipment.signed and receipt.signed', () => {
+  const events = JSON.parse(readFileSync(new URL('../examples/LegxEvent.json', import.meta.url), 'utf8'));
+  const of = (kind: string) => events.find((e: { predicate: { kind: string } }) => e.predicate.kind === kind);
+  const withData = (e: { predicate: { data: object } }, over: object) => ({
+    ...e,
+    predicate: { ...e.predicate, data: { ...e.predicate.data, ...over } },
+  });
+
+  it('refuses a receipt condition outside ok, damaged, missing', () => {
+    const r = of('receipt.signed');
+    for (const c of ['ok', 'damaged', 'missing'])
+      expect(LegxEvent.safeParse(withData(r, { condition: c })).success).toBe(true);
+    for (const c of ['OK', 0, 'lost', ''])
+      expect(LegxEvent.safeParse(withData(r, { condition: c })).success).toBe(false);
+  });
+
+  it('refuses an empty, overlong or control-character carrier or tracking ID, and a bad slot signature', () => {
+    const s = of('shipment.signed');
+    for (const v of ['', 'x'.repeat(65), 'a\nb', 'a\u0000b'])
+      for (const k of ['carrier', 'tracking_id'])
+        expect(LegxEvent.safeParse(withData(s, { [k]: v })).success).toBe(false);
+    expect(LegxEvent.safeParse(withData(s, { carrier: 'x'.repeat(64) })).success).toBe(true);
+    expect(LegxEvent.safeParse(withData(s, { slot_sig: 'ab'.repeat(63) })).success).toBe(false);
+    expect(LegxEvent.safeParse(withData(s, { ledger_index: 0 })).success).toBe(false);
   });
 });

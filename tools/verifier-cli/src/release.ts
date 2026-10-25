@@ -1,8 +1,8 @@
 // DESIGN 8.8 items 2, 8 to 10: the contract and clause proofs, the trust profile of the zero-knowledge records, the
 // offline re-verification of each zero-knowledge proof from the recorded registry answer and circuit files, and a rerun
 // of the release gate (`checkRelease`) on the recorded input. The gate covers the signed contract, the operations
-// bindings, the bar records, the credentials and the passport and onboarding attestations.
-// Source: DESIGN.md 6.10 (offline re-verification), 6.17 (the 15 gate codes), 8.8
+// bindings, the bar records, the credentials, the passport and onboarding attestations, and the shipment and receipt.
+// Source: DESIGN.md 6.10 (offline re-verification), 6.17 (the 17 gate codes, OD-37 added the shipment and the receipt), 8.8
 import { existsSync } from 'node:fs';
 import { checkTrustRecord, type Profile } from '@legx/core/attest';
 import { verifyClause } from '@legx/core/contract';
@@ -75,7 +75,11 @@ function checkClauseProof(path: string, bytes: Uint8Array, root: Uint8Array, out
 
 /** Attestation and gate-record envelopes carry the hybrid signatures of enrolled keys (DESIGN 6.15, 6.17). */
 export function checkRecordSignatures(files: BundleFiles, registry: KeyRegistry, at: number, out: Findings): void {
-  for (const path of [...files.under('attestations/', '.dsse.json'), ...files.under('release/gate/', '.dsse.json')]) {
+  for (const path of [
+    ...files.under('attestations/', '.dsse.json'),
+    ...files.under('release/gate/', '.dsse.json'),
+    ...files.under('delivery/', '.dsse.json'),
+  ]) {
     const r = verifyHybrid(files.json(path) as Envelope, registry, at);
     if (r.ok) out.pass('attestation', path, 'both signatures verify');
     else out.fail('attestation', path, `signature check failed: ${r.code}`);
@@ -183,6 +187,8 @@ const GATE_CHECK: Record<string, string> = {
   ONBOARDING_OK: 'attestations',
   IDS_DISTINCT: 'attestations',
   IDENTITY_POLICY_OK: 'attestations',
+  SHIPMENT_SIGNED_OK: 'delivery',
+  RECEIPT_SIGNED_OK: 'delivery',
 };
 
 /** Bytes travel in the gate input as `{"$bytes": "<base64>"}`. */
@@ -208,7 +214,7 @@ export function checkGate(files: BundleFiles, profile: Profile, out: Findings): 
       gates.length > 0
         ? 'a release gate record is present but its input is not in the bundle'
         : 'the release gate has not run for this deal';
-    for (const c of ['signed-contract', 'bindings', 'bar-records', 'attestations', 'release-gate'])
+    for (const c of ['signed-contract', 'bindings', 'bar-records', 'attestations', 'delivery', 'release-gate'])
       out.skip(c, FILE, `${why}: not verified`);
     return;
   }

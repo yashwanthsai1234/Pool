@@ -7,10 +7,13 @@ export type PyVector<I = Record<string, unknown>, O = string> = { fn: string; in
 
 const DIR = join(dirname(fileURLToPath(import.meta.url)), '../../../../tools/py-ref/vectors');
 
+/** Every vector in `tools/py-ref/vectors/<file>.json`, in file order. */
+export const pyVectors = <I = Record<string, unknown>, O = string>(file: string): PyVector<I, O>[] =>
+  JSON.parse(readFileSync(join(DIR, `${file}.json`), 'utf8')) as PyVector<I, O>[];
+
 /** The vector named `fn` in `tools/py-ref/vectors/<file>.json`; throws if it is missing, so a renamed vector fails loudly. */
 export function pyVector<I = Record<string, string>, O = string>(file: string, fn: string): PyVector<I, O> {
-  const all = JSON.parse(readFileSync(join(DIR, `${file}.json`), 'utf8')) as PyVector<I, O>[];
-  const v = all.find((x) => x.fn === fn);
+  const v = pyVectors<I, O>(file).find((x) => x.fn === fn);
   if (!v) throw new Error(`no vector ${fn} in ${file}.json`);
   return v;
 }

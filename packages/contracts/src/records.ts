@@ -321,7 +321,25 @@ export const LOCK_CODES = [
 export const LockDynamicCode = z.string().regex(/^(?:UNEXPECTED_OWNED|INCOMING)_[A-Z0-9_]{1,64}$/);
 export const LockCode = z.union([z.enum(LOCK_CODES), LockDynamicCode]);
 
-/** The 15 release gate codes (DESIGN 6.17). */
+// ---------- Shipment manifest (OD-37, build/SHIP_RECEIPT.md 1) ----------
+
+/** One manifest line. Its RFC 8785 (JCS) bytes are one leaf of the signed manifest root. */
+export const ManifestItem = z.strictObject({
+  sku: z.string().min(1).max(64),
+  description: z.string().max(512),
+  qty: z.int().min(1).max(1_000_000),
+  weight_g: z.int().min(0).max(1_000_000_000),
+});
+export type ManifestItem = z.infer<typeof ManifestItem>;
+/** The full manifest Bob attaches as evidence; only the root over `items` is signed. */
+export const Manifest = z.strictObject({
+  items: z.array(ManifestItem).min(1).max(1000),
+  packed_at: z.iso.datetime({ offset: true }),
+  total_weight_g: z.int().min(0).max(Number.MAX_SAFE_INTEGER),
+});
+export type Manifest = z.infer<typeof Manifest>;
+
+/** The 17 release gate codes (DESIGN 6.17; OD-37 added the shipment and the receipt). */
 export const GATE_CODES = [
   'LOCK_OK',
   'CONTRACT_SEAL_OK',
@@ -338,6 +356,8 @@ export const GATE_CODES = [
   'IDENTITY_POLICY_OK',
   'PQ_BINDINGS_OK',
   'SLOT_SETUP_OK',
+  'SHIPMENT_SIGNED_OK',
+  'RECEIPT_SIGNED_OK',
 ] as const;
 export const GateCode = z.enum(GATE_CODES);
 /** A warning of the release gate (`level: 'warn'`, `ok: true`): the demo profile accepted a release proof without a face match (OD-34). */
@@ -365,10 +385,10 @@ export const ReleaseGateRecord = z
       .max(256),
     slot_lb_sig: Ed25519SigHex, // FROST signature by slot LB over the record hash (recipe: core, task 1.12)
   })
-  // A passed gate lists all 15 codes, each passing (DESIGN 6.17; IMPLEMENTATION P3.2-13).
+  // A passed gate lists all 17 codes, each passing (DESIGN 6.17; IMPLEMENTATION P3.2-13).
   .refine((g) => GATE_CODES.every((c) => g.findings.some((f) => f.code === c && f.ok && f.level === 'block')), {
     path: ['findings'],
-    message: 'a passed gate lists all 15 gate codes as passing',
+    message: 'a passed gate lists all 17 gate codes as passing',
   });
 
 // ---------- Enrollment keys and slot policy (DESIGN 6.3, 6.4) ----------

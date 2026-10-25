@@ -21,6 +21,8 @@ export const OutboxTopic = z.enum([
   'ledger.validated',
   'frost.session',
   'alert',
+  // The demo-profile guided walkthrough (build/WALKTHROUGH.md): one row per step, for the dashboard timeline.
+  'walkthrough.step',
 ]);
 
 /** The `ledger.validated` payload (OD-9). */

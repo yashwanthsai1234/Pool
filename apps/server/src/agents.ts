@@ -79,6 +79,7 @@ function dealFacts(c: CoordinatorDeps, maxFeeDrops: string): DealInfoPort {
       const d = pd.publicData;
       const key = (k: string) => hexToBytes(k.toLowerCase());
       return {
+        dealId,
         walletAddress: d.walletAddress,
         contractRoot: key(d.contractRoot),
         dealSeal: key(pd.dealSeal),

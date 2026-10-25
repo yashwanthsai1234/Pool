@@ -196,6 +196,32 @@ const ROWS: Row[] = [
     },
     ['SLOT_SETUP_OK'],
   ],
+  [
+    'SHIPMENT_SIGNED_OK',
+    'the shipment is signed by slot A instead of slot B (and the receipt then has no valid shipment)',
+    async (i, w) => {
+      i.records.shipments = [
+        await w.event(
+          'shipment.signed',
+          w.ship.shipmentData((m) => w.S.A.sign(m)),
+        ),
+      ];
+    },
+    ['SHIPMENT_SIGNED_OK', 'RECEIPT_SIGNED_OK'],
+  ],
+  [
+    'RECEIPT_SIGNED_OK',
+    "attack 1: the receipt is forged with slot B, not Alice's slot A",
+    async (i, w) => {
+      i.records.receipts = [
+        await w.event(
+          'receipt.signed',
+          w.ship.receiptData((m) => w.S.B.sign(m)),
+        ),
+      ];
+    },
+    ['RECEIPT_SIGNED_OK'],
+  ],
 ];
 const broken = async (row: Row) => {
   const i = mutable(w.input);
@@ -204,7 +230,7 @@ const broken = async (row: Row) => {
 };
 
 describe('T-U-18a and the DESIGN 6.17 table', () => {
-  it('T-U-18a: every input good gives 15 passing blocking findings, in the DESIGN 6.17 order', () => {
+  it('T-U-18a: every input good gives 17 passing blocking findings, in the DESIGN 6.17 order', () => {
     const f = checkRelease(w.input);
     expect(f.map((x) => x.code)).toEqual([...GATE_CODES]);
     expect(f.every((x) => x.ok && x.level === 'block' && x.detail === undefined)).toBe(true);
@@ -217,9 +243,71 @@ describe('T-U-18a and the DESIGN 6.17 table', () => {
     const codes = [...section.matchAll(/^\| `([A-Z_]+)`(?:, `([A-Z_]+)`)? \|/gm)].flatMap((m) =>
       m.slice(1).filter((x): x is string => x !== undefined),
     );
-    expect(codes).toHaveLength(15);
+    expect(codes).toHaveLength(17);
     expect(checkRelease(w.input).map((x) => x.code)).toEqual(codes);
     expect(ROWS.map((r) => r[0])).toEqual(codes);
+  });
+});
+
+describe('OD-37 shipment and receipt checks', () => {
+  const codeOf = async (change: (i: Mut) => Promise<void>, code: GateCode): Promise<FindingSchema | undefined> => {
+    const i = mutable(w.input);
+    await change(i);
+    return checkRelease(i).find((f) => f.code === code);
+  };
+  const receipt =
+    (over: Parameters<World['ship']['receiptData']>[1]) =>
+    async (i: Mut): Promise<void> => {
+      i.records.receipts = [
+        await w.event(
+          'receipt.signed',
+          w.ship.receiptData((m) => w.S.A.sign(m), over),
+        ),
+      ];
+    };
+  /** Replaces the stored records of one kind with what `make` returns. */
+  const set =
+    (key: 'shipments' | 'receipts', make: (i: Mut) => Promise<Uint8Array[] | undefined>) =>
+    async (i: Mut): Promise<void> => {
+      i.records[key] = await make(i);
+    };
+  const shipped = (over: Parameters<World['ship']['shipmentData']>[1]) =>
+    set('shipments', async () => [
+      await w.event(
+        'shipment.signed',
+        w.ship.shipmentData((m) => w.S.B.sign(m), over),
+      ),
+    ]);
+  it.each([
+    ['no receipt', set('receipts', async () => []), 'MISSING'],
+    ['attack 2: a receipt for another shipment', receipt({ shipment: { trackingId: 'OTHER' } }), 'SHIPMENT_MISMATCH'],
+    ['attack 2: a swapped manifest root', receipt({ root: new Uint8Array(32).fill(1) }), 'MANIFEST_MISMATCH'],
+    ['a damaged receipt', receipt({ condition: 'damaged' }), 'CONDITION_DAMAGED'],
+    ['a missing receipt', receipt({ condition: 'missing' }), 'CONDITION_MISSING'],
+    ['a receipt before the shipment', receipt({ ledgerIndex: 90_000_089 }), 'LEDGER_BEFORE_SHIPMENT'],
+  ] as const)('RECEIPT_SIGNED_OK fails on %s', async (_, change, detail) => {
+    expect(await codeOf(change, 'RECEIPT_SIGNED_OK')).toMatchObject({ ok: false, detail });
+  });
+  it('the latest receipt counts: a later ok receipt replaces a damaged one', async () => {
+    const i = mutable(w.input);
+    const damaged = await w.event(
+      'receipt.signed',
+      w.ship.receiptData((m) => w.S.A.sign(m), { condition: 'damaged' }),
+    );
+    i.records.receipts = [damaged, ...i.records.receipts];
+    expect(checkRelease(i).every((f) => f.ok)).toBe(true);
+  });
+  it.each([
+    ['no shipment', set('shipments', async () => undefined), 'MISSING'],
+    [
+      'two shipments',
+      set('shipments', async (i) => [i.records.shipments[0], i.records.shipments[0]]),
+      'NOT_EXACTLY_ONE',
+    ],
+    ['a shipment after the gate ledger', shipped({ ledgerIndex: 90_000_101 }), 'LEDGER_AFTER_GATE'],
+    ['a shipment of another deal seal', shipped({ dealSeal: new Uint8Array(32) }), 'MSG_HASH_MISMATCH'],
+  ] as const)('SHIPMENT_SIGNED_OK fails on %s', async (_, change, detail) => {
+    expect(await codeOf(change, 'SHIPMENT_SIGNED_OK')).toMatchObject({ ok: false, detail });
   });
 });
 
@@ -547,6 +635,8 @@ describe('P1.12-01: the release.gate.passed record', () => {
           [`pq.bound/${s}`, r.pqBound[s]],
           [`frost.dkg.completed/${s}`, r.dkgCompleted[s]],
         ]),
+        ['shipment.signed', r.shipments?.[0]],
+        ['receipt.signed', r.receipts?.[0]],
       ].map(([name, b]) => ({ name, sha256: bytesToHex(sha256(b as Uint8Array)) }));
       expect(gate.relied_on).toEqual(expected);
       expect(st.predicate.actor).toEqual({ role: 'lawyerB', key_id: 'LB/console/ed' });

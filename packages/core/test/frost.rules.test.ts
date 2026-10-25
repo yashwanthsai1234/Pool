@@ -137,6 +137,7 @@ const deal: SealedDeal = {
   walletAddress: wallet,
   contractRoot: randomBytes(32),
   dealSeal: randomBytes(32),
+  dealId: '0192f1a0-7b3c-7d4e-8f00-0000000000a1',
   payoutA: { account: 'rPEPPER7kfTD9w2To4CQk6UCfuHM9c6GDY' },
   payoutB: { account: 'rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn', tag: 7 },
   exitAmountDrops: '1000000',
@@ -278,6 +279,50 @@ describe('T-U-31b message allow-list', () => {
     expect(messageAllowed({ kind: 'gate-record', envelope: other }, sha256(other), deal, 'LB').ok).toBe(false);
     const junk = enc('{');
     expect(messageAllowed({ kind: 'gate-record', envelope: junk }, sha256(junk), deal, 'LB').ok).toBe(false);
+  });
+});
+
+describe('OD-37 shipment and receipt tags', () => {
+  const id = u(deal.dealId!);
+  const seal = deal.dealSeal!;
+  const h = () => randomBytes(32);
+  const ship = (over: Partial<Record<number, Uint8Array>> = {}) => {
+    const parts = [id, seal, h(), u('DHL'), u('JD0146'), Uint8Array.of(0, 0, 3, 232)];
+    for (const [k, v] of Object.entries(over)) parts[Number(k)] = v as Uint8Array;
+    return tagged('legx/shipment/v1', parts);
+  };
+  const rcpt = (over: Partial<Record<number, Uint8Array>> = {}) => {
+    const parts = [id, seal, h(), h(), Uint8Array.of(0), Uint8Array.of(0, 0, 3, 233)];
+    for (const [k, v] of Object.entries(over)) parts[Number(k)] = v as Uint8Array;
+    return tagged('legx/receipt/v1', parts);
+  };
+  const allowed = (x: ReturnType<typeof tagged>, slot: SlotName, d: SealedDeal = deal) =>
+    messageAllowed(x.req, x.msg, d, slot).ok;
+
+  it('slot B alone signs a shipment; slot A alone signs a receipt', () => {
+    expect(allowed(ship(), 'B')).toBe(true);
+    for (const s of ['A', 'LA', 'LB'] as const) expect(allowed(ship(), s)).toBe(false);
+    for (const c of [0, 1, 2]) expect(allowed(rcpt({ 4: Uint8Array.of(c) }), 'A')).toBe(true);
+    for (const s of ['B', 'LA', 'LB'] as const) expect(allowed(rcpt(), s)).toBe(false);
+  });
+  it('refuses another deal, another seal, a deal without seal or id, and malformed parts', () => {
+    const other = u('0192f1a0-7b3c-7d4e-8f00-0000000000a2');
+    expect(allowed(ship({ 0: other }), 'B')).toBe(false);
+    expect(allowed(ship({ 1: h() }), 'B')).toBe(false);
+    expect(allowed(ship(), 'B', { ...deal, dealSeal: undefined })).toBe(false);
+    expect(allowed(ship(), 'B', { ...deal, dealId: undefined })).toBe(false);
+    expect(allowed(ship({ 2: randomBytes(31) }), 'B')).toBe(false);
+    expect(allowed(ship({ 3: new Uint8Array() }), 'B')).toBe(false);
+    expect(allowed(ship({ 4: u('x'.repeat(65)) }), 'B')).toBe(false);
+    expect(allowed(ship({ 5: Uint8Array.of(1, 2, 3) }), 'B')).toBe(false);
+    expect(allowed(rcpt({ 0: other }), 'A')).toBe(false);
+    expect(allowed(rcpt({ 1: h() }), 'A')).toBe(false);
+    expect(allowed(rcpt({ 3: randomBytes(33) }), 'A')).toBe(false);
+    expect(allowed(rcpt({ 4: Uint8Array.of(3) }), 'A')).toBe(false);
+    expect(allowed(rcpt({ 4: Uint8Array.of(0, 0) }), 'A')).toBe(false);
+    expect(allowed(rcpt({ 5: Uint8Array.of(0, 0, 0, 0, 1) }), 'A')).toBe(false);
+    const short = tagged('legx/receipt/v1', [id, seal, h(), h(), Uint8Array.of(0)]);
+    expect(allowed(short, 'A')).toBe(false);
   });
 });
 

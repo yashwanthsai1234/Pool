@@ -1,9 +1,12 @@
 // A full deal driven through the public API, step by step, so each test can stop at the state it needs.
 
 import { GATE_CODES } from '@legx/contracts/records';
+import { hexToBytes } from '@legx/core/dealcore';
 import { lsf } from '@legx/core/lockcheck';
 import { toBase64 } from '@legx/core/pq';
+import { ed25519 } from '@noble/curves/ed25519.js';
 import { deriveAddress } from 'xrpl';
+import { shipBuilders } from '../../../../packages/core/test/helpers/ship.ts';
 import {
   addTx,
   call,
@@ -262,7 +265,7 @@ export async function gatePassed(w: World, id: string) {
 }
 
 export async function toFunded(w: World, id: string) {
-  await toVerified(w, id);
+  await toReceived(w, id);
   const g = ok(await gatePassed(w, id));
   const finish = addTx(w, 'EscrowFinish', w.addr.opsB, ourEscrow(w));
   w.ledger.index += 0;
@@ -273,4 +276,33 @@ export async function toFunded(w: World, id: string) {
       gate_leaf_hash: g.leafHash,
     }),
   );
+}
+
+/** The slot key of a party signs a tagged message (the real slot is a FROST pair; its group signature is plain Ed25519). */
+const slotSigner = (w: World, role: Role) => (msg: Uint8Array) =>
+  ed25519.sign(msg, hexToBytes(w.parties[role].wallet.privateKey.slice(2)));
+
+/** `shipment.signed` / `receipt.signed` data for a deal, built at the world's current ledger. */
+export async function shipData(w: World, id: string, signAs: Role = 'bob', at = w.ledger.index) {
+  const pd = await publicData(w, id);
+  const b = shipBuilders(id, hexToBytes(pd.dealSeal), at);
+  const sign = slotSigner(w, signAs);
+  return {
+    ...b,
+    shipment: (over: Parameters<typeof b.shipmentData>[1] = {}) => b.shipmentData(sign, over),
+    receipt: (over: Parameters<typeof b.receiptData>[1] = {}, as: Role = 'alice') =>
+      b.receiptData(slotSigner(w, as), over),
+  };
+}
+
+export async function toShipped(w: World, id: string) {
+  await toVerified(w, id);
+  const s = await shipData(w, id);
+  ok(await post(w, id, 'bob', 'shipment.signed', s.shipment()));
+}
+
+export async function toReceived(w: World, id: string) {
+  await toShipped(w, id);
+  const s = await shipData(w, id);
+  ok(await post(w, id, 'alice', 'receipt.signed', s.receipt()));
 }

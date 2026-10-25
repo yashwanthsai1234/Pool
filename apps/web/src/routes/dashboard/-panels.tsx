@@ -2,7 +2,7 @@ import { DealState } from '@legx/contracts/values';
 import { cn, StatusBadge } from '@legx/ui';
 import type { ReactNode } from 'react';
 import { explorerUrl, type Network } from './-explorer.ts';
-import type { EvidenceView, FrostEntry, Item, LedgerEntry } from './-model.ts';
+import type { EvidenceView, FrostEntry, Item, LedgerEntry, ShipStep, WalkStep } from './-model.ts';
 import './-dashboard.css';
 
 export function Panel({ title, children, className }: { title: string; children: ReactNode; className?: string }) {
@@ -160,6 +160,57 @@ export function FrostProgress({ frost }: { frost: readonly FrostEntry[] }) {
           </li>
         ))}
       </ul>
+    </Panel>
+  );
+}
+
+export function ShippingTimeline({ steps }: { steps: readonly ShipStep[] }) {
+  return (
+    <Panel title="Shipment and receipt">
+      <ol className="grid gap-2 text-lg">
+        {steps.map((s) => (
+          <li key={s.label} data-done={s.done} className="grid gap-0.5">
+            <span className={s.done ? 'font-bold' : 'text-muted'}>
+              {s.done ? '\u2713 ' : '\u25CB '}
+              {s.label}
+              {s.condition ? ` (${s.condition})` : ''}
+            </span>
+            {s.signature ? (
+              <span className="font-mono text-base">
+                signature <span data-testid="ship-signature">{short(s.signature, 8)}</span>
+              </span>
+            ) : null}
+            {s.manifestRoot ? (
+              <span className="font-mono text-base">
+                manifest root <span data-testid="ship-root">{short(s.manifestRoot, 8)}</span>
+              </span>
+            ) : null}
+          </li>
+        ))}
+      </ol>
+    </Panel>
+  );
+}
+
+export function WalkthroughTimeline({ steps }: { steps: readonly WalkStep[] }) {
+  if (steps.length === 0) return null;
+  return (
+    <Panel title="Walkthrough">
+      <ol className="grid gap-1 text-base">
+        {steps.map((s) => (
+          <li key={s.n} data-step={s.step} data-ok={s.ok} className="grid">
+            <span className={s.ok ? 'font-bold' : 'font-bold text-fail'}>
+              {s.ok ? '\u2713 ' : '\u2717 '}
+              {s.n}. {s.step}
+            </span>
+            {s.txHashes.map((h) => (
+              <span key={h} className="font-mono text-muted">
+                {short(h, 6)}
+              </span>
+            ))}
+          </li>
+        ))}
+      </ol>
     </Panel>
   );
 }

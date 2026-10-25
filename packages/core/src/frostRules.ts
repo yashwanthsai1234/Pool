@@ -92,6 +92,7 @@ export type SealedDeal = {
   walletAddress: string;
   contractRoot: Uint8Array;
   dealSeal?: Uint8Array; // absent before the seal exists; seal-bound tags are refused then
+  dealId?: string; // OD-37: the shipment and receipt tags name the deal; refused when absent
   payoutA: Payout; // Alice: refund, and the AccountDelete destination
   payoutB: Payout;
   exitAmountDrops: string;
@@ -188,6 +189,25 @@ function checkCredentialAccept(
   }
 }
 
+const len = (p: readonly Uint8Array[], i: number, n: number) => p[i]?.length === n;
+/** OD-37: parts 0 and 1 are the sealed deal ID and deal seal. */
+const sealedDealParts = (p: readonly Uint8Array[], deal: SealedDeal) =>
+  deal.dealId !== undefined &&
+  deal.dealSeal !== undefined &&
+  p[0] !== undefined &&
+  p[1] !== undefined &&
+  equalBytes(p[0], utf8ToBytes(deal.dealId)) &&
+  equalBytes(p[1], deal.dealSeal);
+/** A carrier or tracking ID as the `shipment.signed` schema allows it: UTF-8, 1 to 64 characters, no controls. */
+function shipText(b: Uint8Array | undefined): boolean {
+  try {
+    const t = new TextDecoder('utf-8', { fatal: true }).decode(b);
+    return [...t].length <= 64 && /^[^\p{Cc}]+$/u.test(t);
+  } catch {
+    return false;
+  }
+}
+
 /** The tagged tupleHash messages a slot may sign, each with the parts that must match the seal (DESIGN 6.4). */
 function checkTagged(tag: string, p: readonly Uint8Array[], deal: SealedDeal, slot: SlotName): boolean {
   const eq = (i: number, v: Uint8Array | undefined) => v !== undefined && p[i] !== undefined && equalBytes(p[i], v);
@@ -206,6 +226,27 @@ function checkTagged(tag: string, p: readonly Uint8Array[], deal: SealedDeal, sl
       return p.length === 3 && eq(0, deal.dealSeal) && eq(1, deal.slotPubs[slot]);
     case 'legx/ops-binding/v1': // 6.14 [contractRoot, opsAccount, lawyerPub, LC, role]
       return lawyer && p.length === 5 && eq(0, deal.contractRoot) && eq(2, deal.slotPubs[slot]) && isSlot(4);
+    case 'legx/shipment/v1': // OD-37 [dealId, dealSeal, manifestRoot, carrier, trackingId, u32 ledgerIndex], slot B only
+      return (
+        slot === 'B' &&
+        p.length === 6 &&
+        sealedDealParts(p, deal) &&
+        len(p, 2, 32) &&
+        shipText(p[3]) &&
+        shipText(p[4]) &&
+        len(p, 5, 4)
+      );
+    case 'legx/receipt/v1': // OD-37 [dealId, dealSeal, shipmentHash, manifestRoot, u8 condition, u32 ledgerIndex], slot A only
+      return (
+        slot === 'A' &&
+        p.length === 6 &&
+        sealedDealParts(p, deal) &&
+        len(p, 2, 32) &&
+        len(p, 3, 32) &&
+        len(p, 4, 1) &&
+        (p[4]?.[0] ?? 3) <= 2 &&
+        len(p, 5, 4)
+      );
     default:
       return false;
   }

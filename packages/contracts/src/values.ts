@@ -150,7 +150,7 @@ export const IdMethod = z.enum(['zkpassport', 'nfc-chip']);
 /** Identity policy in the seal (DESIGN 6.10). */
 export const IdentityPolicy = z.enum(['zk', 'zk-or-chip', 'chip']);
 
-/** Deal states (DESIGN 5.1, 9). */
+/** Deal states (DESIGN 5.1, 9). SHIPPED and RECEIVED (OD-37) sit between VERIFIED and FUNDED. */
 export const DealState = z.enum([
   'DRAFT',
   'CONTRACT_SIGNED',
@@ -159,6 +159,8 @@ export const DealState = z.enum([
   'KEYS_READY',
   'WALLET_LOCKED',
   'VERIFIED',
+  'SHIPPED',
+  'RECEIVED',
   'FUNDED',
   'PAID_OUT',
   'REFUNDED',

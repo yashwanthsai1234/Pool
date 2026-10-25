@@ -16,9 +16,12 @@ const EXPECTED: Record<AttackId, string> = {
   'stripped-pq': 'B:CROSS_SIG_MISSING',
   'replayed-zk': 'BOUND_VALUE_MISMATCH',
   'foreign-share': 'SHARE_INVALID',
+  'forged-receipt': 'RECEIPT_SIGNED_OK',
+  'swapped-manifest': 'RECEIPT_SIGNED_OK',
+  'release-before-receipt': 'RECEIPT_SIGNED_OK',
 };
 
-describe('the nine scenes, run twice each', () => {
+describe('the twelve scenes, run twice each', () => {
   it.each(ATTACKS)('%s is defeated both times with the same code', async (a) => {
     const first = await scenes[a]();
     const second = await scenes[a]();
@@ -37,6 +40,6 @@ describe('the nine scenes, run twice each', () => {
     expect(lock.findings?.some((f) => f.code === 'MASTER_DISABLED' && !f.ok)).toBe(true);
     const stale = await scenes['stale-bar']();
     expect(stale.findings?.filter((f) => !f.ok).map((f) => f.code)).toEqual(['BAR_A_OK', 'BAR_B_OK']);
-    expect(stale.findings).toHaveLength(15);
+    expect(stale.findings).toHaveLength(17);
   });
 });

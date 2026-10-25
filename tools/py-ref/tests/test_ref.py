@@ -118,3 +118,19 @@ def test_settled_rules():
     assert L.gate_memo(b"env")["MemoData"] == L.sha(b"env").hex().upper()
     assert L.gate_memo(b"env") != L.gate_memo(b"enw")
     assert L.zk_commitment(B(1), "123") != L.zk_commitment(B(1), "124")
+
+
+def test_shipment_and_receipt():
+    item = {"sku": "a", "description": "b", "qty": 1, "weight_g": 2}
+    assert L.jcs_item(item) == b'{"description":"b","qty":1,"sku":"a","weight_g":2}'
+    for bad in ({**item, "x": 1}, {**item, "qty": 1.5}, {**item, "qty": True}, {**item, "sku": "\ud800"}):
+        with pytest.raises((ValueError, UnicodeEncodeError)):
+            L.jcs_item(bad)
+    with pytest.raises(ValueError):
+        L.manifest_root([])
+    two = [item, {**item, "qty": 2}]
+    assert L.manifest_root(two) != L.manifest_root(two[::-1])
+    assert L.manifest_root([item]) == L.sha(b"\x00" + L.jcs_item(item))
+    base = L.rcpt_msg("d", B(1), B(2), B(3), "ok", 5)
+    assert L.rcpt_msg("d", B(1), B(2), B(3), "damaged", 5) != base
+    assert L.ship_msg("d", B(1), B(3), "c", "t", 5) != L.ship_msg("d", B(1), B(3), "c", "t", 6)

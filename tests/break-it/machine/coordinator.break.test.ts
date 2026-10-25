@@ -13,6 +13,7 @@ import {
   joinAll,
   ok,
   toFunded,
+  toReceived,
   toVerified,
 } from '../../../services/coordinator/test/support/lifecycle.ts';
 import {
@@ -39,7 +40,7 @@ describe('I-S-M1 release.performed accepts an EscrowFinish of another escrow', (
   it('an EscrowFinish by the releaser for a different Owner/OfferSequence does not move the deal to FUNDED', async () => {
     const w = await fresh();
     const id = await newDeal(w);
-    await toVerified(w, id);
+    await toReceived(w, id);
     const g = ok(await gatePassed(w, id)) as { leafHash: string };
     const finish = addTx(w, 'EscrowFinish', w.addr.opsB, { Owner: OTHER, OfferSequence: 99 });
     const r = await post(w, id, 'lawyerB', 'release.performed', {

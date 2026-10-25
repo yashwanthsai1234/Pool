@@ -69,6 +69,7 @@ export async function makeFirmWorld(db?: World['db']): Promise<FirmWorld> {
   const opsSecret = new Uint8Array(Buffer.from(ops.privateKey.slice(2), 'hex'));
   const addr = () => Wallet.generate(ECDSA.ed25519).classicAddress;
   const sealed: SealedDeal = {
+    dealId: w.dealId,
     walletAddress: addr(),
     contractRoot: rnd(32),
     dealSeal: rnd(32),

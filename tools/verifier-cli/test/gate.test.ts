@@ -33,8 +33,8 @@ describe('release gate rerun', () => {
     const checks = v.report.findings.filter(
       (f) => f.file === 'release/gate-input.json' && f.status === 'pass' && f.check !== 'manifest',
     );
-    expect(checks.map((f) => f.message).sort()).toHaveLength(15);
-    for (const c of ['signed-contract', 'bindings', 'bar-records', 'attestations', 'release-gate'])
+    expect(checks.map((f) => f.message).sort()).toHaveLength(17);
+    for (const c of ['signed-contract', 'bindings', 'bar-records', 'attestations', 'delivery', 'release-gate'])
       expect(
         checks.some((f) => f.check === c),
         c,
@@ -59,6 +59,24 @@ describe('release gate rerun', () => {
     ]);
     expect(failures(v2).length).toBeGreaterThan(0);
     expect(failures(v2).every((f) => f.file === 'release/gate-input.json')).toBe(true);
+  });
+
+  it('a missing shipment, or a receipt of another shipment, fails under the delivery check (OD-37)', async () => {
+    const noShip = mutable(gate.input);
+    noShip.records.shipments = [];
+    const swapped = mutable(gate.input);
+    swapped.records.receipts = [];
+    for (const [input, code] of [
+      [noShip, 'SHIPMENT_SIGNED_OK'],
+      [swapped, 'RECEIPT_SIGNED_OK'],
+    ] as const) {
+      const v = await verifyLenient(zip(await resign(b, { 'release/gate-input.json': gateJson(input) })), [
+        '--profile',
+        'production',
+      ]);
+      expect(v.code).toBe(1);
+      expect(failures(v).map((f) => `${f.check} ${f.message.split(':')[0]}`)).toContain(`delivery ${code}`);
+    }
   });
 
   it('a malformed input fails closed', async () => {

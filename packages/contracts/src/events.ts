@@ -57,6 +57,34 @@ const FrostDecision = z.strictObject({
   credential: z.string().max(1024).optional(), // the WebAuthn credential id that approved (base64url)
   commitment_id: Hex32.optional(),
 });
+/** Carrier name or tracking ID: 1 to 64 printable characters, no control characters (OD-37). */
+const ShipText = z
+  .string()
+  .min(1)
+  .max(64)
+  .regex(/^[^\p{Cc}]+$/u);
+/** Delivery condition of a receipt; rcptMsg carries its index as uint8 (0 ok, 1 damaged, 2 missing). */
+export const ReceiptCondition = z.enum(['ok', 'damaged', 'missing']);
+/** OD-37 (build/SHIP_RECEIPT.md 2): Bob's slot B FROST signature over shipMsg; the manifest itself is an attachment. */
+export const ShipmentSigned = z.strictObject({
+  manifest_root: Hex32, // RFC 9162 Merkle root over the JCS bytes of the manifest items
+  carrier: ShipText,
+  tracking_id: ShipText,
+  ledger_index: LedgerIndex, // a recent validated ledger, signed inside shipMsg
+  ship_msg_hash: Hex32, // SHA-256(shipMsg) = shipmentHash
+  slot_sig: Ed25519SigHex,
+});
+export type ShipmentSigned = z.infer<typeof ShipmentSigned>;
+/** OD-37 (build/SHIP_RECEIPT.md 3): Alice's slot A FROST signature over rcptMsg, bound to one shipment. */
+export const ReceiptSigned = z.strictObject({
+  shipment_hash: Hex32,
+  manifest_root: Hex32,
+  condition: ReceiptCondition,
+  ledger_index: LedgerIndex,
+  rcpt_msg_hash: Hex32, // SHA-256(rcptMsg)
+  slot_sig: Ed25519SigHex,
+});
+export type ReceiptSigned = z.infer<typeof ReceiptSigned>;
 const Recovery = { recovery_id: z.uuid({ version: 'v7' }), slot: Slot };
 
 /** Per-kind event data, keyed by EventKind (DESIGN 8.1). */
@@ -174,6 +202,8 @@ const EVENT_DATA = {
   // OD-28: the old lawyer B hands the release code to the new lawyer B in an X-Wing box (kind
   // `release-code-handover`); the box is an attachment and only its hash is logged.
   'release_code.handed_over': z.strictObject({ from_key_id: KeyId, to_key_id: KeyId, box_sha256: Hex32 }),
+  'shipment.signed': ShipmentSigned,
+  'receipt.signed': ReceiptSigned,
   'checkpoint.anchored': z.strictObject({
     tree_size: z.int().min(1),
     root: Hex32,

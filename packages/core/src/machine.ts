@@ -1,6 +1,6 @@
 // Deal state machine (DESIGN 5.1, invariants I1 to I8). Pure and total: `transition` never throws, so the Quint
 // model (task 5.1) can replay traces through it. `step` is the throwing form for callers that want an exception.
-// Source: DESIGN 5.1 and Appendix C.
+// Source: DESIGN 5.1 and Appendix C; build/SHIP_RECEIPT.md 5 (OD-37: SHIPPED and RECEIVED before the release).
 export type State =
   | 'DRAFT'
   | 'CONTRACT_SIGNED'
@@ -9,6 +9,8 @@ export type State =
   | 'KEYS_READY'
   | 'WALLET_LOCKED'
   | 'VERIFIED'
+  | 'SHIPPED'
+  | 'RECEIVED'
   | 'FUNDED'
   | 'PAID_OUT'
   | 'REFUNDED'
@@ -22,6 +24,8 @@ export type Event =
   | { t: 'KEYS_MADE' }
   | { t: 'LOCK_WALLET' }
   | { t: 'VERIFY_OK' }
+  | { t: 'SHIP_SIGNED' }
+  | { t: 'RECEIPT_SIGNED'; condition: 'ok' | 'damaged' | 'missing' }
   | { t: 'RELEASE_ESCROW'; gatePassed: boolean; submitter: string; releaser: string }
   | { t: 'CANCEL_AFTER_PASSED' }
   | { t: 'PAY_BOB'; sigs: number }
@@ -44,7 +48,10 @@ const next: Record<State, Partial<Record<Event['t'], State>>> = {
   QUARANTINED: { KEYS_MADE: 'KEYS_READY', CANCEL_AFTER_PASSED: 'EXPIRED' },
   KEYS_READY: { LOCK_WALLET: 'WALLET_LOCKED', CANCEL_AFTER_PASSED: 'EXPIRED' },
   WALLET_LOCKED: { VERIFY_OK: 'VERIFIED', CANCEL_AFTER_PASSED: 'EXPIRED' },
-  VERIFIED: { RELEASE_ESCROW: 'FUNDED', CANCEL_AFTER_PASSED: 'EXPIRED' },
+  // OD-37: Bob's shipment, then Alice's receipt; the release is legal only after the receipt.
+  VERIFIED: { SHIP_SIGNED: 'SHIPPED', CANCEL_AFTER_PASSED: 'EXPIRED' },
+  SHIPPED: { RECEIPT_SIGNED: 'RECEIVED', CANCEL_AFTER_PASSED: 'EXPIRED' },
+  RECEIVED: { RELEASE_ESCROW: 'FUNDED', CANCEL_AFTER_PASSED: 'EXPIRED' },
   FUNDED: { PAY_BOB: 'PAID_OUT', REFUND_ALICE: 'REFUNDED', OPEN_DISPUTE: 'DISPUTED' },
   DISPUTED: { AWARD: 'PAID_OUT' },
   PAID_OUT: { CLOSE: 'CLOSED' },
@@ -53,13 +60,17 @@ const next: Record<State, Partial<Record<Event['t'], State>>> = {
   CLOSED: {},
 };
 
-export type Refusal = 'illegal' | 'quorum' | 'gate' | 'submitter';
+export type Refusal = 'illegal' | 'quorum' | 'gate' | 'submitter' | 'receipt';
 export type Transition = { ok: true; deal: Deal } | { ok: false; refusal: Refusal; message: string };
 
 // Total transition. Refuses an illegal event, a missing quorum, or a release without the gate (I8).
 export function transition(d: Deal, e: Event): Transition {
   const to = next[d.state][e.t];
   if (!to) return { ok: false, refusal: 'illegal', message: `illegal ${e.t} in ${d.state}` };
+  // OD-37: only an `ok` receipt moves the deal on; damaged or missing leaves it SHIPPED (dispute path, or the refund
+  // after CancelAfter).
+  if (e.t === 'RECEIPT_SIGNED' && e.condition !== 'ok')
+    return { ok: false, refusal: 'receipt', message: `receipt condition ${e.condition}` };
   // I8: funds enter the deal wallet only after the release gate passed (DESIGN 6.17).
   if (e.t === 'RELEASE_ESCROW' && e.gatePassed !== true)
     return { ok: false, refusal: 'gate', message: 'release gate not passed' };

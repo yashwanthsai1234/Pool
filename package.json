@@ -22,7 +22,8 @@
     "demo:check": "node scripts/demo/check.ts",
     "demo:dry-run": "node scripts/demo/dry-run.ts",
     "demo:rehearse": "node scripts/demo/rehearse.ts",
-    "demo:phones": "node scripts/demo/phones.ts"
+    "demo:phones": "node scripts/demo/phones.ts",
+    "demo:product": "node scripts/demo/product-e2e.ts"
   },
   "devDependencies": {
     "@biomejs/biome": "2.5.15",

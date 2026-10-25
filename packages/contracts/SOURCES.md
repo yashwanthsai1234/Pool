@@ -28,3 +28,6 @@
 | https://docs.zkpassport.id | ZKPassport verify result and request parameters; `NullifierType` names read from `@zkpassport/utils` typings |
 | DESIGN.md 6.2 to 6.17, 8.1, 8.10, 9 | every record, event and field |
 | IMPLEMENTATION.md 1.2, 3, 4.3, 4.9, 1.15 to 1.17, 2.2, 3.2 to 3.12 | ports, route needs, research facts |
+
+## OD-37
+- build/SHIP_RECEIPT.md 2, 3: `shipment.signed`, `receipt.signed`, `ReceiptCondition`, `Manifest`, `ManifestItem`, gate codes 16 and 17, deal states SHIPPED and RECEIVED.

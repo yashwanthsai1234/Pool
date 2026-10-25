@@ -104,6 +104,27 @@ const RESULTS: Record<AttackId, AttackResult> = {
   },
   'replayed-zk': { attack: 'replayed-zk', defeated: true, code: 'BOUND_VALUE_MISMATCH', detail: 'replay' },
   'foreign-share': { attack: 'foreign-share', defeated: true, code: 'SHARE_INVALID', detail: 'foreign share' },
+  'forged-receipt': {
+    attack: 'forged-receipt',
+    defeated: true,
+    code: 'RECEIPT_SIGNED_OK',
+    detail: 'wrong key',
+    findings: [{ ok: false, level: 'block', code: 'RECEIPT_SIGNED_OK', detail: 'BAD_SIGNATURE' }],
+  },
+  'swapped-manifest': {
+    attack: 'swapped-manifest',
+    defeated: true,
+    code: 'RECEIPT_SIGNED_OK',
+    detail: 'other root',
+    findings: [{ ok: false, level: 'block', code: 'RECEIPT_SIGNED_OK', detail: 'MANIFEST_MISMATCH' }],
+  },
+  'release-before-receipt': {
+    attack: 'release-before-receipt',
+    defeated: true,
+    code: 'RECEIPT_SIGNED_OK',
+    detail: 'no receipt',
+    findings: [{ ok: false, level: 'block', code: 'RECEIPT_SIGNED_OK', detail: 'NO_RECEIPT' }],
+  },
 };
 function stubClient(available = true): AttackClient & { calls: AttackId[] } {
   const calls: AttackId[] = [];
@@ -230,7 +251,7 @@ describe('P4.5-02 the lock checker turns PASS one step at a time', () => {
 });
 
 describe('the other panels', () => {
-  it('the deal state, 15 gate codes, FROST pair, evidence chain and Merkle root', async () => {
+  it('the deal state, every gate code, FROST pair, evidence chain and Merkle root', async () => {
     mock.publish(DEAL, 'deal.state', statePayload('WALLET_LOCKED'));
     mock.publish(
       DEAL,
@@ -258,10 +279,10 @@ describe('the other panels', () => {
     await expect.element(page.getByText('WALLET_LOCKED')).toHaveAttribute('aria-current', 'step');
     await vi.waitFor(() =>
       expect(s.container.querySelectorAll('section[aria-label="Release gate"] li[data-status="pass"]')).toHaveLength(
-        15,
+        GATE_CODES.length,
       ),
     );
-    expect(GATE_CODES).toHaveLength(15);
+    expect(GATE_CODES).toHaveLength(17);
     await expect.element(page.getByText('LB/console + LB/firm-hsm')).toBeVisible();
     await expect.element(page.getByTestId('chain-status')).toHaveTextContent('intact, gap-free');
     await expect.element(page.getByTestId('merkle-root')).toHaveTextContent('abababab…abababab');
@@ -294,7 +315,7 @@ describe('P4.5-03 the attack buttons', () => {
     await expect.element(page.getByTestId('attack-code')).toHaveTextContent(RESULTS[id].code);
     expect(client.calls).toEqual([id]);
     await expect.element(page.getByText('Attack stopped')).toBeVisible();
-    expect(s.container.querySelectorAll('section[aria-label="Attack mode"] button')).toHaveLength(9);
+    expect(s.container.querySelectorAll('section[aria-label="Attack mode"] button')).toHaveLength(12);
   });
 
   it('master key left on: the lock checker item turns red; a stale bar turns BAR_A_OK and BAR_B_OK red', async () => {
@@ -316,7 +337,7 @@ describe('P4.5-03 the attack buttons', () => {
         await expect.element(page.getByTestId('attack-code')).toHaveTextContent(RESULTS[id].code);
       }
     }
-    expect(client.calls).toHaveLength(18);
+    expect(client.calls).toHaveLength(24);
   });
 
   it('the buttons are disabled while one attack runs, and a failed run shows the error', async () => {
@@ -512,5 +533,70 @@ describe('OD-31 the dashboard signs its feed upgrade with the observer key', () 
     expect(auth).toHaveBeenCalled();
     mock.publish(DEAL, 'deal.state', statePayload('SHELL_OPEN'));
     await expect.element(screen.getByText('Feed: open')).toBeVisible();
+  });
+});
+
+describe('OD-37 the shipment and receipt timeline', () => {
+  const timeline = (c: Element) =>
+    c.ownerDocument.querySelector('section[aria-label="Shipment and receipt"]')?.textContent ?? '';
+  const SIG = 'ab'.repeat(64);
+  const ROOT = 'cd'.repeat(32);
+  it('shows both steps, with the truncated signature and manifest root, once the events arrive', async () => {
+    const s = await show();
+    await expect.element(page.getByRole('status', { name: 'Live feed' })).toHaveTextContent('Feed: open');
+    await vi.waitFor(() => expect(timeline(s.container)).toContain('Shipped: Bob signed'));
+    expect(s.container.querySelectorAll('[data-done="true"]')).toHaveLength(0);
+    mock.publish(
+      DEAL,
+      'deal.event',
+      event('shipment.signed', 0, { manifest_root: ROOT, slot_sig: SIG, carrier: 'DHL', tracking_id: 'T1' }),
+    );
+    await expect.element(page.getByTestId('ship-signature')).toHaveTextContent('abababab…abababab');
+    await expect.element(page.getByTestId('ship-root')).toHaveTextContent('cdcdcdcd…cdcdcdcd');
+    mock.publish(DEAL, 'deal.event', event('receipt.signed', 1, { manifest_root: ROOT, slot_sig: SIG, condition: 1 }));
+    await vi.waitFor(() => expect(s.container.querySelectorAll('[data-done="true"]')).toHaveLength(2));
+    await vi.waitFor(() => expect(timeline(s.container)).toContain('Received: Alice signed (damaged)'));
+    expect(document.body.textContent).not.toContain(SIG);
+  });
+});
+
+describe('the guided walkthrough rows (topic walkthrough.step)', () => {
+  const row = (n: number, step: string, extra: object = {}) =>
+    json({
+      walkthroughId: 'w1',
+      step,
+      n,
+      status: 'ok',
+      txHashes: [HASH(n)],
+      ledgerIndex: 100 + n,
+      detail: `${step} done`,
+      ...extra,
+    });
+  const panel = (c: Element) => c.ownerDocument.querySelector('section[aria-label="Walkthrough"]')?.textContent ?? '';
+
+  it('lists each step with a tick or a cross and its truncated transaction hashes', () => {
+    const view = buildView(
+      [
+        { seq: 0, topic: 'walkthrough.step', payload: row(1, 'enroll') },
+        { seq: 1, topic: 'walkthrough.step', payload: row(2, 'deal', { status: 'failed', txHashes: [] }) },
+      ],
+      undefined,
+    );
+    expect(view.walkthrough).toEqual([
+      { step: 'enroll', n: 1, ok: true, txHashes: [HASH(1)], detail: 'enroll done' },
+      { step: 'deal', n: 2, ok: false, txHashes: [], detail: 'deal done' },
+    ]);
+  });
+
+  it('drives the gate panel from the gate step findings, on screen', async () => {
+    const s = await show();
+    await expect.element(page.getByRole('status', { name: 'Live feed' })).toHaveTextContent('Feed: open');
+    const findings = GATE_CODES.map((code) => ({ ok: code !== 'RECEIPT_SIGNED_OK', level: 'block', code }));
+    mock.publish(DEAL, 'walkthrough.step', row(6, 'lock'));
+    mock.publish(DEAL, 'walkthrough.step', row(10, 'gate', { gate: findings }));
+    await vi.waitFor(() => expect(panel(s.container)).toContain('gate'));
+    await vi.waitFor(() => expect(statusOf(s.container, 'LOCK_OK')).toBe('pass'));
+    expect(statusOf(s.container, 'RECEIPT_SIGNED_OK')).toBe('fail');
+    expect(panel(s.container)).toContain('✓');
   });
 });

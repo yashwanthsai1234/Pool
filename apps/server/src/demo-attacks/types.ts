@@ -12,6 +12,9 @@ export const ATTACKS = [
   'stripped-pq',
   'replayed-zk',
   'foreign-share',
+  'forged-receipt',
+  'swapped-manifest',
+  'release-before-receipt',
 ] as const;
 export type AttackId = (typeof ATTACKS)[number];
 

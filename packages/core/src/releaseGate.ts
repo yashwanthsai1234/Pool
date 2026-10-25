@@ -1,7 +1,7 @@
 // Release gate (DESIGN 6.17, W5): one pure function over one validated ledger and the evidence records, then the
 // `release.gate.passed` record lawyer B signs and the EscrowFinish memo (D22). The gate never reads the network, so an
 // arbitrator who reruns it on the same input gets the same findings in the same order (IMPLEMENTATION 1.12).
-// Source: DESIGN.md 6.17 (the 15 codes), 6.15, 6.16, 6.14, 6.13, 6.12, 6.10, 6.9, 6.4, D22, D23; build/DECISIONS.md OD-2, OD-21
+// Source: DESIGN.md 6.17 (the 17 codes; build/SHIP_RECEIPT.md 4 for the last two), 6.15, 6.16, 6.14, 6.13, 6.12, 6.10, 6.9, 6.4, D22, D23; build/DECISIONS.md OD-2, OD-21
 import type { PublicDealData } from '@legx/contracts/deal';
 import { LegxEvent } from '@legx/contracts/events';
 import type { SignerPort } from '@legx/contracts/ports';
@@ -26,6 +26,7 @@ import { type KeyRegistry, type RegisteredKey, signHybrid, verifyHybrid } from '
 import { allOk, blocking, checkLock } from './lockcheck.ts';
 import { type AccountInfo, verifyOpsBinding } from './opsBinding.ts';
 import { fromBase64Strict, pqKeyHash, toBase64, verifyPqBinding } from './pq.ts';
+import { type ShipmentResult, verifyReceipt, verifyShipment } from './shipment.ts';
 import { MINT_MEMO_TYPE, verifySignedContract } from './signedContract.ts';
 
 export type GateCode = (typeof GATE_CODES)[number];
@@ -81,6 +82,10 @@ export interface ReleaseInput {
     readonly dkgCompleted: Partial<Record<SlotName, Uint8Array>>; // `frost.dkg.completed` event envelopes
     readonly keys: readonly KeyRow[];
     readonly slotHolders: Readonly<Record<SlotName, SlotHolders>>;
+    /** OD-37: every stored `shipment.signed` event envelope of the deal (exactly one is required). */
+    readonly shipments?: readonly Uint8Array[];
+    /** OD-37: every stored `receipt.signed` event envelope of the deal, in log order (the last one counts). */
+    readonly receipts?: readonly Uint8Array[];
   };
   readonly deal: {
     readonly id: string;
@@ -193,7 +198,7 @@ const sealedKeysOf = (i: ReleaseInput): SealedKeys => ({
 /** Validated history by index, including the gate's own ledger. */
 const lookupOf = (i: ReleaseInput) => (index: number) => [i.ledger, ...i.ledger.history].find((l) => l.index === index);
 
-// ---------- the 15 rules, in DESIGN 6.17 order ----------
+// ---------- the 17 rules, in DESIGN 6.17 order ----------
 
 // LOCK_OK: the lock checker (6.9) has no blocking findings. The expected releaser is the sealed one, so a wrong
 // submitter trips RELEASER_SEALED alone.
@@ -477,6 +482,52 @@ function slotSetup(i: ReleaseInput, s: SlotName): Result {
 }
 const slotSetupOk = (i: ReleaseInput): Result => each(SLOTS, (s) => slotSetup(i, s));
 
+/**
+ * SHIPMENT_SIGNED_OK: exactly one shipment.signed for the deal; its slot_sig verifies under the sealed slot B key over
+ * shipMsg rebuilt from its fields and the deal; its ledger index is not later than the gate's ledger.
+ * Source: build/SHIP_RECEIPT.md 2, 4
+ */
+function shipment(
+  i: ReleaseInput,
+): ShipmentResult | { readonly ok: false; readonly code: 'MISSING' | 'NOT_EXACTLY_ONE' } {
+  const all = i.records.shipments ?? [];
+  if (all.length === 0) return { ok: false, code: 'MISSING' };
+  if (all.length > 1) return { ok: false, code: 'NOT_EXACTLY_ONE' };
+  const d = dataOf(i);
+  return verifyShipment(eventData(i, all[0], 'shipment.signed'), {
+    dealId: i.deal.id,
+    dealSeal: dealSeal(d),
+    slotPub: hexBytes(d.xPubB),
+    atLedger: i.ledger.index,
+  });
+}
+const shipmentSignedOk = (i: ReleaseInput): Result => {
+  const r = shipment(i);
+  return r.ok ? OK : no(r.code);
+};
+
+/**
+ * RECEIPT_SIGNED_OK: the latest receipt.signed verifies under the sealed slot A key, names this shipment's hash and
+ * manifest root, is not earlier than the shipment (nor later than the gate's ledger), and its condition is `ok`.
+ * Source: build/SHIP_RECEIPT.md 3, 4
+ */
+function receiptSignedOk(i: ReleaseInput): Result {
+  const s = shipment(i);
+  if (!s.ok) return no('NO_VALID_SHIPMENT');
+  const all = i.records.receipts ?? [];
+  if (all.length === 0) return no('MISSING');
+  const d = dataOf(i);
+  const r = verifyReceipt(eventData(i, all[all.length - 1], 'receipt.signed'), {
+    dealId: i.deal.id,
+    dealSeal: dealSeal(d),
+    slotPub: hexBytes(d.xPubA),
+    atLedger: i.ledger.index,
+    shipment: s,
+  });
+  if (!r.ok) return no(r.code);
+  return r.condition === 'ok' ? OK : no(`CONDITION_${r.condition.toUpperCase()}`);
+}
+
 type Rule = { readonly code: GateCode; readonly check: (i: ReleaseInput, keys: SealedKeys) => Result };
 const RULES: readonly Rule[] = [
   { code: 'LOCK_OK', check: lockOk },
@@ -494,6 +545,8 @@ const RULES: readonly Rule[] = [
   { code: 'IDENTITY_POLICY_OK', check: identityPolicyOk },
   { code: 'PQ_BINDINGS_OK', check: pqBindingsOk },
   { code: 'SLOT_SETUP_OK', check: slotSetupOk },
+  { code: 'SHIPMENT_SIGNED_OK', check: shipmentSignedOk },
+  { code: 'RECEIPT_SIGNED_OK', check: receiptSignedOk },
 ];
 
 /** A rule that throws on hostile input fails closed; the gate itself never throws. */
@@ -561,6 +614,8 @@ function reliedOn(i: ReleaseInput): { name: string; sha256: string }[] {
       [`pq.bound/${s}`, r.pqBound[s]],
       [`frost.dkg.completed/${s}`, r.dkgCompleted[s]],
     ]),
+    ['shipment.signed', r.shipments?.[0]],
+    ['receipt.signed', r.receipts?.[(r.receipts?.length ?? 0) - 1]],
   ];
   return list.flatMap(([name, b]) => (b ? [{ name, sha256: leafHashOf(b) }] : []));
 }

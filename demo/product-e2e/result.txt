@@ -1,0 +1,17 @@
+PASS register Alice rid_jz5sp7rg4n5unvgc, Bob rid_ftothlwbqmvz5jpj
+PASS create deal 9e1512bf-8ef5-4d69-a119-9a454ab1c89e
+PASS approve every stage from the right /me page
+PASS /present shows 14/14 green after reload
+PASS deal 1: PDF link opens
+PASS Released tab shows names, RIDs, fingerprints, NFT owner, tx hashes
+PASS create deal 6635ab07-e794-466f-8fd2-a686bd2bb52b
+PASS approve every stage from the right /me page
+PASS /present shows 14/14 green after reload
+PASS deal 2: PDF link opens
+PASS Released tab shows names, RIDs, fingerprints, NFT owner, tx hashes
+PASS create deal 2efa3e5e-021b-472d-9e7d-6157cd32a993
+PASS approve every stage from the right /me page
+PASS /present shows 14/14 green after reload
+PASS deal 3: PDF link opens
+PASS Released tab shows names, RIDs, fingerprints, NFT owner, tx hashes
+PASS /present dots turned green live

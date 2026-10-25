@@ -7,11 +7,12 @@ import { type EventPredicate, LegxEvent } from '@legx/contracts/events';
 import type { LedgerPort, ValidatedTx } from '@legx/contracts/ports';
 import { HybridEnvelope } from '@legx/contracts/records';
 import type { Role } from '@legx/contracts/values';
-import { bytesToHex, sha256 } from '@legx/core/dealcore';
+import { bytesToHex, hexToBytes, sha256 } from '@legx/core/dealcore';
 import { verifyHybrid } from '@legx/core/hybridEnvelope';
 import { allOk, blocking, checkLock } from '@legx/core/lockcheck';
 import { type Deal, type Event as MachineEvent, type State, transition } from '@legx/core/machine';
 import { fromBase64Strict } from '@legx/core/pq';
+import { SHIP_LEDGER_MAX_AGE, verifyReceipt, verifyShipment } from '@legx/core/shipment';
 import type { EvidenceEventRow, Repos } from '@legx/db';
 import type { DealRow } from '@legx/db/repos/deals';
 import type { z } from 'zod';
@@ -49,6 +50,9 @@ const ACTORS: Readonly<Record<string, (data: Record<string, unknown>) => Role[]>
   'lock.verified': () => ['lawyerB'],
   'lawyer.approved': (d) => SLOT_ROLES(d.role),
   'passport.verified': (d) => SIDE_LAWYER(d.side),
+  // OD-37: Bob signs the shipment (slot B), Alice the receipt (slot A); only a primary holder posts them (I-S-A1).
+  'shipment.signed': () => ['bob'],
+  'receipt.signed': () => ['alice'],
   'release.gate.passed': () => ['lawyerB'],
   'release.performed': () => ['lawyerB'],
   'frost.dkg.completed': (d) => SLOT_ROLES(d.slot),
@@ -166,6 +170,17 @@ async function lockCheck(
     );
 }
 
+/** The deal, its seal and one sealed slot key, for the shipment and receipt verifiers (OD-37). */
+function dealContext(dealId: string, p: PublicDataResult | undefined, slot: 'A' | 'B', atLedger: number) {
+  if (p?.status !== 'complete') throw unprocessable('public_data_incomplete', 'the deal seal cannot be computed yet');
+  return {
+    dealId,
+    dealSeal: hexToBytes(p.dealSeal),
+    slotPub: hexToBytes(slot === 'A' ? p.publicData.xPubA : p.publicData.xPubB),
+    atLedger,
+  };
+}
+
 async function planFor(
   deps: CoordinatorDeps,
   kind: string,
@@ -268,6 +283,36 @@ async function planFor(
       await lockCheck(deps, deal, needPd(), d);
       return { machine: () => ({ t: 'VERIFY_OK' }) };
     }
+    case 'shipment.signed': {
+      const latest = (await deps.ledger.validatedLedger()).ledgerIndex;
+      return {
+        states: ['VERIFIED'],
+        needsPublicData: true,
+        machine: (_, __, p) => {
+          const ctx = dealContext(deal.deal_id, p, 'B', latest);
+          // Source: build/SHIP_RECEIPT.md 2 (the ledger index is at most 20 ledgers old)
+          const r = verifyShipment(d, { ...ctx, maxAge: SHIP_LEDGER_MAX_AGE });
+          if (!r.ok) throw unprocessable(`shipment_${r.code.toLowerCase()}`, `shipment refused: ${r.code}`);
+          return { t: 'SHIP_SIGNED' };
+        },
+      };
+    }
+    case 'receipt.signed': {
+      const latest = (await deps.ledger.validatedLedger()).ledgerIndex;
+      return {
+        states: ['SHIPPED'],
+        needsPublicData: true,
+        machine: (_, log, p) => {
+          const shipped = lastOf(log, 'shipment.signed');
+          const sctx = dealContext(deal.deal_id, p, 'B', latest);
+          const s = shipped && verifyShipment(shipped.data, sctx);
+          if (!s?.ok) throw unprocessable('shipment_missing', 'no valid shipment is logged for this deal');
+          const r = verifyReceipt(d, { ...dealContext(deal.deal_id, p, 'A', latest), shipment: s });
+          if (!r.ok) throw unprocessable(`receipt_${r.code.toLowerCase()}`, `receipt refused: ${r.code}`);
+          return { t: 'RECEIPT_SIGNED', condition: r.condition };
+        },
+      };
+    }
     case 'release.gate.passed': {
       const claim = d.gate as ReleaseGateRecord;
       const r = await deps.gate.run({
@@ -280,7 +325,7 @@ async function planFor(
       if (claim.deal_seal !== needPd().dealSeal)
         throw unprocessable('seal_mismatch', 'the gate record names a different deal seal');
       return {
-        states: ['VERIFIED'],
+        states: ['RECEIVED'],
         after: async (repos, row) => {
           await repos.releaseGates.insert({
             deal_id: deal.deal_id,
@@ -300,7 +345,7 @@ async function planFor(
       const snap = await deps.ledger.snapshot([shell as never]);
       const slotS = Number(snap.accounts[shell]?.accountData.Sequence);
       return {
-        states: ['VERIFIED'],
+        states: ['RECEIVED'],
         // Slot S: the wallet's next Sequence at funding (DESIGN 7.5, D9).
         patch: () => ({ exit_slot: slotS }),
         machine: (dl, log) => ({

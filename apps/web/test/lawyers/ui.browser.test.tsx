@@ -1,6 +1,7 @@
 // The lawyer page, both halves on one screen: what each half shows, the approval dialog, the disabled release button
 // with its reason, and axe (task 4.1 sets the bar: no serious or critical violation).
 
+import { GATE_CODES } from '@legx/contracts/records';
 import { contractRoot } from '@legx/core/contract';
 import { bytesToHex, utf8ToBytes } from '@legx/core/dealcore';
 import axe from 'axe-core';
@@ -86,7 +87,7 @@ describe('the lawyer page', () => {
     await expect.element(lb.getByRole('button', { name: 'Release money' })).toBeEnabled();
     const list = lb.getByRole('list', { name: 'Release gate findings' });
     await expect.element(list).toBeVisible();
-    expect(list.element().querySelectorAll('li')).toHaveLength(15);
+    expect(list.element().querySelectorAll('li')).toHaveLength(GATE_CODES.length);
     await expect.element(lb.getByText(/Alice: Zero-knowledge. Bob: Chip./)).toBeVisible();
   });
 

@@ -14,6 +14,9 @@ export const ATTACKS = [
   { id: 'stripped-pq', label: 'Post-quantum signature stripped', expects: 'PQ_BINDINGS_OK' },
   { id: 'replayed-zk', label: 'Replayed ZK release proof', expects: 'BOUND_VALUE_MISMATCH' },
   { id: 'foreign-share', label: 'FROST share from outside the slot', expects: 'SHARE_INVALID' },
+  { id: 'forged-receipt', label: 'Forged receipt', expects: 'RECEIPT_SIGNED_OK' },
+  { id: 'swapped-manifest', label: 'Receipt for a swapped manifest', expects: 'RECEIPT_SIGNED_OK' },
+  { id: 'release-before-receipt', label: 'Release before the receipt', expects: 'refused' },
 ] as const;
 export type AttackId = (typeof ATTACKS)[number]['id'];
 

@@ -15,7 +15,31 @@ export type PresenceRequest = {
   ledgerIndex: number;
 };
 
+/** One packed item (build/SHIP_RECEIPT.md section 1). */
+export type ManifestItem = { sku: string; description: string; qty: number; weight_g: number };
+export type Manifest = { items: ManifestItem[]; packed_at: string; total_weight_g: number };
+export type Condition = 'ok' | 'damaged' | 'missing';
+/** What Bob signed, as Alice's phone reads it: the full manifest is the evidence attachment, the root is what was signed. */
+export type ShipmentRecord = { manifest: Manifest; signedRoot: string; carrier: string; trackingId: string };
+
+/** The shipment and receipt actions (SHIP_RECEIPT sections 2 and 3). Absent when the host cannot sign them. */
+export type ShipPort = {
+  /** RFC 9162 root over the JCS bytes of the items, as lowercase hex. Throws on an invalid manifest. */
+  manifestRoot: (m: Manifest) => string;
+  /** Bob: FROST-signs `legx/shipment/v1` (slot B) and posts `shipment.signed`. */
+  signShipment: (i: {
+    manifest: Manifest;
+    carrier: string;
+    trackingId: string;
+  }) => Promise<{ signature: string; manifestRoot: string }>;
+  /** Alice: Bob's signed shipment and the manifest attached to it; undefined until Bob has shipped. */
+  shipment: () => Promise<ShipmentRecord | undefined>;
+  /** Alice: FROST-signs `legx/receipt/v1` (slot A) and posts `receipt.signed`. */
+  signReceipt: (i: { condition: Condition }) => Promise<{ signature: string }>;
+};
+
 export type PartyServices = {
+  ship?: ShipPort;
   dealId: string;
   role: Extract<Role, 'alice' | 'bob'>;
   api: ApiClient;

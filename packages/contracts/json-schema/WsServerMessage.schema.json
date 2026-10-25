@@ -27,7 +27,8 @@
             "ledger.observation",
             "ledger.validated",
             "frost.session",
-            "alert"
+            "alert",
+            "walkthrough.step"
           ]
         },
         "payload": {

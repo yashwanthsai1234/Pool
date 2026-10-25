@@ -1,5 +1,6 @@
 """Independent reference of the DESIGN.md section 6 recipes. Written from the DESIGN text only. Stdlib only."""
 import hashlib
+import json
 import struct
 import unicodedata
 
@@ -168,6 +169,45 @@ def presence_msg(seal: bytes, side: str, ledger_hash: bytes, lawyer_nonce: bytes
 # DESIGN 6.17
 def gate_memo(envelope: bytes) -> dict:  # leaf hash = SHA-256 of the exact DSSE envelope bytes (6 intro)
     return {"MemoType": u("legx/release-gate/v1").hex().upper(), "MemoData": sha(envelope).hex().upper()}
+
+
+# OD-37 (build/SHIP_RECEIPT.md 1). JCS of a manifest item; the item holds only ASCII keys, strings and integers, for
+# which sorted keys, no whitespace and json.dumps string escaping are exactly RFC 8785.
+# Source: https://www.rfc-editor.org/rfc/rfc8785.html#section-3.2 (3.2.2.2 strings, 3.2.2.3 numbers, 3.2.3 sorting)
+ITEM_KEYS = {"sku", "description", "qty", "weight_g"}
+
+
+def jcs_item(item: dict) -> bytes:
+    if set(item) != ITEM_KEYS:
+        raise ValueError("manifest item keys")
+    for k in ("qty", "weight_g"):
+        if type(item[k]) is not int or not 0 <= item[k] <= 2**53 - 1:
+            raise ValueError("manifest item integer")
+    for k in ("sku", "description"):
+        if type(item[k]) is not str:
+            raise ValueError("manifest item string")
+        item[k].encode("utf-8")  # a lone surrogate raises (RFC 8785 3.2.2.2)
+    return u(json.dumps(item, sort_keys=True, separators=(",", ":"), ensure_ascii=False))
+
+
+# Source: https://www.rfc-editor.org/rfc/rfc9162.html#section-2.1.1 (MTH over the items' JCS bytes, list order)
+def manifest_root(items: list[dict]) -> bytes:
+    if not items:
+        raise ValueError("empty manifest")
+    return merkle_root([jcs_item(i) for i in items])
+
+
+# OD-37 (build/SHIP_RECEIPT.md 2, 3)
+CONDITIONS = ["ok", "damaged", "missing"]
+
+
+def ship_msg(deal_id: str, seal: bytes, root: bytes, carrier: str, tracking_id: str, ledger_index: int) -> bytes:
+    return tuple_hash("legx/shipment/v1", [u(deal_id), seal, root, u(carrier), u(tracking_id), u32(ledger_index)])
+
+
+def rcpt_msg(deal_id: str, seal: bytes, shipment_hash: bytes, root: bytes, condition: str, ledger_index: int) -> bytes:
+    parts = [u(deal_id), seal, shipment_hash, root, bytes([CONDITIONS.index(condition)]), u32(ledger_index)]
+    return tuple_hash("legx/receipt/v1", parts)
 
 
 # DESIGN 6.13 EXTERNAL_MU. Source: https://csrc.nist.gov/pubs/fips/204/final (Algorithm 2 line 10, Algorithm 7 line 6)

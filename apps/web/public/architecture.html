@@ -1,0 +1,251 @@
+<title>LegX Deal Tree</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a blueprint-style system tree. Root deal → seven phases → fourteen stages, each leaf naming the
+   component that acts and the cryptography it uses. Status lives in the node colour; the current stage pulses. */
+:root {
+  --bg: #eef2f6;
+  --paper: #ffffff;
+  --ink: #12233b;
+  --muted: #5a6a80;
+  --line: #c3cedc;
+  --pending: #b3bfce;
+  --done: #17845a;
+  --done-soft: #dff3ea;
+  --now: #2457d6;
+  --now-soft: #e3ebff;
+  --chip: #e6ecf3;
+  --display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0d1626; --paper: #142036; --ink: #e8eef7; --muted: #9aaac0; --line: #2c3c57;
+    --pending: #4a5a74; --done: #3fc48b; --done-soft: #12352a; --now: #7aa2ff; --now-soft: #1a2a52; --chip: #1d2a43;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0d1626; --paper: #142036; --ink: #e8eef7; --muted: #9aaac0; --line: #2c3c57;
+  --pending: #4a5a74; --done: #3fc48b; --done-soft: #12352a; --now: #7aa2ff; --now-soft: #1a2a52; --chip: #1d2a43;
+  color-scheme: dark;
+}
+body {
+  background: var(--bg); color: var(--ink); font: 15px/1.45 var(--body);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 20px 32px;
+}
+.wrap { max-width: 1280px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
+header { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px 24px; }
+h1 { font: 800 clamp(26px, 3.4vw, 40px)/1.05 var(--display); margin: 0; text-wrap: balance; letter-spacing: -0.01em; }
+.deal { font: 500 clamp(16px, 1.6vw, 20px) var(--body); color: var(--muted); margin-top: 6px; }
+.deal b { color: var(--ink); }
+.meta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.pill { font: 600 13px var(--body); letter-spacing: 0.04em; text-transform: uppercase; padding: 6px 12px; border-radius: 999px; background: var(--chip); color: var(--muted); }
+.pill.live { background: var(--done-soft); color: var(--done); }
+.pill.locked { background: var(--now-soft); color: var(--now); }
+.pill.released { background: var(--done); color: var(--paper); }
+.controls { display: flex; gap: 6px; }
+.controls button {
+  font: 600 14px var(--body); color: var(--ink); background: var(--paper); border: 1px solid var(--line);
+  border-radius: 8px; padding: 7px 12px; cursor: pointer;
+}
+.controls button:focus-visible { outline: 3px solid var(--now); outline-offset: 2px; }
+.bar { height: 6px; background: var(--chip); border-radius: 999px; overflow: hidden; }
+.bar i { display: block; height: 100%; width: 0; background: var(--done); transition: width 0.5s ease; }
+
+/* the tree */
+.tree { display: grid; grid-template-columns: 210px 1fr; gap: 0; background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 22px 22px 22px 18px; overflow-x: auto; }
+.root { grid-column: 1 / -1; display: flex; align-items: center; gap: 12px; padding-bottom: 14px; margin-bottom: 6px; border-bottom: 1px dashed var(--line); }
+.root .node { width: 18px; height: 18px; }
+.root strong { font: 800 18px var(--display); }
+.root span { color: var(--muted); font-size: 14px; }
+.phase { display: contents; }
+.phase-head { position: relative; padding: 14px 16px 14px 18px; border-left: 2px solid var(--line); }
+.phase-head h2 { margin: 0; font: 800 15px var(--display); letter-spacing: 0.02em; text-transform: uppercase; }
+.phase-head p { margin: 2px 0 0; color: var(--muted); font-size: 13px; }
+.phase-head::before { content: ""; position: absolute; left: -7px; top: 18px; width: 12px; height: 12px; border-radius: 50%; background: var(--pending); box-shadow: 0 0 0 3px var(--paper); }
+.phase[data-state="done"] .phase-head::before { background: var(--done); }
+.phase[data-state="now"] .phase-head::before { background: var(--now); }
+.leaves { display: flex; flex-direction: column; gap: 8px; padding: 8px 0 8px 22px; border-left: 2px solid var(--line); min-width: 0; }
+.leaf { position: relative; display: grid; grid-template-columns: 26px minmax(0, 1fr) auto; gap: 4px 12px; align-items: start; padding: 10px 14px; border-radius: 10px; border: 1px solid transparent; transition: background 0.4s, border-color 0.4s; }
+.leaf::before { content: ""; position: absolute; left: -22px; top: 20px; width: 18px; border-top: 2px solid var(--line); }
+.node { width: 16px; height: 16px; border-radius: 50%; background: var(--pending); margin-top: 3px; transition: background 0.4s; }
+.leaf[data-s="done"] { background: var(--done-soft); }
+.leaf[data-s="done"] .node { background: var(--done); }
+.leaf[data-s="now"] { background: var(--now-soft); border-color: var(--now); }
+.leaf[data-s="now"] .node { background: var(--now); animation: pulse 1.4s ease-in-out infinite; }
+.leaf[data-s="failed"] .node { background: #c2412d; }
+@keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--now) 45%, transparent); } 50% { box-shadow: 0 0 0 8px transparent; } }
+@media (prefers-reduced-motion: reduce) { .leaf[data-s="now"] .node { animation: none; } .bar i, .leaf, .node { transition: none; } }
+.what { min-width: 0; }
+.what h3 { margin: 0; font: 600 16px var(--body); }
+.what h3 small { font: 500 12px var(--mono); color: var(--muted); margin-left: 6px; }
+.what p { margin: 2px 0 0; color: var(--muted); font-size: 13.5px; }
+.tech { margin-top: 5px; font: 400 12.5px var(--mono); color: var(--ink); opacity: 0.85; }
+.by { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+.chip { font: 600 11.5px var(--body); letter-spacing: 0.03em; text-transform: uppercase; padding: 3px 8px; border-radius: 6px; background: var(--chip); color: var(--muted); white-space: nowrap; }
+.leaf[data-s="now"] .chip { background: var(--now); color: var(--paper); }
+footer { color: var(--muted); font-size: 13px; display: flex; flex-wrap: wrap; gap: 6px 18px; }
+@media (max-width: 760px) {
+  .tree { grid-template-columns: 1fr; padding: 16px; }
+  .phase-head { border-left: 0; padding-left: 0; }
+  .phase-head::before { display: none; }
+  .leaf { grid-template-columns: 22px minmax(0, 1fr); }
+  .by { grid-column: 2; justify-content: flex-start; }
+}
+</style>
+
+<div class="wrap">
+  <header>
+    <div>
+      <h1>How a LegX deal executes</h1>
+      <div class="deal" id="deal">Sender <b>Alice</b> → Recipient <b>Bob</b> · <b>25 XRP</b></div>
+    </div>
+    <div class="meta">
+      <span class="pill" id="mode">Presenter mode</span>
+      <span class="pill locked" id="escrow">Escrow not funded</span>
+      <div class="controls" id="controls">
+        <button type="button" id="prev" aria-label="Previous stage">◀</button>
+        <button type="button" id="play">Play</button>
+        <button type="button" id="next" aria-label="Next stage">▶</button>
+      </div>
+    </div>
+  </header>
+  <div class="bar" aria-hidden="true"><i id="bar"></i></div>
+  <section class="tree" id="tree" aria-label="Deal execution tree"></section>
+  <footer>
+    <span>● green: done</span><span>● blue: happening now</span><span>● grey: not yet</span>
+    <span>Every step is a signature or a hash, recorded in a post-quantum signed log anchored on the XRP Ledger.</span>
+  </footer>
+</div>
+
+<script>
+const PHASES = [
+  { name: "Agreement", note: "The contract becomes a fixed, provable object", stages: [1] },
+  { name: "Identity", note: "Real people, without exposing their passports", stages: [2, 3] },
+  { name: "Keys", note: "No single device or person holds a whole key", stages: [4, 5] },
+  { name: "Lock the funds", note: "Money moves into a wallet nobody controls alone", stages: [6, 7] },
+  { name: "Delivery proof", note: "Shipping and receipt are signed, not claimed", stages: [8, 9] },
+  { name: "Release", note: "Both approve, 17 checks pass, the recipient is paid", stages: [10, 11, 12, 13] },
+  { name: "Close", note: "Nothing is left behind; anyone can audit offline", stages: [14] },
+];
+const STAGES = {
+  1: { t: "Contract signed and minted", by: ["Laptop", "Server", "XRPL"], p: "The contract PDF is hashed and minted as an NFT owned by the deal wallet.", x: "SHA-256(PDF) · NFTokenMint · signed-contract seal" },
+  2: { t: "Sender passport verified", by: ["Phone", "ZK verifier"], p: "A zero-knowledge proof shows a valid passport without revealing it.", x: "ZKPassport · Noir/UltraHonk · salted commitment" },
+  3: { t: "Recipient passport verified", by: ["Phone", "ZK verifier"], p: "Same proof for the recipient; one person cannot be both sides.", x: "ZK proof · IDS_DISTINCT tag" },
+  4: { t: "Sender keys set up", by: ["Phone vault"], p: "A 2-of-3 threshold key is generated across the sender's devices.", x: "FROST Ed25519 DKG · ML-DSA-65 binding" },
+  5: { t: "Recipient keys set up", by: ["Phone vault"], p: "Same for the recipient; each key is bound to post-quantum keys.", x: "FROST 2-of-3 · pqKeyHash" },
+  6: { t: "Escrow funded", by: ["Phone", "XRPL"], p: "The sender's amount is locked in a ledger escrow with a hash condition.", x: "EscrowCreate · PREIMAGE-SHA-256 · CancelAfter" },
+  7: { t: "Wallet locked and checked", by: ["Server", "XRPL"], p: "The deal wallet needs all four signers; the master key is switched off.", x: "SignerList 4-of-4 · DisableMaster · DepositAuth" },
+  8: { t: "Shipment signed", by: ["Recipient phone"], p: "The seller signs what was packed, the carrier and the tracking number.", x: "FROST Ed25519 · manifest Merkle root (RFC 9162)" },
+  9: { t: "Receipt signed", by: ["Sender phone"], p: "The buyer signs that it arrived, bound to that exact shipment.", x: "FROST Ed25519 · shipment hash binding" },
+  10: { t: "Sender approves release", by: ["Sender phone"], p: "The sender authorises the payout.", x: "Signed approval · fingerprint recorded" },
+  11: { t: "Recipient approves release", by: ["Recipient phone"], p: "The recipient authorises the payout.", x: "Signed approval · fingerprint recorded" },
+  12: { t: "Release gate: 17 checks", by: ["Server"], p: "Identity, keys, lock, contract, shipment and receipt are all re-verified.", x: "Hybrid-signed gate record · Merkle log" },
+  13: { t: "Funds released", by: ["XRPL"], p: "The escrow is finished and the recipient is paid by a 4-of-4 signature.", x: "EscrowFinish · FROST multisig Payment · slot S" },
+  14: { t: "Wallet closed", by: ["XRPL", "Auditor"], p: "The wallet is deleted; the evidence bundle verifies offline.", x: "AccountDelete · legx-verify" },
+};
+
+const $ = (id) => document.getElementById(id);
+const tree = $("tree");
+tree.innerHTML =
+  `<div class="root"><span class="node" style="background:var(--now)"></span><strong>LegX deal</strong><span>sender · recipient · two lawyers · XRP Ledger</span></div>` +
+  PHASES.map((ph, i) => `
+    <div class="phase" data-phase="${i}">
+      <div class="phase-head"><h2>${ph.name}</h2><p>${ph.note}</p></div>
+      <div class="leaves">${ph.stages.map((n) => {
+        const s = STAGES[n];
+        return `<div class="leaf" data-n="${n}" data-s="pending">
+          <span class="node" aria-hidden="true"></span>
+          <div class="what"><h3>${s.t}<small>#${n}</small></h3><p>${s.p}</p><div class="tech">${s.x}</div></div>
+          <div class="by">${s.by.map((b) => `<span class="chip">${b}</span>`).join("")}</div>
+        </div>`;
+      }).join("")}</div>
+    </div>`).join("");
+
+// statuses: { n: 'pending' | 'done' | 'failed' }; the current stage is the first one not done.
+function render(statuses, info) {
+  const current = Object.keys(STAGES).map(Number).find((n) => statuses[n] !== "done");
+  document.querySelectorAll(".leaf").forEach((el) => {
+    const n = Number(el.dataset.n);
+    const st = statuses[n] === "done" ? "done" : statuses[n] === "failed" ? "failed" : n === current ? "now" : "pending";
+    el.dataset.s = st;
+    el.setAttribute("aria-current", st === "now" ? "step" : "false");
+  });
+  document.querySelectorAll(".phase").forEach((el) => {
+    const ns = PHASES[el.dataset.phase].stages;
+    el.dataset.state = ns.every((n) => statuses[n] === "done") ? "done" : ns.includes(current) ? "now" : "pending";
+  });
+  const done = Object.values(statuses).filter((s) => s === "done").length;
+  $("bar").style.width = `${(done / 14) * 100}%`;
+  const esc = $("escrow");
+  const released = statuses[13] === "done";
+  const funded = statuses[6] === "done";
+  esc.textContent = released ? "Escrow released" : funded ? `Escrow locked · ${info.amount} XRP` : "Escrow not funded";
+  esc.className = `pill ${released ? "released" : "locked"}`;
+  $("deal").innerHTML = `Sender <b>${info.sender}</b> → Recipient <b>${info.recipient}</b> · <b>${info.amount} XRP</b>`;
+}
+
+// Live mode: served by the LegX web app, read the deal from its API. Presenter mode: the claude.ai artifact cannot
+// reach the deal server, so it steps through the stages with the buttons or Play.
+const deal = new URLSearchParams(location.search).get("deal");
+let step = 0, timer;
+const demoInfo = { sender: "Alice", recipient: "Bob", amount: 25 };
+const demo = () => {
+  const st = {};
+  for (let n = 1; n <= 14; n++) st[n] = n <= step ? "done" : "pending";
+  render(st, demoInfo);
+};
+const stop = () => { clearInterval(timer); timer = undefined; $("play").textContent = "Play"; };
+$("prev").onclick = () => { stop(); step = Math.max(0, step - 1); demo(); };
+$("next").onclick = () => { stop(); step = Math.min(14, step + 1); demo(); };
+$("play").onclick = () => {
+  if (timer) return stop();
+  if (step >= 14) step = 0;
+  $("play").textContent = "Pause";
+  timer = setInterval(() => { step++; demo(); if (step >= 14) stop(); }, 1800);
+};
+document.addEventListener("keydown", (e) => {
+  if (e.key === "ArrowRight") $("next").click();
+  if (e.key === "ArrowLeft") $("prev").click();
+});
+
+async function latestDealId() {
+  for (const status of ["locked", "released"]) {
+    const r = await fetch(`/api/demo/deals?status=${status}`);
+    if (!r.ok) throw new Error(String(r.status));
+    const list = await r.json();
+    const deals = Array.isArray(list) ? list : list.deals || [];
+    if (deals.length) return deals.sort((a, b) => String(b.createdAt).localeCompare(String(a.createdAt)))[0].id;
+  }
+  return undefined;
+}
+async function poll(id) {
+  const r = await fetch(`/api/demo/deals/${encodeURIComponent(id)}`);
+  if (!r.ok) throw new Error(String(r.status));
+  const d = await r.json();
+  const st = {};
+  for (const s of d.stages || []) st[s.n] = s.status;
+  render(st, { sender: d.sender?.name || "Sender", recipient: d.recipient?.name || "Recipient", amount: d.amountXrp });
+}
+async function live() {
+  try {
+    const id = deal || (await latestDealId());
+    if (!id) throw new Error("no deal");
+    await poll(id);
+    $("mode").textContent = "Live deal";
+    $("mode").className = "pill live";
+    $("controls").hidden = true;
+    setInterval(() => poll(id).catch(() => {}), 1500);
+  } catch {
+    demo();
+  }
+}
+demo();
+live();
+</script>

@@ -17,7 +17,7 @@ afterEach(async () => {
 });
 
 describe('demo profile', () => {
-  it('lists the nine attacks and runs one without an auth header', async () => {
+  it('lists the twelve attacks and runs one without an auth header', async () => {
     c = await compose({ demo: demoAttacks(stubs()) });
     const list = await c.server.app.inject({ method: 'GET', url: '/demo/attack' });
     expect(list.statusCode).toBe(200);

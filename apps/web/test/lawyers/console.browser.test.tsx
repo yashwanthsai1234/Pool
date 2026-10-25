@@ -275,7 +275,7 @@ describe('P4.4-02 the release code never leaves the browser', () => {
 });
 
 describe('P4.4-06 and P4.4-10 the gate list', () => {
-  it('reads a snapshot through the relay (HTTP, MSW), checks the public node, and shows the 15 codes as checkRelease returns them', async () => {
+  it('reads a snapshot through the relay (HTTP, MSW), checks the public node, and shows the 17 codes as checkRelease returns them', async () => {
     const worker = await startMocks();
     try {
       const base = await makeConsole({ role: 'LB' });
@@ -295,7 +295,7 @@ describe('P4.4-06 and P4.4-10 the gate list', () => {
       const expected = checkRelease({ ...mutable(base.input), submitter: OPS.LB.address });
       expect(state.findings).toEqual(expected);
       expect(state.findings.map((f) => f.code)).toEqual([...GATE_CODES]);
-      expect(state.findings).toHaveLength(15);
+      expect(state.findings).toHaveLength(17);
       expect(x.spies.publicLedger.hashAt).toHaveBeenCalledWith(LEDGER.index);
       expect(state.methods).toEqual({
         A: { method: 'zkpassport', label: 'Zero-knowledge' },
@@ -460,7 +460,13 @@ const ROWS: Row[] = [
 ];
 
 describe('P4.4-07, 13, 15 and "all directions": each of the 15 codes failing in turn', () => {
-  it('the rows cover the 15 codes, in order', () => expect(ROWS.map((r) => r[0])).toEqual([...GATE_CODES]));
+  it('the rows cover the first 15 codes, in order; the console lists the two shipping codes too', () => {
+    expect(ROWS.map((r) => r[0])).toEqual(GATE_CODES.slice(0, 15));
+    expect(GATE_CODES.slice(15)).toEqual(['SHIPMENT_SIGNED_OK', 'RECEIPT_SIGNED_OK']);
+  });
+  it.todo(
+    'DQ: rows for SHIPMENT_SIGNED_OK and RECEIPT_SIGNED_OK once the test world carries signed shipment and receipt events',
+  );
 
   it(
     'with every input good the release button is on, and the snapshot is current',

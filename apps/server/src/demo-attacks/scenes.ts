@@ -8,6 +8,7 @@ import { join } from 'node:path';
 import type { Finding } from '@legx/contracts/records';
 import { tupleHash } from '@legx/core/dealcore';
 import { SigningSession } from '@legx/core/frost';
+import { type Event, transition } from '../../../../packages/core/src/machine.ts';
 import { passiveAuth } from '../../../../packages/core/src/passport/passiveAuth.ts';
 import { checkRelease, type GateCode } from '../../../../packages/core/src/releaseGate.ts';
 import { checkZkResult, releaseBoundValue, zkIdentityCommitment } from '../../../../packages/core/src/zkIdentity.ts';
@@ -232,6 +233,69 @@ async function foreignShare(): Promise<SceneOutcome> {
   };
 }
 
+type GateWorld = Awaited<ReturnType<typeof makeWorld>>;
+
+/**
+ * OD-37: one delivery attack on the real gate. The control (the untouched world passes all 17 codes) runs first, so the
+ * refusal is the attack's doing. `defeated` needs exactly RECEIPT_SIGNED_OK to fail, with the expected reason.
+ * Source: build/SHIP_RECEIPT.md 4, 6 (the three attacks)
+ */
+async function deliveryAttack(
+  detail: string,
+  expect: string,
+  attack: (i: ReturnType<typeof mutable>, w: GateWorld) => Promise<void>,
+): Promise<SceneOutcome> {
+  const w = await makeWorld();
+  const control = checkRelease(w.input).every((f) => f.ok);
+  const i = mutable(w.input);
+  await attack(i, w);
+  const findings = checkRelease(i);
+  const bad = findings.filter((f) => !f.ok);
+  return {
+    defeated: control && bad.length === 1 && bad[0]?.code === 'RECEIPT_SIGNED_OK' && bad[0]?.detail === expect,
+    code: bad.map((f) => f.code).join(',') || 'accepted',
+    detail: `${detail}: ${bad.map((f) => f.detail).join(', ') || 'no finding'}`,
+    findings,
+  };
+}
+
+// Source: build/SHIP_RECEIPT.md 6 attack 1 (the receipt is signed by a key that is not Alice's slot key)
+const forgedReceipt = () =>
+  deliveryAttack('a receipt signed by Bob, not by the buyer slot', 'BAD_SIGNATURE', async (i, w) => {
+    i.records.receipts = [
+      await w.event(
+        'receipt.signed',
+        w.ship.receiptData((m) => w.S.B.sign(m)),
+      ),
+    ];
+  });
+
+// Source: build/SHIP_RECEIPT.md 6 attack 2 (a receipt for another manifest root)
+const swappedManifest = () =>
+  deliveryAttack('Alice signed a receipt for a swapped manifest root', 'MANIFEST_MISMATCH', async (i, w) => {
+    i.records.receipts = [
+      await w.event(
+        'receipt.signed',
+        w.ship.receiptData((m) => w.S.A.sign(m), { root: new Uint8Array(32).fill(0x42) }),
+      ),
+    ];
+  });
+
+// Source: build/SHIP_RECEIPT.md 6 attack 3 and 5 (release only from RECEIVED); OD-38
+async function releaseBeforeReceipt(): Promise<SceneOutcome> {
+  const o = await deliveryAttack('no receipt was signed', 'MISSING', async (i) => {
+    i.records.receipts = [];
+  });
+  const release: Event = { t: 'RELEASE_ESCROW', gatePassed: true, submitter: 'r', releaser: 'r' };
+  const m = transition({ state: 'SHIPPED', wasLocked: true }, release);
+  const refused = !m.ok && m.refusal === 'illegal';
+  return {
+    ...o,
+    defeated: o.defeated && refused,
+    detail: `${o.detail}; the machine refuses RELEASE_ESCROW in SHIPPED`,
+  };
+}
+
 /** The scenes for a demo server whose standalone ledger listens at `ledgerWs`. */
 export function realScenes(ledgerWs: string): Scenes {
   return {
@@ -244,5 +308,8 @@ export function realScenes(ledgerWs: string): Scenes {
     'stripped-pq': strippedPq,
     'replayed-zk': replayedZk,
     'foreign-share': foreignShare,
+    'forged-receipt': forgedReceipt,
+    'swapped-manifest': swappedManifest,
+    'release-before-receipt': releaseBeforeReceipt,
   };
 }

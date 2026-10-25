@@ -31,7 +31,9 @@
             "IDS_DISTINCT",
             "IDENTITY_POLICY_OK",
             "PQ_BINDINGS_OK",
-            "SLOT_SETUP_OK"
+            "SLOT_SETUP_OK",
+            "SHIPMENT_SIGNED_OK",
+            "RECEIPT_SIGNED_OK"
           ]
         },
         {

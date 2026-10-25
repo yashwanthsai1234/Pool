@@ -21,6 +21,30 @@ def seal_fields() -> dict:
     }
 
 
+DEAL_ID = "0192f1a0-7b3c-7d4e-8f00-0000000000a1"
+ITEMS = [
+    {"sku": "SKU-1", "description": "Steel bolts, M8 \"zinc\"", "qty": 200, "weight_g": 1800},
+    {"sku": "SKU-2", "description": "Caf\u00e9 cups \u20ac / \U0001F600\ttab", "qty": 12, "weight_g": 3600},
+    {"sku": "SKU-3", "description": "", "qty": 1, "weight_g": 0},
+]
+
+
+def shipment_vectors(seal: bytes, v) -> list[dict]:
+    out = [v("jcsItem", {"item": i}, H(L.jcs_item(i))) for i in ITEMS]
+    out += [v("manifestRoot", {"items": ITEMS[:n]}, H(L.manifest_root(ITEMS[:n]))) for n in range(1, 4)]
+    root = L.manifest_root(ITEMS)
+    ship_in = {"dealId": DEAL_ID, "dealSeal": H(seal), "manifestRoot": H(root), "carrier": "DHL Express",
+               "trackingId": "JD014600006281230704", "ledgerIndex": 90_000_050}
+    sm = L.ship_msg(DEAL_ID, seal, root, "DHL Express", "JD014600006281230704", 90_000_050)
+    out.append(v("shipMsg", ship_in, H(sm)))
+    sh = L.sha(sm)
+    for cond in L.CONDITIONS:
+        rin = {"dealId": DEAL_ID, "dealSeal": H(seal), "shipmentHash": H(sh), "manifestRoot": H(root),
+               "condition": cond, "ledgerIndex": 90_000_080}
+        out.append(v(f"rcptMsg/{cond}", rin, H(L.rcpt_msg(DEAL_ID, seal, sh, root, cond, 90_000_080))))
+    return out
+
+
 def build() -> dict[str, list[dict]]:
     seal = L.deal_seal(seal_fields())
     s, c, k = B(0xAA), B(0xBB), [B(0x21, 1952), B(0x22, 1952), B(0x23, 1952)]
@@ -66,6 +90,7 @@ def build() -> dict[str, list[dict]]:
         ],
         "ops_bind": [v("opsBindMsg", {"root": H(B(1)), "ops": "rOpsA", "lawyerPub": H(P33(7)), "LC": H(B(9)), "role": "LA"}, H(L.ops_bind_msg(B(1), "rOpsA", P33(7), B(9), "LA")))],
         "presence": [v("presenceMsg", {"dealSeal": H(seal), "side": "B", "ledgerHash": H(B(0x51)), "nonce": H(B(0x52))}, H(L.presence_msg(seal, "B", B(0x51), B(0x52))))],
+        "shipment": shipment_vectors(seal, v),
         "gate_memo": [v("gateMemo", {"envelope": H(b'{"payloadType":"x"}')}, L.gate_memo(b'{"payloadType":"x"}'))],
     }
 

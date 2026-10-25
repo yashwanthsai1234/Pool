@@ -50,7 +50,7 @@ describe('P5.1-01 and scenario tests', () => {
   it('quint test: every scenario run passes', () => {
     const r = quint(['test', SPEC, '--seed', '0x5101']);
     expect(r.out).not.toMatch(/failed/);
-    expect(r.out).toMatch(/33 passing/);
+    expect(r.out).toMatch(/34 passing/);
     expect(r.code).toBe(0);
   }, 120_000);
 });
@@ -125,8 +125,8 @@ const MUTANTS: Mutant[] = [
     id: 'P5.1-02 release without the gate guard',
     edits: [
       [
-        '  action release = all {\n    d.st == VERIFIED,\n    gatePasses(d.gate),\n',
-        '  action release = all {\n    d.st == VERIFIED,\n',
+        '  action release = all {\n    d.st == RECEIVED,\n    gatePasses(d.gate),\n',
+        '  action release = all {\n    d.st == RECEIVED,\n',
       ],
     ],
     invariant: 'invGateBeforeFunds',
@@ -302,6 +302,8 @@ const MACHINE_STATES = new Set([
   'KEYS_READY',
   'WALLET_LOCKED',
   'VERIFIED',
+  'SHIPPED',
+  'RECEIVED',
   'FUNDED',
   'PAID_OUT',
   'REFUNDED',
@@ -316,6 +318,8 @@ const MACHINE_EVENTS = new Set([
   'KEYS_MADE',
   'LOCK_WALLET',
   'VERIFY_OK',
+  'SHIP_SIGNED',
+  'RECEIPT_SIGNED',
   'RELEASE_ESCROW',
   'CANCEL_AFTER_PASSED',
   'PAY_BOB',

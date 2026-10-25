@@ -41,6 +41,7 @@ import {
   seal,
   wipe,
 } from './aead.ts';
+import { type Confirmation, confirmationFor } from './confirmation.ts';
 import { VaultError } from './errors.ts';
 import { decodeFile, encodeFile, type FileLock } from './file.ts';
 import type { PrfCredential, PrfSource } from './prf.ts';
@@ -79,6 +80,8 @@ export type VaultDeps = {
   cosigner?: (dealId: string) => CoSignerPort;
   /** Frame UI on the second device: approve this request? (P4.2-14) */
   approve?: (dealId: string, request: SignRequest) => Promise<boolean>;
+  /** Frame UI: shows what a shipment or receipt signs and asks the client to confirm (OD-37). Without it those requests are refused. */
+  confirm?: (dealId: string, what: Confirmation) => Promise<boolean>;
   context?: () => StorageContext;
 };
 
@@ -345,6 +348,8 @@ export function createVault(deps: VaultDeps) {
     const msg = messageFor(e.pub, request);
     const check: Check = (m) => messageAllowed(request, m, deal, e.slot);
     if (!check(msg).ok) throw new VaultError('MESSAGE_REFUSED');
+    const what = confirmationFor(request);
+    if (what && !(await deps.confirm?.(dealId, what).catch(() => false))) throw new VaultError('APPROVAL_REFUSED');
     return { msg, check };
   }
 

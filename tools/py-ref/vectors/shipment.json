@@ -1,0 +1,146 @@
+[
+ {
+  "fn": "jcsItem",
+  "inputs": {
+   "item": {
+    "sku": "SKU-1",
+    "description": "Steel bolts, M8 \"zinc\"",
+    "qty": 200,
+    "weight_g": 1800
+   }
+  },
+  "output": "7b226465736372697074696f6e223a22537465656c20626f6c74732c204d38205c227a696e635c22222c22717479223a3230302c22736b75223a22534b552d31222c227765696768745f67223a313830307d"
+ },
+ {
+  "fn": "jcsItem",
+  "inputs": {
+   "item": {
+    "sku": "SKU-2",
+    "description": "Caf\u00e9 cups \u20ac / \ud83d\ude00\ttab",
+    "qty": 12,
+    "weight_g": 3600
+   }
+  },
+  "output": "7b226465736372697074696f6e223a22436166c3a9206375707320e282ac202f20f09f98805c74746162222c22717479223a31322c22736b75223a22534b552d32222c227765696768745f67223a333630307d"
+ },
+ {
+  "fn": "jcsItem",
+  "inputs": {
+   "item": {
+    "sku": "SKU-3",
+    "description": "",
+    "qty": 1,
+    "weight_g": 0
+   }
+  },
+  "output": "7b226465736372697074696f6e223a22222c22717479223a312c22736b75223a22534b552d33222c227765696768745f67223a307d"
+ },
+ {
+  "fn": "manifestRoot",
+  "inputs": {
+   "items": [
+    {
+     "sku": "SKU-1",
+     "description": "Steel bolts, M8 \"zinc\"",
+     "qty": 200,
+     "weight_g": 1800
+    }
+   ]
+  },
+  "output": "2f226829825e591164dea3346ca5a5f40f3b1913e76dd95e1796f62fbf6affd8"
+ },
+ {
+  "fn": "manifestRoot",
+  "inputs": {
+   "items": [
+    {
+     "sku": "SKU-1",
+     "description": "Steel bolts, M8 \"zinc\"",
+     "qty": 200,
+     "weight_g": 1800
+    },
+    {
+     "sku": "SKU-2",
+     "description": "Caf\u00e9 cups \u20ac / \ud83d\ude00\ttab",
+     "qty": 12,
+     "weight_g": 3600
+    }
+   ]
+  },
+  "output": "cd258e12fe85c254b19881176cb013360ca2e929374cda65b43392ce8b029bc6"
+ },
+ {
+  "fn": "manifestRoot",
+  "inputs": {
+   "items": [
+    {
+     "sku": "SKU-1",
+     "description": "Steel bolts, M8 \"zinc\"",
+     "qty": 200,
+     "weight_g": 1800
+    },
+    {
+     "sku": "SKU-2",
+     "description": "Caf\u00e9 cups \u20ac / \ud83d\ude00\ttab",
+     "qty": 12,
+     "weight_g": 3600
+    },
+    {
+     "sku": "SKU-3",
+     "description": "",
+     "qty": 1,
+     "weight_g": 0
+    }
+   ]
+  },
+  "output": "8015593007f57570f5c2b4a9de0dbbddd6e2234fe3deb79dba393e9584c98470"
+ },
+ {
+  "fn": "shipMsg",
+  "inputs": {
+   "dealId": "0192f1a0-7b3c-7d4e-8f00-0000000000a1",
+   "dealSeal": "1b9a078290b7c3ed64b890775033703f17c5f73c1c047db3ae200264fd0ccce3",
+   "manifestRoot": "8015593007f57570f5c2b4a9de0dbbddd6e2234fe3deb79dba393e9584c98470",
+   "carrier": "DHL Express",
+   "trackingId": "JD014600006281230704",
+   "ledgerIndex": 90000050
+  },
+  "output": "f9bc5a9ac7d02d1fb6a86e5a7666e503e30a216d1476505937e7469f6091f4a6"
+ },
+ {
+  "fn": "rcptMsg/ok",
+  "inputs": {
+   "dealId": "0192f1a0-7b3c-7d4e-8f00-0000000000a1",
+   "dealSeal": "1b9a078290b7c3ed64b890775033703f17c5f73c1c047db3ae200264fd0ccce3",
+   "shipmentHash": "45f32714e1f9a9487677e7a2fdaecd4c01adefe9964f907a8b56b42949698ba8",
+   "manifestRoot": "8015593007f57570f5c2b4a9de0dbbddd6e2234fe3deb79dba393e9584c98470",
+   "condition": "ok",
+   "ledgerIndex": 90000080
+  },
+  "output": "d244c5b26b902ce4bb7067e2c27cb0d8851d0f495026575cc242203d4c78c2d7"
+ },
+ {
+  "fn": "rcptMsg/damaged",
+  "inputs": {
+   "dealId": "0192f1a0-7b3c-7d4e-8f00-0000000000a1",
+   "dealSeal": "1b9a078290b7c3ed64b890775033703f17c5f73c1c047db3ae200264fd0ccce3",
+   "shipmentHash": "45f32714e1f9a9487677e7a2fdaecd4c01adefe9964f907a8b56b42949698ba8",
+   "manifestRoot": "8015593007f57570f5c2b4a9de0dbbddd6e2234fe3deb79dba393e9584c98470",
+   "condition": "damaged",
+   "ledgerIndex": 90000080
+  },
+  "output": "acb64624934e78323209d5d90b33221ff909338d9673804c34e12fc0374e18b6"
+ },
+ {
+  "fn": "rcptMsg/missing",
+  "inputs": {
+   "dealId": "0192f1a0-7b3c-7d4e-8f00-0000000000a1",
+   "dealSeal": "1b9a078290b7c3ed64b890775033703f17c5f73c1c047db3ae200264fd0ccce3",
+   "shipmentHash": "45f32714e1f9a9487677e7a2fdaecd4c01adefe9964f907a8b56b42949698ba8",
+   "manifestRoot": "8015593007f57570f5c2b4a9de0dbbddd6e2234fe3deb79dba393e9584c98470",
+   "condition": "missing",
+   "ledgerIndex": 90000080
+  },
+  "output": "e228643d7ebe392cf7dd61d468f5eea7d98f586cd90e77bd7f4af792f1df0a94"
+ }
+]

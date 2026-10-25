@@ -4,7 +4,7 @@
 import { GATE_CODES } from '@legx/contracts/records';
 import { lsf } from '@legx/core/lockcheck';
 import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest';
-import { account, gatePassed, gateRecord, ok, ourEscrow, publicData, toVerified } from './support/lifecycle.ts';
+import { account, gatePassed, gateRecord, ok, ourEscrow, publicData, toReceived } from './support/lifecycle.ts';
 import { addTx, call, holderOf, makeWorld, newDeal, OPS_B, post, rndHex, SHELL, type World } from './support/world.ts';
 
 vi.setConfig({ testTimeout: 180_000 });
@@ -21,7 +21,7 @@ const stateOf = async (id: string) => ok(await call(w, holderOf(w, 'alice'), 'GE
 describe('P3.2-11 the coordinator runs the gate before it relays release records', () => {
   it('a gate failure stops the relay: nothing stored, no outbox row, no gate record, and the release is refused', async () => {
     const id = await newDeal(w);
-    await toVerified(w, id);
+    await toReceived(w, id);
     const before = { e: await eventCount(id), o: await outboxCount(id) };
     w.gate.run = async () => ({ ok: false, failed: ['PASSPORT_B_OK'] });
     const r = await gatePassed(w, id);
@@ -39,13 +39,13 @@ describe('P3.2-11 the coordinator runs the gate before it relays release records
     });
     expect(rel.status).toBe(422);
     expect(rel.body.error).toBe('refused_gate');
-    expect(await stateOf(id)).toBe('VERIFIED');
+    expect(await stateOf(id)).toBe('RECEIVED');
     w.gate.run = async () => ({ ok: true });
   });
 
   it('a passing gate is stored once with the record, relayed, and the release then funds the deal (slot S recorded)', async () => {
     const id = await newDeal(w);
-    await toVerified(w, id);
+    await toReceived(w, id);
     const seen: string[] = [];
     w.gate.run = async (i) => {
       seen.push(i.dealId);
@@ -70,7 +70,7 @@ describe('P3.2-11 the coordinator runs the gate before it relays release records
 
   it('a finish submitted by anyone but the sealed releaser is refused (D4, D22)', async () => {
     const id = await newDeal(w);
-    await toVerified(w, id);
+    await toReceived(w, id);
     const g = ok(await gatePassed(w, id));
     const finish = addTx(w, 'EscrowFinish', account(w, 'alice'), ourEscrow(w));
     const rel = await post(w, id, 'lawyerB', 'release.performed', {
@@ -117,7 +117,7 @@ describe('P3.2-11 the coordinator runs the gate before it relays release records
 describe('P3.2-13 each gate code fails on its own and stops the relay', () => {
   it.each(GATE_CODES.map((c) => [c]))('%s', async (code) => {
     const id = await newDeal(w);
-    await toVerified(w, id);
+    await toReceived(w, id);
     w.gate.run = async () => ({ ok: false, failed: [code] });
     const before = await eventCount(id);
     const r = await gatePassed(w, id);
@@ -129,7 +129,7 @@ describe('P3.2-13 each gate code fails on its own and stops the relay', () => {
 
   it('the stored gate record lists all 15 codes, and a record that omits one is refused by the schema with its path', async () => {
     const id = await newDeal(w);
-    await toVerified(w, id);
+    await toReceived(w, id);
     const pd = await publicData(w, id);
     const rec = gateRecord(w, id, pd.dealSeal);
     const short = { ...rec, findings: rec.findings.slice(1) };

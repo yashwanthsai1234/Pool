@@ -662,6 +662,16 @@
               "ok": true,
               "level": "block",
               "code": "SLOT_SETUP_OK"
+            },
+            {
+              "ok": true,
+              "level": "block",
+              "code": "SHIPMENT_SIGNED_OK"
+            },
+            {
+              "ok": true,
+              "level": "block",
+              "code": "RECEIPT_SIGNED_OK"
             }
           ],
           "relied_on": [
@@ -1606,6 +1616,92 @@
         "from_key_id": "deal/LB/console",
         "to_key_id": "deal/LB/console2",
         "box_sha256": "abababababababababababababababababababababababababababababababab"
+      }
+    }
+  },
+  {
+    "_type": "https://in-toto.io/Statement/v1",
+    "subject": [
+      {
+        "name": "deal:0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+        "digest": {
+          "sha256": "0101010101010101010101010101010101010101010101010101010101010101"
+        }
+      }
+    ],
+    "predicateType": "https://legx.dev/event/v1",
+    "predicate": {
+      "event_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8ca0",
+      "deal_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+      "seq": 4,
+      "kind": "shipment.signed",
+      "actor": {
+        "role": "bob",
+        "key_id": "deal/B/phone"
+      },
+      "occurred_at": "2026-10-24T10:00:00Z",
+      "prev_hash": "b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1",
+      "payload_commitment": "b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2",
+      "ledger": {
+        "tx_hash": "3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B",
+        "ledger_index": 1234567,
+        "validated": true
+      },
+      "trace_id": "4bf92f3577b34da6a3ce929d0e0e4736",
+      "sig_algs": [
+        "ed25519",
+        "ml-dsa-65"
+      ],
+      "data": {
+        "manifest_root": "c1c1c1c1c1c1c1c1c1c1c1c1c1c1c1c1c1c1c1c1c1c1c1c1c1c1c1c1c1c1c1c1",
+        "carrier": "DHL Express",
+        "tracking_id": "JD014600006281230704",
+        "ledger_index": 1234560,
+        "ship_msg_hash": "c2c2c2c2c2c2c2c2c2c2c2c2c2c2c2c2c2c2c2c2c2c2c2c2c2c2c2c2c2c2c2c2",
+        "slot_sig": "c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3"
+      }
+    }
+  },
+  {
+    "_type": "https://in-toto.io/Statement/v1",
+    "subject": [
+      {
+        "name": "deal:0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+        "digest": {
+          "sha256": "0101010101010101010101010101010101010101010101010101010101010101"
+        }
+      }
+    ],
+    "predicateType": "https://legx.dev/event/v1",
+    "predicate": {
+      "event_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8ca0",
+      "deal_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+      "seq": 5,
+      "kind": "receipt.signed",
+      "actor": {
+        "role": "alice",
+        "key_id": "deal/A/phone"
+      },
+      "occurred_at": "2026-10-24T10:00:00Z",
+      "prev_hash": "b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1",
+      "payload_commitment": "b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2",
+      "ledger": {
+        "tx_hash": "3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B",
+        "ledger_index": 1234567,
+        "validated": true
+      },
+      "trace_id": "4bf92f3577b34da6a3ce929d0e0e4736",
+      "sig_algs": [
+        "ed25519",
+        "ml-dsa-65"
+      ],
+      "data": {
+        "shipment_hash": "c2c2c2c2c2c2c2c2c2c2c2c2c2c2c2c2c2c2c2c2c2c2c2c2c2c2c2c2c2c2c2c2",
+        "manifest_root": "c1c1c1c1c1c1c1c1c1c1c1c1c1c1c1c1c1c1c1c1c1c1c1c1c1c1c1c1c1c1c1c1",
+        "condition": "ok",
+        "ledger_index": 1234600,
+        "rcpt_msg_hash": "c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4",
+        "slot_sig": "c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5"
       }
     }
   },

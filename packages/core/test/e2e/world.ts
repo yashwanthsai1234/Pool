@@ -56,6 +56,7 @@ import {
   VERIFIER_ISSUER,
   WALLET,
 } from '../helpers/gate.ts';
+import { shipBuilders } from '../helpers/ship.ts';
 import { zkSet } from '../helpers/zkFixtures.ts';
 import { makeSlot, type Slot } from './slots.ts';
 
@@ -197,6 +198,7 @@ export async function buildPaperDeal(o: DealOptions = {}) {
   const sealedDeal = (seal?: Uint8Array): SealedDeal => ({
     walletAddress: WALLET,
     contractRoot: root,
+    dealId: DEAL_ID,
     ...(seal ? { dealSeal: seal } : {}),
     payoutA: { account: ALICE, tag: 7 },
     payoutB: { account: BOB },
@@ -586,6 +588,7 @@ export async function buildPaperDeal(o: DealOptions = {}) {
     },
   ];
 
+  const ship = shipBuilders(DEAL_ID, seal, LEDGER.index);
   const keys: KeyRow[] = [...SLOT_NAMES.flatMap((s) => S[s].rows), ...VERIFIER_ROWS];
   const input: ReleaseInput = {
     profile: 'demo',
@@ -626,6 +629,21 @@ export async function buildPaperDeal(o: DealOptions = {}) {
       ),
       keys,
       slotHolders: { A: S.A.holders, LA: S.LA.holders, B: S.B.holders, LB: S.LB.holders },
+      // OD-37: Bob's slot B signs the shipment and Alice's slot A the receipt, each through its allow-list.
+      shipments: [
+        await event(
+          'shipment.signed',
+          ship.shipmentData((_m, tag, parts) => signTagged('B', tag, parts, seal)),
+          S.B.hybrid(0),
+        ),
+      ],
+      receipts: [
+        await event(
+          'receipt.signed',
+          ship.receiptData((_m, tag, parts) => signTagged('A', tag, parts, seal)),
+          S.A.hybrid(0),
+        ),
+      ],
     },
     deal: {
       id: DEAL_ID,
@@ -664,6 +682,8 @@ export async function buildPaperDeal(o: DealOptions = {}) {
       ...(['A', 'B'] as const).flatMap((s) => [r.passport[s], r.onboarding[s]]),
       ...(['LA', 'LB'] as const).flatMap((s) => [r.bar[s]?.verification, r.bar[s]?.link, r.opsBound[s]]),
       ...SLOT_NAMES.flatMap((s) => [r.pqBound[s], r.dkgCompleted[s]]),
+      ...(r.shipments ?? []),
+      ...(r.receipts ?? []),
       gate.envelopeBytes,
     ] as Uint8Array[];
   };
@@ -729,6 +749,7 @@ export async function buildPaperDeal(o: DealOptions = {}) {
     presence,
     signTagged,
     sealedDeal,
+    ship,
     zkRelease,
     zkOnboard,
     walletObjects,

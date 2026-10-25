@@ -17,6 +17,7 @@ import { mldsaSign, nobleHybridSigner, pqBindMsg, pqKeygen, pqKeyHash, toBase64 
 import type { KeyRow, ReleaseInput, SlotHolders } from '../../src/releaseGate.ts';
 import { buildSignedContractSeal, contractSigMsg, MINT_MEMO_TYPE } from '../../src/signedContract.ts';
 import { dkgKeys, frostSign } from './frost.ts';
+import { shipBuilders } from './ship.ts';
 
 export const ATTEST = 'application/vnd.legx.attest+json;v=1';
 export const EVENT = 'application/vnd.legx.event+json;v=1';
@@ -499,6 +500,7 @@ export async function makeWorld(o: WorldOptions = {}) {
     ...over,
   });
 
+  const ship = shipBuilders(DEAL_ID, seal, LEDGER.index);
   const input: ReleaseInput = {
     profile: 'production',
     ledger: {
@@ -548,6 +550,20 @@ export async function makeWorld(o: WorldOptions = {}) {
       ),
       keys: [...SLOTS.flatMap((s) => S[s].rows), ...VERIFIER_ROWS],
       slotHolders: { A: S.A.holders, LA: S.LA.holders, B: S.B.holders, LB: S.LB.holders },
+      shipments: [
+        await event(
+          'shipment.signed',
+          ship.shipmentData((m) => S.B.sign(m)),
+          S.B.holderSigner(0),
+        ),
+      ],
+      receipts: [
+        await event(
+          'receipt.signed',
+          ship.receiptData((m) => S.A.sign(m)),
+          S.A.holderSigner(0),
+        ),
+      ],
     },
     deal: {
       id: DEAL_ID,
@@ -562,6 +578,7 @@ export async function makeWorld(o: WorldOptions = {}) {
   };
   return {
     input,
+    ship,
     S,
     seal,
     lawyerSigner,

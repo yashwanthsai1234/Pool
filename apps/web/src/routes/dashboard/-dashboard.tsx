@@ -8,7 +8,15 @@ import type { AttackClient, AttackResult } from './-attack-api.ts';
 import { AttackPanel } from './-attack-panel.tsx';
 import type { Network } from './-explorer.ts';
 import { buildView } from './-model.ts';
-import { DealStatePanel, EvidenceLog, FrostProgress, ItemList, LedgerLog } from './-panels.tsx';
+import {
+  DealStatePanel,
+  EvidenceLog,
+  FrostProgress,
+  ItemList,
+  LedgerLog,
+  ShippingTimeline,
+  WalkthroughTimeline,
+} from './-panels.tsx';
 
 export function Dashboard({
   dealId,
@@ -42,6 +50,8 @@ export function Dashboard({
         <div className="grid gap-4">
           <DealStatePanel state={view.state} />
           <FrostProgress frost={view.frost} />
+          <ShippingTimeline steps={view.shipping} />
+          <WalkthroughTimeline steps={view.walkthrough} />
         </div>
         <div className="grid gap-4">
           <ItemList title="Lock checker" items={view.lock} columns={2} />

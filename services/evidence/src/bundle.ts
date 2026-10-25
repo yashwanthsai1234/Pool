@@ -111,6 +111,7 @@ What is in it
   signed-contract/, ops/, bar/       the signed contract, operations bindings, bar records
   attestations/, release/, zk/       passport attestations, the release gate, zero-knowledge proofs
   frost/, pq/                        FROST records and post-quantum bindings
+  delivery/                          Bob's signed shipment and Alice's signed receipt (OD-37)
   checks/report.json                 what the service itself verified when it built this bundle
   fre902/                            a certification template (US Federal Rule of Evidence 902(13) and 902(14))
 
@@ -310,6 +311,8 @@ export async function collectBundle(
     const kind = e.event.predicate.kind;
     const seq = (rows[i] as { seq: number }).seq;
     if (FROST.has(kind)) put(`frost/${six(seq)}-${kind}.dsse.json`, (rows[i] as { envelope: Uint8Array }).envelope);
+    if (kind === 'shipment.signed' || kind === 'receipt.signed')
+      put(`delivery/${six(seq)}-${kind}.dsse.json`, (rows[i] as { envelope: Uint8Array }).envelope);
     if (kind === 'pq.bound') put(`pq/${six(seq)}-${kind}.dsse.json`, (rows[i] as { envelope: Uint8Array }).envelope);
   }
 
@@ -338,6 +341,7 @@ export async function collectBundle(
       frost: byKind((k) => FROST.has(k)),
       pq_bindings: byKind((k) => k === 'pq.bound'),
       identity: byKind((k) => k === 'identity.onboarded' || k === 'passport.verified'),
+      delivery: byKind((k) => k === 'shipment.signed' || k === 'receipt.signed'),
       release_gate: byKind((k) => k === 'release.gate.passed' || k === 'release.performed'),
       zero_knowledge: zk.map((z) => ({
         side: z.side,

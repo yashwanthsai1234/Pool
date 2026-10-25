@@ -8,6 +8,8 @@ import { BadgeScreen, HomeScreen, LockScreen, type Screen } from './-home.tsx';
 // The screens that decode transactions or check signatures load on demand: their crypto is not part of the first download.
 const ApproveScreen = lazy(() => import('./-approve.tsx').then((m) => ({ default: m.ApproveScreen })));
 const PresenceScreen = lazy(() => import('./-presence.tsx').then((m) => ({ default: m.PresenceScreen })));
+const ShipScreen = lazy(() => import('./-ship.tsx').then((m) => ({ default: m.ShipScreen })));
+const ReceiveScreen = lazy(() => import('./-ship.tsx').then((m) => ({ default: m.ReceiveScreen })));
 const RecordsScreen = lazy(() => import('./-records.tsx').then((m) => ({ default: m.RecordsScreen })));
 
 const ROLES = { alice: 'Alice', bob: 'Bob' } as const;
@@ -46,6 +48,7 @@ export function PartyApp({ role, makeKey }: { role: string; makeKey: () => void 
       <Suspense fallback={<p className="p-4">Loading</p>}>
         {screen === 'presence' ? <PresenceScreen /> : null}
         {screen === 'approve' ? <ApproveScreen /> : null}
+        {screen === 'ship' ? role === 'bob' ? <ShipScreen /> : <ReceiveScreen /> : null}
         {screen === 'records' ? <RecordsScreen /> : null}
       </Suspense>
     </main>

@@ -28,7 +28,25 @@ export interface EvidenceView {
   readonly chain: 'empty' | 'intact' | 'broken';
   readonly checkpoint?: { treeSize: number; root: string; anchorTx: string; anchorLedger: number };
 }
+/** One step of the shipping timeline: undefined until its event is in the feed. */
+export interface ShipStep {
+  readonly label: string;
+  readonly done: boolean;
+  readonly signature?: string;
+  readonly manifestRoot?: string;
+  readonly condition?: string;
+}
+/** One `walkthrough.step` row of the guided demo (the server's StepResult): the latest row of each step. */
+export interface WalkStep {
+  readonly step: string;
+  readonly n: number;
+  readonly ok: boolean;
+  readonly txHashes: readonly string[];
+  readonly detail: string;
+}
 export interface DashboardView {
+  readonly walkthrough: readonly WalkStep[];
+  readonly shipping: readonly ShipStep[];
   readonly state: (typeof DealState.options)[number] | undefined;
   readonly lock: readonly Item[];
   readonly gate: readonly Item[];
@@ -171,9 +189,33 @@ function lockItems(rows: readonly LiveRow[], events: readonly Decoded[], attack:
   });
 }
 
-function gateItems(events: readonly Decoded[], attack: AttackResult | undefined): Item[] {
+/** The walkthrough rows, latest per step, in step order; the gate step's findings ride along for the gate panel. */
+function walkRows(rows: readonly LiveRow[]): { steps: WalkStep[]; gate: Json[] | undefined } {
+  const latest = new Map<number, { step: WalkStep; gate?: Json[] }>();
+  for (const r of rows) {
+    if (r.topic !== 'walkthrough.step') continue;
+    const b = obj(b64Json(r.payload));
+    const step = str(b.step);
+    if (!step || typeof b.n !== 'number') continue;
+    latest.set(b.n, {
+      step: {
+        step,
+        n: b.n,
+        ok: b.status === 'ok',
+        txHashes: Array.isArray(b.txHashes) ? b.txHashes.map(String) : [],
+        detail: str(b.detail) ?? '',
+      },
+      ...(step === 'gate' && Array.isArray(b.gate) ? { gate: b.gate as Json[] } : {}),
+    });
+  }
+  const sorted = [...latest.values()].sort((a, b) => a.step.n - b.step.n);
+  return { steps: sorted.map((x) => x.step), gate: sorted.findLast((x) => x.gate)?.gate };
+}
+
+function gateItems(events: readonly Decoded[], attack: AttackResult | undefined, walkGate: Json[] | undefined): Item[] {
   const gate = events.findLast((e) => e.kind === 'release.gate.passed');
-  const findings = Array.isArray(obj(gate?.data.gate).findings) ? (obj(gate?.data.gate).findings as Json[]) : [];
+  const findings =
+    walkGate ?? (Array.isArray(obj(gate?.data.gate).findings) ? (obj(gate?.data.gate).findings as Json[]) : []);
   const attacked = failedByAttack(attack);
   return GATE_CODES.map((code): Item => {
     if (attacked.has(code)) return { code, status: 'fail', detail: attacked.get(code) as string };
@@ -220,6 +262,25 @@ function evidenceView(events: readonly Decoded[]): EvidenceView {
   };
 }
 
+/** The two shipping events (SHIP_RECEIPT section 6): who signed, with the slot signature and the manifest root. */
+function shippingSteps(events: readonly Decoded[]): ShipStep[] {
+  const step = (kind: string, label: string): ShipStep => {
+    const e = events.findLast((x) => x.kind === kind);
+    if (!e) return { label, done: false };
+    const sig = str(e.data.slot_sig);
+    const root = str(e.data.manifest_root);
+    const cond = ['ok', 'damaged', 'missing'][Number(e.data.condition)] ?? str(e.data.condition);
+    return {
+      label,
+      done: true,
+      ...(sig ? { signature: sig } : {}),
+      ...(root ? { manifestRoot: root } : {}),
+      ...(kind === 'receipt.signed' && cond ? { condition: cond } : {}),
+    };
+  };
+  return [step('shipment.signed', 'Shipped: Bob signed'), step('receipt.signed', 'Received: Alice signed')];
+}
+
 const SLOTS = ['A', 'LA', 'B', 'LB'] as const;
 
 export function buildView(
@@ -228,6 +289,7 @@ export function buildView(
   attack?: AttackResult,
 ): DashboardView {
   const events = rows.flatMap((r) => decodeEvent(r) ?? []);
+  const walk = walkRows(rows);
   const ledger: LedgerEntry[] = events.flatMap((e, i) =>
     e.ledger
       ? [
@@ -248,8 +310,10 @@ export function buildView(
   });
   return {
     state,
+    walkthrough: walk.steps,
+    shipping: shippingSteps(events),
     lock: lockItems(rows, events, attack),
-    gate: gateItems(events, attack),
+    gate: gateItems(events, attack, walk.gate),
     ledger,
     evidence: evidenceView(events),
     frost,

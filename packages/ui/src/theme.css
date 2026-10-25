@@ -9,6 +9,12 @@
   --primary-fg: #ffffff;
   --pass: #166534;
   --fail: #b91c1c;
+  --warn: #92400e;
+  --surface: #f8fafc;
+  --soft: #e2e8f0;
+  --pass-bg: #dcfce7;
+  --fail-bg: #fee2e2;
+  --warn-bg: #fef3c7;
 }
 
 [data-theme="projector"] {
@@ -20,6 +26,12 @@
   --primary-fg: #000000;
   --pass: #4ade80;
   --fail: #ff8a8a;
+  --warn: #fcd34d;
+  --surface: #0f172a;
+  --soft: #334155;
+  --pass-bg: #052e16;
+  --fail-bg: #450a0a;
+  --warn-bg: #451a03;
 }
 
 @theme inline {
@@ -31,4 +43,10 @@
   --color-primary-fg: var(--primary-fg);
   --color-pass: var(--pass);
   --color-fail: var(--fail);
+  --color-warn: var(--warn);
+  --color-surface: var(--surface);
+  --color-soft: var(--soft);
+  --color-pass-bg: var(--pass-bg);
+  --color-fail-bg: var(--fail-bg);
+  --color-warn-bg: var(--warn-bg);
 }

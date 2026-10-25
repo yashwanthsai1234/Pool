@@ -17,7 +17,9 @@ import {
   type ReleaseInput,
   verifyGatePassedRecord,
 } from '@legx/core/releaseGate';
+import { manifestRoot, rcptMsg, shipMsg } from '@legx/core/shipment';
 import { buildSignedContractSeal, signContract } from '@legx/core/signedContract';
+import { sha256 } from '@noble/hashes/sha2.js';
 import { bytesToHex, randomBytes } from '@noble/hashes/utils.js';
 import { expect } from 'vitest';
 import type xrpl from 'xrpl';
@@ -96,6 +98,8 @@ export interface DealOptions {
   curve?: Curve;
   /** If set, `CancelAfter` is this many ledger seconds after step 3, not three days: the escrow can expire in a test. */
   cancelAfterSeconds?: number;
+  /** The quarantine escrow's amount in drops (default ESCROW_DROPS, T-I-01's 50 XRP). */
+  escrowDrops?: string;
 }
 
 /** What an exit paid: the validated transaction and the balances around it. */
@@ -110,6 +114,7 @@ export class Deal {
   readonly c: Chain;
   readonly o: DealOptions;
   readonly curve: Curve;
+  readonly escrowDrops: string;
   readonly dealId = uuid7();
   readonly root: Uint8Array;
   readonly rootHex: string;
@@ -153,6 +158,7 @@ export class Deal {
     this.c = c;
     this.o = o;
     this.curve = o.curve ?? 'ed25519';
+    this.escrowDrops = o.escrowDrops ?? ESCROW_DROPS;
     const clauses = ['clause 0: goods', 'clause 1: price'].map(utf8ToBytes);
     this.root = contractRoot(
       clauses,
@@ -273,7 +279,7 @@ export class Deal {
       {
         alice: this.aliceBase.wallet.classicAddress,
         shell: this.wallet,
-        amount: ESCROW_DROPS,
+        amount: this.escrowDrops,
         condition,
         closeTime: await this.closeNow(),
         days: 3,
@@ -403,7 +409,7 @@ export class Deal {
     escrow: {
       owner: this.alice.wallet.classicAddress,
       sequence: this.escrowSequence,
-      amountDrops: ESCROW_DROPS,
+      amountDrops: this.escrowDrops,
       conditionHex: this.condition,
     },
   });
@@ -444,6 +450,69 @@ export class Deal {
   // ---------- release (P7) ----------
 
   passports: Partial<Record<'A' | 'B', Uint8Array>> = {};
+  readonly shipments: Uint8Array[] = [];
+  readonly receipts: Uint8Array[] = [];
+  shipped: { hash: Uint8Array; root: Uint8Array; ledgerIndex: number } | undefined;
+
+  /** OD-37: Bob's slot B signs shipMsg (build/SHIP_RECEIPT.md 2). */
+  async ship() {
+    const items = [{ sku: 'TEST-1', description: 'test goods', qty: 1, weight_g: 1000 }];
+    const root = manifestRoot(items);
+    const f = {
+      dealId: this.dealId,
+      dealSeal: this.seal,
+      manifestRoot: root,
+      carrier: 'TEST-POST',
+      trackingId: `TEST-${this.dealId.slice(-8)}`,
+      ledgerIndex: (await ledgerRef(this.c)).index,
+    };
+    const msg = shipMsg(f);
+    this.shipped = { hash: sha256(msg), root, ledgerIndex: f.ledgerIndex };
+    this.shipments.push(
+      await this.ev.event(
+        'shipment.signed',
+        {
+          manifest_root: bytesToHex(root),
+          carrier: f.carrier,
+          tracking_id: f.trackingId,
+          ledger_index: f.ledgerIndex,
+          ship_msg_hash: bytesToHex(this.shipped.hash),
+          slot_sig: bytesToHex(this.bob.slot.sign(msg)),
+        },
+        this.bob.slot,
+        'bob',
+      ),
+    );
+  }
+
+  /** OD-37: Alice's slot A signs rcptMsg over Bob's shipment, condition ok (build/SHIP_RECEIPT.md 3). */
+  async receive() {
+    if (!this.shipped) throw new Error('no shipment yet');
+    const f = {
+      dealId: this.dealId,
+      dealSeal: this.seal,
+      shipmentHash: this.shipped.hash,
+      manifestRoot: this.shipped.root,
+      condition: 'ok' as const,
+      ledgerIndex: (await ledgerRef(this.c)).index,
+    };
+    const msg = rcptMsg(f);
+    this.receipts.push(
+      await this.ev.event(
+        'receipt.signed',
+        {
+          shipment_hash: bytesToHex(f.shipmentHash),
+          manifest_root: bytesToHex(f.manifestRoot),
+          condition: f.condition,
+          ledger_index: f.ledgerIndex,
+          rcpt_msg_hash: bytesToHex(sha256(msg)),
+          slot_sig: bytesToHex(this.alice.slot.sign(msg)),
+        },
+        this.alice.slot,
+        'alice',
+      ),
+    );
+  }
 
   async readInput(): Promise<ReleaseInput> {
     const keys: KeyRow[] = [...this.slots().flatMap((s) => s.rows), ...this.verifier.rows];
@@ -480,6 +549,8 @@ export class Deal {
         opsBound: this.rec.opsBound,
         pqBound: this.rec.pq,
         dkgCompleted: this.rec.dkg,
+        shipments: this.shipments,
+        receipts: this.receipts,
         keys,
         slotHolders: {
           A: this.alice.slot.holderIds(),
@@ -497,7 +568,7 @@ export class Deal {
         escrow: {
           owner: this.alice.wallet.classicAddress,
           sequence: this.escrowSequence,
-          amountDrops: ESCROW_DROPS,
+          amountDrops: this.escrowDrops,
           conditionHex: this.condition,
         },
       },
@@ -508,6 +579,8 @@ export class Deal {
 
   /** Runs the release gate on a real snapshot: findings in the contract order, the input, and the signed record. */
   async gate() {
+    if (!this.shipped) await this.ship();
+    if (this.receipts.length === 0) await this.receive();
     const input = await this.readInput();
     const findings = checkRelease(input);
     expect(findings.map((x) => x.code)).toEqual([...GATE_CODES]);
@@ -573,7 +646,7 @@ export class Deal {
         {
           alice: this.aliceBase.wallet.classicAddress,
           shell: this.wallet,
-          amount: ESCROW_DROPS,
+          amount: this.escrowDrops,
           condition,
           closeTime: await this.closeNow(),
           days,
@@ -592,7 +665,7 @@ export class Deal {
   // ---------- exits (P8) ----------
 
   /** A 4-of-4 payment from the shell on slot S to a sealed payout (`payoutB` pays Bob, `payoutA` refunds Alice). */
-  async exit(to: 'bob' | 'alice', amount: string = ESCROW_DROPS): Promise<Exit> {
+  async exit(to: 'bob' | 'alice', amount: string = this.escrowDrops): Promise<Exit> {
     const receiver = to === 'bob' ? this.bob.wallet.classicAddress : this.alice.wallet.classicAddress;
     const receiverBefore = await this.balance(receiver);
     const deliveredBefore = await this.balance(this.wallet);

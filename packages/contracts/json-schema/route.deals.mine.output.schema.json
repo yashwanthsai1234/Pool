@@ -32,6 +32,8 @@
               "KEYS_READY",
               "WALLET_LOCKED",
               "VERIFIED",
+              "SHIPPED",
+              "RECEIVED",
               "FUNDED",
               "PAID_OUT",
               "REFUNDED",

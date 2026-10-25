@@ -1,7 +1,7 @@
 // The real release gate of the composed server (DESIGN 6.17, 10.2; closes I-3.7-g). The coordinator hands it the claim a
 // lawyer signed; this reads ONE validated ledger and the deal's stored records, builds the core gate's plain input, and
 // runs `checkRelease` of `@legx/core/releaseGate`. Anything it cannot read makes the gate fail closed, never pass.
-// Source: DESIGN.md 6.17 (the 15 codes); IMPLEMENTATION 1.12 (the gate is one pure function over one validated ledger)
+// Source: DESIGN.md 6.17 (the 17 codes); IMPLEMENTATION 1.12 (the gate is one pure function over one validated ledger)
 import type { SignerPort } from '@legx/contracts/ports';
 import { loadConfig } from '@legx/coordinator/deal';
 import type { GateInput, GatePort, GateResult } from '@legx/coordinator/deps';
@@ -203,6 +203,9 @@ export async function buildReleaseInput(cfg: GateConfig, g: GateInput): Promise<
       bar: barRecs,
       opsBound: bySide('ops.bound', (d) => (d.role === 'LA' || d.role === 'LB' ? d.role : undefined)),
       pqBound: bySide('pq.bound', (d) => (SLOTS.includes(d.binding?.slot) ? (d.binding.slot as Slot) : undefined)),
+      // OD-37: the logged envelopes; the gate verifies both and rebuilds shipMsg and rcptMsg itself.
+      shipments: byKind('shipment.signed').map((e) => e.bytes),
+      receipts: byKind('receipt.signed').map((e) => e.bytes),
       dkgCompleted: bySide('frost.dkg.completed', (d) => (SLOTS.includes(d.slot) ? (d.slot as Slot) : undefined)),
       keys: keyRows,
       slotHolders,

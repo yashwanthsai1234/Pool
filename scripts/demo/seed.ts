@@ -46,7 +46,16 @@ if (state.network !== network) throw new Error(`state is for ${state.network}; r
 // The demo enrollment keys the server pins (LEGX_LAWYER_KEYS, LEGX_OBSERVER_KEYS, LEGX_OPERATOR_KEYS are built from them
 // by apps/server/src/demo.ts). Made once; a second run keeps them.
 state.keys ??= {};
-for (const k of ['lawyer-a', 'lawyer-b', 'operator']) state.keys[k] ??= makeKey(k);
+// `slot-a` and `slot-b` stand in for the slot FROST pairs when the dry run signs the shipment and the receipt (OD-37).
+for (const k of ['lawyer-a', 'lawyer-b', 'operator', 'slot-a', 'slot-b']) state.keys[k] ??= makeKey(k);
+state.delivery ??= {
+  carrier: 'DHL Express',
+  trackingId: 'JD014600006281230704',
+  items: [
+    { sku: 'BOLT-M8', description: 'Steel bolts, M8, zinc', qty: 200, weight_g: 9 },
+    { sku: 'CUP-01', description: 'Ceramic cups', qty: 12, weight_g: 300 },
+  ],
+};
 
 // Mock bar registry: lawyer-a and lawyer-b are the two active demo lawyers (DEMO-0001, DEMO-0002).
 const active = LAWYERS.filter((l) => l.status === 'active');

@@ -28,6 +28,7 @@ import {
   opsBound,
   pqBind,
   publicData,
+  shipData,
 } from '../../test/support/lifecycle.ts';
 import { call, contractRoot, holderOf, post, ROLES, type Role, type World } from '../../test/support/world.ts';
 import type { RealLedger } from './real.ts';
@@ -41,10 +42,24 @@ export const STAGE_STATE = [
   'KEYS_READY',
   'WALLET_LOCKED',
   'VERIFIED',
-  'VERIFIED', // gate passed (no state change)
+  'SHIPPED',
+  'RECEIVED',
+  'RECEIVED', // gate passed (no state change)
   'FUNDED',
 ] as const;
-export const STEPS = ['join', 'mint', 'shellOpen', 'escrow', 'pq', 'lock', 'verify', 'gate', 'release'] as const;
+export const STEPS = [
+  'join',
+  'mint',
+  'shellOpen',
+  'escrow',
+  'pq',
+  'lock',
+  'verify',
+  'ship',
+  'receipt',
+  'gate',
+  'release',
+] as const;
 
 const GENESIS_PAY = 200; // XRP for each wallet that needs fees
 
@@ -57,6 +72,7 @@ export class Scenario {
   stage = 0; // steps done
   escrowSequence = 0;
   gateLeaf = '';
+  shipLedger = 0;
   id = '';
   /** The last event bytes posted, for the retry command. */
   lastEvent: { role: Role; b64: string } | undefined;
@@ -212,6 +228,18 @@ export class Scenario {
         findings: [],
       }),
     );
+  }
+
+  private async ship() {
+    this.shipLedger = (await this.real.port.validatedLedger()).ledgerIndex;
+    const s = await shipData(this.w, this.id, 'bob', this.shipLedger);
+    return ok(await post(this.w, this.id, 'bob', 'shipment.signed', s.shipment()));
+  }
+
+  private async receipt() {
+    // The receipt names the shipment's hash, which holds the ledger index it was signed at.
+    const s = await shipData(this.w, this.id, 'bob', this.shipLedger);
+    return ok(await post(this.w, this.id, 'alice', 'receipt.signed', s.receipt()));
   }
 
   private async gate() {

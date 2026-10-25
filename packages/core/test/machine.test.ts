@@ -10,6 +10,8 @@ const STATES: State[] = [
   'KEYS_READY',
   'WALLET_LOCKED',
   'VERIFIED',
+  'SHIPPED',
+  'RECEIVED',
   'FUNDED',
   'PAID_OUT',
   'REFUNDED',
@@ -24,6 +26,7 @@ const PLAIN = [
   'KEYS_MADE',
   'LOCK_WALLET',
   'VERIFY_OK',
+  'SHIP_SIGNED',
   'CANCEL_AFTER_PASSED',
   'OPEN_DISPUTE',
   'ABANDON',
@@ -36,6 +39,10 @@ const ev: fc.Arbitrary<Event> = fc.oneof(
     gatePassed: fc.boolean(),
     submitter: fc.constantFrom('rB', 'rX'),
     releaser: fc.constant('rB'),
+  }),
+  fc.record({
+    t: fc.constant('RECEIPT_SIGNED' as const),
+    condition: fc.constantFrom('ok', 'damaged', 'missing') as fc.Arbitrary<'ok' | 'damaged' | 'missing'>,
   }),
   fc.record({ t: fc.constant('PAY_BOB' as const), sigs }),
   fc.record({ t: fc.constant('REFUND_ALICE' as const), sigs }),
@@ -59,6 +66,7 @@ it('T-P-04 invariants I1, I2, I6 and I8 hold for any event sequence', () => {
         const n = r.deal;
         if (n.state === 'FUNDED') {
           expect(d.wasLocked).toBe(true); // I1: funded only after the lock
+          expect(d.state).toBe('RECEIVED'); // OD-37: release only after Alice's receipt
           expect(e.t === 'RELEASE_ESCROW' && e.gatePassed === true && e.submitter === e.releaser).toBe(true); // I8, P1.14-02
         }
         if (n.state === 'PAID_OUT' || n.state === 'REFUNDED') expect('sigs' in e && e.sigs >= QUORUM).toBe(true); // I2
@@ -71,8 +79,33 @@ it('T-P-04 invariants I1, I2, I6 and I8 hold for any event sequence', () => {
   );
 });
 
+describe('OD-37 shipment and receipt before release', () => {
+  it('ships from VERIFIED, receives an ok receipt from SHIPPED, then releases from RECEIVED', () => {
+    let d = step(at('VERIFIED', true), { t: 'SHIP_SIGNED' });
+    expect(d.state).toBe('SHIPPED');
+    d = step(d, { t: 'RECEIPT_SIGNED', condition: 'ok' });
+    expect(d.state).toBe('RECEIVED');
+    expect(step(d, { t: 'RELEASE_ESCROW', gatePassed: true, submitter: 'rB', releaser: 'rB' }).state).toBe('FUNDED');
+  });
+  it('attack 3: release before the receipt is refused, even with a passed gate', () => {
+    for (const s of ['VERIFIED', 'SHIPPED'] as const)
+      expect(
+        transition(at(s, true), { t: 'RELEASE_ESCROW', gatePassed: true, submitter: 'rB', releaser: 'rB' }),
+      ).toMatchObject({ ok: false, refusal: 'illegal' });
+  });
+  it('a damaged or missing receipt is refused: the deal stays SHIPPED (dispute or CancelAfter refund)', () => {
+    for (const condition of ['damaged', 'missing'] as const)
+      expect(transition(at('SHIPPED', true), { t: 'RECEIPT_SIGNED', condition })).toMatchObject({
+        ok: false,
+        refusal: 'receipt',
+      });
+    expect(step(at('SHIPPED', true), { t: 'CANCEL_AFTER_PASSED' }).state).toBe('EXPIRED');
+    expect(step(at('RECEIVED', true), { t: 'CANCEL_AFTER_PASSED' }).state).toBe('EXPIRED');
+  });
+});
+
 describe('P1.14 release gate and awards', () => {
-  const verified = at('VERIFIED', true);
+  const verified = at('RECEIVED', true);
   it('P1.14-01 RELEASE_ESCROW without gatePassed: true, or from another submitter, throws; the sealed releaser funds', () => {
     expect(() => step(verified, { t: 'RELEASE_ESCROW', gatePassed: false, submitter: 'rB', releaser: 'rB' })).toThrow(
       /gate/,
@@ -133,8 +166,12 @@ describe('exhaustive state times event table', () => {
     'KEYS_READY CANCEL_AFTER_PASSED': 'EXPIRED',
     'WALLET_LOCKED VERIFY_OK': 'VERIFIED',
     'WALLET_LOCKED CANCEL_AFTER_PASSED': 'EXPIRED',
-    'VERIFIED RELEASE_ESCROW': 'FUNDED',
+    'VERIFIED SHIP_SIGNED': 'SHIPPED',
     'VERIFIED CANCEL_AFTER_PASSED': 'EXPIRED',
+    'SHIPPED RECEIPT_SIGNED': 'RECEIVED',
+    'SHIPPED CANCEL_AFTER_PASSED': 'EXPIRED',
+    'RECEIVED RELEASE_ESCROW': 'FUNDED',
+    'RECEIVED CANCEL_AFTER_PASSED': 'EXPIRED',
     'FUNDED PAY_BOB': 'PAID_OUT',
     'FUNDED REFUND_ALICE': 'REFUNDED',
     'FUNDED OPEN_DISPUTE': 'DISPUTED',
@@ -145,13 +182,14 @@ describe('exhaustive state times event table', () => {
   };
   const full: Event[] = [
     ...PLAIN.map((t) => ({ t }) as Event),
+    { t: 'RECEIPT_SIGNED', condition: 'ok' },
     { t: 'RELEASE_ESCROW', gatePassed: true, submitter: 'rB', releaser: 'rB' },
     { t: 'PAY_BOB', sigs: QUORUM },
     { t: 'REFUND_ALICE', sigs: QUORUM },
     { t: 'AWARD', to: 'BOB', sigs: QUORUM },
     { t: 'CLOSE', sigs: QUORUM },
   ];
-  it('every state and every event gives the expected state or an illegal refusal (13 x 14 x 2 lock flags)', () => {
+  it('every state and every event gives the expected state or an illegal refusal (15 x 16 x 2 lock flags)', () => {
     let checked = 0;
     for (const s of STATES)
       for (const e of full)
@@ -163,8 +201,8 @@ describe('exhaustive state times event table', () => {
           if (r.ok) expect(r.deal.wasLocked).toBe(locked || r.deal.state === 'WALLET_LOCKED');
           checked++;
         }
-    expect(checked).toBe(13 * 14 * 2);
-    expect(Object.keys(EDGES)).toHaveLength(20);
+    expect(checked).toBe(15 * 16 * 2);
+    expect(Object.keys(EDGES)).toHaveLength(24);
   });
   it('a locked deal refuses every sigs-carrying event below the quorum, an unlocked shell does not', () => {
     for (const s of STATES)

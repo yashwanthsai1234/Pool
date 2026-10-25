@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { usePartyStrict } from './-context.tsx';
 import { gate } from './-gate.tsx';
 
-export type Screen = 'home' | 'lock' | 'badge' | 'presence' | 'approve' | 'records';
+export type Screen = 'home' | 'lock' | 'badge' | 'presence' | 'approve' | 'records' | 'ship';
 const ORDER = DealState.options;
 const reached = (state: string, at: (typeof ORDER)[number]) => ORDER.indexOf(state as never) >= ORDER.indexOf(at);
 
@@ -27,6 +27,12 @@ export function HomeScreen({ open, makeKey }: { open: (screen: Screen) => void; 
     { screen: 'lock', label: 'Lock money', done: reached(st, 'WALLET_LOCKED'), hidden: s.role !== 'alice' },
     { screen: 'presence', label: 'Passport presence', done: reached(st, 'VERIFIED') },
     { screen: 'badge', label: 'Accept my badge', done: Boolean(deal.data.nftTokenId) && reached(st, 'FUNDED') },
+    {
+      screen: 'ship',
+      label: s.role === 'bob' ? 'Ship' : 'Confirm delivery',
+      done: reached(st, 'PAID_OUT'),
+      hidden: !s.ship,
+    },
     { screen: 'approve', label: 'Approve payment', done: reached(st, 'PAID_OUT') },
     { screen: 'records', label: 'My records', done: false },
   ];

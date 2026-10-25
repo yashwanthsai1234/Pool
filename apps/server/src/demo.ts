@@ -14,6 +14,7 @@ import { advanceLedgers } from '@legx/xrpl/ledger';
 import { demoAgentDeps, demoFirmDeps } from './agents.ts';
 import { demoAttacks } from './demo-attacks/index.ts';
 import { realScenes } from './demo-attacks/scenes.ts';
+import { withWalkthrough } from './demo-walkthrough/index.ts';
 import { type Adapters, type Built, buildStack } from './stack.ts';
 import { verifyScriptText } from './verifyScript.ts';
 
@@ -147,7 +148,7 @@ export async function buildDemo(env: Readonly<Record<string, string | undefined>
         },
       }),
     }),
-    demo: demoAttacks(realScenes(ledgerWs)), // attack mode (task 4.5), demo profile only
+    demo: withWalkthrough(demoAttacks(realScenes(ledgerWs)), { env, ledgerWs, pgUrl: env.LEGX_PG ?? DEFAULTS.pg }), // attack mode (4.5) and the walkthrough, demo profile only
     stops,
   };
   return await buildStack({ ...pinnedFromSeed(env), ...env, LEGX_PG: env.LEGX_PG ?? DEFAULTS.pg }, adapters);

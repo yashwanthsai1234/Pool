@@ -9,10 +9,15 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as IndexRouteImport } from './routes/index'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard/index'
+import { Route as DealsIndexRouteImport } from './routes/deals/index'
 import { Route as LawyersIndexRouteImport } from './routes/lawyers/index'
+import { Route as MeIndexRouteImport } from './routes/me/index'
 import { Route as PartyRoleRouteImport } from './routes/party/$role'
 import { Route as PartyPqBindingRouteImport } from './routes/party/pq-binding'
+import { Route as PresentIdRouteImport } from './routes/present/$id'
+import { Route as RegisterIndexRouteImport } from './routes/register/index'
 import { Route as LawyersFrostDkgRouteImport } from './routes/lawyers/frost/dkg'
 import { Route as LawyersFrostRecoveriesRouteImport } from './routes/lawyers/frost/recoveries'
 import { Route as LawyersFrostRotationRouteImport } from './routes/lawyers/frost/rotation'
@@ -24,14 +29,29 @@ import { Route as PartyFrostRefreshRouteImport } from './routes/party/frost/refr
 import { Route as PartyFrostRotationRouteImport } from './routes/party/frost/rotation'
 import { Route as PartyFrostSignRouteImport } from './routes/party/frost/sign'
 
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DashboardIndexRoute = DashboardIndexRouteImport.update({
   id: '/dashboard/',
   path: '/dashboard/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DealsIndexRoute = DealsIndexRouteImport.update({
+  id: '/deals/',
+  path: '/deals/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LawyersIndexRoute = LawyersIndexRouteImport.update({
   id: '/lawyers/',
   path: '/lawyers/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MeIndexRoute = MeIndexRouteImport.update({
+  id: '/me/',
+  path: '/me/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PartyRoleRoute = PartyRoleRouteImport.update({
@@ -42,6 +62,16 @@ const PartyRoleRoute = PartyRoleRouteImport.update({
 const PartyPqBindingRoute = PartyPqBindingRouteImport.update({
   id: '/party/pq-binding',
   path: '/party/pq-binding',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PresentIdRoute = PresentIdRouteImport.update({
+  id: '/present/$id',
+  path: '/present/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RegisterIndexRoute = RegisterIndexRouteImport.update({
+  id: '/register/',
+  path: '/register/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LawyersFrostDkgRoute = LawyersFrostDkgRouteImport.update({
@@ -97,10 +127,15 @@ const PartyFrostSignRoute = PartyFrostSignRouteImport.update({
 } as any)
 
 export interface FileRoutesByFullPath {
+  '/': typeof IndexRoute
   '/party/$role': typeof PartyRoleRoute
   '/party/pq-binding': typeof PartyPqBindingRoute
+  '/present/$id': typeof PresentIdRoute
   '/dashboard/': typeof DashboardIndexRoute
+  '/deals/': typeof DealsIndexRoute
   '/lawyers/': typeof LawyersIndexRoute
+  '/me/': typeof MeIndexRoute
+  '/register/': typeof RegisterIndexRoute
   '/lawyers/frost/dkg': typeof LawyersFrostDkgRoute
   '/lawyers/frost/recoveries': typeof LawyersFrostRecoveriesRoute
   '/lawyers/frost/rotation': typeof LawyersFrostRotationRoute
@@ -113,10 +148,15 @@ export interface FileRoutesByFullPath {
   '/party/frost/sign': typeof PartyFrostSignRoute
 }
 export interface FileRoutesByTo {
+  '/': typeof IndexRoute
   '/party/$role': typeof PartyRoleRoute
   '/party/pq-binding': typeof PartyPqBindingRoute
+  '/present/$id': typeof PresentIdRoute
   '/dashboard': typeof DashboardIndexRoute
+  '/deals': typeof DealsIndexRoute
   '/lawyers': typeof LawyersIndexRoute
+  '/me': typeof MeIndexRoute
+  '/register': typeof RegisterIndexRoute
   '/lawyers/frost/dkg': typeof LawyersFrostDkgRoute
   '/lawyers/frost/recoveries': typeof LawyersFrostRecoveriesRoute
   '/lawyers/frost/rotation': typeof LawyersFrostRotationRoute
@@ -130,10 +170,15 @@ export interface FileRoutesByTo {
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
+  '/': typeof IndexRoute
   '/party/$role': typeof PartyRoleRoute
   '/party/pq-binding': typeof PartyPqBindingRoute
+  '/present/$id': typeof PresentIdRoute
   '/dashboard/': typeof DashboardIndexRoute
+  '/deals/': typeof DealsIndexRoute
   '/lawyers/': typeof LawyersIndexRoute
+  '/me/': typeof MeIndexRoute
+  '/register/': typeof RegisterIndexRoute
   '/lawyers/frost/dkg': typeof LawyersFrostDkgRoute
   '/lawyers/frost/recoveries': typeof LawyersFrostRecoveriesRoute
   '/lawyers/frost/rotation': typeof LawyersFrostRotationRoute
@@ -148,10 +193,15 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
+    | '/'
     | '/party/$role'
     | '/party/pq-binding'
+    | '/present/$id'
     | '/dashboard/'
+    | '/deals/'
     | '/lawyers/'
+    | '/me/'
+    | '/register/'
     | '/lawyers/frost/dkg'
     | '/lawyers/frost/recoveries'
     | '/lawyers/frost/rotation'
@@ -164,10 +214,15 @@ export interface FileRouteTypes {
     | '/party/frost/sign'
   fileRoutesByTo: FileRoutesByTo
   to:
+    | '/'
     | '/party/$role'
     | '/party/pq-binding'
+    | '/present/$id'
     | '/dashboard'
+    | '/deals'
     | '/lawyers'
+    | '/me'
+    | '/register'
     | '/lawyers/frost/dkg'
     | '/lawyers/frost/recoveries'
     | '/lawyers/frost/rotation'
@@ -180,10 +235,15 @@ export interface FileRouteTypes {
     | '/party/frost/sign'
   id:
     | '__root__'
+    | '/'
     | '/party/$role'
     | '/party/pq-binding'
+    | '/present/$id'
     | '/dashboard/'
+    | '/deals/'
     | '/lawyers/'
+    | '/me/'
+    | '/register/'
     | '/lawyers/frost/dkg'
     | '/lawyers/frost/recoveries'
     | '/lawyers/frost/rotation'
@@ -197,10 +257,15 @@ export interface FileRouteTypes {
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
+  IndexRoute: typeof IndexRoute
   PartyRoleRoute: typeof PartyRoleRoute
   PartyPqBindingRoute: typeof PartyPqBindingRoute
+  PresentIdRoute: typeof PresentIdRoute
   DashboardIndexRoute: typeof DashboardIndexRoute
+  DealsIndexRoute: typeof DealsIndexRoute
   LawyersIndexRoute: typeof LawyersIndexRoute
+  MeIndexRoute: typeof MeIndexRoute
+  RegisterIndexRoute: typeof RegisterIndexRoute
   LawyersFrostDkgRoute: typeof LawyersFrostDkgRoute
   LawyersFrostRecoveriesRoute: typeof LawyersFrostRecoveriesRoute
   LawyersFrostRotationRoute: typeof LawyersFrostRotationRoute
@@ -215,6 +280,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/dashboard/': {
       id: '/dashboard/'
       path: '/dashboard'
@@ -222,11 +294,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/deals/': {
+      id: '/deals/'
+      path: '/deals'
+      fullPath: '/deals/'
+      preLoaderRoute: typeof DealsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/lawyers/': {
       id: '/lawyers/'
       path: '/lawyers'
       fullPath: '/lawyers/'
       preLoaderRoute: typeof LawyersIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/me/': {
+      id: '/me/'
+      path: '/me'
+      fullPath: '/me/'
+      preLoaderRoute: typeof MeIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/party/$role': {
@@ -241,6 +327,20 @@ declare module '@tanstack/react-router' {
       path: '/party/pq-binding'
       fullPath: '/party/pq-binding'
       preLoaderRoute: typeof PartyPqBindingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/present/$id': {
+      id: '/present/$id'
+      path: '/present/$id'
+      fullPath: '/present/$id'
+      preLoaderRoute: typeof PresentIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/register/': {
+      id: '/register/'
+      path: '/register'
+      fullPath: '/register/'
+      preLoaderRoute: typeof RegisterIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/lawyers/frost/dkg': {
@@ -317,10 +417,15 @@ declare module '@tanstack/react-router' {
 }
 
 const rootRouteChildren: RootRouteChildren = {
+  IndexRoute: IndexRoute,
   PartyRoleRoute: PartyRoleRoute,
   PartyPqBindingRoute: PartyPqBindingRoute,
+  PresentIdRoute: PresentIdRoute,
   DashboardIndexRoute: DashboardIndexRoute,
+  DealsIndexRoute: DealsIndexRoute,
   LawyersIndexRoute: LawyersIndexRoute,
+  MeIndexRoute: MeIndexRoute,
+  RegisterIndexRoute: RegisterIndexRoute,
   LawyersFrostDkgRoute: LawyersFrostDkgRoute,
   LawyersFrostRecoveriesRoute: LawyersFrostRecoveriesRoute,
   LawyersFrostRotationRoute: LawyersFrostRotationRoute,
