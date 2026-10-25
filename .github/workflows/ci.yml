@@ -136,6 +136,8 @@ jobs:
           node-version: '24.22'
           cache: pnpm
       - run: pnpm install --frozen-lockfile
+      - name: Install Chromium for the UI system tests
+        run: pnpm --filter @legx/web exec playwright install --with-deps chromium
       - name: Start the system containers
         run: |
           docker run -d --name legx-sys-pg -e POSTGRES_PASSWORD=pw -p 5520:5432 postgres:18.6-trixie

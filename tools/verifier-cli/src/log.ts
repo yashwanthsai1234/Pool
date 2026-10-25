@@ -41,9 +41,18 @@ export function registryFromBundle(files: BundleFiles, service: ServiceKeys | un
       logged: true,
       pair: r.key_id,
     };
-    if (/^[0-9a-f]{64}$/.test(r.ed25519_pub))
-      map.set(r.key_id, { alg: 'ed25519', publicKey: hexToBytes(r.ed25519_pub), ...window });
-    if (mldsa) map.set(`${r.key_id}:pq`, { alg: 'ml-dsa-65', publicKey: mldsa, ...window });
+    // One key-id convention across the services (I-3.7-e): `<pair>#ed25519` and `<pair>#ml-dsa-65`; bundles written
+    // before it used `<pair>` and `<pair>:pq`, so both are read.
+    if (/^[0-9a-f]{64}$/.test(r.ed25519_pub)) {
+      const ed: RegisteredKey = { alg: 'ed25519', publicKey: hexToBytes(r.ed25519_pub), ...window };
+      map.set(r.key_id, ed);
+      map.set(`${r.key_id}#ed25519`, ed);
+    }
+    if (mldsa) {
+      const pq: RegisteredKey = { alg: 'ml-dsa-65', publicKey: mldsa, ...window };
+      map.set(`${r.key_id}:pq`, pq);
+      map.set(`${r.key_id}#ml-dsa-65`, pq);
+    }
   }
   if (service) {
     map.set(service.ed.keyId, {
