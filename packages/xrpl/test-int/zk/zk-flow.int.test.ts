@@ -229,7 +229,9 @@ describe('T-I-12 the full flow with zero-knowledge identity (identity policy "zk
     expect(refused).toBe('refused ZK_REFUSED DEVMODE_REFUSED');
     const prod = checkRelease({ ...f.input, profile: 'production' });
     expect(failing(prod)).toEqual(['PASSPORT_A_OK', 'PASSPORT_B_OK', 'ONBOARDING_OK']);
-    for (const x of prod.filter((y) => !y.ok)) expect(x.detail).toMatch(/DEVMODE_REFUSED$/);
+    // OD-34: production also needs face_match_passed true, which the headless flow records as false.
+    for (const x of prod.filter((y) => !y.ok))
+      expect(x.detail).toMatch(/DEVMODE_REFUSED$|^CHECK_FALSE:face_match_passed$/);
     for (const s of ['A', 'B'] as const) {
       const trust = trustRecordOf(f.sides[s].release!.verification);
       expect(trust).toMatchObject({ chain_id: 11155111, identifier_type: 'NON_SALTED_MOCK', dev_mode: true });

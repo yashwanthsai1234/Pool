@@ -9,22 +9,16 @@
 import websocket from '@fastify/websocket';
 import { API_AUTH_HEADER, type AuthRule } from '@legx/contracts/api';
 import { authenticate, canReadDeal, type Principal } from '@legx/coordinator/auth';
-import type { CoordinatorDeps, PinnedKey } from '@legx/coordinator/deps';
 import { ApiError, unauthorized } from '@legx/coordinator/errors';
 import { register as registerRelay } from '@legx/coordinator/frost/index';
-import type { RelayOptions } from '@legx/coordinator/frost/relay';
 import { register as registerCoordinator } from '@legx/coordinator/index';
-import type { BundleDeps } from '@legx/evidence/bundle';
-import type { RecordsDeps } from '@legx/evidence/records';
-import { type FirmCosigner, register as registerFirm, registerFirmRoutes } from '@legx/firm-cosigner';
+import { register as registerFirm, registerFirmRoutes } from '@legx/firm-cosigner';
 import { register as registerAgent } from '@legx/recovery-agent';
-import type { AgentHttpDeps } from '@legx/recovery-agent/routes';
-import type { Verifier } from '@legx/verifier/service';
 import Fastify, { type FastifyInstance, type FastifyRequest } from 'fastify';
 import { CHIP_LINK_PREFIX, registerChipLink } from './chipLink.ts';
-import { assertProfile, type PortSpec, type ProfileName, type ZkSettings } from './config.ts';
+import { assertProfile, type PortSpec, type ProfileName } from './config.ts';
 import type { ServerDeps } from './deps.ts';
-import { LiveHub, type LiveOptions } from './live.ts';
+import { LiveHub } from './live.ts';
 import { mountRoutes } from './routes.ts';
 
 /** Largest request body. Envelopes are at most 64 KiB, base64 makes them a third larger (the coordinator's limit). */
