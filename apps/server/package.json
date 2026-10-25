@@ -1,0 +1,49 @@
+{
+  "name": "@legx/server",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./*": "./src/*.ts"
+  },
+  "scripts": {
+    "start": "node src/main.ts"
+  },
+  "dependencies": {
+    "@aws-sdk/client-kms": "3.1149.0",
+    "@aws-sdk/client-s3": "3.1149.0",
+    "@fastify/websocket": "11.2.0",
+    "@legx/contracts": "workspace:*",
+    "@legx/coordinator": "workspace:*",
+    "@legx/core": "workspace:*",
+    "@legx/db": "workspace:*",
+    "@legx/evidence": "workspace:*",
+    "@legx/firm-cosigner": "workspace:*",
+    "@legx/recovery-agent": "workspace:*",
+    "@legx/signer": "workspace:*",
+    "@legx/storage": "workspace:*",
+    "@legx/verifier": "workspace:*",
+    "@legx/watcher": "workspace:*",
+    "@legx/xrpl": "workspace:*",
+    "@legx/zk": "workspace:*",
+    "@legx/zk-verifier": "workspace:*",
+    "@noble/curves": "2.4.0",
+    "@noble/hashes": "2.4.0",
+    "fastify": "5.12.7",
+    "pg": "8.23.0",
+    "pg-boss": "12.38.0",
+    "ws": "8.18.3",
+    "xrpl": "5.3.0",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "@legx/chip-link": "workspace:*",
+    "@legx/fixtures": "workspace:*",
+    "@legx/mock-bar-registry": "workspace:*",
+    "@scure/base": "2.2.0",
+    "@types/pg": "8.23.1",
+    "@types/ws": "8.18.1",
+    "fast-check": "4.10.2"
+  }
+}

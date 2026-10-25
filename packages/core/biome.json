@@ -1,0 +1,77 @@
+{
+  "root": false,
+  "extends": "//",
+  "files": {
+    "includes": [
+      "**",
+      "!**/node_modules",
+      "!vectors",
+      "!**/*.json",
+      "!src/dealcore.ts",
+      "!src/contract.ts",
+      "!src/fees.ts",
+      "!test/dealcore.test.ts",
+      "!test/more.test.ts"
+    ]
+  },
+  "linter": {
+    "rules": {
+      "style": {
+        "noRestrictedImports": {
+          "level": "error",
+          "options": {
+            "patterns": [
+              {
+                "group": [
+                  "@zkpassport/*"
+                ],
+                "message": "@legx/core stays pure: the ZKPassport SDK sits behind ZkVerifierPort (IMPLEMENTATION 1.17)."
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "overrides": [
+    {
+      "includes": [
+        "src/**"
+      ],
+      "linter": {
+        "rules": {
+          "style": {
+            "noRestrictedImports": {
+              "level": "error",
+              "options": {
+                "patterns": [
+                  {
+                    "group": [
+                      "@zkpassport/*"
+                    ],
+                    "message": "@legx/core stays pure: the ZKPassport SDK sits behind ZkVerifierPort (IMPLEMENTATION 1.17)."
+                  },
+                  {
+                    "group": [
+                      "node:*"
+                    ],
+                    "message": "@legx/core runs in browsers (OD-27): no Node built-ins. Use Uint8Array with @noble/hashes/utils.js or @scure/base."
+                  }
+                ]
+              }
+            },
+            "noRestrictedGlobals": {
+              "level": "error",
+              "options": {
+                "deniedGlobals": {
+                  "Buffer": "@legx/core runs in browsers (OD-27): use Uint8Array with bytesToHex/hexToBytes/utf8ToBytes/concatBytes from @noble/hashes/utils.js, or @scure/base for base64.",
+                  "process": "@legx/core runs in browsers (OD-27): no Node globals."
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

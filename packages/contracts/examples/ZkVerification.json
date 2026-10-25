@@ -1,0 +1,29 @@
+[
+  {
+    "verified": true,
+    "uniqueIdentifier": "61234294426963",
+    "uniqueIdentifierType": "NON_SALTED",
+    "queryResultErrors": {},
+    "proofSha256": "2121212121212121212121212121212121212121212121212121212121212121",
+    "vkeyHash": "0x4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d",
+    "version": "0.21.1",
+    "committedInputs": {
+      "custom_data": "2222222222222222222222222222222222222222222222222222222222222222"
+    },
+    "scope": "legx/v1/0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+    "domain": "legx.app",
+    "trust": {
+      "chainId": 1,
+      "blockNumber": 21000000,
+      "blockHash": "0x1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a",
+      "registryAddress": "0x2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b",
+      "root": "0x3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c",
+      "circuitManifestVersion": "0.21.1",
+      "vkeyHashes": [
+        "0x4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d",
+        "0x5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e"
+      ],
+      "devMode": false
+    }
+  }
+]

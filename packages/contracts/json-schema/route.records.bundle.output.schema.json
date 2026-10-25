@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "filename": {
+      "type": "string",
+      "maxLength": 128
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "zip": {
+      "type": "string",
+      "maxLength": 89478488,
+      "format": "base64",
+      "contentEncoding": "base64",
+      "pattern": "^$|^(?:[0-9a-zA-Z+/]{4})*(?:(?:[0-9a-zA-Z+/]{2}==)|(?:[0-9a-zA-Z+/]{3}=))?$"
+    }
+  },
+  "required": [
+    "filename",
+    "sha256",
+    "zip"
+  ],
+  "additionalProperties": false
+}

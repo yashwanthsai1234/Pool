@@ -1,0 +1,1653 @@
+[
+  {
+    "_type": "https://in-toto.io/Statement/v1",
+    "subject": [
+      {
+        "name": "deal:0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+        "digest": {
+          "sha256": "0101010101010101010101010101010101010101010101010101010101010101"
+        }
+      }
+    ],
+    "predicateType": "https://legx.dev/event/v1",
+    "predicate": {
+      "event_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8ca0",
+      "deal_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+      "seq": 3,
+      "kind": "contract.lawyer_signed",
+      "actor": {
+        "role": "lawyerA",
+        "key_id": "deal/LA/console"
+      },
+      "occurred_at": "2026-10-24T10:00:00Z",
+      "prev_hash": "b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1",
+      "payload_commitment": "b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2",
+      "ledger": {
+        "tx_hash": "3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B",
+        "ledger_index": 1234567,
+        "validated": true
+      },
+      "trace_id": "4bf92f3577b34da6a3ce929d0e0e4736",
+      "sig_algs": [
+        "ed25519",
+        "ml-dsa-65"
+      ],
+      "data": {
+        "role": "LA",
+        "contract_root": "0101010101010101010101010101010101010101010101010101010101010101",
+        "wallet_address": "rH9ESAdrFfDAZtCZGa7JiwNJfKnC6CmGFQ",
+        "lawyer_pub": "ED26D54D80051A116166CF76FEA87330D546680B875827B87AF1B1D58B9EB464E1",
+        "contract_sig": "cdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcd"
+      }
+    }
+  },
+  {
+    "_type": "https://in-toto.io/Statement/v1",
+    "subject": [
+      {
+        "name": "deal:0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+        "digest": {
+          "sha256": "0101010101010101010101010101010101010101010101010101010101010101"
+        }
+      }
+    ],
+    "predicateType": "https://legx.dev/event/v1",
+    "predicate": {
+      "event_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8ca0",
+      "deal_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+      "seq": 3,
+      "kind": "nft.minted",
+      "actor": {
+        "role": "lawyerA",
+        "key_id": "deal/LA/console"
+      },
+      "occurred_at": "2026-10-24T10:00:00Z",
+      "prev_hash": "b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1",
+      "payload_commitment": "b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2",
+      "ledger": {
+        "tx_hash": "3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B",
+        "ledger_index": 1234567,
+        "validated": true
+      },
+      "trace_id": "4bf92f3577b34da6a3ce929d0e0e4736",
+      "sig_algs": [
+        "ed25519",
+        "ml-dsa-65"
+      ],
+      "data": {
+        "nftoken_id": "0A0A0A0A0A0A0A0A0A0A0A0A0A0A0A0A0A0A0A0A0A0A0A0A0A0A0A0A0A0A0A0A",
+        "mint_tx_hash": "1B1B1B1B1B1B1B1B1B1B1B1B1B1B1B1B1B1B1B1B1B1B1B1B1B1B1B1B1B1B1B1B",
+        "minter": "rHhr2iRBgp3ZzzNH4YGQ59G7VAiGPEWj7f",
+        "signed_contract_seal": "0202020202020202020202020202020202020202020202020202020202020202"
+      }
+    }
+  },
+  {
+    "_type": "https://in-toto.io/Statement/v1",
+    "subject": [
+      {
+        "name": "deal:0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+        "digest": {
+          "sha256": "0101010101010101010101010101010101010101010101010101010101010101"
+        }
+      }
+    ],
+    "predicateType": "https://legx.dev/event/v1",
+    "predicate": {
+      "event_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8ca0",
+      "deal_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+      "seq": 3,
+      "kind": "shell.opened",
+      "actor": {
+        "role": "lawyerA",
+        "key_id": "deal/LA/console"
+      },
+      "occurred_at": "2026-10-24T10:00:00Z",
+      "prev_hash": "b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1",
+      "payload_commitment": "b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2",
+      "ledger": {
+        "tx_hash": "3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B",
+        "ledger_index": 1234567,
+        "validated": true
+      },
+      "trace_id": "4bf92f3577b34da6a3ce929d0e0e4736",
+      "sig_algs": [
+        "ed25519",
+        "ml-dsa-65"
+      ],
+      "data": {
+        "wallet_address": "rH9ESAdrFfDAZtCZGa7JiwNJfKnC6CmGFQ",
+        "funding_tx_hash": "1C1C1C1C1C1C1C1C1C1C1C1C1C1C1C1C1C1C1C1C1C1C1C1C1C1C1C1C1C1C1C1C"
+      }
+    }
+  },
+  {
+    "_type": "https://in-toto.io/Statement/v1",
+    "subject": [
+      {
+        "name": "deal:0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+        "digest": {
+          "sha256": "0101010101010101010101010101010101010101010101010101010101010101"
+        }
+      }
+    ],
+    "predicateType": "https://legx.dev/event/v1",
+    "predicate": {
+      "event_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8ca0",
+      "deal_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+      "seq": 3,
+      "kind": "escrow.created",
+      "actor": {
+        "role": "lawyerA",
+        "key_id": "deal/LA/console"
+      },
+      "occurred_at": "2026-10-24T10:00:00Z",
+      "prev_hash": "b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1",
+      "payload_commitment": "b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2",
+      "ledger": {
+        "tx_hash": "3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B",
+        "ledger_index": 1234567,
+        "validated": true
+      },
+      "trace_id": "4bf92f3577b34da6a3ce929d0e0e4736",
+      "sig_algs": [
+        "ed25519",
+        "ml-dsa-65"
+      ],
+      "data": {
+        "escrow": {
+          "owner": "r3sNTMefq5gsRumMYsNznnX6yzzxVH6dTC",
+          "offer_sequence": 7,
+          "amount_drops": "250000000",
+          "condition": "A02580206666666666666666666666666666666666666666666666666666666666666666810120",
+          "cancel_after": 815000000
+        },
+        "tx_hash": "1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D"
+      }
+    }
+  },
+  {
+    "_type": "https://in-toto.io/Statement/v1",
+    "subject": [
+      {
+        "name": "deal:0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+        "digest": {
+          "sha256": "0101010101010101010101010101010101010101010101010101010101010101"
+        }
+      }
+    ],
+    "predicateType": "https://legx.dev/event/v1",
+    "predicate": {
+      "event_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8ca0",
+      "deal_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+      "seq": 3,
+      "kind": "key.bound",
+      "actor": {
+        "role": "lawyerA",
+        "key_id": "deal/LA/console"
+      },
+      "occurred_at": "2026-10-24T10:00:00Z",
+      "prev_hash": "b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1",
+      "payload_commitment": "b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2",
+      "ledger": {
+        "tx_hash": "3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B",
+        "ledger_index": 1234567,
+        "validated": true
+      },
+      "trace_id": "4bf92f3577b34da6a3ce929d0e0e4736",
+      "sig_algs": [
+        "ed25519",
+        "ml-dsa-65"
+      ],
+      "data": {
+        "slot": "A",
+        "xrpl_pubkey": "ED06895BEC3FDE4090F06D840770D888D49E3089B3757C4285E3851BC33964E0F9",
+        "commitment": "0303030303030303030303030303030303030303030303030303030303030303",
+        "binding_sig": "cdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcd"
+      }
+    }
+  },
+  {
+    "_type": "https://in-toto.io/Statement/v1",
+    "subject": [
+      {
+        "name": "deal:0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+        "digest": {
+          "sha256": "0101010101010101010101010101010101010101010101010101010101010101"
+        }
+      }
+    ],
+    "predicateType": "https://legx.dev/event/v1",
+    "predicate": {
+      "event_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8ca0",
+      "deal_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+      "seq": 3,
+      "kind": "ops.bound",
+      "actor": {
+        "role": "lawyerA",
+        "key_id": "deal/LA/console"
+      },
+      "occurred_at": "2026-10-24T10:00:00Z",
+      "prev_hash": "b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1",
+      "payload_commitment": "b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2",
+      "ledger": {
+        "tx_hash": "3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B",
+        "ledger_index": 1234567,
+        "validated": true
+      },
+      "trace_id": "4bf92f3577b34da6a3ce929d0e0e4736",
+      "sig_algs": [
+        "ed25519",
+        "ml-dsa-65"
+      ],
+      "data": {
+        "role": "LB",
+        "ops_account": "rEhh6f9rj5UUBhFzGGaxS5zYU2CCqKFXBC",
+        "ops_pub": "038DC251C57CB83DC3CCC10E432F2E59397DB02B7E91FD4186C8B7DA549FB050DF",
+        "lawyer_pub": "ED7B9E49FF65B0E2A2834771A03982C68FE301AE13AD8FE3C7D37D718DED4BE414",
+        "bar_commitment": "0606060606060606060606060606060606060606060606060606060606060606",
+        "sig_ops": "3045ababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab",
+        "sig_lawyer": "cdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcd"
+      }
+    }
+  },
+  {
+    "_type": "https://in-toto.io/Statement/v1",
+    "subject": [
+      {
+        "name": "deal:0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+        "digest": {
+          "sha256": "0101010101010101010101010101010101010101010101010101010101010101"
+        }
+      }
+    ],
+    "predicateType": "https://legx.dev/event/v1",
+    "predicate": {
+      "event_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8ca0",
+      "deal_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+      "seq": 3,
+      "kind": "bar.verified",
+      "actor": {
+        "role": "lawyerA",
+        "key_id": "deal/LA/console"
+      },
+      "occurred_at": "2026-10-24T10:00:00Z",
+      "prev_hash": "b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1",
+      "payload_commitment": "b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2",
+      "ledger": {
+        "tx_hash": "3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B",
+        "ledger_index": 1234567,
+        "validated": true
+      },
+      "trace_id": "4bf92f3577b34da6a3ce929d0e0e4736",
+      "sig_algs": [
+        "ed25519",
+        "ml-dsa-65"
+      ],
+      "data": {
+        "ops_account": "rHhr2iRBgp3ZzzNH4YGQ59G7VAiGPEWj7f",
+        "verification_sha256": "5353535353535353535353535353535353535353535353535353535353535353"
+      }
+    }
+  },
+  {
+    "_type": "https://in-toto.io/Statement/v1",
+    "subject": [
+      {
+        "name": "deal:0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+        "digest": {
+          "sha256": "0101010101010101010101010101010101010101010101010101010101010101"
+        }
+      }
+    ],
+    "predicateType": "https://legx.dev/event/v1",
+    "predicate": {
+      "event_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8ca0",
+      "deal_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+      "seq": 3,
+      "kind": "bar.deal_linked",
+      "actor": {
+        "role": "lawyerA",
+        "key_id": "deal/LA/console"
+      },
+      "occurred_at": "2026-10-24T10:00:00Z",
+      "prev_hash": "b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1",
+      "payload_commitment": "b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2",
+      "ledger": {
+        "tx_hash": "3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B",
+        "ledger_index": 1234567,
+        "validated": true
+      },
+      "trace_id": "4bf92f3577b34da6a3ce929d0e0e4736",
+      "sig_algs": [
+        "ed25519",
+        "ml-dsa-65"
+      ],
+      "data": {
+        "role": "LA",
+        "link_sha256": "5454545454545454545454545454545454545454545454545454545454545454",
+        "verification_sha256": "5353535353535353535353535353535353535353535353535353535353535353"
+      }
+    }
+  },
+  {
+    "_type": "https://in-toto.io/Statement/v1",
+    "subject": [
+      {
+        "name": "deal:0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+        "digest": {
+          "sha256": "0101010101010101010101010101010101010101010101010101010101010101"
+        }
+      }
+    ],
+    "predicateType": "https://legx.dev/event/v1",
+    "predicate": {
+      "event_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8ca0",
+      "deal_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+      "seq": 3,
+      "kind": "attorney.credential.issued",
+      "actor": {
+        "role": "lawyerA",
+        "key_id": "deal/LA/console"
+      },
+      "occurred_at": "2026-10-24T10:00:00Z",
+      "prev_hash": "b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1",
+      "payload_commitment": "b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2",
+      "ledger": {
+        "tx_hash": "3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B",
+        "ledger_index": 1234567,
+        "validated": true
+      },
+      "trace_id": "4bf92f3577b34da6a3ce929d0e0e4736",
+      "sig_algs": [
+        "ed25519",
+        "ml-dsa-65"
+      ],
+      "data": {
+        "ops_account": "rHhr2iRBgp3ZzzNH4YGQ59G7VAiGPEWj7f",
+        "verification_sha256": "5353535353535353535353535353535353535353535353535353535353535353",
+        "create_tx_hash": "1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E",
+        "accept_tx_hash": "1F1F1F1F1F1F1F1F1F1F1F1F1F1F1F1F1F1F1F1F1F1F1F1F1F1F1F1F1F1F1F1F",
+        "expiration": 822000000
+      }
+    }
+  },
+  {
+    "_type": "https://in-toto.io/Statement/v1",
+    "subject": [
+      {
+        "name": "deal:0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+        "digest": {
+          "sha256": "0101010101010101010101010101010101010101010101010101010101010101"
+        }
+      }
+    ],
+    "predicateType": "https://legx.dev/event/v1",
+    "predicate": {
+      "event_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8ca0",
+      "deal_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+      "seq": 3,
+      "kind": "wallet.locked",
+      "actor": {
+        "role": "lawyerA",
+        "key_id": "deal/LA/console"
+      },
+      "occurred_at": "2026-10-24T10:00:00Z",
+      "prev_hash": "b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1",
+      "payload_commitment": "b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2",
+      "ledger": {
+        "tx_hash": "3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B",
+        "ledger_index": 1234567,
+        "validated": true
+      },
+      "trace_id": "4bf92f3577b34da6a3ce929d0e0e4736",
+      "sig_algs": [
+        "ed25519",
+        "ml-dsa-65"
+      ],
+      "data": {
+        "tx_hashes": [
+          "2A2A2A2A2A2A2A2A2A2A2A2A2A2A2A2A2A2A2A2A2A2A2A2A2A2A2A2A2A2A2A2A",
+          "2B2B2B2B2B2B2B2B2B2B2B2B2B2B2B2B2B2B2B2B2B2B2B2B2B2B2B2B2B2B2B2B"
+        ],
+        "domain": "0101010101010101010101010101010101010101010101010101010101010101010F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F"
+      }
+    }
+  },
+  {
+    "_type": "https://in-toto.io/Statement/v1",
+    "subject": [
+      {
+        "name": "deal:0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+        "digest": {
+          "sha256": "0101010101010101010101010101010101010101010101010101010101010101"
+        }
+      }
+    ],
+    "predicateType": "https://legx.dev/event/v1",
+    "predicate": {
+      "event_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8ca0",
+      "deal_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+      "seq": 3,
+      "kind": "lock.verified",
+      "actor": {
+        "role": "lawyerA",
+        "key_id": "deal/LA/console"
+      },
+      "occurred_at": "2026-10-24T10:00:00Z",
+      "prev_hash": "b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1",
+      "payload_commitment": "b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2",
+      "ledger": {
+        "tx_hash": "3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B",
+        "ledger_index": 1234567,
+        "validated": true
+      },
+      "trace_id": "4bf92f3577b34da6a3ce929d0e0e4736",
+      "sig_algs": [
+        "ed25519",
+        "ml-dsa-65"
+      ],
+      "data": {
+        "ledger": {
+          "ledger_index": 1234567,
+          "ledger_hash": "ABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABAB"
+        },
+        "findings": [
+          {
+            "ok": true,
+            "level": "block",
+            "code": "MASTER_DISABLED"
+          },
+          {
+            "ok": true,
+            "level": "warn",
+            "code": "INCOMING_CHECK",
+            "detail": "x"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "_type": "https://in-toto.io/Statement/v1",
+    "subject": [
+      {
+        "name": "deal:0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+        "digest": {
+          "sha256": "0101010101010101010101010101010101010101010101010101010101010101"
+        }
+      }
+    ],
+    "predicateType": "https://legx.dev/event/v1",
+    "predicate": {
+      "event_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8ca0",
+      "deal_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+      "seq": 3,
+      "kind": "lawyer.approved",
+      "actor": {
+        "role": "lawyerA",
+        "key_id": "deal/LA/console"
+      },
+      "occurred_at": "2026-10-24T10:00:00Z",
+      "prev_hash": "b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1",
+      "payload_commitment": "b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2",
+      "ledger": {
+        "tx_hash": "3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B",
+        "ledger_index": 1234567,
+        "validated": true
+      },
+      "trace_id": "4bf92f3577b34da6a3ce929d0e0e4736",
+      "sig_algs": [
+        "ed25519",
+        "ml-dsa-65"
+      ],
+      "data": {
+        "role": "LB",
+        "message_hash": "a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1"
+      }
+    }
+  },
+  {
+    "_type": "https://in-toto.io/Statement/v1",
+    "subject": [
+      {
+        "name": "deal:0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+        "digest": {
+          "sha256": "0101010101010101010101010101010101010101010101010101010101010101"
+        }
+      }
+    ],
+    "predicateType": "https://legx.dev/event/v1",
+    "predicate": {
+      "event_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8ca0",
+      "deal_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+      "seq": 3,
+      "kind": "passport.verified",
+      "actor": {
+        "role": "lawyerA",
+        "key_id": "deal/LA/console"
+      },
+      "occurred_at": "2026-10-24T10:00:00Z",
+      "prev_hash": "b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1",
+      "payload_commitment": "b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2",
+      "ledger": {
+        "tx_hash": "3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B",
+        "ledger_index": 1234567,
+        "validated": true
+      },
+      "trace_id": "4bf92f3577b34da6a3ce929d0e0e4736",
+      "sig_algs": [
+        "ed25519",
+        "ml-dsa-65"
+      ],
+      "data": {
+        "side": "A",
+        "attestation": "eyJwYXlsb2FkVHlwZSI6ImFwcGxpY2F0aW9uL3ZuZC5sZWd4LmV2ZW50K2pzb247dj0xIiwicGF5bG9hZCI6ImUzMD0iLCJzaWduYXR1cmVzIjpbXX0="
+      }
+    }
+  },
+  {
+    "_type": "https://in-toto.io/Statement/v1",
+    "subject": [
+      {
+        "name": "deal:0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+        "digest": {
+          "sha256": "0101010101010101010101010101010101010101010101010101010101010101"
+        }
+      }
+    ],
+    "predicateType": "https://legx.dev/event/v1",
+    "predicate": {
+      "event_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8ca0",
+      "deal_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+      "seq": 3,
+      "kind": "release.gate.passed",
+      "actor": {
+        "role": "lawyerA",
+        "key_id": "deal/LA/console"
+      },
+      "occurred_at": "2026-10-24T10:00:00Z",
+      "prev_hash": "b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1",
+      "payload_commitment": "b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2",
+      "ledger": {
+        "tx_hash": "3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B",
+        "ledger_index": 1234567,
+        "validated": true
+      },
+      "trace_id": "4bf92f3577b34da6a3ce929d0e0e4736",
+      "sig_algs": [
+        "ed25519",
+        "ml-dsa-65"
+      ],
+      "data": {
+        "gate": {
+          "deal_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+          "deal_seal": "0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f",
+          "ledger": {
+            "ledger_index": 1234567,
+            "ledger_hash": "ABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABAB"
+          },
+          "findings": [
+            {
+              "ok": true,
+              "level": "block",
+              "code": "LOCK_OK"
+            },
+            {
+              "ok": true,
+              "level": "block",
+              "code": "CONTRACT_SEAL_OK"
+            },
+            {
+              "ok": true,
+              "level": "block",
+              "code": "PASSPORT_A_OK"
+            },
+            {
+              "ok": true,
+              "level": "block",
+              "code": "PASSPORT_B_OK"
+            },
+            {
+              "ok": true,
+              "level": "block",
+              "code": "BAR_A_OK"
+            },
+            {
+              "ok": true,
+              "level": "block",
+              "code": "BAR_B_OK"
+            },
+            {
+              "ok": true,
+              "level": "block",
+              "code": "ATTORNEY_CREDENTIAL_A_OK"
+            },
+            {
+              "ok": true,
+              "level": "block",
+              "code": "ATTORNEY_CREDENTIAL_B_OK"
+            },
+            {
+              "ok": true,
+              "level": "block",
+              "code": "RELEASER_SEALED"
+            },
+            {
+              "ok": true,
+              "level": "block",
+              "code": "OPS_BINDINGS_OK"
+            },
+            {
+              "ok": true,
+              "level": "block",
+              "code": "ONBOARDING_OK"
+            },
+            {
+              "ok": true,
+              "level": "block",
+              "code": "IDS_DISTINCT"
+            },
+            {
+              "ok": true,
+              "level": "block",
+              "code": "IDENTITY_POLICY_OK"
+            },
+            {
+              "ok": true,
+              "level": "block",
+              "code": "PQ_BINDINGS_OK"
+            },
+            {
+              "ok": true,
+              "level": "block",
+              "code": "SLOT_SETUP_OK"
+            }
+          ],
+          "relied_on": [
+            {
+              "name": "passport.A",
+              "sha256": "6161616161616161616161616161616161616161616161616161616161616161"
+            }
+          ],
+          "slot_lb_sig": "cdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcd"
+        }
+      }
+    }
+  },
+  {
+    "_type": "https://in-toto.io/Statement/v1",
+    "subject": [
+      {
+        "name": "deal:0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+        "digest": {
+          "sha256": "0101010101010101010101010101010101010101010101010101010101010101"
+        }
+      }
+    ],
+    "predicateType": "https://legx.dev/event/v1",
+    "predicate": {
+      "event_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8ca0",
+      "deal_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+      "seq": 3,
+      "kind": "release.performed",
+      "actor": {
+        "role": "lawyerA",
+        "key_id": "deal/LA/console"
+      },
+      "occurred_at": "2026-10-24T10:00:00Z",
+      "prev_hash": "b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1",
+      "payload_commitment": "b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2",
+      "ledger": {
+        "tx_hash": "3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B",
+        "ledger_index": 1234567,
+        "validated": true
+      },
+      "trace_id": "4bf92f3577b34da6a3ce929d0e0e4736",
+      "sig_algs": [
+        "ed25519",
+        "ml-dsa-65"
+      ],
+      "data": {
+        "finish_tx_hash": "2C2C2C2C2C2C2C2C2C2C2C2C2C2C2C2C2C2C2C2C2C2C2C2C2C2C2C2C2C2C2C2C",
+        "ledger_index": 1234600,
+        "gate_leaf_hash": "a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2"
+      }
+    }
+  },
+  {
+    "_type": "https://in-toto.io/Statement/v1",
+    "subject": [
+      {
+        "name": "deal:0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+        "digest": {
+          "sha256": "0101010101010101010101010101010101010101010101010101010101010101"
+        }
+      }
+    ],
+    "predicateType": "https://legx.dev/event/v1",
+    "predicate": {
+      "event_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8ca0",
+      "deal_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+      "seq": 3,
+      "kind": "frost.dkg.completed",
+      "actor": {
+        "role": "lawyerA",
+        "key_id": "deal/LA/console"
+      },
+      "occurred_at": "2026-10-24T10:00:00Z",
+      "prev_hash": "b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1",
+      "payload_commitment": "b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2",
+      "ledger": {
+        "tx_hash": "3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B",
+        "ledger_index": 1234567,
+        "validated": true
+      },
+      "trace_id": "4bf92f3577b34da6a3ce929d0e0e4736",
+      "sig_algs": [
+        "ed25519",
+        "ml-dsa-65"
+      ],
+      "data": {
+        "session_id": "7070707070707070707070707070707070707070707070707070707070707070",
+        "slot": "A",
+        "group_pub": "ED06895BEC3FDE4090F06D840770D888D49E3089B3757C4285E3851BC33964E0F9",
+        "slot_policy": "0707070707070707070707070707070707070707070707070707070707070707",
+        "roles": [
+          "phone",
+          "second-authenticator",
+          "recovery-agent"
+        ],
+        "transcript_hash": "a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3",
+        "holder_sigs": [
+          {
+            "key_id": "deal/A/holder1",
+            "sig": "cdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcd"
+          },
+          {
+            "key_id": "deal/A/holder2",
+            "sig": "cdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcd"
+          },
+          {
+            "key_id": "deal/A/holder3",
+            "sig": "cdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcd"
+          }
+        ],
+        "verifying_shares": [
+          {
+            "identifier": "0100000000000000000000000000000000000000000000000000000000000000",
+            "share": "9191919191919191919191919191919191919191919191919191919191919191"
+          },
+          {
+            "identifier": "0200000000000000000000000000000000000000000000000000000000000000",
+            "share": "9191919191919191919191919191919191919191919191919191919191919191"
+          },
+          {
+            "identifier": "0300000000000000000000000000000000000000000000000000000000000000",
+            "share": "9191919191919191919191919191919191919191919191919191919191919191"
+          }
+        ],
+        "test_sigs": [
+          "cdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcd",
+          "cececececececececececececececececececececececececececececececececececececececececececececececececececececececececececececececece",
+          "cfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcf"
+        ]
+      }
+    }
+  },
+  {
+    "_type": "https://in-toto.io/Statement/v1",
+    "subject": [
+      {
+        "name": "deal:0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+        "digest": {
+          "sha256": "0101010101010101010101010101010101010101010101010101010101010101"
+        }
+      }
+    ],
+    "predicateType": "https://legx.dev/event/v1",
+    "predicate": {
+      "event_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8ca0",
+      "deal_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+      "seq": 3,
+      "kind": "frost.signed",
+      "actor": {
+        "role": "lawyerA",
+        "key_id": "deal/LA/console"
+      },
+      "occurred_at": "2026-10-24T10:00:00Z",
+      "prev_hash": "b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1",
+      "payload_commitment": "b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2",
+      "ledger": {
+        "tx_hash": "3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B",
+        "ledger_index": 1234567,
+        "validated": true
+      },
+      "trace_id": "4bf92f3577b34da6a3ce929d0e0e4736",
+      "sig_algs": [
+        "ed25519",
+        "ml-dsa-65"
+      ],
+      "data": {
+        "slot": "A",
+        "message_hash": "a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4",
+        "signer_key_ids": [
+          "deal/A/phone",
+          "deal/A/second-authenticator"
+        ],
+        "signature": "cdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcd"
+      }
+    }
+  },
+  {
+    "_type": "https://in-toto.io/Statement/v1",
+    "subject": [
+      {
+        "name": "deal:0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+        "digest": {
+          "sha256": "0101010101010101010101010101010101010101010101010101010101010101"
+        }
+      }
+    ],
+    "predicateType": "https://legx.dev/event/v1",
+    "predicate": {
+      "event_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8ca0",
+      "deal_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+      "seq": 3,
+      "kind": "frost.refreshed",
+      "actor": {
+        "role": "lawyerA",
+        "key_id": "deal/LA/console"
+      },
+      "occurred_at": "2026-10-24T10:00:00Z",
+      "prev_hash": "b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1",
+      "payload_commitment": "b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2",
+      "ledger": {
+        "tx_hash": "3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B",
+        "ledger_index": 1234567,
+        "validated": true
+      },
+      "trace_id": "4bf92f3577b34da6a3ce929d0e0e4736",
+      "sig_algs": [
+        "ed25519",
+        "ml-dsa-65"
+      ],
+      "data": {
+        "slot": "A",
+        "group_pub": "ED06895BEC3FDE4090F06D840770D888D49E3089B3757C4285E3851BC33964E0F9",
+        "epoch": 1,
+        "old_verifying_shares": [
+          {
+            "identifier": "0100000000000000000000000000000000000000000000000000000000000000",
+            "share": "9191919191919191919191919191919191919191919191919191919191919191"
+          },
+          {
+            "identifier": "0200000000000000000000000000000000000000000000000000000000000000",
+            "share": "9191919191919191919191919191919191919191919191919191919191919191"
+          },
+          {
+            "identifier": "0300000000000000000000000000000000000000000000000000000000000000",
+            "share": "9191919191919191919191919191919191919191919191919191919191919191"
+          }
+        ],
+        "new_verifying_shares": [
+          {
+            "identifier": "0100000000000000000000000000000000000000000000000000000000000000",
+            "share": "9191919191919191919191919191919191919191919191919191919191919191"
+          },
+          {
+            "identifier": "0200000000000000000000000000000000000000000000000000000000000000",
+            "share": "9191919191919191919191919191919191919191919191919191919191919191"
+          },
+          {
+            "identifier": "0300000000000000000000000000000000000000000000000000000000000000",
+            "share": "9191919191919191919191919191919191919191919191919191919191919191"
+          }
+        ],
+        "deletion_sigs": [
+          {
+            "key_id": "deal/A/holder1",
+            "sig": "cdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcd"
+          },
+          {
+            "key_id": "deal/A/holder2",
+            "sig": "cdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcd"
+          },
+          {
+            "key_id": "deal/A/holder3",
+            "sig": "cdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcd"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "_type": "https://in-toto.io/Statement/v1",
+    "subject": [
+      {
+        "name": "deal:0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+        "digest": {
+          "sha256": "0101010101010101010101010101010101010101010101010101010101010101"
+        }
+      }
+    ],
+    "predicateType": "https://legx.dev/event/v1",
+    "predicate": {
+      "event_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8ca0",
+      "deal_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+      "seq": 3,
+      "kind": "identity.onboarded",
+      "actor": {
+        "role": "lawyerA",
+        "key_id": "deal/LA/console"
+      },
+      "occurred_at": "2026-10-24T10:00:00Z",
+      "prev_hash": "b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1",
+      "payload_commitment": "b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2",
+      "ledger": {
+        "tx_hash": "3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B",
+        "ledger_index": 1234567,
+        "validated": true
+      },
+      "trace_id": "4bf92f3577b34da6a3ce929d0e0e4736",
+      "sig_algs": [
+        "ed25519",
+        "ml-dsa-65"
+      ],
+      "data": {
+        "side": "A",
+        "attestation": "eyJwYXlsb2FkVHlwZSI6ImFwcGxpY2F0aW9uL3ZuZC5sZWd4LmV2ZW50K2pzb247dj0xIiwicGF5bG9hZCI6ImUzMD0iLCJzaWduYXR1cmVzIjpbXX0="
+      }
+    }
+  },
+  {
+    "_type": "https://in-toto.io/Statement/v1",
+    "subject": [
+      {
+        "name": "deal:0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+        "digest": {
+          "sha256": "0101010101010101010101010101010101010101010101010101010101010101"
+        }
+      }
+    ],
+    "predicateType": "https://legx.dev/event/v1",
+    "predicate": {
+      "event_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8ca0",
+      "deal_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+      "seq": 3,
+      "kind": "pq.bound",
+      "actor": {
+        "role": "lawyerA",
+        "key_id": "deal/LA/console"
+      },
+      "occurred_at": "2026-10-24T10:00:00Z",
+      "prev_hash": "b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1",
+      "payload_commitment": "b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2",
+      "ledger": {
+        "tx_hash": "3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B",
+        "ledger_index": 1234567,
+        "validated": true
+      },
+      "trace_id": "4bf92f3577b34da6a3ce929d0e0e4736",
+      "sig_algs": [
+        "ed25519",
+        "ml-dsa-65"
+      ],
+      "data": {
+        "binding": {
+          "slot": "A",
+          "deal_seal": "0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f",
+          "slot_pub": "ED06895BEC3FDE4090F06D840770D888D49E3089B3757C4285E3851BC33964E0F9",
+          "pq_key_hash": "0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b",
+          "holder_sigs": [
+            {
+              "key_id": "deal/A/phone",
+              "sig": "AwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMD"
+            },
+            {
+              "key_id": "deal/A/second-authenticator",
+              "sig": "BAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQE"
+            }
+          ],
+          "cross_sig": "cdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcd"
+        }
+      }
+    }
+  },
+  {
+    "_type": "https://in-toto.io/Statement/v1",
+    "subject": [
+      {
+        "name": "deal:0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+        "digest": {
+          "sha256": "0101010101010101010101010101010101010101010101010101010101010101"
+        }
+      }
+    ],
+    "predicateType": "https://legx.dev/event/v1",
+    "predicate": {
+      "event_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8ca0",
+      "deal_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+      "seq": 3,
+      "kind": "exit.signed",
+      "actor": {
+        "role": "lawyerA",
+        "key_id": "deal/LA/console"
+      },
+      "occurred_at": "2026-10-24T10:00:00Z",
+      "prev_hash": "b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1",
+      "payload_commitment": "b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2",
+      "ledger": {
+        "tx_hash": "3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B",
+        "ledger_index": 1234567,
+        "validated": true
+      },
+      "trace_id": "4bf92f3577b34da6a3ce929d0e0e4736",
+      "sig_algs": [
+        "ed25519",
+        "ml-dsa-65"
+      ],
+      "data": {
+        "purpose": "pay_bob",
+        "request_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8ca0",
+        "exit_slot": 9,
+        "destination": "rPPdduC9MRTrXZP1J7MQyEKKEYiFigWZ6Q:12345"
+      }
+    }
+  },
+  {
+    "_type": "https://in-toto.io/Statement/v1",
+    "subject": [
+      {
+        "name": "deal:0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+        "digest": {
+          "sha256": "0101010101010101010101010101010101010101010101010101010101010101"
+        }
+      }
+    ],
+    "predicateType": "https://legx.dev/event/v1",
+    "predicate": {
+      "event_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8ca0",
+      "deal_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+      "seq": 3,
+      "kind": "exit.validated",
+      "actor": {
+        "role": "lawyerA",
+        "key_id": "deal/LA/console"
+      },
+      "occurred_at": "2026-10-24T10:00:00Z",
+      "prev_hash": "b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1",
+      "payload_commitment": "b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2",
+      "ledger": {
+        "tx_hash": "3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B",
+        "ledger_index": 1234567,
+        "validated": true
+      },
+      "trace_id": "4bf92f3577b34da6a3ce929d0e0e4736",
+      "sig_algs": [
+        "ed25519",
+        "ml-dsa-65"
+      ],
+      "data": {
+        "purpose": "pay_bob",
+        "tx_hash": "2D2D2D2D2D2D2D2D2D2D2D2D2D2D2D2D2D2D2D2D2D2D2D2D2D2D2D2D2D2D2D2D",
+        "destination": "rPPdduC9MRTrXZP1J7MQyEKKEYiFigWZ6Q:12345",
+        "delivered_drops": "250000000"
+      }
+    }
+  },
+  {
+    "_type": "https://in-toto.io/Statement/v1",
+    "subject": [
+      {
+        "name": "deal:0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+        "digest": {
+          "sha256": "0101010101010101010101010101010101010101010101010101010101010101"
+        }
+      }
+    ],
+    "predicateType": "https://legx.dev/event/v1",
+    "predicate": {
+      "event_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8ca0",
+      "deal_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+      "seq": 3,
+      "kind": "dispute.opened",
+      "actor": {
+        "role": "lawyerA",
+        "key_id": "deal/LA/console"
+      },
+      "occurred_at": "2026-10-24T10:00:00Z",
+      "prev_hash": "b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1",
+      "payload_commitment": "b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2",
+      "ledger": {
+        "tx_hash": "3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B",
+        "ledger_index": 1234567,
+        "validated": true
+      },
+      "trace_id": "4bf92f3577b34da6a3ce929d0e0e4736",
+      "sig_algs": [
+        "ed25519",
+        "ml-dsa-65"
+      ],
+      "data": {
+        "notice_sha256": "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5"
+      }
+    }
+  },
+  {
+    "_type": "https://in-toto.io/Statement/v1",
+    "subject": [
+      {
+        "name": "deal:0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+        "digest": {
+          "sha256": "0101010101010101010101010101010101010101010101010101010101010101"
+        }
+      }
+    ],
+    "predicateType": "https://legx.dev/event/v1",
+    "predicate": {
+      "event_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8ca0",
+      "deal_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+      "seq": 3,
+      "kind": "award.recorded",
+      "actor": {
+        "role": "lawyerA",
+        "key_id": "deal/LA/console"
+      },
+      "occurred_at": "2026-10-24T10:00:00Z",
+      "prev_hash": "b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1",
+      "payload_commitment": "b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2",
+      "ledger": {
+        "tx_hash": "3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B",
+        "ledger_index": 1234567,
+        "validated": true
+      },
+      "trace_id": "4bf92f3577b34da6a3ce929d0e0e4736",
+      "sig_algs": [
+        "ed25519",
+        "ml-dsa-65"
+      ],
+      "data": {
+        "award_sha256": "a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6",
+        "outcome": "refund_alice"
+      }
+    }
+  },
+  {
+    "_type": "https://in-toto.io/Statement/v1",
+    "subject": [
+      {
+        "name": "deal:0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+        "digest": {
+          "sha256": "0101010101010101010101010101010101010101010101010101010101010101"
+        }
+      }
+    ],
+    "predicateType": "https://legx.dev/event/v1",
+    "predicate": {
+      "event_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8ca0",
+      "deal_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+      "seq": 3,
+      "kind": "escrow.cancelled",
+      "actor": {
+        "role": "lawyerA",
+        "key_id": "deal/LA/console"
+      },
+      "occurred_at": "2026-10-24T10:00:00Z",
+      "prev_hash": "b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1",
+      "payload_commitment": "b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2",
+      "ledger": {
+        "tx_hash": "3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B",
+        "ledger_index": 1234567,
+        "validated": true
+      },
+      "trace_id": "4bf92f3577b34da6a3ce929d0e0e4736",
+      "sig_algs": [
+        "ed25519",
+        "ml-dsa-65"
+      ],
+      "data": {
+        "tx_hash": "2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E"
+      }
+    }
+  },
+  {
+    "_type": "https://in-toto.io/Statement/v1",
+    "subject": [
+      {
+        "name": "deal:0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+        "digest": {
+          "sha256": "0101010101010101010101010101010101010101010101010101010101010101"
+        }
+      }
+    ],
+    "predicateType": "https://legx.dev/event/v1",
+    "predicate": {
+      "event_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8ca0",
+      "deal_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+      "seq": 3,
+      "kind": "wallet.closed",
+      "actor": {
+        "role": "lawyerA",
+        "key_id": "deal/LA/console"
+      },
+      "occurred_at": "2026-10-24T10:00:00Z",
+      "prev_hash": "b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1",
+      "payload_commitment": "b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2",
+      "ledger": {
+        "tx_hash": "3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B",
+        "ledger_index": 1234567,
+        "validated": true
+      },
+      "trace_id": "4bf92f3577b34da6a3ce929d0e0e4736",
+      "sig_algs": [
+        "ed25519",
+        "ml-dsa-65"
+      ],
+      "data": {
+        "tx_hash": "2F2F2F2F2F2F2F2F2F2F2F2F2F2F2F2F2F2F2F2F2F2F2F2F2F2F2F2F2F2F2F2F",
+        "destination": "r3sNTMefq5gsRumMYsNznnX6yzzxVH6dTC"
+      }
+    }
+  },
+  {
+    "_type": "https://in-toto.io/Statement/v1",
+    "subject": [
+      {
+        "name": "deal:0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+        "digest": {
+          "sha256": "0101010101010101010101010101010101010101010101010101010101010101"
+        }
+      }
+    ],
+    "predicateType": "https://legx.dev/event/v1",
+    "predicate": {
+      "event_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8ca0",
+      "deal_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+      "seq": 3,
+      "kind": "deal.created",
+      "actor": {
+        "role": "coordinator",
+        "key_id": "coordinator#ed25519"
+      },
+      "occurred_at": "2026-10-24T10:00:00Z",
+      "prev_hash": "b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1",
+      "payload_commitment": "b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2",
+      "trace_id": "4bf92f3577b34da6a3ce929d0e0e4736",
+      "sig_algs": [
+        "ed25519",
+        "ml-dsa-65"
+      ],
+      "data": {
+        "identity_policy": "zk",
+        "network": "testnet",
+        "amount_drops": "25000000"
+      }
+    }
+  },
+  {
+    "_type": "https://in-toto.io/Statement/v1",
+    "subject": [
+      {
+        "name": "deal:0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+        "digest": {
+          "sha256": "0101010101010101010101010101010101010101010101010101010101010101"
+        }
+      }
+    ],
+    "predicateType": "https://legx.dev/event/v1",
+    "predicate": {
+      "event_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8ca0",
+      "deal_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+      "seq": 3,
+      "kind": "enrollment.pinned",
+      "actor": {
+        "role": "coordinator",
+        "key_id": "coordinator#ed25519"
+      },
+      "occurred_at": "2026-10-24T10:00:00Z",
+      "prev_hash": "b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1",
+      "payload_commitment": "b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2",
+      "trace_id": "4bf92f3577b34da6a3ce929d0e0e4736",
+      "sig_algs": [
+        "ed25519",
+        "ml-dsa-65"
+      ],
+      "data": {
+        "key_id": "deal/A/phone",
+        "slot": "A",
+        "holder_role": "phone",
+        "key_sha256": "abababababababababababababababababababababababababababababababab"
+      }
+    }
+  },
+  {
+    "_type": "https://in-toto.io/Statement/v1",
+    "subject": [
+      {
+        "name": "deal:0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+        "digest": {
+          "sha256": "0101010101010101010101010101010101010101010101010101010101010101"
+        }
+      }
+    ],
+    "predicateType": "https://legx.dev/event/v1",
+    "predicate": {
+      "event_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8ca0",
+      "deal_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+      "seq": 3,
+      "kind": "ledger.disagreement",
+      "actor": {
+        "role": "watcher",
+        "key_id": "watcher#ed25519"
+      },
+      "occurred_at": "2026-10-24T10:00:00Z",
+      "prev_hash": "b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1",
+      "payload_commitment": "b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2",
+      "trace_id": "4bf92f3577b34da6a3ce929d0e0e4736",
+      "sig_algs": [
+        "ed25519",
+        "ml-dsa-65"
+      ],
+      "data": {
+        "ledger_index": 1234567,
+        "hashes": {
+          "wss://s1.example": "3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B",
+          "wss://s2.example": "4C4C4C4C4C4C4C4C4C4C4C4C4C4C4C4C4C4C4C4C4C4C4C4C4C4C4C4C4C4C4C4C"
+        }
+      }
+    }
+  },
+  {
+    "_type": "https://in-toto.io/Statement/v1",
+    "subject": [
+      {
+        "name": "deal:0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+        "digest": {
+          "sha256": "0101010101010101010101010101010101010101010101010101010101010101"
+        }
+      }
+    ],
+    "predicateType": "https://legx.dev/event/v1",
+    "predicate": {
+      "event_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8ca0",
+      "deal_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+      "seq": 3,
+      "kind": "frost.share.released",
+      "actor": {
+        "role": "firm-hsm",
+        "key_id": "firm/LB/hsm#ed25519"
+      },
+      "occurred_at": "2026-10-24T10:00:00Z",
+      "prev_hash": "b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1",
+      "payload_commitment": "b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2",
+      "trace_id": "4bf92f3577b34da6a3ce929d0e0e4736",
+      "sig_algs": [
+        "ed25519",
+        "ml-dsa-65"
+      ],
+      "data": {
+        "slot": "LB",
+        "reason": "signed",
+        "message_hash": "abababababababababababababababababababababababababababababababab",
+        "seal": "cdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcd",
+        "audit_hash": "efefefefefefefefefefefefefefefefefefefefefefefefefefefefefefefef",
+        "kind": "xrpl-multisign",
+        "credential": "Y3JlZA",
+        "commitment_id": "1212121212121212121212121212121212121212121212121212121212121212"
+      }
+    }
+  },
+  {
+    "_type": "https://in-toto.io/Statement/v1",
+    "subject": [
+      {
+        "name": "deal:0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+        "digest": {
+          "sha256": "0101010101010101010101010101010101010101010101010101010101010101"
+        }
+      }
+    ],
+    "predicateType": "https://legx.dev/event/v1",
+    "predicate": {
+      "event_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8ca0",
+      "deal_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+      "seq": 3,
+      "kind": "frost.refused",
+      "actor": {
+        "role": "recovery-agent",
+        "key_id": "agent/A#ed25519"
+      },
+      "occurred_at": "2026-10-24T10:00:00Z",
+      "prev_hash": "b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1",
+      "payload_commitment": "b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2",
+      "trace_id": "4bf92f3577b34da6a3ce929d0e0e4736",
+      "sig_algs": [
+        "ed25519",
+        "ml-dsa-65"
+      ],
+      "data": {
+        "slot": "A",
+        "reason": "NOT_ALLOWED"
+      }
+    }
+  },
+  {
+    "_type": "https://in-toto.io/Statement/v1",
+    "subject": [
+      {
+        "name": "deal:0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+        "digest": {
+          "sha256": "0101010101010101010101010101010101010101010101010101010101010101"
+        }
+      }
+    ],
+    "predicateType": "https://legx.dev/event/v1",
+    "predicate": {
+      "event_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8ca0",
+      "deal_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+      "seq": 3,
+      "kind": "frost.recovery.requested",
+      "actor": {
+        "role": "recovery-agent",
+        "key_id": "agent/A#ed25519"
+      },
+      "occurred_at": "2026-10-24T10:00:00Z",
+      "prev_hash": "b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1",
+      "payload_commitment": "b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2",
+      "trace_id": "4bf92f3577b34da6a3ce929d0e0e4736",
+      "sig_algs": [
+        "ed25519",
+        "ml-dsa-65"
+      ],
+      "data": {
+        "recovery_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8cb1",
+        "slot": "A",
+        "new_key_id": "deal/A/phone2",
+        "ready_at": 259200000
+      }
+    }
+  },
+  {
+    "_type": "https://in-toto.io/Statement/v1",
+    "subject": [
+      {
+        "name": "deal:0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+        "digest": {
+          "sha256": "0101010101010101010101010101010101010101010101010101010101010101"
+        }
+      }
+    ],
+    "predicateType": "https://legx.dev/event/v1",
+    "predicate": {
+      "event_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8ca0",
+      "deal_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+      "seq": 3,
+      "kind": "frost.recovery.cancelled",
+      "actor": {
+        "role": "recovery-agent",
+        "key_id": "agent/A#ed25519"
+      },
+      "occurred_at": "2026-10-24T10:00:00Z",
+      "prev_hash": "b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1",
+      "payload_commitment": "b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2",
+      "trace_id": "4bf92f3577b34da6a3ce929d0e0e4736",
+      "sig_algs": [
+        "ed25519",
+        "ml-dsa-65"
+      ],
+      "data": {
+        "recovery_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8cb1",
+        "slot": "A"
+      }
+    }
+  },
+  {
+    "_type": "https://in-toto.io/Statement/v1",
+    "subject": [
+      {
+        "name": "deal:0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+        "digest": {
+          "sha256": "0101010101010101010101010101010101010101010101010101010101010101"
+        }
+      }
+    ],
+    "predicateType": "https://legx.dev/event/v1",
+    "predicate": {
+      "event_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8ca0",
+      "deal_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+      "seq": 3,
+      "kind": "frost.recovery.authorized",
+      "actor": {
+        "role": "recovery-agent",
+        "key_id": "agent/A#ed25519"
+      },
+      "occurred_at": "2026-10-24T10:00:00Z",
+      "prev_hash": "b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1",
+      "payload_commitment": "b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2",
+      "trace_id": "4bf92f3577b34da6a3ce929d0e0e4736",
+      "sig_algs": [
+        "ed25519",
+        "ml-dsa-65"
+      ],
+      "data": {
+        "recovery_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8cb1",
+        "slot": "A"
+      }
+    }
+  },
+  {
+    "_type": "https://in-toto.io/Statement/v1",
+    "subject": [
+      {
+        "name": "deal:0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+        "digest": {
+          "sha256": "0101010101010101010101010101010101010101010101010101010101010101"
+        }
+      }
+    ],
+    "predicateType": "https://legx.dev/event/v1",
+    "predicate": {
+      "event_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8ca0",
+      "deal_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+      "seq": 3,
+      "kind": "frost.recovery.signed",
+      "actor": {
+        "role": "recovery-agent",
+        "key_id": "agent/A#ed25519"
+      },
+      "occurred_at": "2026-10-24T10:00:00Z",
+      "prev_hash": "b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1",
+      "payload_commitment": "b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2",
+      "trace_id": "4bf92f3577b34da6a3ce929d0e0e4736",
+      "sig_algs": [
+        "ed25519",
+        "ml-dsa-65"
+      ],
+      "data": {
+        "recovery_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8cb1",
+        "slot": "A",
+        "holder_roles": [
+          "second-authenticator",
+          "recovery-agent"
+        ]
+      }
+    }
+  },
+  {
+    "_type": "https://in-toto.io/Statement/v1",
+    "subject": [
+      {
+        "name": "deal:0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+        "digest": {
+          "sha256": "0101010101010101010101010101010101010101010101010101010101010101"
+        }
+      }
+    ],
+    "predicateType": "https://legx.dev/event/v1",
+    "predicate": {
+      "event_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8ca0",
+      "deal_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+      "seq": 3,
+      "kind": "release_code.handed_over",
+      "actor": {
+        "role": "lawyerB",
+        "key_id": "deal/LB/console#ed25519"
+      },
+      "occurred_at": "2026-10-24T10:00:00Z",
+      "prev_hash": "b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1",
+      "payload_commitment": "b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2",
+      "trace_id": "4bf92f3577b34da6a3ce929d0e0e4736",
+      "sig_algs": [
+        "ed25519",
+        "ml-dsa-65"
+      ],
+      "data": {
+        "from_key_id": "deal/LB/console",
+        "to_key_id": "deal/LB/console2",
+        "box_sha256": "abababababababababababababababababababababababababababababababab"
+      }
+    }
+  },
+  {
+    "_type": "https://in-toto.io/Statement/v1",
+    "subject": [
+      {
+        "name": "deal:0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+        "digest": {
+          "sha256": "0101010101010101010101010101010101010101010101010101010101010101"
+        }
+      }
+    ],
+    "predicateType": "https://legx.dev/event/v1",
+    "predicate": {
+      "event_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8ca0",
+      "deal_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+      "seq": 3,
+      "kind": "checkpoint.anchored",
+      "actor": {
+        "role": "lawyerA",
+        "key_id": "deal/LA/console"
+      },
+      "occurred_at": "2026-10-24T10:00:00Z",
+      "prev_hash": "b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1",
+      "payload_commitment": "b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2",
+      "ledger": {
+        "tx_hash": "3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B",
+        "ledger_index": 1234567,
+        "validated": true
+      },
+      "trace_id": "4bf92f3577b34da6a3ce929d0e0e4736",
+      "sig_algs": [
+        "ed25519",
+        "ml-dsa-65"
+      ],
+      "data": {
+        "tree_size": 1024,
+        "root": "a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7",
+        "anchor_tx_hash": "3A3A3A3A3A3A3A3A3A3A3A3A3A3A3A3A3A3A3A3A3A3A3A3A3A3A3A3A3A3A3A3A",
+        "anchor_ledger": 1234700
+      }
+    }
+  }
+]

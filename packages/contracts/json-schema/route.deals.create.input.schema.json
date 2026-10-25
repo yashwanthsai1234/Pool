@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "network": {
+      "type": "string",
+      "enum": [
+        "standalone",
+        "testnet",
+        "devnet",
+        "mainnet"
+      ]
+    },
+    "identityPolicy": {
+      "type": "string",
+      "enum": [
+        "zk",
+        "zk-or-chip",
+        "chip"
+      ]
+    },
+    "amountDrops": {
+      "type": "string",
+      "pattern": "^(?:0|[1-9][0-9]{0,16}|100000000000000000)$"
+    },
+    "payoutA": {
+      "type": "string",
+      "pattern": "^r[1-9A-HJ-NP-Za-km-z]{24,34}(?::(?:0|[1-9][0-9]{0,9}))?$"
+    },
+    "payoutB": {
+      "type": "string",
+      "pattern": "^r[1-9A-HJ-NP-Za-km-z]{24,34}(?::(?:0|[1-9][0-9]{0,9}))?$"
+    },
+    "lawyerOpsA": {
+      "type": "string",
+      "pattern": "^r[1-9A-HJ-NP-Za-km-z]{24,34}$"
+    },
+    "lawyerOpsB": {
+      "type": "string",
+      "pattern": "^r[1-9A-HJ-NP-Za-km-z]{24,34}$"
+    }
+  },
+  "required": [
+    "network",
+    "identityPolicy",
+    "amountDrops",
+    "payoutA",
+    "payoutB",
+    "lawyerOpsA",
+    "lawyerOpsB"
+  ],
+  "additionalProperties": false
+}

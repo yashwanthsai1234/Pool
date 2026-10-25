@@ -1,0 +1,13 @@
+[
+ {
+  "fn": "tupleHash",
+  "inputs": {
+   "tag": "t",
+   "parts": [
+    "",
+    "6162"
+   ]
+  },
+  "output": "676f7b81a84597cb77c352cc3df2e3f5c091a25665778a161d350f6cc3e7ee49"
+ }
+]

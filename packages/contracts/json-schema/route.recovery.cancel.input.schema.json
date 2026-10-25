@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "dealId": {
+      "type": "string",
+      "format": "uuid",
+      "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$"
+    },
+    "recoveryId": {
+      "type": "string",
+      "format": "uuid",
+      "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$"
+    },
+    "cancelSig": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{128}$"
+    },
+    "oldDevicePub": {
+      "type": "string",
+      "pattern": "^ED[0-9A-F]{64}$"
+    }
+  },
+  "required": [
+    "dealId",
+    "recoveryId",
+    "cancelSig",
+    "oldDevicePub"
+  ],
+  "additionalProperties": false
+}

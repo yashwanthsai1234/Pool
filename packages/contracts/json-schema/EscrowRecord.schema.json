@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "owner": {
+      "type": "string",
+      "pattern": "^r[1-9A-HJ-NP-Za-km-z]{24,34}$"
+    },
+    "offer_sequence": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 4294967295
+    },
+    "amount_drops": {
+      "type": "string",
+      "pattern": "^(?:0|[1-9][0-9]{0,16}|100000000000000000)$"
+    },
+    "condition": {
+      "type": "string",
+      "pattern": "^A0258020[0-9A-F]{64}810120$"
+    },
+    "cancel_after": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 4294967295
+    }
+  },
+  "required": [
+    "owner",
+    "offer_sequence",
+    "amount_drops",
+    "condition",
+    "cancel_after"
+  ],
+  "additionalProperties": false
+}

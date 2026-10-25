@@ -1,0 +1,16 @@
+[
+  {
+    "status": "validated",
+    "result": "tesSUCCESS",
+    "hash": "3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B",
+    "ledgerIndex": 1234567
+  },
+  {
+    "status": "rejected",
+    "result": "temBAD_FEE"
+  },
+  {
+    "status": "expired",
+    "lastLedgerSequence": 1234590
+  }
+]

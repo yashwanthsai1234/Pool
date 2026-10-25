@@ -1,0 +1,15 @@
+#!/bin/sh
+# Serializes pnpm commands that write the lockfile, so parallel agents never corrupt it.
+# Usage: scripts/pnpm-safe add <pkg>@<ver> --filter @legx/<name>
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+LOCK="$ROOT/build/tmp/pnpm.lock"
+export PATH="$ROOT/.tools/node/bin:$PATH"
+mkdir -p "$ROOT/build/tmp"
+i=0
+until mkdir "$LOCK" 2>/dev/null; do
+  i=$((i + 1))
+  if [ "$i" -gt 600 ]; then echo "pnpm-safe: lock held for 10 minutes; remove $LOCK if no pnpm is running" >&2; exit 1; fi
+  sleep 1
+done
+trap 'rmdir "$LOCK"' EXIT INT TERM
+cd "$ROOT" && pnpm "$@"

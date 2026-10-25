@@ -1,0 +1,72 @@
+[
+  {
+    "deal_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+    "contract_root": "0101010101010101010101010101010101010101010101010101010101010101",
+    "deal_seal": "0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f",
+    "side": "A",
+    "commitment": "0303030303030303030303030303030303030303030303030303030303030303",
+    "ledger_anchor": {
+      "ledger_index": 1234567,
+      "ledger_hash": "ABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABAB"
+    },
+    "presence_sig": "cdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcd",
+    "lawyer_nonce": "3131313131313131313131313131313131313131313131313131313131313131",
+    "checked_by_role": "lawyerA",
+    "sig_algs": [
+      "ed25519",
+      "ml-dsa-65"
+    ],
+    "method": "zkpassport",
+    "checks": {
+      "proof_verified": true,
+      "identifier_matches": true,
+      "bound_value_is_presence_msg": true,
+      "document_not_expired": true,
+      "face_match_passed": true,
+      "proof_sha256": "2121212121212121212121212121212121212121212121212121212121212121",
+      "trust": {
+        "chain_id": 1,
+        "block_number": 21000000,
+        "block_hash": "0x1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a",
+        "registry_address": "0x2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b",
+        "root": "0x3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c",
+        "circuit_manifest_version": "0.21.1",
+        "vkey_hashes": [
+          "0x4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d",
+          "0x5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e"
+        ],
+        "identifier_type": "NON_SALTED",
+        "dev_mode": false
+      }
+    }
+  },
+  {
+    "deal_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+    "contract_root": "0101010101010101010101010101010101010101010101010101010101010101",
+    "deal_seal": "0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f",
+    "side": "B",
+    "commitment": "0303030303030303030303030303030303030303030303030303030303030303",
+    "ledger_anchor": {
+      "ledger_index": 1234567,
+      "ledger_hash": "ABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABAB"
+    },
+    "presence_sig": "cdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcd",
+    "lawyer_nonce": "3131313131313131313131313131313131313131313131313131313131313131",
+    "checked_by_role": "lawyerB",
+    "sig_algs": [
+      "ed25519",
+      "ml-dsa-65"
+    ],
+    "method": "nfc-chip",
+    "checks": {
+      "sod_signature_valid": true,
+      "ds_cert_chains_to_csca": true,
+      "dg1_hash_in_sod": true,
+      "document_not_expired": true,
+      "commitment_opens": true,
+      "chip_authentication": "AA",
+      "face_match": true,
+      "chip_auth_available": true
+    }
+  }
+]

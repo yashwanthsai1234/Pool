@@ -1,0 +1,7 @@
+{
+  "TransactionType": "EscrowCancel",
+  "Account": "rH9ESAdrFfDAZtCZGa7JiwNJfKnC6CmGFQ",
+  "Owner": "rfPaNmieF15VqV752Q8qAc6ugtkKhWsA2R",
+  "OfferSequence": 42,
+  "Fee": "10"
+}

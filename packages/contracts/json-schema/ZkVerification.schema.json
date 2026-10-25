@@ -1,0 +1,156 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "verified": {
+      "type": "boolean"
+    },
+    "uniqueIdentifier": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^[0-9]{1,78}$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "uniqueIdentifierType": {
+      "anyOf": [
+        {
+          "type": "string",
+          "enum": [
+            "NON_SALTED",
+            "SALTED",
+            "NON_SALTED_MOCK",
+            "SALTED_MOCK",
+            "NONE"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "queryResultErrors": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string",
+        "maxLength": 64
+      },
+      "additionalProperties": {
+        "type": "object",
+        "propertyNames": {
+          "type": "string",
+          "maxLength": 64
+        },
+        "additionalProperties": {
+          "type": "string",
+          "maxLength": 1024
+        }
+      }
+    },
+    "proofSha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "vkeyHash": {
+      "type": "string",
+      "pattern": "^0x[0-9a-f]{64}$"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "committedInputs": {
+      "type": "object",
+      "properties": {
+        "custom_data": {
+          "type": "string",
+          "maxLength": 509
+        }
+      },
+      "required": [
+        "custom_data"
+      ],
+      "additionalProperties": false
+    },
+    "scope": {
+      "type": "string",
+      "maxLength": 128
+    },
+    "domain": {
+      "type": "string",
+      "maxLength": 253
+    },
+    "trust": {
+      "type": "object",
+      "properties": {
+        "chainId": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "blockNumber": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "blockHash": {
+          "type": "string",
+          "pattern": "^0x[0-9a-f]{64}$"
+        },
+        "registryAddress": {
+          "type": "string",
+          "pattern": "^0x[0-9a-f]{40}$"
+        },
+        "root": {
+          "type": "string",
+          "pattern": "^0x[0-9a-f]{64}$"
+        },
+        "circuitManifestVersion": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+        },
+        "vkeyHashes": {
+          "minItems": 1,
+          "maxItems": 16,
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^0x[0-9a-f]{64}$"
+          }
+        },
+        "devMode": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "chainId",
+        "blockNumber",
+        "blockHash",
+        "registryAddress",
+        "root",
+        "circuitManifestVersion",
+        "vkeyHashes",
+        "devMode"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "verified",
+    "uniqueIdentifier",
+    "uniqueIdentifierType",
+    "queryResultErrors",
+    "proofSha256",
+    "vkeyHash",
+    "version",
+    "committedInputs",
+    "scope",
+    "domain",
+    "trust"
+  ],
+  "additionalProperties": false
+}

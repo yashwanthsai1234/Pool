@@ -1,0 +1,86 @@
+[
+  {
+    "dealId": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+    "slot": "LB",
+    "sessionId": "7070707070707070707070707070707070707070707070707070707070707070",
+    "pair": [
+      1,
+      2
+    ],
+    "seal": "abababababababababababababababababababababababababababababababab",
+    "operator": {
+      "opsPub": "ED26D54D80051A116166CF76FEA87330D546680B875827B87AF1B1D58B9EB464E1",
+      "sig": "cdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcd"
+    },
+    "approval": {
+      "credential_id": "Y3JlZA==",
+      "authenticator_data": "YXV0aA==",
+      "client_data_json": "e30=",
+      "signature": "c2ln",
+      "message_hash": "abababababababababababababababababababababababababababababababab"
+    }
+  },
+  {
+    "dealId": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+    "slot": "LA",
+    "sessionId": "7070707070707070707070707070707070707070707070707070707070707070",
+    "pair": [
+      2,
+      3
+    ],
+    "seal": "abababababababababababababababababababababababababababababababab",
+    "operator": {
+      "opsPub": "ED26D54D80051A116166CF76FEA87330D546680B875827B87AF1B1D58B9EB464E1",
+      "sig": "cdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcd"
+    },
+    "request": {
+      "kind": "xrpl-multisign",
+      "tx": {
+        "TransactionType": "Payment"
+      }
+    },
+    "message": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+  },
+  {
+    "dealId": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+    "slot": "LB",
+    "sessionId": "7070707070707070707070707070707070707070707070707070707070707070",
+    "pair": [
+      2,
+      3
+    ],
+    "seal": "abababababababababababababababababababababababababababababababab",
+    "operator": {
+      "opsPub": "ED26D54D80051A116166CF76FEA87330D546680B875827B87AF1B1D58B9EB464E1",
+      "sig": "cdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcd"
+    },
+    "request": {
+      "kind": "tagged",
+      "tag": "legx/pq-binding/v1",
+      "parts": [
+        "0102",
+        ""
+      ]
+    },
+    "message": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+  },
+  {
+    "dealId": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+    "slot": "LB",
+    "sessionId": "7070707070707070707070707070707070707070707070707070707070707070",
+    "pair": [
+      2,
+      3
+    ],
+    "seal": "abababababababababababababababababababababababababababababababab",
+    "operator": {
+      "opsPub": "ED26D54D80051A116166CF76FEA87330D546680B875827B87AF1B1D58B9EB464E1",
+      "sig": "cdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcd"
+    },
+    "request": {
+      "kind": "gate-record",
+      "envelope": "7b7d"
+    },
+    "message": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+  }
+]

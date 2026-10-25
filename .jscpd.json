@@ -1,0 +1,9 @@
+{
+  "minTokens": 30,
+  "minLines": 5,
+  "format": ["typescript", "tsx"],
+  "path": ["packages", "services", "apps", "tools", "spec"],
+  "ignore": ["**/node_modules/**", "**/dist/**", "**/*.generated.*", "**/snapshots/**"],
+  "reporters": ["console"],
+  "gitignore": true
+}

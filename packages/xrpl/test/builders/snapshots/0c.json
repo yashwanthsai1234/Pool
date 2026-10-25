@@ -1,0 +1,8 @@
+{
+  "TransactionType": "CredentialDelete",
+  "Account": "r3sNTMefq5gsRumMYsNznnX6yzzxVH6dTC",
+  "Subject": "rpjfAeE3DeeHPFnN2PgGFW5YxnZFAjrEyN",
+  "Issuer": "r3sNTMefq5gsRumMYsNznnX6yzzxVH6dTC",
+  "CredentialType": "4C4547585F4154544F524E4559",
+  "Fee": "10"
+}

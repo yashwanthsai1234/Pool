@@ -1,0 +1,12 @@
+# Sources (@legx/evidence)
+- https://www.rfc-editor.org/rfc/rfc3161 : time-stamp request, response, transport.
+- https://pkijs.org/docs/classes/TimeStampReq.html : PKI.js TSP classes.
+- https://www.rfc-editor.org/rfc/rfc9162 : Merkle tree, inclusion and consistency proofs.
+- https://c2sp.org/signed-note , https://c2sp.org/tlog-checkpoint , https://c2sp.org/tlog-cosignature , https://github.com/C2SP/C2SP/blob/main/tlog-proof.md : checkpoints and proofs.
+- https://github.com/secure-systems-lab/dsse/blob/master/protocol.md : DSSE envelopes.
+- https://xrpl.org/docs/references/protocol/transactions/types/accountset : anchor memo.
+- https://pkware.cachefly.net/webdocs/casestudies/APPNOTE.TXT : ZIP format.
+- https://www.rfc-editor.org/rfc/rfc8785 : canonical JSON.
+- https://github.com/PeculiarVentures/PKI.js/blob/master/src/SignedData.ts : `verify` in extended mode returns `signatureVerified`; the result is the verdict (I-S-E1)
+- https://www.rfc-editor.org/rfc/rfc3161#section-2.4.2 : the TSA's signature over TSTInfo is what makes a token (I-S-E1)
+- DESIGN 8.2, 6.3 : an event's signing key is the key of the actor it names (I-S-E4)

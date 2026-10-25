@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "oneOf": [
+    {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "const": "validated"
+        },
+        "result": {
+          "type": "string",
+          "pattern": "^te[cs][A-Z_]{1,64}$"
+        },
+        "hash": {
+          "type": "string",
+          "pattern": "^[0-9A-F]{64}$"
+        },
+        "ledgerIndex": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4294967295
+        }
+      },
+      "required": [
+        "status",
+        "result",
+        "hash",
+        "ledgerIndex"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "const": "rejected"
+        },
+        "result": {
+          "type": "string",
+          "pattern": "^[a-z]{3}[A-Z_]{1,64}$"
+        }
+      },
+      "required": [
+        "status",
+        "result"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "const": "expired"
+        },
+        "lastLedgerSequence": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4294967295
+        }
+      },
+      "required": [
+        "status",
+        "lastLedgerSequence"
+      ],
+      "additionalProperties": false
+    }
+  ]
+}

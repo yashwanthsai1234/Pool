@@ -1,0 +1,36 @@
+[
+ {
+  "fn": "zk",
+  "inputs": {
+   "salt": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+   "N": "id-123"
+  },
+  "output": "ef1ac091cb098106cd2c768f3fa4ec50afdccdd9eeced46218302cdc392630c0"
+ },
+ {
+  "fn": "chip",
+  "inputs": {
+   "salt": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+   "dg1": "aabb",
+   "sod": "ccdd"
+  },
+  "output": "858fc81da06099e21876593995a9a83f4fd15d1e51120feba0c5c91e8ac7fff5"
+ },
+ {
+  "fn": "bar",
+  "inputs": {
+   "salt": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+   "jurisdiction": "US-CA",
+   "bar": "123456"
+  },
+  "output": "38d9dea40503b7eb8f0ea4ff2488b42442e77ca1bb0a2f48c044cbfaa7c798a4"
+ },
+ {
+  "fn": "distinctTag",
+  "inputs": {
+   "dealId": "0192f1a0-7b3c-7d4e-8f00-0000000000a1",
+   "x": "d68fc24845eab73aacfc463a4f414e8736ce7d44667eabfe64f61fe8217c9614"
+  },
+  "output": "876dd329ba92668deab38773ac8ec2156ce55fb295e2341654fe6dd67607060a"
+ }
+]

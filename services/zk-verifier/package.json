@@ -1,0 +1,16 @@
+{
+  "name": "@legx/zk-verifier",
+  "type": "module",
+  "private": true,
+  "exports": {
+    ".": "./src/index.ts",
+    "./*": "./src/*.ts"
+  },
+  "dependencies": {
+    "@legx/contracts": "workspace:*",
+    "@legx/core": "workspace:*",
+    "@legx/db": "workspace:*",
+    "@legx/zk": "workspace:*",
+    "@noble/hashes": "2.4.0"
+  }
+}

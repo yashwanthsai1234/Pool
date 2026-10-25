@@ -1,0 +1,23 @@
+name: ChipReader
+options: { bundleIdPrefix: com.example.legx, deploymentTarget: { iOS: "26.0" } }
+packages:
+  NFCPassportReader: { url: https://github.com/AndyQ/NFCPassportReader, exactVersion: 2.3.3 }
+targets:
+  ChipReader:
+    type: application
+    platform: iOS
+    sources: [ChipReader]
+    dependencies: [{ package: NFCPassportReader }]
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.example.legx.chipreader   # change to something unique for your Apple ID team
+        INFOPLIST_FILE: ChipReader/Info.plist
+        CODE_SIGN_ENTITLEMENTS: ChipReader/ChipReader.entitlements
+        SWIFT_VERSION: "5.0"
+        GENERATE_INFOPLIST_FILE: NO
+  ChipReaderTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources: [Tests, {path: Tests/vector.json, buildPhase: resources}]
+    dependencies: [{ target: ChipReader }]
+    settings: { base: { GENERATE_INFOPLIST_FILE: YES, SWIFT_VERSION: "5.0" } }

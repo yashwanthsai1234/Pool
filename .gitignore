@@ -1,0 +1,23 @@
+node_modules/
+.tools/
+dist/
+coverage/
+.vitest/
+.turbo/
+*.seed
+.env*
+demo-keys/
+demo/state.json
+build/tmp/
+.stryker-tmp/
+reports/
+build/regression/
+*.log
+.DS_Store
+# Xcode / SwiftPM
+apps/chip-reader-ios/**/xcuserdata/
+apps/chip-reader-ios/**/DerivedData/
+apps/chip-reader-ios/.build/
+apps/chip-reader-ios/build/
+.swiftpm/
+.legx-data/

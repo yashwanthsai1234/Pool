@@ -1,0 +1,468 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		036BD7F0A6B429568B66C993 /* ChipTransfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC0AEF51E9C8D94BDD8D5F7 /* ChipTransfer.swift */; };
+		3054CA100C55A62AAAC089C9 /* TransferTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A43BF626DE6F76BDBE9F15F /* TransferTests.swift */; };
+		3DD4707558B3432DDC04CBFD /* ChipReaderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76210954E4C4CF801553A5A8 /* ChipReaderService.swift */; };
+		4872D0F2BA45A08EA17699B5 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECE2ECE3B8D1ACC713FFF7B /* App.swift */; };
+		494E53728691C076DA531873 /* NFCPassportReader in Frameworks */ = {isa = PBXBuildFile; productRef = 33B8EE56941C51861CD96219 /* NFCPassportReader */; };
+		5C587F5AD6822F002E3139A5 /* Seal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E36B939E00E892396017453 /* Seal.swift */; };
+		7AEFA6FD4149F94ACB449F4C /* Mrz.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FC356EF60A17FFB88DA3D8 /* Mrz.swift */; };
+		8219D57CC30CE857536F1171 /* QRScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6904CE9DA85074369234457 /* QRScanner.swift */; };
+		BDF656079D0157DB5EC9110D /* vector.json in Resources */ = {isa = PBXBuildFile; fileRef = C01494FD77D704A7A20EAAE5 /* vector.json */; };
+		E83E27D9D567028ED68E2730 /* Relay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F14992B8903FAC2A2D62F3 /* Relay.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		183E160D9E310903F96280B6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 26E56EE2E1764AC3184B78AC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D7A9FF1C795A0ACF26959042;
+			remoteInfo = ChipReader;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0A43BF626DE6F76BDBE9F15F /* TransferTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferTests.swift; sourceTree = "<group>"; };
+		36F14992B8903FAC2A2D62F3 /* Relay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Relay.swift; sourceTree = "<group>"; };
+		61A7B099ECBC6F6EB2A9E0D4 /* ChipReaderTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = ChipReaderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		76210954E4C4CF801553A5A8 /* ChipReaderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChipReaderService.swift; sourceTree = "<group>"; };
+		7ECE2ECE3B8D1ACC713FFF7B /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
+		9E36B939E00E892396017453 /* Seal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Seal.swift; sourceTree = "<group>"; };
+		AFD7D68498E9BAEAE0E887DB /* ChipReader.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ChipReader.entitlements; sourceTree = "<group>"; };
+		B6904CE9DA85074369234457 /* QRScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScanner.swift; sourceTree = "<group>"; };
+		BC559E825949D2A3FCDBA258 /* ChipReader.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = ChipReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C01494FD77D704A7A20EAAE5 /* vector.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = vector.json; sourceTree = "<group>"; };
+		CBC0AEF51E9C8D94BDD8D5F7 /* ChipTransfer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChipTransfer.swift; sourceTree = "<group>"; };
+		E2FC356EF60A17FFB88DA3D8 /* Mrz.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mrz.swift; sourceTree = "<group>"; };
+		E36A3848C5E0903BCFF82E02 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		036736D595078983F58CA734 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				494E53728691C076DA531873 /* NFCPassportReader in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3C2DB4258ECCE49DC5A4EF5C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BC559E825949D2A3FCDBA258 /* ChipReader.app */,
+				61A7B099ECBC6F6EB2A9E0D4 /* ChipReaderTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5646F9DDFD33FBA78E80A7CD = {
+			isa = PBXGroup;
+			children = (
+				D1BFE5C861BF4EEEAC7D098A /* ChipReader */,
+				D5D98CDB2BB591ECDBE444E3 /* Tests */,
+				3C2DB4258ECCE49DC5A4EF5C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D1BFE5C861BF4EEEAC7D098A /* ChipReader */ = {
+			isa = PBXGroup;
+			children = (
+				7ECE2ECE3B8D1ACC713FFF7B /* App.swift */,
+				AFD7D68498E9BAEAE0E887DB /* ChipReader.entitlements */,
+				76210954E4C4CF801553A5A8 /* ChipReaderService.swift */,
+				CBC0AEF51E9C8D94BDD8D5F7 /* ChipTransfer.swift */,
+				E36A3848C5E0903BCFF82E02 /* Info.plist */,
+				E2FC356EF60A17FFB88DA3D8 /* Mrz.swift */,
+				B6904CE9DA85074369234457 /* QRScanner.swift */,
+				36F14992B8903FAC2A2D62F3 /* Relay.swift */,
+				9E36B939E00E892396017453 /* Seal.swift */,
+			);
+			path = ChipReader;
+			sourceTree = "<group>";
+		};
+		D5D98CDB2BB591ECDBE444E3 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				0A43BF626DE6F76BDBE9F15F /* TransferTests.swift */,
+				C01494FD77D704A7A20EAAE5 /* vector.json */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B121A1E2569C41DE0C176D23 /* ChipReaderTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 38F69B5B48EDC26ED3043758 /* Build configuration list for PBXNativeTarget "ChipReaderTests" */;
+			buildPhases = (
+				445991E396E2770CFF1F3D73 /* Sources */,
+				32D687E8F89BB7A176BC5403 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2B28433818EF04E99924CD7A /* PBXTargetDependency */,
+			);
+			name = ChipReaderTests;
+			packageProductDependencies = (
+			);
+			productName = ChipReaderTests;
+			productReference = 61A7B099ECBC6F6EB2A9E0D4 /* ChipReaderTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		D7A9FF1C795A0ACF26959042 /* ChipReader */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 96E0908364A8A4340BD444B3 /* Build configuration list for PBXNativeTarget "ChipReader" */;
+			buildPhases = (
+				9D2BBDFD06697EE591B13340 /* Sources */,
+				036736D595078983F58CA734 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ChipReader;
+			packageProductDependencies = (
+				33B8EE56941C51861CD96219 /* NFCPassportReader */,
+			);
+			productName = ChipReader;
+			productReference = BC559E825949D2A3FCDBA258 /* ChipReader.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		26E56EE2E1764AC3184B78AC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+				};
+			};
+			buildConfigurationList = BAFEC02F7520B743B7EA3F9F /* Build configuration list for PBXProject "ChipReader" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 5646F9DDFD33FBA78E80A7CD;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				658A10348CDC048FFEA9600A /* XCRemoteSwiftPackageReference "NFCPassportReader" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 3C2DB4258ECCE49DC5A4EF5C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D7A9FF1C795A0ACF26959042 /* ChipReader */,
+				B121A1E2569C41DE0C176D23 /* ChipReaderTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		32D687E8F89BB7A176BC5403 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BDF656079D0157DB5EC9110D /* vector.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		445991E396E2770CFF1F3D73 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3054CA100C55A62AAAC089C9 /* TransferTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9D2BBDFD06697EE591B13340 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4872D0F2BA45A08EA17699B5 /* App.swift in Sources */,
+				3DD4707558B3432DDC04CBFD /* ChipReaderService.swift in Sources */,
+				036BD7F0A6B429568B66C993 /* ChipTransfer.swift in Sources */,
+				7AEFA6FD4149F94ACB449F4C /* Mrz.swift in Sources */,
+				8219D57CC30CE857536F1171 /* QRScanner.swift in Sources */,
+				E83E27D9D567028ED68E2730 /* Relay.swift in Sources */,
+				5C587F5AD6822F002E3139A5 /* Seal.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2B28433818EF04E99924CD7A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D7A9FF1C795A0ACF26959042 /* ChipReader */;
+			targetProxy = 183E160D9E310903F96280B6 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		1212B41E7689555074C55389 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		3A685CBB3C15A303F9C529A6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = ChipReader/ChipReader.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = ChipReader/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.legx.chipreader;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		5121A8B249358293313397C9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = ChipReader/ChipReader.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = ChipReader/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.legx.chipreader;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		ACB52AD4826E08AE819AD824 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.legx.ChipReaderTests;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ChipReader.app/ChipReader";
+			};
+			name = Debug;
+		};
+		B387FE06819689A37C4A0B8C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.legx.ChipReaderTests;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ChipReader.app/ChipReader";
+			};
+			name = Release;
+		};
+		C07CC98A3939356841578983 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		38F69B5B48EDC26ED3043758 /* Build configuration list for PBXNativeTarget "ChipReaderTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ACB52AD4826E08AE819AD824 /* Debug */,
+				B387FE06819689A37C4A0B8C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		96E0908364A8A4340BD444B3 /* Build configuration list for PBXNativeTarget "ChipReader" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3A685CBB3C15A303F9C529A6 /* Debug */,
+				5121A8B249358293313397C9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		BAFEC02F7520B743B7EA3F9F /* Build configuration list for PBXProject "ChipReader" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C07CC98A3939356841578983 /* Debug */,
+				1212B41E7689555074C55389 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		658A10348CDC048FFEA9600A /* XCRemoteSwiftPackageReference "NFCPassportReader" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AndyQ/NFCPassportReader";
+			requirement = {
+				kind = exactVersion;
+				version = 2.3.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		33B8EE56941C51861CD96219 /* NFCPassportReader */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 658A10348CDC048FFEA9600A /* XCRemoteSwiftPackageReference "NFCPassportReader" */;
+			productName = NFCPassportReader;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 26E56EE2E1764AC3184B78AC /* Project object */;
+}

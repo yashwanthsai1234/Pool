@@ -1,0 +1,24 @@
+[
+  {
+    "status": "none"
+  },
+  {
+    "status": "open",
+    "request": {
+      "method": "zkpassport",
+      "lawyerNonce": "abababababababababababababababababababababababababababababababab",
+      "ledgerHash": "3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B",
+      "ledgerIndex": 1234567
+    }
+  },
+  {
+    "status": "signed",
+    "request": {
+      "method": "zkpassport",
+      "lawyerNonce": "abababababababababababababababababababababababababababababababab",
+      "ledgerHash": "3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B",
+      "ledgerIndex": 1234567
+    },
+    "signature": "cdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcd"
+  }
+]

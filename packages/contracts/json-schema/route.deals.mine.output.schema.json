@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "deals": {
+      "maxItems": 200,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "dealId": {
+            "type": "string",
+            "format": "uuid",
+            "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$"
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "alice",
+              "lawyerA",
+              "bob",
+              "lawyerB"
+            ]
+          },
+          "state": {
+            "type": "string",
+            "enum": [
+              "DRAFT",
+              "CONTRACT_SIGNED",
+              "SHELL_OPEN",
+              "QUARANTINED",
+              "KEYS_READY",
+              "WALLET_LOCKED",
+              "VERIFIED",
+              "FUNDED",
+              "PAID_OUT",
+              "REFUNDED",
+              "DISPUTED",
+              "EXPIRED",
+              "CLOSED"
+            ]
+          }
+        },
+        "required": [
+          "dealId",
+          "state"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "deals"
+  ],
+  "additionalProperties": false
+}

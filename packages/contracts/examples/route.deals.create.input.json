@@ -1,0 +1,11 @@
+[
+  {
+    "network": "testnet",
+    "identityPolicy": "zk-or-chip",
+    "amountDrops": "250000000",
+    "payoutA": "r3sNTMefq5gsRumMYsNznnX6yzzxVH6dTC",
+    "payoutB": "rPPdduC9MRTrXZP1J7MQyEKKEYiFigWZ6Q:12345",
+    "lawyerOpsA": "rHhr2iRBgp3ZzzNH4YGQ59G7VAiGPEWj7f",
+    "lawyerOpsB": "rEhh6f9rj5UUBhFzGGaxS5zYU2CCqKFXBC"
+  }
+]

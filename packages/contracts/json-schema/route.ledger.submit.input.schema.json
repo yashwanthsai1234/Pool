@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "txBlob": {
+      "type": "string",
+      "pattern": "^(?:[0-9A-F]{2}){1,100000}$"
+    }
+  },
+  "required": [
+    "txBlob"
+  ],
+  "additionalProperties": false
+}

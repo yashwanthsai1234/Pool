@@ -1,0 +1,42 @@
+{
+  "name": "legx",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@12.11.2",
+  "engines": {
+    "node": ">=24.22.0"
+  },
+  "scripts": {
+    "test": "vitest run --project unit",
+    "test:int": "vitest run --project integration",
+    "test:all": "vitest run",
+    "typecheck": "node scripts/typecheck.ts",
+    "lint": "biome check .",
+    "ledger:up": "docker compose -f docker-compose.ledger.yml up -d && node packages/xrpl/scripts/wait-ledger.ts",
+    "ledger:down": "docker compose -f docker-compose.ledger.yml down",
+    "format": "biome format --write .",
+    "dev": "node scripts/dev.ts",
+    "dev:down": "node scripts/dev.ts --down",
+    "demo:seed": "node scripts/demo/seed.ts",
+    "demo:reset": "node scripts/demo/reset.ts",
+    "demo:check": "node scripts/demo/check.ts",
+    "demo:dry-run": "node scripts/demo/dry-run.ts",
+    "demo:rehearse": "node scripts/demo/rehearse.ts",
+    "demo:phones": "node scripts/demo/phones.ts"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.5.15",
+    "@fast-check/vitest": "0.5.0",
+    "@informalsystems/quint": "0.33.0",
+    "@stryker-mutator/core": "10.1.1",
+    "@stryker-mutator/vitest-runner": "10.1.1",
+    "@swc/core": "1.16.18",
+    "@types/node": "26.6.5",
+    "dependency-cruiser": "18.7.0",
+    "fast-check": "4.10.2",
+    "jscpd": "5.4.2",
+    "knip": "6.42.1",
+    "typescript": "7.0.2",
+    "vitest": "5.0.5"
+  }
+}

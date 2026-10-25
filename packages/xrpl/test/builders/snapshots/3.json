@@ -1,0 +1,9 @@
+{
+  "TransactionType": "EscrowCreate",
+  "Account": "rfPaNmieF15VqV752Q8qAc6ugtkKhWsA2R",
+  "Destination": "rHhr2iRBgp3ZzzNH4YGQ59G7VAiGPEWj7f",
+  "Amount": "50000000",
+  "Condition": "A0258020ABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABAB810120",
+  "CancelAfter": 800259200,
+  "Fee": "10"
+}

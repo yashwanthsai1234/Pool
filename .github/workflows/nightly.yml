@@ -1,0 +1,198 @@
+# Nightly and on demand. Never runs on pull requests, so a failure here never blocks a merge.
+# A failed run opens an issue that links to the run log. Testnet seeds are never written to disk or to artifacts.
+name: nightly
+
+on:
+  schedule:
+    - cron: '17 3 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  PNPM_VERSION: 12.11.2
+
+jobs:
+  fuzz:
+    name: fuzz ${{ matrix.pkg }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      matrix:
+        pkg: [core, contracts, zk]
+    env:
+      LEGX_FUZZ_SECONDS: '600'
+      LEGX_FUZZ_PKG: ${{ matrix.pkg }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
+        with:
+          version: ${{ env.PNPM_VERSION }}
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24.22'
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm vitest run --project unit tools/fuzz/test/fuzz.test.ts
+      - if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: fuzz-crashes-${{ matrix.pkg }}
+          path: tools/fuzz/corpus
+
+  mutation:
+    name: mutation ${{ matrix.scope }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    strategy:
+      fail-fast: false
+      matrix:
+        scope: [critical, rest]
+    env:
+      LEGX_MUTATE: ${{ matrix.scope }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
+        with:
+          version: ${{ env.PNPM_VERSION }}
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24.22'
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm exec stryker run stryker.config.mjs
+      - if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: mutation-report-${{ matrix.scope }}
+          path: tools/mutation/report-${{ matrix.scope }}.json
+          if-no-files-found: ignore
+
+  quint:
+    name: quint (spec/check.sh)
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
+        with:
+          version: ${{ env.PNPM_VERSION }}
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24.22'
+          cache: pnpm
+      # Quint runs Apalache and TLC on the JVM (spec/check.sh needs Java 17 or later).
+      - uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: '21'
+      - run: pnpm install --frozen-lockfile
+      - run: sh spec/check.sh all
+
+  testnet:
+    name: Testnet and Devnet
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
+        with:
+          version: ${{ env.PNPM_VERSION }}
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24.22'
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      # Public faucets only. Keys are generated fresh each run and are never written to disk.
+      - name: Testnet and Devnet runs
+        env:
+          LEGX_NIGHTLY: '1'
+          LEGX_TESTNET: '1'
+        run: pnpm vitest run --project integration packages/xrpl/test-int/network.int.test.ts packages/xrpl/test-int/frost/frost-testnet.int.test.ts
+
+  zk:
+    name: ZK on live Sepolia
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
+        with:
+          version: ${{ env.PNPM_VERSION }}
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24.22'
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      # The optional RPC secrets fall back to the registry's built-in Sepolia endpoint when unset.
+      - name: Live Sepolia registry tests
+        env:
+          LEGX_LIVE_SEPOLIA: '1'
+          SEPOLIA_RPC_URL: ${{ secrets.SEPOLIA_RPC_URL }}
+          SEPOLIA_RPC_URL_2: ${{ secrets.SEPOLIA_RPC_URL_2 }}
+        run: pnpm vitest run --project integration services/zk-verifier
+
+  model:
+    name: model run T-P-06
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    services:
+      postgres:
+        image: postgres:18.6-trixie
+        env:
+          POSTGRES_PASSWORD: pw
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 20
+    env:
+      LEGX_MODEL_RUNS: '200'
+      XRPLD_WS: ws://127.0.0.1:6006
+      LEGX_PG_URL: postgres://postgres:pw@127.0.0.1:5432/postgres
+      LEGX_32_LEDGER: ws://127.0.0.1:6006
+      LEGX_32_PG: postgres://postgres:pw@127.0.0.1:5432/postgres
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
+        with:
+          version: ${{ env.PNPM_VERSION }}
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24.22'
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Start standalone xrpld
+        run: |
+          docker run -d --platform linux/amd64 --name legx-xrpld \
+            -p 6006:6006 -v "$PWD/ci:/etc/xrpld/" \
+            rippleci/xrpld:3.4.1 --standalone
+      - name: Wait for the ledger
+        run: node packages/xrpl/scripts/wait-ledger.ts
+      - run: pnpm vitest run --project integration services/coordinator/test-int/model.int.test.ts
+      - name: Stop xrpld
+        if: always()
+        run: docker rm -f legx-xrpld || true
+
+  open-issue:
+    name: open an issue on failure
+    needs: [fuzz, mutation, quint, testnet, zk, model]
+    if: failure()
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - uses: actions/github-script@v9
+        with:
+          script: |
+            const runUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `Nightly failed on ${new Date().toISOString().slice(0, 10)} (run ${context.runId})`,
+              body: `The nightly workflow failed. The run log is at ${runUrl}`,
+            });

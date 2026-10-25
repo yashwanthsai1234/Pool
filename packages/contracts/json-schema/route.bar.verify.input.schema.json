@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "opsAccount": {
+      "type": "string",
+      "pattern": "^r[1-9A-HJ-NP-Za-km-z]{24,34}$"
+    },
+    "jurisdiction": {
+      "type": "string",
+      "pattern": "^[A-Z]{2}(?:-[A-Z0-9]{1,3})?$"
+    },
+    "barNumber": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9-]{1,32}$",
+      "x-legx-secret": true
+    }
+  },
+  "required": [
+    "opsAccount",
+    "jurisdiction",
+    "barNumber"
+  ],
+  "additionalProperties": false
+}

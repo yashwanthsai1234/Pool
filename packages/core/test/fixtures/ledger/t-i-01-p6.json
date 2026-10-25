@@ -1,0 +1,158 @@
+{
+  "ledger": {
+    "ledgerIndex": 5117,
+    "ledgerHash": "46C856488FDEDD5467867CCFF30E77EEAAE4851E786EC44A8DDBB08C2B7A6178",
+    "closeTime": 846233408
+  },
+  "account_info": {
+    "Account": "rL5RLoMF5D1mi4iCdGi2dscQpz4uYg39CG",
+    "Balance": "99998000",
+    "Domain": "01D352EB1E8D0E56CAA5C86E36A3F7E2158F6D0144D72C9D72BF0B7C15987101877F188C220E97F7DEA21B85B21C283B6138678232EA9FF37240FE5925C10DBBC8",
+    "Flags": 1024458752,
+    "LedgerEntryType": "AccountRoot",
+    "OwnerCount": 2,
+    "PreviousTxnID": "9A83371726E226D58C839B16AAB048CBCDC7459671FA8094E0E4E74202066EC9",
+    "PreviousTxnLgrSeq": 5117,
+    "Sequence": 5109,
+    "index": "ADFDA242371465512E811672E9269CE33815CA0131636541DE02B9EFDEBCD819"
+  },
+  "account_objects": [
+    {
+      "Account": "ra25bmHpK2K6H81zZAHVsBRXd9kESzV45e",
+      "Amount": "50000000",
+      "CancelAfter": 846492590,
+      "Condition": "A025802094BDA499154473C502E39A291669F9179D888CF923F0B03B250B86C3E188B579810120",
+      "Destination": "rL5RLoMF5D1mi4iCdGi2dscQpz4uYg39CG",
+      "DestinationNode": "0",
+      "Flags": 0,
+      "LedgerEntryType": "Escrow",
+      "OwnerNode": "0",
+      "PreviousTxnID": "32E73E3C697B028457B99BA7D159D5D7D1CC7FE88B4DC2CAB4FDB6CBFC9BA9FF",
+      "PreviousTxnLgrSeq": 5100,
+      "index": "266C6D554A86A7E8D455008CAA2B33B9C1F370418C05F2F251CF2A1D84674E05"
+    },
+    {
+      "CredentialType": "4C4547585F50415254595F42",
+      "Flags": 65536,
+      "Issuer": "rL5RLoMF5D1mi4iCdGi2dscQpz4uYg39CG",
+      "IssuerNode": "0",
+      "LedgerEntryType": "Credential",
+      "PreviousTxnID": "C1990921E65E1E0C6663244F23678D39488BE6FD090EEFF4AEE860B0B5476A27",
+      "PreviousTxnLgrSeq": 5116,
+      "Subject": "rU4Yes3ZT9ctbWHGfYQsWi6qmodt7ecSeq",
+      "SubjectNode": "0",
+      "URI": "6C6567783A62696E643A76313A39434445344644423033393530463230453442353231434544413444393137423342443335324230324631313745464334433641393838464643433530443345",
+      "index": "3AAB225D6C93C664D498ADB08561CEFE80D31A6D9106CEB4D57FFE34066591E6"
+    },
+    {
+      "CredentialType": "4C4547585F50415254595F41",
+      "Flags": 65536,
+      "Issuer": "rL5RLoMF5D1mi4iCdGi2dscQpz4uYg39CG",
+      "IssuerNode": "0",
+      "LedgerEntryType": "Credential",
+      "PreviousTxnID": "B81ABE7C524A48F68A6AFE049C56503D67E85EF6B096D6D25616626D3FC64FD4",
+      "PreviousTxnLgrSeq": 5114,
+      "Subject": "ra25bmHpK2K6H81zZAHVsBRXd9kESzV45e",
+      "SubjectNode": "0",
+      "URI": "6C6567783A62696E643A76313A33314639454431323735374235364445443841383741393946364332364546374145373131454138333945424235334138383038324231423731423843414233",
+      "index": "8BEC8AD8B55A0921EFA36EA833FBF88A476E3D1E742CEE771A13EBE44B251020"
+    },
+    {
+      "Account": "rL5RLoMF5D1mi4iCdGi2dscQpz4uYg39CG",
+      "Authorize": "rpuxwHqRjD3NEo412dFw1ymCZKGWquxnGG",
+      "Flags": 0,
+      "LedgerEntryType": "DepositPreauth",
+      "OwnerNode": "0",
+      "PreviousTxnID": "EA5D35025EEB20D6BD9779E4F0AA0D4BC6AF8C0FA01A9708A97B0D7A0BE5CD06",
+      "PreviousTxnLgrSeq": 5112,
+      "index": "C5133A04579E56B4F89270F80144C35CAAE1E2452CF4B2FCFEE44EF33B5D2419"
+    },
+    {
+      "Flags": 65536,
+      "LedgerEntryType": "SignerList",
+      "OwnerNode": "0",
+      "PreviousTxnID": "B572C17184CCBBF53EC39F9B139832A42AB5C7E0F38A0FBB356413ED7A75B02E",
+      "PreviousTxnLgrSeq": 5106,
+      "SignerEntries": [
+        {
+          "SignerEntry": {
+            "Account": "raaTgsYeoaFcdWUusGAns5GzfkRms2ZuRv",
+            "SignerWeight": 1
+          }
+        },
+        {
+          "SignerEntry": {
+            "Account": "rGrrumfJtxgixyEAwipm1zdMb8Sa7jS6vj",
+            "SignerWeight": 1
+          }
+        },
+        {
+          "SignerEntry": {
+            "Account": "rHy43CAjKCTR4F4THvuD2Mas2oFsdoFtm8",
+            "SignerWeight": 1
+          }
+        },
+        {
+          "SignerEntry": {
+            "Account": "rQfjdqaXJ1rLx4bgsiD2dKfggvhArXmQdJ",
+            "SignerWeight": 1
+          }
+        }
+      ],
+      "SignerListID": 0,
+      "SignerQuorum": 4,
+      "index": "D051DFB2CC155D593AA0BBF901083D4ABD492A334EA3547AAB32BBE70E5F2703"
+    }
+  ],
+  "expected": {
+    "deal": {
+      "contractRoot": "d352eb1e8d0e56caa5c86e36a3f7e2158f6d0144d72c9d72bf0b7c1598710187",
+      "signedContractSeal": "2d5b2817fb9ea0db416976b627b45601a5a3edcd6909bd54ff34184382a948de",
+      "walletAddress": "rL5RLoMF5D1mi4iCdGi2dscQpz4uYg39CG",
+      "xPubA": "ED59BA5843B862BACCA574AC213009D6AE28A66965B7655218BEB2F84BFF22E067",
+      "xPubB": "ED4046796A078B3A6EB2493DB15083BA117D20B638A3BCBD351D7FAC9351CD5BA1",
+      "commitmentA": "85b7554c0d02c6f8e062e1a93fa059028a2eb5e167995afabed50833c1104414",
+      "commitmentB": "0c5573ea2268ee26065a1da7acd351aa17631e304c7ad997713d5260862b3f0c",
+      "idMethodA": "nfc-chip",
+      "idMethodB": "nfc-chip",
+      "identityPolicy": "chip",
+      "lawyerPubA": "ED1F58072ECD345739791FC63500841C4EE344A7A2170C7EFC1A8F03679C67B747",
+      "lawyerPubB": "EDC2132E4D06B3DE637522FB4F920EB2A20BB067CA07087F499954A34A6F7A6153",
+      "lawyerCommitmentA": "b564c3a80a550d2699b43c35a4a81577d214bdd848c8e7542320ff2bcc23de1b",
+      "lawyerCommitmentB": "a70b7411f7cee8f74260f36e62d715aaf0d46bbde275ceab262941ad7f310d5f",
+      "lawyerOpsA": "rn6nmuWq4eKcuA2hg4skPjZGWQDYypGgAs",
+      "lawyerOpsB": "rpuxwHqRjD3NEo412dFw1ymCZKGWquxnGG",
+      "releaserAccount": "rpuxwHqRjD3NEo412dFw1ymCZKGWquxnGG",
+      "slotPolicyA": "03807ea8bd31fd576f25dde1eb2eb51287e278a16b5c7360a805a61016e70afa",
+      "slotPolicyLA": "d64652970ea45159e544edcc8489a2324fb49754eede0adc0b102841b978b951",
+      "slotPolicyB": "6b11f324a4f548e4a149f9f75a15ee16cc66211f1c44631051bc79f869715ff6",
+      "slotPolicyLB": "210d6bc17a445fac773698b976264f339a6d55b455547ae3c6aa0502c042521e",
+      "pqKeyHashA": "fa02b01e9298ad923199edcc4996907aaf098cbe6005a417a4702c0d1de79270",
+      "pqKeyHashLA": "224441542eb6d08a4343d3d1735e1efab1ac410b3330909c8bcba19805d31a7b",
+      "pqKeyHashB": "f5daebfc9f274c3875aebd9bf6f70df8e9eb9106b8f343167ade20e79663b97c",
+      "pqKeyHashLB": "43d504c68f1ec5002379974c4b01ecf4bec76d2018ad1039a0db2fec8318c8df",
+      "signerAccounts": [
+        "raaTgsYeoaFcdWUusGAns5GzfkRms2ZuRv",
+        "rQfjdqaXJ1rLx4bgsiD2dKfggvhArXmQdJ",
+        "rHy43CAjKCTR4F4THvuD2Mas2oFsdoFtm8",
+        "rGrrumfJtxgixyEAwipm1zdMb8Sa7jS6vj"
+      ],
+      "quorum": 4,
+      "payoutA": "ra25bmHpK2K6H81zZAHVsBRXd9kESzV45e:7",
+      "payoutB": "rU4Yes3ZT9ctbWHGfYQsWi6qmodt7ecSeq"
+    },
+    "releaserAccount": "rpuxwHqRjD3NEo412dFw1ymCZKGWquxnGG",
+    "credentialSubjects": [
+      "ra25bmHpK2K6H81zZAHVsBRXd9kESzV45e",
+      "rU4Yes3ZT9ctbWHGfYQsWi6qmodt7ecSeq"
+    ],
+    "escrow": {
+      "owner": "ra25bmHpK2K6H81zZAHVsBRXd9kESzV45e",
+      "sequence": 5086,
+      "amountDrops": "50000000",
+      "conditionHex": "A025802094BDA499154473C502E39A291669F9179D888CF923F0B03B250B86C3E188B579810120"
+    },
+    "domainHex": "01D352EB1E8D0E56CAA5C86E36A3F7E2158F6D0144D72C9D72BF0B7C15987101877F188C220E97F7DEA21B85B21C283B6138678232EA9FF37240FE5925C10DBBC8",
+    "minCancelAfter": 846319808
+  }
+}

@@ -1,0 +1,11 @@
+[
+  {
+    "profile": "demo",
+    "ports": {
+      "ledger": {
+        "impl": "testnet",
+        "status": "ok"
+      }
+    }
+  }
+]

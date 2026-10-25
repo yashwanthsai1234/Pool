@@ -1,0 +1,28 @@
+{
+  "name": "@legx/coordinator",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./*": "./src/*.ts"
+  },
+  "dependencies": {
+    "@legx/contracts": "workspace:*",
+    "@legx/core": "workspace:*",
+    "@legx/db": "workspace:*",
+    "@legx/xrpl": "workspace:*",
+    "@noble/curves": "2.4.0",
+    "@orpc/server": "1.16.0",
+    "fastify": "5.12.7",
+    "kysely": "0.29.7",
+    "pg": "8.23.0",
+    "xrpl": "5.3.0",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "@legx/signer": "workspace:*",
+    "@types/pg": "8.23.1",
+    "fast-check": "4.10.2"
+  }
+}

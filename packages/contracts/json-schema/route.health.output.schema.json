@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "profile": {
+      "type": "string",
+      "enum": [
+        "production",
+        "demo"
+      ]
+    },
+    "ports": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string",
+        "maxLength": 64
+      },
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "impl": {
+            "type": "string",
+            "maxLength": 64
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ok",
+              "down"
+            ]
+          }
+        },
+        "required": [
+          "impl",
+          "status"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "profile",
+    "ports"
+  ],
+  "additionalProperties": false
+}

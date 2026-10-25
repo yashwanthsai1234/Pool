@@ -1,0 +1,94 @@
+[
+  {
+    "deal_id": "0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+    "deal_seal": "0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f",
+    "ledger": {
+      "ledger_index": 1234567,
+      "ledger_hash": "ABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABAB"
+    },
+    "findings": [
+      {
+        "ok": true,
+        "level": "block",
+        "code": "LOCK_OK"
+      },
+      {
+        "ok": true,
+        "level": "block",
+        "code": "CONTRACT_SEAL_OK"
+      },
+      {
+        "ok": true,
+        "level": "block",
+        "code": "PASSPORT_A_OK"
+      },
+      {
+        "ok": true,
+        "level": "block",
+        "code": "PASSPORT_B_OK"
+      },
+      {
+        "ok": true,
+        "level": "block",
+        "code": "BAR_A_OK"
+      },
+      {
+        "ok": true,
+        "level": "block",
+        "code": "BAR_B_OK"
+      },
+      {
+        "ok": true,
+        "level": "block",
+        "code": "ATTORNEY_CREDENTIAL_A_OK"
+      },
+      {
+        "ok": true,
+        "level": "block",
+        "code": "ATTORNEY_CREDENTIAL_B_OK"
+      },
+      {
+        "ok": true,
+        "level": "block",
+        "code": "RELEASER_SEALED"
+      },
+      {
+        "ok": true,
+        "level": "block",
+        "code": "OPS_BINDINGS_OK"
+      },
+      {
+        "ok": true,
+        "level": "block",
+        "code": "ONBOARDING_OK"
+      },
+      {
+        "ok": true,
+        "level": "block",
+        "code": "IDS_DISTINCT"
+      },
+      {
+        "ok": true,
+        "level": "block",
+        "code": "IDENTITY_POLICY_OK"
+      },
+      {
+        "ok": true,
+        "level": "block",
+        "code": "PQ_BINDINGS_OK"
+      },
+      {
+        "ok": true,
+        "level": "block",
+        "code": "SLOT_SETUP_OK"
+      }
+    ],
+    "relied_on": [
+      {
+        "name": "passport.A",
+        "sha256": "6161616161616161616161616161616161616161616161616161616161616161"
+      }
+    ],
+    "slot_lb_sig": "cdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcd"
+  }
+]

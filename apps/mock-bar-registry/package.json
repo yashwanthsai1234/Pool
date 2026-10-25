@@ -1,0 +1,7 @@
+{
+  "name": "@legx/mock-bar-registry",
+  "private": true,
+  "type": "module",
+  "exports": { ".": "./src/index.ts" },
+  "scripts": { "start": "node src/main.ts", "test": "vitest run --project unit apps/mock-bar-registry" }
+}

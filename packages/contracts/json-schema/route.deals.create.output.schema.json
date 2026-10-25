@@ -1,0 +1,142 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "dealId": {
+      "type": "string",
+      "format": "uuid",
+      "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$"
+    },
+    "state": {
+      "type": "string",
+      "enum": [
+        "DRAFT",
+        "CONTRACT_SIGNED",
+        "SHELL_OPEN",
+        "QUARANTINED",
+        "KEYS_READY",
+        "WALLET_LOCKED",
+        "VERIFIED",
+        "FUNDED",
+        "PAID_OUT",
+        "REFUNDED",
+        "DISPUTED",
+        "EXPIRED",
+        "CLOSED"
+      ]
+    },
+    "network": {
+      "type": "string",
+      "enum": [
+        "standalone",
+        "testnet",
+        "devnet",
+        "mainnet"
+      ]
+    },
+    "identityPolicy": {
+      "type": "string",
+      "enum": [
+        "zk",
+        "zk-or-chip",
+        "chip"
+      ]
+    },
+    "amountDrops": {
+      "type": "string",
+      "pattern": "^(?:0|[1-9][0-9]{0,16}|100000000000000000)$"
+    },
+    "payoutA": {
+      "type": "string",
+      "pattern": "^r[1-9A-HJ-NP-Za-km-z]{24,34}(?::(?:0|[1-9][0-9]{0,9}))?$"
+    },
+    "payoutB": {
+      "type": "string",
+      "pattern": "^r[1-9A-HJ-NP-Za-km-z]{24,34}(?::(?:0|[1-9][0-9]{0,9}))?$"
+    },
+    "lawyerOpsA": {
+      "type": "string",
+      "pattern": "^r[1-9A-HJ-NP-Za-km-z]{24,34}$"
+    },
+    "lawyerOpsB": {
+      "type": "string",
+      "pattern": "^r[1-9A-HJ-NP-Za-km-z]{24,34}$"
+    },
+    "contractRoot": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "walletAddress": {
+      "type": "string",
+      "pattern": "^r[1-9A-HJ-NP-Za-km-z]{24,34}$"
+    },
+    "signedContractSeal": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "dealSeal": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "nftTokenId": {
+      "type": "string",
+      "pattern": "^[0-9A-F]{64}$"
+    },
+    "mintTxHash": {
+      "type": "string",
+      "pattern": "^[0-9A-F]{64}$"
+    },
+    "escrow": {
+      "type": "object",
+      "properties": {
+        "owner": {
+          "type": "string",
+          "pattern": "^r[1-9A-HJ-NP-Za-km-z]{24,34}$"
+        },
+        "offer_sequence": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4294967295
+        },
+        "amount_drops": {
+          "type": "string",
+          "pattern": "^(?:0|[1-9][0-9]{0,16}|100000000000000000)$"
+        },
+        "condition": {
+          "type": "string",
+          "pattern": "^A0258020[0-9A-F]{64}810120$"
+        },
+        "cancel_after": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295
+        }
+      },
+      "required": [
+        "owner",
+        "offer_sequence",
+        "amount_drops",
+        "condition",
+        "cancel_after"
+      ],
+      "additionalProperties": false
+    },
+    "exitSlot": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 4294967295
+    }
+  },
+  "required": [
+    "dealId",
+    "state",
+    "network",
+    "identityPolicy",
+    "amountDrops",
+    "payoutA",
+    "payoutB",
+    "lawyerOpsA",
+    "lawyerOpsB"
+  ],
+  "additionalProperties": false
+}

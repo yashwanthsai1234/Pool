@@ -1,0 +1,803 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "anyOf": [
+    {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "deal_id": {
+              "type": "string",
+              "format": "uuid",
+              "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$"
+            },
+            "contract_root": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "deal_seal": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "side": {
+              "type": "string",
+              "enum": [
+                "A",
+                "B"
+              ]
+            },
+            "commitment": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "ledger_anchor": {
+              "type": "object",
+              "properties": {
+                "ledger_index": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 4294967295
+                },
+                "ledger_hash": {
+                  "type": "string",
+                  "pattern": "^[0-9A-F]{64}$"
+                }
+              },
+              "required": [
+                "ledger_index",
+                "ledger_hash"
+              ],
+              "additionalProperties": false
+            },
+            "presence_sig": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{128}$"
+            },
+            "lawyer_nonce": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "checked_by_role": {
+              "type": "string",
+              "enum": [
+                "lawyerA",
+                "lawyerB"
+              ]
+            },
+            "sig_algs": {
+              "minItems": 1,
+              "maxItems": 4,
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "ed25519",
+                  "ml-dsa-65"
+                ]
+              }
+            },
+            "method": {
+              "type": "string",
+              "const": "zkpassport"
+            },
+            "checks": {
+              "type": "object",
+              "properties": {
+                "proof_verified": {
+                  "type": "boolean"
+                },
+                "identifier_matches": {
+                  "type": "boolean"
+                },
+                "bound_value_is_presence_msg": {
+                  "type": "boolean"
+                },
+                "document_not_expired": {
+                  "type": "boolean"
+                },
+                "face_match_passed": {
+                  "type": "boolean"
+                },
+                "proof_sha256": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{64}$"
+                },
+                "trust": {
+                  "type": "object",
+                  "properties": {
+                    "chain_id": {
+                      "type": "integer",
+                      "minimum": 1,
+                      "maximum": 9007199254740991
+                    },
+                    "block_number": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 9007199254740991
+                    },
+                    "block_hash": {
+                      "type": "string",
+                      "pattern": "^0x[0-9a-f]{64}$"
+                    },
+                    "registry_address": {
+                      "type": "string",
+                      "pattern": "^0x[0-9a-f]{40}$"
+                    },
+                    "root": {
+                      "type": "string",
+                      "pattern": "^0x[0-9a-f]{64}$"
+                    },
+                    "circuit_manifest_version": {
+                      "type": "string",
+                      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+                    },
+                    "vkey_hashes": {
+                      "minItems": 1,
+                      "maxItems": 16,
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "pattern": "^0x[0-9a-f]{64}$"
+                      }
+                    },
+                    "identifier_type": {
+                      "type": "string",
+                      "enum": [
+                        "NON_SALTED",
+                        "SALTED",
+                        "NON_SALTED_MOCK",
+                        "SALTED_MOCK",
+                        "NONE"
+                      ]
+                    },
+                    "dev_mode": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "chain_id",
+                    "block_number",
+                    "block_hash",
+                    "registry_address",
+                    "root",
+                    "circuit_manifest_version",
+                    "vkey_hashes",
+                    "identifier_type",
+                    "dev_mode"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "proof_verified",
+                "identifier_matches",
+                "bound_value_is_presence_msg",
+                "document_not_expired",
+                "face_match_passed",
+                "proof_sha256",
+                "trust"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "deal_id",
+            "contract_root",
+            "deal_seal",
+            "side",
+            "commitment",
+            "ledger_anchor",
+            "presence_sig",
+            "lawyer_nonce",
+            "checked_by_role",
+            "sig_algs",
+            "method",
+            "checks"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "deal_id": {
+              "type": "string",
+              "format": "uuid",
+              "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$"
+            },
+            "contract_root": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "deal_seal": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "side": {
+              "type": "string",
+              "enum": [
+                "A",
+                "B"
+              ]
+            },
+            "commitment": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "ledger_anchor": {
+              "type": "object",
+              "properties": {
+                "ledger_index": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 4294967295
+                },
+                "ledger_hash": {
+                  "type": "string",
+                  "pattern": "^[0-9A-F]{64}$"
+                }
+              },
+              "required": [
+                "ledger_index",
+                "ledger_hash"
+              ],
+              "additionalProperties": false
+            },
+            "presence_sig": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{128}$"
+            },
+            "lawyer_nonce": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "checked_by_role": {
+              "type": "string",
+              "enum": [
+                "lawyerA",
+                "lawyerB"
+              ]
+            },
+            "sig_algs": {
+              "minItems": 1,
+              "maxItems": 4,
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "ed25519",
+                  "ml-dsa-65"
+                ]
+              }
+            },
+            "method": {
+              "type": "string",
+              "const": "nfc-chip"
+            },
+            "checks": {
+              "type": "object",
+              "properties": {
+                "sod_signature_valid": {
+                  "type": "boolean"
+                },
+                "ds_cert_chains_to_csca": {
+                  "type": "boolean"
+                },
+                "dg1_hash_in_sod": {
+                  "type": "boolean"
+                },
+                "document_not_expired": {
+                  "type": "boolean"
+                },
+                "commitment_opens": {
+                  "type": "boolean"
+                },
+                "chip_authentication": {
+                  "type": "string",
+                  "enum": [
+                    "AA",
+                    "CA",
+                    "none"
+                  ]
+                },
+                "chip_auth_available": {
+                  "type": "boolean"
+                },
+                "face_match": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "sod_signature_valid",
+                "ds_cert_chains_to_csca",
+                "dg1_hash_in_sod",
+                "document_not_expired",
+                "commitment_opens",
+                "chip_authentication",
+                "chip_auth_available"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "deal_id",
+            "contract_root",
+            "deal_seal",
+            "side",
+            "commitment",
+            "ledger_anchor",
+            "presence_sig",
+            "lawyer_nonce",
+            "checked_by_role",
+            "sig_algs",
+            "method",
+            "checks"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "deal_id": {
+              "type": "string",
+              "format": "uuid",
+              "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$"
+            },
+            "contract_root": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "side": {
+              "type": "string",
+              "enum": [
+                "A",
+                "B"
+              ]
+            },
+            "slot_pub": {
+              "type": "string",
+              "pattern": "^ED[0-9A-F]{64}$"
+            },
+            "commitment": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "disclosure_box_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "checked_by_role": {
+              "type": "string",
+              "enum": [
+                "lawyerA",
+                "lawyerB"
+              ]
+            },
+            "distinct_tag": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "sig_algs": {
+              "minItems": 1,
+              "maxItems": 4,
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "ed25519",
+                  "ml-dsa-65"
+                ]
+              }
+            },
+            "method": {
+              "type": "string",
+              "const": "zkpassport"
+            },
+            "checks": {
+              "type": "object",
+              "properties": {
+                "proof_verified": {
+                  "type": "boolean"
+                },
+                "bound_value_matches": {
+                  "type": "boolean"
+                },
+                "expiry_after_cancel_plus_30d": {
+                  "type": "boolean"
+                },
+                "age_over_18": {
+                  "type": "boolean"
+                },
+                "scope": {
+                  "type": "string",
+                  "maxLength": 128
+                },
+                "domain": {
+                  "type": "string",
+                  "maxLength": 253
+                },
+                "unique_identifier": {
+                  "type": "string",
+                  "pattern": "^[0-9]{1,78}$"
+                },
+                "proof_sha256": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{64}$"
+                },
+                "trust": {
+                  "type": "object",
+                  "properties": {
+                    "chain_id": {
+                      "type": "integer",
+                      "minimum": 1,
+                      "maximum": 9007199254740991
+                    },
+                    "block_number": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 9007199254740991
+                    },
+                    "block_hash": {
+                      "type": "string",
+                      "pattern": "^0x[0-9a-f]{64}$"
+                    },
+                    "registry_address": {
+                      "type": "string",
+                      "pattern": "^0x[0-9a-f]{40}$"
+                    },
+                    "root": {
+                      "type": "string",
+                      "pattern": "^0x[0-9a-f]{64}$"
+                    },
+                    "circuit_manifest_version": {
+                      "type": "string",
+                      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+                    },
+                    "vkey_hashes": {
+                      "minItems": 1,
+                      "maxItems": 16,
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "pattern": "^0x[0-9a-f]{64}$"
+                      }
+                    },
+                    "identifier_type": {
+                      "type": "string",
+                      "enum": [
+                        "NON_SALTED",
+                        "SALTED",
+                        "NON_SALTED_MOCK",
+                        "SALTED_MOCK",
+                        "NONE"
+                      ]
+                    },
+                    "dev_mode": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "chain_id",
+                    "block_number",
+                    "block_hash",
+                    "registry_address",
+                    "root",
+                    "circuit_manifest_version",
+                    "vkey_hashes",
+                    "identifier_type",
+                    "dev_mode"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "proof_verified",
+                "bound_value_matches",
+                "expiry_after_cancel_plus_30d",
+                "age_over_18",
+                "scope",
+                "domain",
+                "unique_identifier",
+                "proof_sha256",
+                "trust"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "deal_id",
+            "contract_root",
+            "side",
+            "slot_pub",
+            "commitment",
+            "disclosure_box_sha256",
+            "checked_by_role",
+            "distinct_tag",
+            "sig_algs",
+            "method",
+            "checks"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "deal_id": {
+              "type": "string",
+              "format": "uuid",
+              "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$"
+            },
+            "contract_root": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "side": {
+              "type": "string",
+              "enum": [
+                "A",
+                "B"
+              ]
+            },
+            "slot_pub": {
+              "type": "string",
+              "pattern": "^ED[0-9A-F]{64}$"
+            },
+            "commitment": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "disclosure_box_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "checked_by_role": {
+              "type": "string",
+              "enum": [
+                "lawyerA",
+                "lawyerB"
+              ]
+            },
+            "distinct_tag": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "sig_algs": {
+              "minItems": 1,
+              "maxItems": 4,
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "ed25519",
+                  "ml-dsa-65"
+                ]
+              }
+            },
+            "method": {
+              "type": "string",
+              "const": "nfc-chip"
+            },
+            "checks": {
+              "type": "object",
+              "properties": {
+                "sod_signature_valid": {
+                  "type": "boolean"
+                },
+                "ds_cert_chains_to_csca": {
+                  "type": "boolean"
+                },
+                "dg1_hash_in_sod": {
+                  "type": "boolean"
+                },
+                "document_not_expired": {
+                  "type": "boolean"
+                },
+                "commitment_opens": {
+                  "type": "boolean"
+                },
+                "chip_authentication": {
+                  "type": "string",
+                  "enum": [
+                    "AA",
+                    "CA",
+                    "none"
+                  ]
+                },
+                "chip_auth_available": {
+                  "type": "boolean"
+                },
+                "face_match": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "sod_signature_valid",
+                "ds_cert_chains_to_csca",
+                "dg1_hash_in_sod",
+                "document_not_expired",
+                "commitment_opens",
+                "chip_authentication",
+                "chip_auth_available"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "deal_id",
+            "contract_root",
+            "side",
+            "slot_pub",
+            "commitment",
+            "disclosure_box_sha256",
+            "checked_by_role",
+            "distinct_tag",
+            "sig_algs",
+            "method",
+            "checks"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    {
+      "type": "object",
+      "properties": {
+        "jurisdiction": {
+          "type": "string",
+          "pattern": "^[A-Z]{2}(?:-[A-Z0-9]{1,3})?$"
+        },
+        "bar_number_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "active",
+            "not_active"
+          ]
+        },
+        "source": {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "enum": [
+                "registry-api",
+                "registry-page",
+                "manual"
+              ]
+            },
+            "url": {
+              "type": "string",
+              "format": "uri"
+            },
+            "evidence_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "kind",
+            "url",
+            "evidence_sha256"
+          ],
+          "additionalProperties": false
+        },
+        "ops_account": {
+          "type": "string",
+          "pattern": "^r[1-9A-HJ-NP-Za-km-z]{24,34}$"
+        },
+        "checked_at_ledger": {
+          "type": "object",
+          "properties": {
+            "ledger_index": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 4294967295
+            },
+            "ledger_hash": {
+              "type": "string",
+              "pattern": "^[0-9A-F]{64}$"
+            }
+          },
+          "required": [
+            "ledger_index",
+            "ledger_hash"
+          ],
+          "additionalProperties": false
+        },
+        "verifier_key_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9._:/#-]{1,128}$"
+        },
+        "sig_algs": {
+          "minItems": 1,
+          "maxItems": 4,
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "ed25519",
+              "ml-dsa-65"
+            ]
+          }
+        }
+      },
+      "required": [
+        "jurisdiction",
+        "bar_number_sha256",
+        "status",
+        "source",
+        "ops_account",
+        "checked_at_ledger",
+        "verifier_key_id",
+        "sig_algs"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "deal_id": {
+          "type": "string",
+          "format": "uuid",
+          "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$"
+        },
+        "contract_root": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "role": {
+          "type": "string",
+          "enum": [
+            "LA",
+            "LB"
+          ]
+        },
+        "lawyer_pub": {
+          "type": "string",
+          "pattern": "^ED[0-9A-F]{64}$"
+        },
+        "bar_commitment": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "ops_account": {
+          "type": "string",
+          "pattern": "^r[1-9A-HJ-NP-Za-km-z]{24,34}$"
+        },
+        "verification_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "sig_algs": {
+          "minItems": 1,
+          "maxItems": 4,
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "ed25519",
+              "ml-dsa-65"
+            ]
+          }
+        }
+      },
+      "required": [
+        "deal_id",
+        "contract_root",
+        "role",
+        "lawyer_pub",
+        "bar_commitment",
+        "ops_account",
+        "verification_sha256",
+        "sig_algs"
+      ],
+      "additionalProperties": false
+    }
+  ]
+}

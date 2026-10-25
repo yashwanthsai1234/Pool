@@ -1,0 +1,12 @@
+[
+ {
+  "fn": "bindMsg",
+  "inputs": {
+   "root": "0101010101010101010101010101010101010101010101010101010101010101",
+   "C": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+   "slotPub": "ed0303030303030303030303030303030303030303030303030303030303030303",
+   "side": "A"
+  },
+  "output": "533049c321f97dbb2bbc67a19627d07ef8758e53464039dd3f8fc44442b3c312"
+ }
+]

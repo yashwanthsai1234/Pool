@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "key_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9._:/#-]{1,128}$"
+    },
+    "slot": {
+      "type": "string",
+      "enum": [
+        "A",
+        "LA",
+        "B",
+        "LB"
+      ]
+    },
+    "holder_role": {
+      "type": "string",
+      "enum": [
+        "phone",
+        "second-authenticator",
+        "passkey-same-device",
+        "recovery-agent",
+        "console",
+        "firm-hsm",
+        "partner"
+      ]
+    },
+    "ed25519_pub": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "mldsa65_pub": {
+      "type": "string",
+      "pattern": "^(?:[A-Za-z0-9+/]{4}){650}[A-Za-z0-9+/]{3}=$"
+    },
+    "valid_from": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 4294967295
+    },
+    "valid_to": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 4294967295
+    }
+  },
+  "required": [
+    "key_id",
+    "slot",
+    "holder_role",
+    "ed25519_pub",
+    "mldsa65_pub",
+    "valid_from"
+  ],
+  "additionalProperties": false
+}

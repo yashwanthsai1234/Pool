@@ -1,0 +1,4082 @@
+{
+  "files": {
+    "packages/core/src/signedContract.ts": {
+      "language": "typescript",
+      "mutants": [
+        {
+          "id": "25",
+          "mutatorName": "StringLiteral",
+          "replacement": "``",
+          "status": "NoCoverage",
+          "static": false,
+          "coveredBy": [],
+          "location": {
+            "end": {
+              "column": 110,
+              "line": 79
+            },
+            "start": {
+              "column": 51,
+              "line": 79
+            }
+          }
+        },
+        {
+          "id": "78",
+          "mutatorName": "BlockStatement",
+          "replacement": "{}",
+          "status": "NoCoverage",
+          "static": false,
+          "coveredBy": [],
+          "location": {
+            "end": {
+              "column": 4,
+              "line": 131
+            },
+            "start": {
+              "column": 11,
+              "line": 129
+            }
+          }
+        },
+        {
+          "id": "79",
+          "mutatorName": "BooleanLiteral",
+          "replacement": "true",
+          "status": "NoCoverage",
+          "static": false,
+          "coveredBy": [],
+          "location": {
+            "end": {
+              "column": 17,
+              "line": 130
+            },
+            "start": {
+              "column": 12,
+              "line": 130
+            }
+          }
+        },
+        {
+          "id": "4",
+          "mutatorName": "BlockStatement",
+          "replacement": "{}",
+          "statusReason": "\"message\" expected Uint8Array, got type=undefined",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 33.23550000000023,
+          "killedBy": [
+            "0"
+          ],
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 2,
+              "line": 47
+            },
+            "start": {
+              "column": 111,
+              "line": 45
+            }
+          }
+        },
+        {
+          "id": "5",
+          "mutatorName": "StringLiteral",
+          "replacement": "\"\"",
+          "statusReason": "expected '9E21EBA8A50E1707FE6FF4CC8A36B8B2A47D3…' to be '362C5177B883F9C21A8EE24C8B34C8D95E2D3…' // Object.is equality",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 11,
+          "duration": 386.32491900000105,
+          "killedBy": [
+            "14"
+          ],
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 43,
+              "line": 46
+            },
+            "start": {
+              "column": 20,
+              "line": 46
+            }
+          }
+        },
+        {
+          "id": "6",
+          "mutatorName": "ArrayDeclaration",
+          "replacement": "[]",
+          "statusReason": "expected { ok: false, code: 'SEAL_MISMATCH' } to deeply equal { ok: false, code: 'SIG_LA_INVALID' }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 2,
+          "duration": 146.27720799999952,
+          "killedBy": [
+            "1"
+          ],
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 106,
+              "line": 46
+            },
+            "start": {
+              "column": 45,
+              "line": 46
+            }
+          }
+        },
+        {
+          "id": "7",
+          "mutatorName": "BlockStatement",
+          "replacement": "{}",
+          "statusReason": "Cannot read properties of undefined (reading 'length')",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 42.010417000000416,
+          "killedBy": [
+            "0"
+          ],
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "7",
+            "12",
+            "13",
+            "14",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 2,
+              "line": 63
+            },
+            "start": {
+              "column": 24,
+              "line": 57
+            }
+          }
+        },
+        {
+          "id": "8",
+          "mutatorName": "ConditionalExpression",
+          "replacement": "true",
+          "statusReason": "contract signature for LB does not verify",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 84.00808299999971,
+          "killedBy": [
+            "0"
+          ],
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "7",
+            "12",
+            "13",
+            "14",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 28,
+              "line": 60
+            },
+            "start": {
+              "column": 15,
+              "line": 60
+            }
+          }
+        },
+        {
+          "id": "9",
+          "mutatorName": "ConditionalExpression",
+          "replacement": "false",
+          "statusReason": "contract signature for LA does not verify",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 83.35870799999975,
+          "killedBy": [
+            "0"
+          ],
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "7",
+            "12",
+            "13",
+            "14",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 28,
+              "line": 60
+            },
+            "start": {
+              "column": 15,
+              "line": 60
+            }
+          }
+        },
+        {
+          "id": "10",
+          "mutatorName": "EqualityOperator",
+          "replacement": "role !== 'LA'",
+          "statusReason": "contract signature for LA does not verify",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 73.29520899999989,
+          "killedBy": [
+            "0"
+          ],
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "7",
+            "12",
+            "13",
+            "14",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 28,
+              "line": 60
+            },
+            "start": {
+              "column": 15,
+              "line": 60
+            }
+          }
+        },
+        {
+          "id": "11",
+          "mutatorName": "StringLiteral",
+          "replacement": "\"\"",
+          "statusReason": "contract signature for LA does not verify",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 70.24679199999991,
+          "killedBy": [
+            "0"
+          ],
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "7",
+            "12",
+            "13",
+            "14",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 28,
+              "line": 60
+            },
+            "start": {
+              "column": 24,
+              "line": 60
+            }
+          }
+        },
+        {
+          "id": "13",
+          "mutatorName": "ConditionalExpression",
+          "replacement": "true",
+          "statusReason": "contract signature for LA does not verify",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 59.809917000000496,
+          "killedBy": [
+            "0"
+          ],
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "7",
+            "12",
+            "13",
+            "14",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 43,
+              "line": 61
+            },
+            "start": {
+              "column": 7,
+              "line": 61
+            }
+          }
+        },
+        {
+          "id": "12",
+          "mutatorName": "BooleanLiteral",
+          "replacement": "verifyXrplKeySig(pub, msg, up(sig))",
+          "statusReason": "contract signature for LA does not verify",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 84.50412500000039,
+          "killedBy": [
+            "0"
+          ],
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "7",
+            "12",
+            "13",
+            "14",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 43,
+              "line": 61
+            },
+            "start": {
+              "column": 7,
+              "line": 61
+            }
+          }
+        },
+        {
+          "id": "16",
+          "mutatorName": "StringLiteral",
+          "replacement": "``",
+          "statusReason": "expected [Function] to throw error matching /does not verify/ but got ''",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 90.9213749999999,
+          "killedBy": [
+            "7"
+          ],
+          "coveredBy": [
+            "7"
+          ],
+          "location": {
+            "end": {
+              "column": 109,
+              "line": 61
+            },
+            "start": {
+              "column": 61,
+              "line": 61
+            }
+          }
+        },
+        {
+          "id": "14",
+          "mutatorName": "ConditionalExpression",
+          "replacement": "false",
+          "statusReason": "promise resolved \"Uint8Array[ 203, 155, 60, 27, 43, …(-52) ]\" instead of rejecting",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 7,
+          "duration": 146.4999999999991,
+          "killedBy": [
+            "7"
+          ],
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "7",
+            "12",
+            "13",
+            "14",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 43,
+              "line": 61
+            },
+            "start": {
+              "column": 7,
+              "line": 61
+            }
+          }
+        },
+        {
+          "id": "17",
+          "mutatorName": "BlockStatement",
+          "replacement": "{}",
+          "statusReason": "expected { ok: false, code: 'URI_MALFORMED' } to deeply equal { ok: true }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 88.27720899999986,
+          "killedBy": [
+            "0"
+          ],
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 2,
+              "line": 68
+            },
+            "start": {
+              "column": 50,
+              "line": 66
+            }
+          }
+        },
+        {
+          "id": "18",
+          "mutatorName": "ArithmeticOperator",
+          "replacement": "URI_PREFIX - up(seal)",
+          "statusReason": "string expected",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 80.70087500000045,
+          "killedBy": [
+            "0"
+          ],
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 46,
+              "line": 67
+            },
+            "start": {
+              "column": 25,
+              "line": 67
+            }
+          }
+        },
+        {
+          "id": "20",
+          "mutatorName": "ArrayDeclaration",
+          "replacement": "[]",
+          "statusReason": "mint memo must be 195 bytes, got 194",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 61.7622080000001,
+          "killedBy": [
+            "0"
+          ],
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 34,
+              "line": 73
+            },
+            "start": {
+              "column": 20,
+              "line": 73
+            }
+          }
+        },
+        {
+          "id": "19",
+          "mutatorName": "BlockStatement",
+          "replacement": "{}",
+          "statusReason": "expected { ok: false, code: 'MEMO_MALFORMED' } to deeply equal { ok: true }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 72.75254099999984,
+          "killedBy": [
+            "0"
+          ],
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 2,
+              "line": 81
+            },
+            "start": {
+              "column": 53,
+              "line": 71
+            }
+          }
+        },
+        {
+          "id": "21",
+          "mutatorName": "ConditionalExpression",
+          "replacement": "true",
+          "statusReason": "mint memo must be 195 bytes, got 195",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 61.56341599999996,
+          "killedBy": [
+            "0"
+          ],
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 33,
+              "line": 79
+            },
+            "start": {
+              "column": 7,
+              "line": 79
+            }
+          }
+        },
+        {
+          "id": "23",
+          "mutatorName": "EqualityOperator",
+          "replacement": "data.length === MEMO_BYTES",
+          "statusReason": "mint memo must be 195 bytes, got 195",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 51.206083000000035,
+          "killedBy": [
+            "0"
+          ],
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 33,
+              "line": 79
+            },
+            "start": {
+              "column": 7,
+              "line": 79
+            }
+          }
+        },
+        {
+          "id": "26",
+          "mutatorName": "BlockStatement",
+          "replacement": "{}",
+          "statusReason": "Cannot read properties of undefined (reading 'ok')",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 72.45708300000024,
+          "killedBy": [
+            "0"
+          ],
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "8",
+            "10",
+            "11",
+            "12",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 2,
+              "line": 97
+            },
+            "start": {
+              "column": 120,
+              "line": 84
+            }
+          }
+        },
+        {
+          "id": "22",
+          "mutatorName": "ConditionalExpression",
+          "replacement": "false",
+          "status": "Survived",
+          "static": false,
+          "testsCompleted": 16,
+          "duration": 960.7456680000014,
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 33,
+              "line": 79
+            },
+            "start": {
+              "column": 7,
+              "line": 79
+            }
+          }
+        },
+        {
+          "id": "27",
+          "mutatorName": "BooleanLiteral",
+          "replacement": "new RegExp(`^(?:[0-9A-F]{2}){${MEMO_BYTES}}$`).test(memoHex)",
+          "statusReason": "expected { ok: false, code: 'MEMO_MALFORMED' } to deeply equal { ok: true }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 61.39337500000147,
+          "killedBy": [
+            "0"
+          ],
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "8",
+            "10",
+            "11",
+            "12",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 68,
+              "line": 85
+            },
+            "start": {
+              "column": 7,
+              "line": 85
+            }
+          }
+        },
+        {
+          "id": "28",
+          "mutatorName": "ConditionalExpression",
+          "replacement": "true",
+          "statusReason": "expected { ok: false, code: 'MEMO_MALFORMED' } to deeply equal { ok: true }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 60.85474999999951,
+          "killedBy": [
+            "0"
+          ],
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "8",
+            "10",
+            "11",
+            "12",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 68,
+              "line": 85
+            },
+            "start": {
+              "column": 7,
+              "line": 85
+            }
+          }
+        },
+        {
+          "id": "29",
+          "mutatorName": "ConditionalExpression",
+          "replacement": "false",
+          "statusReason": "expected { ok: true, value: { …(4) } } to deeply equal { ok: false, code: 'MEMO_MALFORMED' }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 9,
+          "duration": 192.5462510000052,
+          "killedBy": [
+            "10"
+          ],
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "8",
+            "10",
+            "11",
+            "12",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 68,
+              "line": 85
+            },
+            "start": {
+              "column": 7,
+              "line": 85
+            }
+          }
+        },
+        {
+          "id": "30",
+          "mutatorName": "StringLiteral",
+          "replacement": "``",
+          "statusReason": "expected { ok: true, value: { …(4) } } to deeply equal { ok: false, code: 'MEMO_MALFORMED' }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 9,
+          "duration": 216.4785010000005,
+          "killedBy": [
+            "10"
+          ],
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "8",
+            "10",
+            "11",
+            "12",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 53,
+              "line": 85
+            },
+            "start": {
+              "column": 19,
+              "line": 85
+            }
+          }
+        },
+        {
+          "id": "31",
+          "mutatorName": "ObjectLiteral",
+          "replacement": "{}",
+          "statusReason": "expected {} to deeply equal { ok: false, code: 'MEMO_MALFORMED' }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 32.41070799999943,
+          "killedBy": [
+            "10"
+          ],
+          "coveredBy": [
+            "10"
+          ],
+          "location": {
+            "end": {
+              "column": 114,
+              "line": 85
+            },
+            "start": {
+              "column": 77,
+              "line": 85
+            }
+          }
+        },
+        {
+          "id": "32",
+          "mutatorName": "BooleanLiteral",
+          "replacement": "true",
+          "statusReason": "expected { ok: true, code: 'MEMO_MALFORMED' } to deeply equal { ok: false, code: 'MEMO_MALFORMED' }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 53.52691699999923,
+          "killedBy": [
+            "10"
+          ],
+          "coveredBy": [
+            "10"
+          ],
+          "location": {
+            "end": {
+              "column": 88,
+              "line": 85
+            },
+            "start": {
+              "column": 83,
+              "line": 85
+            }
+          }
+        },
+        {
+          "id": "33",
+          "mutatorName": "StringLiteral",
+          "replacement": "\"\"",
+          "statusReason": "expected { ok: false, code: '' } to deeply equal { ok: false, code: 'MEMO_MALFORMED' }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 54.11179099999936,
+          "killedBy": [
+            "10"
+          ],
+          "coveredBy": [
+            "10"
+          ],
+          "location": {
+            "end": {
+              "column": 112,
+              "line": 85
+            },
+            "start": {
+              "column": 96,
+              "line": 85
+            }
+          }
+        },
+        {
+          "id": "34",
+          "mutatorName": "ConditionalExpression",
+          "replacement": "true",
+          "statusReason": "expected { ok: false, code: 'MEMO_MALFORMED' } to deeply equal { ok: true }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 160.06425000000127,
+          "killedBy": [
+            "0"
+          ],
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "8",
+            "10",
+            "11",
+            "12",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 63,
+              "line": 87
+            },
+            "start": {
+              "column": 7,
+              "line": 87
+            }
+          }
+        },
+        {
+          "id": "35",
+          "mutatorName": "ConditionalExpression",
+          "replacement": "false",
+          "statusReason": "expected { ok: true, value: { …(4) } } to deeply equal { ok: false, code: 'MEMO_MALFORMED' }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 9,
+          "duration": 280.57495700000436,
+          "killedBy": [
+            "10"
+          ],
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "8",
+            "10",
+            "11",
+            "12",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 63,
+              "line": 87
+            },
+            "start": {
+              "column": 7,
+              "line": 87
+            }
+          }
+        },
+        {
+          "id": "36",
+          "mutatorName": "LogicalOperator",
+          "replacement": "(b[0] !== MEMO_VERSION || b[1] !== 0xed) && b[98] !== 0xed",
+          "statusReason": "expected { ok: true, value: { …(4) } } to deeply equal { ok: false, code: 'MEMO_MALFORMED' }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 9,
+          "duration": 250.88916600000084,
+          "killedBy": [
+            "10"
+          ],
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "8",
+            "10",
+            "11",
+            "12",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 63,
+              "line": 87
+            },
+            "start": {
+              "column": 7,
+              "line": 87
+            }
+          }
+        },
+        {
+          "id": "37",
+          "mutatorName": "ConditionalExpression",
+          "replacement": "false",
+          "statusReason": "expected { ok: true, value: { …(4) } } to deeply equal { ok: false, code: 'MEMO_MALFORMED' }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 9,
+          "duration": 226.93525000000227,
+          "killedBy": [
+            "10"
+          ],
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "8",
+            "10",
+            "11",
+            "12",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 45,
+              "line": 87
+            },
+            "start": {
+              "column": 7,
+              "line": 87
+            }
+          }
+        },
+        {
+          "id": "38",
+          "mutatorName": "LogicalOperator",
+          "replacement": "b[0] !== MEMO_VERSION && b[1] !== 0xed",
+          "statusReason": "expected { ok: true, value: { …(4) } } to deeply equal { ok: false, code: 'MEMO_MALFORMED' }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 9,
+          "duration": 375.8742089999996,
+          "killedBy": [
+            "10"
+          ],
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "8",
+            "10",
+            "11",
+            "12",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 45,
+              "line": 87
+            },
+            "start": {
+              "column": 7,
+              "line": 87
+            }
+          }
+        },
+        {
+          "id": "39",
+          "mutatorName": "ConditionalExpression",
+          "replacement": "false",
+          "statusReason": "expected { ok: true, value: { …(4) } } to deeply equal { ok: false, code: 'MEMO_MALFORMED' }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 9,
+          "duration": 351.1042490000018,
+          "killedBy": [
+            "10"
+          ],
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "8",
+            "10",
+            "11",
+            "12",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 28,
+              "line": 87
+            },
+            "start": {
+              "column": 7,
+              "line": 87
+            }
+          }
+        },
+        {
+          "id": "40",
+          "mutatorName": "EqualityOperator",
+          "replacement": "b[0] === MEMO_VERSION",
+          "statusReason": "expected { ok: false, code: 'MEMO_MALFORMED' } to deeply equal { ok: true }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 95.31554200000028,
+          "killedBy": [
+            "0"
+          ],
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "8",
+            "10",
+            "11",
+            "12",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 28,
+              "line": 87
+            },
+            "start": {
+              "column": 7,
+              "line": 87
+            }
+          }
+        },
+        {
+          "id": "42",
+          "mutatorName": "EqualityOperator",
+          "replacement": "b[1] === 0xed",
+          "statusReason": "expected { ok: false, code: 'MEMO_MALFORMED' } to deeply equal { ok: true }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 113.64004199999908,
+          "killedBy": [
+            "0"
+          ],
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "8",
+            "10",
+            "11",
+            "12",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 45,
+              "line": 87
+            },
+            "start": {
+              "column": 32,
+              "line": 87
+            }
+          }
+        },
+        {
+          "id": "41",
+          "mutatorName": "ConditionalExpression",
+          "replacement": "false",
+          "status": "Survived",
+          "static": false,
+          "testsCompleted": 12,
+          "duration": 1202.6581669999996,
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "8",
+            "10",
+            "11",
+            "12",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 45,
+              "line": 87
+            },
+            "start": {
+              "column": 32,
+              "line": 87
+            }
+          }
+        },
+        {
+          "id": "44",
+          "mutatorName": "EqualityOperator",
+          "replacement": "b[98] === 0xed",
+          "statusReason": "expected { ok: false, code: 'MEMO_MALFORMED' } to deeply equal { ok: true }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 79.77033300000039,
+          "killedBy": [
+            "0"
+          ],
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "8",
+            "11",
+            "12",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 63,
+              "line": 87
+            },
+            "start": {
+              "column": 49,
+              "line": 87
+            }
+          }
+        },
+        {
+          "id": "43",
+          "mutatorName": "ConditionalExpression",
+          "replacement": "false",
+          "status": "Survived",
+          "static": false,
+          "testsCompleted": 11,
+          "duration": 1163.5468339999989,
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "8",
+            "11",
+            "12",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 63,
+              "line": 87
+            },
+            "start": {
+              "column": 49,
+              "line": 87
+            }
+          }
+        },
+        {
+          "id": "45",
+          "mutatorName": "ObjectLiteral",
+          "replacement": "{}",
+          "statusReason": "expected {} to deeply equal { ok: false, code: 'MEMO_MALFORMED' }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 76.08545799999956,
+          "killedBy": [
+            "10"
+          ],
+          "coveredBy": [
+            "10"
+          ],
+          "location": {
+            "end": {
+              "column": 109,
+              "line": 87
+            },
+            "start": {
+              "column": 72,
+              "line": 87
+            }
+          }
+        },
+        {
+          "id": "46",
+          "mutatorName": "BooleanLiteral",
+          "replacement": "true",
+          "statusReason": "expected { ok: true, code: 'MEMO_MALFORMED' } to deeply equal { ok: false, code: 'MEMO_MALFORMED' }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 41.80537499999991,
+          "killedBy": [
+            "10"
+          ],
+          "coveredBy": [
+            "10"
+          ],
+          "location": {
+            "end": {
+              "column": 83,
+              "line": 87
+            },
+            "start": {
+              "column": 78,
+              "line": 87
+            }
+          }
+        },
+        {
+          "id": "47",
+          "mutatorName": "StringLiteral",
+          "replacement": "\"\"",
+          "statusReason": "expected { ok: false, code: '' } to deeply equal { ok: false, code: 'MEMO_MALFORMED' }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 54.35441600000013,
+          "killedBy": [
+            "10"
+          ],
+          "coveredBy": [
+            "10"
+          ],
+          "location": {
+            "end": {
+              "column": 107,
+              "line": 87
+            },
+            "start": {
+              "column": 91,
+              "line": 87
+            }
+          }
+        },
+        {
+          "id": "48",
+          "mutatorName": "ObjectLiteral",
+          "replacement": "{}",
+          "statusReason": "expected {} to deeply equal { ok: true }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 65.45808299999953,
+          "killedBy": [
+            "0"
+          ],
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "8",
+            "11",
+            "12",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 4,
+              "line": 96
+            },
+            "start": {
+              "column": 10,
+              "line": 88
+            }
+          }
+        },
+        {
+          "id": "49",
+          "mutatorName": "BooleanLiteral",
+          "replacement": "false",
+          "statusReason": "expected { ok: false, value: { …(4) } } to deeply equal { ok: true }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 81.95166699999936,
+          "killedBy": [
+            "0"
+          ],
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "8",
+            "11",
+            "12",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 13,
+              "line": 89
+            },
+            "start": {
+              "column": 9,
+              "line": 89
+            }
+          }
+        },
+        {
+          "id": "50",
+          "mutatorName": "ObjectLiteral",
+          "replacement": "{}",
+          "statusReason": "expected { ok: false, code: 'KEYS_NOT_SEALED' } to deeply equal { ok: true }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 75.75700000000143,
+          "killedBy": [
+            "0"
+          ],
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "8",
+            "11",
+            "12",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 6,
+              "line": 95
+            },
+            "start": {
+              "column": 12,
+              "line": 90
+            }
+          }
+        },
+        {
+          "id": "51",
+          "mutatorName": "MethodExpression",
+          "replacement": "b",
+          "statusReason": "expected { ok: false, code: 'SIG_LA_INVALID' } to deeply equal { ok: true }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 78.9177090000012,
+          "killedBy": [
+            "0"
+          ],
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "8",
+            "11",
+            "12",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 29,
+              "line": 92
+            },
+            "start": {
+              "column": 14,
+              "line": 92
+            }
+          }
+        },
+        {
+          "id": "52",
+          "mutatorName": "MethodExpression",
+          "replacement": "b",
+          "statusReason": "expected { ok: false, code: 'SIG_LB_INVALID' } to deeply equal { ok: true }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 73.53070800000023,
+          "killedBy": [
+            "0"
+          ],
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "8",
+            "11",
+            "12",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 31,
+              "line": 94
+            },
+            "start": {
+              "column": 14,
+              "line": 94
+            }
+          }
+        },
+        {
+          "id": "53",
+          "mutatorName": "BlockStatement",
+          "replacement": "{}",
+          "statusReason": "expected Uint8Array, got type=undefined",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 82.50087499999972,
+          "killedBy": [
+            "0"
+          ],
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 2,
+              "line": 109
+            },
+            "start": {
+              "column": 64,
+              "line": 100
+            }
+          }
+        },
+        {
+          "id": "55",
+          "mutatorName": "ArrayDeclaration",
+          "replacement": "[]",
+          "statusReason": "expected { ok: true } to deeply equal { ok: false, code: 'SEAL_MISMATCH' }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 3,
+          "duration": 148.06145900000047,
+          "killedBy": [
+            "2"
+          ],
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 4,
+              "line": 108
+            },
+            "start": {
+              "column": 47,
+              "line": 101
+            }
+          }
+        },
+        {
+          "id": "54",
+          "mutatorName": "StringLiteral",
+          "replacement": "\"\"",
+          "statusReason": "expected 'c14dc952aad7e92f60ba94d7cf9023462c995…' to be '03fa0a0010782f41dde2cd0a3c0abb6c650dc…' // Object.is equality",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 10,
+          "duration": 297.03266800000165,
+          "killedBy": [
+            "14"
+          ],
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 45,
+              "line": 101
+            },
+            "start": {
+              "column": 20,
+              "line": 101
+            }
+          }
+        },
+        {
+          "id": "56",
+          "mutatorName": "BlockStatement",
+          "replacement": "{}",
+          "statusReason": "expected { ok: false, code: 'MEMO_MALFORMED' } to deeply equal { ok: true }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 94.31716600000073,
+          "killedBy": [
+            "0"
+          ],
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 2,
+              "line": 116
+            },
+            "start": {
+              "column": 83,
+              "line": 112
+            }
+          }
+        },
+        {
+          "id": "57",
+          "mutatorName": "ObjectLiteral",
+          "replacement": "{}",
+          "statusReason": "hex string expected, got undefined",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 123.73962500000016,
+          "killedBy": [
+            "0"
+          ],
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 105,
+              "line": 114
+            },
+            "start": {
+              "column": 34,
+              "line": 114
+            }
+          }
+        },
+        {
+          "id": "58",
+          "mutatorName": "ObjectLiteral",
+          "replacement": "{}",
+          "statusReason": "expected { ok: false, code: 'MEMO_MALFORMED' } to deeply equal { ok: true }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 121.95154199999888,
+          "killedBy": [
+            "0"
+          ],
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 49,
+              "line": 115
+            },
+            "start": {
+              "column": 10,
+              "line": 115
+            }
+          }
+        },
+        {
+          "id": "59",
+          "mutatorName": "BlockStatement",
+          "replacement": "{}",
+          "statusReason": "expected { ok: false, code: 'URI_MALFORMED' } to deeply equal { ok: true }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 117.90324999999939,
+          "killedBy": [
+            "0"
+          ],
+          "coveredBy": [
+            "0",
+            "2",
+            "5",
+            "12",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 2,
+              "line": 124
+            },
+            "start": {
+              "column": 62,
+              "line": 119
+            }
+          }
+        },
+        {
+          "id": "61",
+          "mutatorName": "ConditionalExpression",
+          "replacement": "true",
+          "statusReason": "expected { ok: false, code: 'URI_MALFORMED' } to deeply equal { ok: true }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 111.06816699999763,
+          "killedBy": [
+            "0"
+          ],
+          "coveredBy": [
+            "0",
+            "2",
+            "5",
+            "12",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 41,
+              "line": 120
+            },
+            "start": {
+              "column": 7,
+              "line": 120
+            }
+          }
+        },
+        {
+          "id": "60",
+          "mutatorName": "BooleanLiteral",
+          "replacement": "/^(?:[0-9A-F]{2})+$/.test(uriHex)",
+          "statusReason": "expected { ok: false, code: 'URI_MALFORMED' } to deeply equal { ok: true }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 122.85566699999981,
+          "killedBy": [
+            "0"
+          ],
+          "coveredBy": [
+            "0",
+            "2",
+            "5",
+            "12",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 41,
+              "line": 120
+            },
+            "start": {
+              "column": 7,
+              "line": 120
+            }
+          }
+        },
+        {
+          "id": "62",
+          "mutatorName": "ConditionalExpression",
+          "replacement": "false",
+          "statusReason": "expected { ok: true } to deeply equal { ok: false, code: 'URI_MALFORMED' }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 4,
+          "duration": 222.1674589999966,
+          "killedBy": [
+            "12"
+          ],
+          "coveredBy": [
+            "0",
+            "2",
+            "5",
+            "12",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 41,
+              "line": 120
+            },
+            "start": {
+              "column": 7,
+              "line": 120
+            }
+          }
+        },
+        {
+          "id": "63",
+          "mutatorName": "Regex",
+          "replacement": "/(?:[0-9A-F]{2})+$/",
+          "statusReason": "expected { ok: true } to deeply equal { ok: false, code: 'URI_MALFORMED' }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 4,
+          "duration": 262.4769159999996,
+          "killedBy": [
+            "12"
+          ],
+          "coveredBy": [
+            "0",
+            "2",
+            "5",
+            "12",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 28,
+              "line": 120
+            },
+            "start": {
+              "column": 8,
+              "line": 120
+            }
+          }
+        },
+        {
+          "id": "65",
+          "mutatorName": "Regex",
+          "replacement": "/^(?:[0-9A-F]{2})$/",
+          "statusReason": "expected { ok: false, code: 'URI_MALFORMED' } to deeply equal { ok: true }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 145.1004589999975,
+          "killedBy": [
+            "0"
+          ],
+          "coveredBy": [
+            "0",
+            "2",
+            "5",
+            "12",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 28,
+              "line": 120
+            },
+            "start": {
+              "column": 8,
+              "line": 120
+            }
+          }
+        },
+        {
+          "id": "64",
+          "mutatorName": "Regex",
+          "replacement": "/^(?:[0-9A-F]{2})+/",
+          "status": "Survived",
+          "static": false,
+          "testsCompleted": 5,
+          "duration": 1250.4241260000017,
+          "coveredBy": [
+            "0",
+            "2",
+            "5",
+            "12",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 28,
+              "line": 120
+            },
+            "start": {
+              "column": 8,
+              "line": 120
+            }
+          }
+        },
+        {
+          "id": "66",
+          "mutatorName": "Regex",
+          "replacement": "/^(?:[0-9A-F])+$/",
+          "status": "Survived",
+          "static": false,
+          "testsCompleted": 5,
+          "duration": 1199.9403749999983,
+          "coveredBy": [
+            "0",
+            "2",
+            "5",
+            "12",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 28,
+              "line": 120
+            },
+            "start": {
+              "column": 8,
+              "line": 120
+            }
+          }
+        },
+        {
+          "id": "67",
+          "mutatorName": "Regex",
+          "replacement": "/^(?:[^0-9A-F]{2})+$/",
+          "statusReason": "expected { ok: false, code: 'URI_MALFORMED' } to deeply equal { ok: true }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 133.84187499999825,
+          "killedBy": [
+            "0"
+          ],
+          "coveredBy": [
+            "0",
+            "2",
+            "5",
+            "12",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 28,
+              "line": 120
+            },
+            "start": {
+              "column": 8,
+              "line": 120
+            }
+          }
+        },
+        {
+          "id": "69",
+          "mutatorName": "Regex",
+          "replacement": "/^legx:sc:v1:([0-9A-F]{64})/",
+          "statusReason": "expected { ok: true } to deeply equal { ok: false, code: 'URI_MALFORMED' }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 4,
+          "duration": 252.7234570000037,
+          "killedBy": [
+            "12"
+          ],
+          "coveredBy": [
+            "0",
+            "2",
+            "5",
+            "12",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 42,
+              "line": 122
+            },
+            "start": {
+              "column": 13,
+              "line": 122
+            }
+          }
+        },
+        {
+          "id": "68",
+          "mutatorName": "Regex",
+          "replacement": "/legx:sc:v1:([0-9A-F]{64})$/",
+          "statusReason": "expected { ok: true } to deeply equal { ok: false, code: 'URI_MALFORMED' }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 4,
+          "duration": 272.61162599999807,
+          "killedBy": [
+            "12"
+          ],
+          "coveredBy": [
+            "0",
+            "2",
+            "5",
+            "12",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 42,
+              "line": 122
+            },
+            "start": {
+              "column": 13,
+              "line": 122
+            }
+          }
+        },
+        {
+          "id": "70",
+          "mutatorName": "Regex",
+          "replacement": "/^legx:sc:v1:([0-9A-F])$/",
+          "statusReason": "expected { ok: false, code: 'URI_MALFORMED' } to deeply equal { ok: true }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 88.14862500000163,
+          "killedBy": [
+            "0"
+          ],
+          "coveredBy": [
+            "0",
+            "2",
+            "5",
+            "12",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 42,
+              "line": 122
+            },
+            "start": {
+              "column": 13,
+              "line": 122
+            }
+          }
+        },
+        {
+          "id": "71",
+          "mutatorName": "Regex",
+          "replacement": "/^legx:sc:v1:([^0-9A-F]{64})$/",
+          "statusReason": "expected { ok: false, code: 'URI_MALFORMED' } to deeply equal { ok: true }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 103.0870419999992,
+          "killedBy": [
+            "0"
+          ],
+          "coveredBy": [
+            "0",
+            "2",
+            "5",
+            "12",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 42,
+              "line": 122
+            },
+            "start": {
+              "column": 13,
+              "line": 122
+            }
+          }
+        },
+        {
+          "id": "72",
+          "mutatorName": "ConditionalExpression",
+          "replacement": "true",
+          "statusReason": "expected { ok: false, code: 'URI_MALFORMED' } to deeply equal { ok: true }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 98.35683399999834,
+          "killedBy": [
+            "0"
+          ],
+          "coveredBy": [
+            "0",
+            "2",
+            "5",
+            "12",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 30,
+              "line": 123
+            },
+            "start": {
+              "column": 10,
+              "line": 123
+            }
+          }
+        },
+        {
+          "id": "73",
+          "mutatorName": "ConditionalExpression",
+          "replacement": "false",
+          "statusReason": "Cannot read properties of null (reading '1')",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 4,
+          "duration": 158.56737499999872,
+          "killedBy": [
+            "12"
+          ],
+          "coveredBy": [
+            "0",
+            "2",
+            "5",
+            "12",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 30,
+              "line": 123
+            },
+            "start": {
+              "column": 10,
+              "line": 123
+            }
+          }
+        },
+        {
+          "id": "74",
+          "mutatorName": "EqualityOperator",
+          "replacement": "m?.[1] !== undefined",
+          "statusReason": "expected { ok: false, code: 'URI_MALFORMED' } to deeply equal { ok: true }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 101.98066699999981,
+          "killedBy": [
+            "0"
+          ],
+          "coveredBy": [
+            "0",
+            "2",
+            "5",
+            "12",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 30,
+              "line": 123
+            },
+            "start": {
+              "column": 10,
+              "line": 123
+            }
+          }
+        },
+        {
+          "id": "75",
+          "mutatorName": "OptionalChaining",
+          "replacement": "m[1]",
+          "statusReason": "Cannot read properties of null (reading '1')",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 4,
+          "duration": 142.24337399999786,
+          "killedBy": [
+            "12"
+          ],
+          "coveredBy": [
+            "0",
+            "2",
+            "5",
+            "12",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 16,
+              "line": 123
+            },
+            "start": {
+              "column": 10,
+              "line": 123
+            }
+          }
+        },
+        {
+          "id": "76",
+          "mutatorName": "BlockStatement",
+          "replacement": "{}",
+          "statusReason": "expected { ok: false, code: 'KEYS_NOT_SEALED' } to deeply equal { ok: true }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 115.52370799999699,
+          "killedBy": [
+            "0"
+          ],
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "12",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 2,
+              "line": 132
+            },
+            "start": {
+              "column": 43,
+              "line": 126
+            }
+          }
+        },
+        {
+          "id": "77",
+          "mutatorName": "BlockStatement",
+          "replacement": "{}",
+          "statusReason": "expected { ok: false, code: 'KEYS_NOT_SEALED' } to deeply equal { ok: true }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 98.52449999999953,
+          "killedBy": [
+            "0"
+          ],
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "12",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 4,
+              "line": 129
+            },
+            "start": {
+              "column": 7,
+              "line": 127
+            }
+          }
+        },
+        {
+          "id": "80",
+          "mutatorName": "BlockStatement",
+          "replacement": "{}",
+          "statusReason": "expected undefined to deeply equal { ok: true }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 114.44445800000176,
+          "killedBy": [
+            "0"
+          ],
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "12",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 2,
+              "line": 154
+            },
+            "start": {
+              "column": 100,
+              "line": 139
+            }
+          }
+        },
+        {
+          "id": "81",
+          "mutatorName": "BooleanLiteral",
+          "replacement": "memo.ok",
+          "statusReason": "expected { ok: true, value: { …(4) } } to deeply equal { ok: true }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 65.56866699999955,
+          "killedBy": [
+            "0"
+          ],
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "12",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 15,
+              "line": 141
+            },
+            "start": {
+              "column": 7,
+              "line": 141
+            }
+          }
+        },
+        {
+          "id": "82",
+          "mutatorName": "ConditionalExpression",
+          "replacement": "true",
+          "statusReason": "expected { ok: true, value: { …(4) } } to deeply equal { ok: true }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 59.28637499999968,
+          "killedBy": [
+            "0"
+          ],
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "12",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 15,
+              "line": 141
+            },
+            "start": {
+              "column": 7,
+              "line": 141
+            }
+          }
+        },
+        {
+          "id": "84",
+          "mutatorName": "ConditionalExpression",
+          "replacement": "true",
+          "statusReason": "expected { ok: false, code: 'KEYS_NOT_SEALED' } to deeply equal { ok: true }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 86.97779100000116,
+          "killedBy": [
+            "0"
+          ],
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "12",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 91,
+              "line": 143
+            },
+            "start": {
+              "column": 7,
+              "line": 143
+            }
+          }
+        },
+        {
+          "id": "85",
+          "mutatorName": "ConditionalExpression",
+          "replacement": "false",
+          "statusReason": "expected { ok: false, code: 'SEAL_MISMATCH' } to deeply equal { ok: false, code: 'KEYS_NOT_SEALED' }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 2,
+          "duration": 110.75158300000112,
+          "killedBy": [
+            "1"
+          ],
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "12",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 91,
+              "line": 143
+            },
+            "start": {
+              "column": 7,
+              "line": 143
+            }
+          }
+        },
+        {
+          "id": "83",
+          "mutatorName": "ConditionalExpression",
+          "replacement": "false",
+          "status": "Survived",
+          "static": false,
+          "testsCompleted": 9,
+          "duration": 956.0411229999991,
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "12",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 15,
+              "line": 141
+            },
+            "start": {
+              "column": 7,
+              "line": 141
+            }
+          }
+        },
+        {
+          "id": "86",
+          "mutatorName": "LogicalOperator",
+          "replacement": "!sameKey(m.lawyerPubA, terms.lawyerPubA) && !sameKey(m.lawyerPubB, terms.lawyerPubB)",
+          "statusReason": "expected { ok: false, code: 'SEAL_MISMATCH' } to deeply equal { ok: false, code: 'KEYS_NOT_SEALED' }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 2,
+          "duration": 79.24675099999877,
+          "killedBy": [
+            "1"
+          ],
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "12",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 91,
+              "line": 143
+            },
+            "start": {
+              "column": 7,
+              "line": 143
+            }
+          }
+        },
+        {
+          "id": "88",
+          "mutatorName": "BooleanLiteral",
+          "replacement": "sameKey(m.lawyerPubB, terms.lawyerPubB)",
+          "statusReason": "expected { ok: false, code: 'KEYS_NOT_SEALED' } to deeply equal { ok: true }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 58.58550000000105,
+          "killedBy": [
+            "0"
+          ],
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "5",
+            "6",
+            "12",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 91,
+              "line": 143
+            },
+            "start": {
+              "column": 51,
+              "line": 143
+            }
+          }
+        },
+        {
+          "id": "87",
+          "mutatorName": "BooleanLiteral",
+          "replacement": "sameKey(m.lawyerPubA, terms.lawyerPubA)",
+          "statusReason": "expected { ok: false, code: 'KEYS_NOT_SEALED' } to deeply equal { ok: true }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 77.90779199999815,
+          "killedBy": [
+            "0"
+          ],
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "12",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 47,
+              "line": 143
+            },
+            "start": {
+              "column": 7,
+              "line": 143
+            }
+          }
+        },
+        {
+          "id": "89",
+          "mutatorName": "ObjectLiteral",
+          "replacement": "{}",
+          "statusReason": "expected {} to deeply equal { ok: false, code: 'KEYS_NOT_SEALED' }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 67.7222499999989,
+          "killedBy": [
+            "1"
+          ],
+          "coveredBy": [
+            "1",
+            "3",
+            "4",
+            "5",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 50,
+              "line": 144
+            },
+            "start": {
+              "column": 12,
+              "line": 144
+            }
+          }
+        },
+        {
+          "id": "90",
+          "mutatorName": "BooleanLiteral",
+          "replacement": "true",
+          "statusReason": "expected { ok: true, code: 'KEYS_NOT_SEALED' } to deeply equal { ok: false, code: 'KEYS_NOT_SEALED' }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 68.95704200000182,
+          "killedBy": [
+            "1"
+          ],
+          "coveredBy": [
+            "1",
+            "3",
+            "4",
+            "5",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 23,
+              "line": 144
+            },
+            "start": {
+              "column": 18,
+              "line": 144
+            }
+          }
+        },
+        {
+          "id": "91",
+          "mutatorName": "StringLiteral",
+          "replacement": "\"\"",
+          "statusReason": "expected { ok: false, code: '' } to deeply equal { ok: false, code: 'KEYS_NOT_SEALED' }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 84.99720800000068,
+          "killedBy": [
+            "1"
+          ],
+          "coveredBy": [
+            "1",
+            "3",
+            "4",
+            "5",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 48,
+              "line": 144
+            },
+            "start": {
+              "column": 31,
+              "line": 144
+            }
+          }
+        },
+        {
+          "id": "92",
+          "mutatorName": "BooleanLiteral",
+          "replacement": "verifyXrplKeySig(m.lawyerPubA, contractSigMsg(root, wallet, 'LA'), up(m.sigLA))",
+          "statusReason": "expected { ok: false, code: 'SIG_LA_INVALID' } to deeply equal { ok: true }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 71.48079099999813,
+          "killedBy": [
+            "0"
+          ],
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "5",
+            "6",
+            "12",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 87,
+              "line": 146
+            },
+            "start": {
+              "column": 7,
+              "line": 146
+            }
+          }
+        },
+        {
+          "id": "93",
+          "mutatorName": "ConditionalExpression",
+          "replacement": "true",
+          "statusReason": "expected { ok: false, code: 'SIG_LA_INVALID' } to deeply equal { ok: true }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 76.31883400000152,
+          "killedBy": [
+            "0"
+          ],
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "5",
+            "6",
+            "12",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 87,
+              "line": 146
+            },
+            "start": {
+              "column": 7,
+              "line": 146
+            }
+          }
+        },
+        {
+          "id": "94",
+          "mutatorName": "ConditionalExpression",
+          "replacement": "false",
+          "statusReason": "expected { ok: false, code: 'SIG_LB_INVALID' } to deeply equal { ok: false, code: 'SIG_LA_INVALID' }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 2,
+          "duration": 184.179583000001,
+          "killedBy": [
+            "1"
+          ],
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "5",
+            "6",
+            "12",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 87,
+              "line": 146
+            },
+            "start": {
+              "column": 7,
+              "line": 146
+            }
+          }
+        },
+        {
+          "id": "95",
+          "mutatorName": "StringLiteral",
+          "replacement": "\"\"",
+          "statusReason": "expected { ok: false, code: 'SIG_LA_INVALID' } to deeply equal { ok: true }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 114.87079199999789,
+          "killedBy": [
+            "0"
+          ],
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "5",
+            "6",
+            "12",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 72,
+              "line": 146
+            },
+            "start": {
+              "column": 68,
+              "line": 146
+            }
+          }
+        },
+        {
+          "id": "96",
+          "mutatorName": "ObjectLiteral",
+          "replacement": "{}",
+          "statusReason": "expected {} to deeply equal { ok: false, code: 'SIG_LA_INVALID' }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 85.8929169999974,
+          "killedBy": [
+            "1"
+          ],
+          "coveredBy": [
+            "1",
+            "3",
+            "6",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 49,
+              "line": 147
+            },
+            "start": {
+              "column": 12,
+              "line": 147
+            }
+          }
+        },
+        {
+          "id": "97",
+          "mutatorName": "BooleanLiteral",
+          "replacement": "true",
+          "statusReason": "expected { ok: true, code: 'SIG_LA_INVALID' } to deeply equal { ok: false, code: 'SIG_LA_INVALID' }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 61.536457999998674,
+          "killedBy": [
+            "1"
+          ],
+          "coveredBy": [
+            "1",
+            "3",
+            "6",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 23,
+              "line": 147
+            },
+            "start": {
+              "column": 18,
+              "line": 147
+            }
+          }
+        },
+        {
+          "id": "98",
+          "mutatorName": "StringLiteral",
+          "replacement": "\"\"",
+          "statusReason": "expected { ok: false, code: '' } to deeply equal { ok: false, code: 'SIG_LA_INVALID' }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 77.92316700000083,
+          "killedBy": [
+            "1"
+          ],
+          "coveredBy": [
+            "1",
+            "3",
+            "6",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 47,
+              "line": 147
+            },
+            "start": {
+              "column": 31,
+              "line": 147
+            }
+          }
+        },
+        {
+          "id": "99",
+          "mutatorName": "BooleanLiteral",
+          "replacement": "verifyXrplKeySig(m.lawyerPubB, contractSigMsg(root, wallet, 'LB'), up(m.sigLB))",
+          "statusReason": "expected { ok: false, code: 'SIG_LB_INVALID' } to deeply equal { ok: true }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 101.6414999999979,
+          "killedBy": [
+            "0"
+          ],
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "5",
+            "12",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 87,
+              "line": 148
+            },
+            "start": {
+              "column": 7,
+              "line": 148
+            }
+          }
+        },
+        {
+          "id": "100",
+          "mutatorName": "ConditionalExpression",
+          "replacement": "true",
+          "statusReason": "expected { ok: false, code: 'SIG_LB_INVALID' } to deeply equal { ok: true }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 103.64562500000102,
+          "killedBy": [
+            "0"
+          ],
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "5",
+            "12",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 87,
+              "line": 148
+            },
+            "start": {
+              "column": 7,
+              "line": 148
+            }
+          }
+        },
+        {
+          "id": "101",
+          "mutatorName": "ConditionalExpression",
+          "replacement": "false",
+          "statusReason": "expected { ok: false, code: 'SEAL_MISMATCH' } to deeply equal { ok: false, code: 'SIG_LB_INVALID' }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 2,
+          "duration": 110.1461249999993,
+          "killedBy": [
+            "1"
+          ],
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "5",
+            "12",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 87,
+              "line": 148
+            },
+            "start": {
+              "column": 7,
+              "line": 148
+            }
+          }
+        },
+        {
+          "id": "102",
+          "mutatorName": "StringLiteral",
+          "replacement": "\"\"",
+          "statusReason": "expected { ok: false, code: 'SIG_LB_INVALID' } to deeply equal { ok: true }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 81.59599999999773,
+          "killedBy": [
+            "0"
+          ],
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "5",
+            "12",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 72,
+              "line": 148
+            },
+            "start": {
+              "column": 68,
+              "line": 148
+            }
+          }
+        },
+        {
+          "id": "104",
+          "mutatorName": "BooleanLiteral",
+          "replacement": "true",
+          "statusReason": "expected { ok: true, code: 'SIG_LB_INVALID' } to deeply equal { ok: false, code: 'SIG_LB_INVALID' }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 89.63412499999686,
+          "killedBy": [
+            "1"
+          ],
+          "coveredBy": [
+            "1",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 23,
+              "line": 149
+            },
+            "start": {
+              "column": 18,
+              "line": 149
+            }
+          }
+        },
+        {
+          "id": "103",
+          "mutatorName": "ObjectLiteral",
+          "replacement": "{}",
+          "statusReason": "expected {} to deeply equal { ok: false, code: 'SIG_LB_INVALID' }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 107.88658399999986,
+          "killedBy": [
+            "1"
+          ],
+          "coveredBy": [
+            "1",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 49,
+              "line": 149
+            },
+            "start": {
+              "column": 12,
+              "line": 149
+            }
+          }
+        },
+        {
+          "id": "106",
+          "mutatorName": "BooleanLiteral",
+          "replacement": "uriSeal",
+          "statusReason": "expected { ok: false, code: 'URI_MALFORMED' } to deeply equal { ok: true }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 76.6374169999981,
+          "killedBy": [
+            "0"
+          ],
+          "coveredBy": [
+            "0",
+            "2",
+            "5",
+            "12",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 15,
+              "line": 151
+            },
+            "start": {
+              "column": 7,
+              "line": 151
+            }
+          }
+        },
+        {
+          "id": "105",
+          "mutatorName": "StringLiteral",
+          "replacement": "\"\"",
+          "statusReason": "expected { ok: false, code: '' } to deeply equal { ok: false, code: 'SIG_LB_INVALID' }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 86.63570900000195,
+          "killedBy": [
+            "1"
+          ],
+          "coveredBy": [
+            "1",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 47,
+              "line": 149
+            },
+            "start": {
+              "column": 31,
+              "line": 149
+            }
+          }
+        },
+        {
+          "id": "107",
+          "mutatorName": "ConditionalExpression",
+          "replacement": "true",
+          "statusReason": "expected { ok: false, code: 'URI_MALFORMED' } to deeply equal { ok: true }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 138.1919999999991,
+          "killedBy": [
+            "0"
+          ],
+          "coveredBy": [
+            "0",
+            "2",
+            "5",
+            "12",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 15,
+              "line": 151
+            },
+            "start": {
+              "column": 7,
+              "line": 151
+            }
+          }
+        },
+        {
+          "id": "108",
+          "mutatorName": "ConditionalExpression",
+          "replacement": "false",
+          "statusReason": "expected Uint8Array, got type=undefined",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 4,
+          "duration": 318.6279170000016,
+          "killedBy": [
+            "12"
+          ],
+          "coveredBy": [
+            "0",
+            "2",
+            "5",
+            "12",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 15,
+              "line": 151
+            },
+            "start": {
+              "column": 7,
+              "line": 151
+            }
+          }
+        },
+        {
+          "id": "109",
+          "mutatorName": "ObjectLiteral",
+          "replacement": "{}",
+          "statusReason": "expected {} to deeply equal { ok: false, code: 'URI_MALFORMED' }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 148.67466699999932,
+          "killedBy": [
+            "12"
+          ],
+          "coveredBy": [
+            "12"
+          ],
+          "location": {
+            "end": {
+              "column": 60,
+              "line": 151
+            },
+            "start": {
+              "column": 24,
+              "line": 151
+            }
+          }
+        },
+        {
+          "id": "110",
+          "mutatorName": "BooleanLiteral",
+          "replacement": "true",
+          "statusReason": "expected { ok: true, code: 'URI_MALFORMED' } to deeply equal { ok: false, code: 'URI_MALFORMED' }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 131.5601659999993,
+          "killedBy": [
+            "12"
+          ],
+          "coveredBy": [
+            "12"
+          ],
+          "location": {
+            "end": {
+              "column": 35,
+              "line": 151
+            },
+            "start": {
+              "column": 30,
+              "line": 151
+            }
+          }
+        },
+        {
+          "id": "111",
+          "mutatorName": "StringLiteral",
+          "replacement": "\"\"",
+          "statusReason": "expected { ok: false, code: '' } to deeply equal { ok: false, code: 'URI_MALFORMED' }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 97.71883300000263,
+          "killedBy": [
+            "12"
+          ],
+          "coveredBy": [
+            "12"
+          ],
+          "location": {
+            "end": {
+              "column": 58,
+              "line": 151
+            },
+            "start": {
+              "column": 43,
+              "line": 151
+            }
+          }
+        },
+        {
+          "id": "112",
+          "mutatorName": "BooleanLiteral",
+          "replacement": "equalBytes(uriSeal, sealOf(terms, m))",
+          "statusReason": "expected { ok: false, code: 'SEAL_MISMATCH' } to deeply equal { ok: true }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 97.87695800000074,
+          "killedBy": [
+            "0"
+          ],
+          "coveredBy": [
+            "0",
+            "2",
+            "5",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 45,
+              "line": 152
+            },
+            "start": {
+              "column": 7,
+              "line": 152
+            }
+          }
+        },
+        {
+          "id": "113",
+          "mutatorName": "ConditionalExpression",
+          "replacement": "true",
+          "statusReason": "expected { ok: false, code: 'SEAL_MISMATCH' } to deeply equal { ok: true }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 130.80854100000215,
+          "killedBy": [
+            "0"
+          ],
+          "coveredBy": [
+            "0",
+            "2",
+            "5",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 45,
+              "line": 152
+            },
+            "start": {
+              "column": 7,
+              "line": 152
+            }
+          }
+        },
+        {
+          "id": "114",
+          "mutatorName": "ConditionalExpression",
+          "replacement": "false",
+          "statusReason": "expected { ok: true } to deeply equal { ok: false, code: 'SEAL_MISMATCH' }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 2,
+          "duration": 127.76645800000188,
+          "killedBy": [
+            "2"
+          ],
+          "coveredBy": [
+            "0",
+            "2",
+            "5",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 45,
+              "line": 152
+            },
+            "start": {
+              "column": 7,
+              "line": 152
+            }
+          }
+        },
+        {
+          "id": "115",
+          "mutatorName": "ObjectLiteral",
+          "replacement": "{}",
+          "statusReason": "expected {} to deeply equal { ok: false, code: 'SEAL_MISMATCH' }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 126.97308400000111,
+          "killedBy": [
+            "2"
+          ],
+          "coveredBy": [
+            "2"
+          ],
+          "location": {
+            "end": {
+              "column": 90,
+              "line": 152
+            },
+            "start": {
+              "column": 54,
+              "line": 152
+            }
+          }
+        },
+        {
+          "id": "116",
+          "mutatorName": "BooleanLiteral",
+          "replacement": "true",
+          "statusReason": "expected { ok: true, code: 'SEAL_MISMATCH' } to deeply equal { ok: false, code: 'SEAL_MISMATCH' }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 137.74291699999958,
+          "killedBy": [
+            "2"
+          ],
+          "coveredBy": [
+            "2"
+          ],
+          "location": {
+            "end": {
+              "column": 65,
+              "line": 152
+            },
+            "start": {
+              "column": 60,
+              "line": 152
+            }
+          }
+        },
+        {
+          "id": "117",
+          "mutatorName": "StringLiteral",
+          "replacement": "\"\"",
+          "statusReason": "expected { ok: false, code: '' } to deeply equal { ok: false, code: 'SEAL_MISMATCH' }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 102.97612500000105,
+          "killedBy": [
+            "2"
+          ],
+          "coveredBy": [
+            "2"
+          ],
+          "location": {
+            "end": {
+              "column": 88,
+              "line": 152
+            },
+            "start": {
+              "column": 73,
+              "line": 152
+            }
+          }
+        },
+        {
+          "id": "118",
+          "mutatorName": "ObjectLiteral",
+          "replacement": "{}",
+          "statusReason": "expected {} to deeply equal { ok: true }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 86.60399999999936,
+          "killedBy": [
+            "0"
+          ],
+          "coveredBy": [
+            "0",
+            "5",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 22,
+              "line": 153
+            },
+            "start": {
+              "column": 10,
+              "line": 153
+            }
+          }
+        },
+        {
+          "id": "119",
+          "mutatorName": "BooleanLiteral",
+          "replacement": "false",
+          "statusReason": "expected { ok: false } to deeply equal { ok: true }",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 104.3549579999999,
+          "killedBy": [
+            "0"
+          ],
+          "coveredBy": [
+            "0",
+            "5",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 20,
+              "line": 153
+            },
+            "start": {
+              "column": 16,
+              "line": 153
+            }
+          }
+        },
+        {
+          "id": "0",
+          "mutatorName": "ArrowFunction",
+          "replacement": "() => undefined",
+          "statusReason": "verifyXrplKeySig(pubHex: string, msg: Uint8Array, sigHex: string)",
+          "status": "Killed",
+          "static": true,
+          "testsCompleted": 1,
+          "duration": 45.29483399999663,
+          "killedBy": [
+            "0"
+          ],
+          "coveredBy": [],
+          "location": {
+            "end": {
+              "column": 58,
+              "line": 36
+            },
+            "start": {
+              "column": 12,
+              "line": 36
+            }
+          }
+        },
+        {
+          "id": "1",
+          "mutatorName": "MethodExpression",
+          "replacement": "bytesToHex(b).toLowerCase()",
+          "statusReason": "expected { ok: false, code: 'MEMO_MALFORMED' } to deeply equal { ok: true }",
+          "status": "Killed",
+          "static": true,
+          "testsCompleted": 1,
+          "duration": 84.27558300000237,
+          "killedBy": [
+            "0"
+          ],
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16"
+          ],
+          "location": {
+            "end": {
+              "column": 58,
+              "line": 36
+            },
+            "start": {
+              "column": 31,
+              "line": 36
+            }
+          }
+        },
+        {
+          "id": "2",
+          "mutatorName": "StringLiteral",
+          "replacement": "\"\"",
+          "statusReason": "expected { ok: false, code: 'URI_MALFORMED' } to deeply equal { ok: true }",
+          "status": "Killed",
+          "static": true,
+          "testsCompleted": 1,
+          "duration": 135.58487500000047,
+          "killedBy": [
+            "0"
+          ],
+          "coveredBy": [],
+          "location": {
+            "end": {
+              "column": 33,
+              "line": 39
+            },
+            "start": {
+              "column": 20,
+              "line": 39
+            }
+          }
+        },
+        {
+          "id": "3",
+          "mutatorName": "StringLiteral",
+          "replacement": "\"\"",
+          "statusReason": "expected 204 to be 225 // Object.is equality",
+          "status": "Killed",
+          "static": true,
+          "testsCompleted": 10,
+          "duration": 256.91916499999934,
+          "killedBy": [
+            "9"
+          ],
+          "coveredBy": [],
+          "location": {
+            "end": {
+              "column": 69,
+              "line": 42
+            },
+            "start": {
+              "column": 46,
+              "line": 42
+            }
+          }
+        }
+      ],
+      "source": "// Signed-contract seal and the NFTokenMint memo (DESIGN 6.12, W1). Only the two lawyers sign the contract, each with\n// the lawyer slot key that also sits on the deal wallet's signer list; the contract names the wallet (D16, D17).\nimport { equalBytes } from '@noble/curves/utils.js';\nimport { bytesToHex, concatBytes, hexToBytes, utf8ToBytes } from '@noble/hashes/utils.js';\nimport { tupleHash } from './dealcore.ts';\nimport { verifyXrplKeySig } from './verify.ts';\n\nexport type LawyerRole = 'LA' | 'LB';\n\n/** What the deal seal fixes about the contract: the sealed lawyer slot keys are 33-byte XRPL keys (`ED` + 64 hex). */\nexport interface ContractTerms {\n  contractRoot: Uint8Array;\n  walletAddress: string;\n  lawyerPubA: string;\n  lawyerPubB: string;\n}\nexport interface ContractSigs {\n  sigLA: Uint8Array;\n  sigLB: Uint8Array;\n}\n/** The decoded mint memo: both lawyer keys (uppercase XRPL hex) and their 64-byte Ed25519 signatures. */\nexport interface MintMemo extends ContractSigs {\n  lawyerPubA: string;\n  lawyerPubB: string;\n}\n\nexport type SignedContractCode =\n  | 'MEMO_MALFORMED'\n  | 'URI_MALFORMED'\n  | 'KEYS_NOT_SEALED'\n  | 'SIG_LA_INVALID'\n  | 'SIG_LB_INVALID'\n  | 'SEAL_MISMATCH';\nexport type Check = { ok: true } | { ok: false; code: SignedContractCode };\n\nconst up = (b: Uint8Array) => bytesToHex(b).toUpperCase();\nconst MEMO_VERSION = 0x01;\nconst MEMO_BYTES = 195; // 1 + 33 + 64 + 33 + 64\nconst URI_PREFIX = 'legx:sc:v1:';\n\n/** `MemoType` of the mint memo: hex(utf8(\"legx/contract-sigs/v1\")), uppercase. */\nexport const MINT_MEMO_TYPE = up(utf8ToBytes('legx/contract-sigs/v1'));\n\n// Source: DESIGN 6.12 (contractSigMsg); encoding rules: DESIGN 6 \"Encoding rules for every tuple hash\".\nexport function contractSigMsg(contractRoot: Uint8Array, walletAddress: string, role: LawyerRole): Uint8Array {\n  return tupleHash('legx/contract-sign/v1', [contractRoot, utf8ToBytes(walletAddress), utf8ToBytes(role)]);\n}\n\n/**\n * Signs the contract for `role` with `sign` (a FROST session of the lawyer slot, whose output is a plain Ed25519\n * signature, DESIGN 6.4) and refuses a signature that does not verify strictly under the sealed lawyer key.\n */\nexport async function signContract(\n  sign: (msg: Uint8Array) => Promise<Uint8Array>,\n  terms: ContractTerms,\n  role: LawyerRole,\n): Promise<Uint8Array> {\n  const msg = contractSigMsg(terms.contractRoot, terms.walletAddress, role);\n  const sig = await sign(msg);\n  const pub = role === 'LA' ? terms.lawyerPubA : terms.lawyerPubB;\n  if (!verifyXrplKeySig(pub, msg, up(sig))) throw new Error(`contract signature for ${role} does not verify`);\n  return sig;\n}\n\n/** `hex(utf8(\"legx:sc:v1:\" + upperHex(seal)))`, uppercase. Source: DESIGN 6.12 (NFT URI). */\nexport function nftUri(seal: Uint8Array): string {\n  return up(utf8ToBytes(URI_PREFIX + up(seal)));\n}\n\n/** `MemoData` = hex(0x01 || lawyerPubA(33) || sigLA(64) || lawyerPubB(33) || sigLB(64)), 195 bytes, uppercase. */\nexport function encodeMintMemo(m: MintMemo): string {\n  const data = concatBytes(\n    new Uint8Array([MEMO_VERSION]),\n    hexToBytes(m.lawyerPubA),\n    m.sigLA,\n    hexToBytes(m.lawyerPubB),\n    m.sigLB,\n  );\n  if (data.length !== MEMO_BYTES) throw new Error(`mint memo must be ${MEMO_BYTES} bytes, got ${data.length}`);\n  return up(data);\n}\n\n/** Parses `MemoData` (uppercase hex, as rippled returns it). Keys must be Ed25519 (`ED` prefix): slot keys are. */\nexport function decodeMintMemo(memoHex: string): { ok: true; value: MintMemo } | { ok: false; code: 'MEMO_MALFORMED' } {\n  if (!new RegExp(`^(?:[0-9A-F]{2}){${MEMO_BYTES}}$`).test(memoHex)) return { ok: false, code: 'MEMO_MALFORMED' };\n  const b = hexToBytes(memoHex);\n  if (b[0] !== MEMO_VERSION || b[1] !== 0xed || b[98] !== 0xed) return { ok: false, code: 'MEMO_MALFORMED' };\n  return {\n    ok: true,\n    value: {\n      lawyerPubA: up(b.subarray(1, 34)),\n      sigLA: b.slice(34, 98),\n      lawyerPubB: up(b.subarray(98, 131)),\n      sigLB: b.slice(131, 195),\n    },\n  };\n}\n\n// Source: DESIGN 6.12 (signedContractSeal).\nfunction sealOf(t: ContractTerms, s: ContractSigs): Uint8Array {\n  return tupleHash('legx/signed-contract/v1', [\n    t.contractRoot,\n    utf8ToBytes(t.walletAddress),\n    hexToBytes(t.lawyerPubA),\n    s.sigLA,\n    hexToBytes(t.lawyerPubB),\n    s.sigLB,\n  ]);\n}\n\n/** The seal, the NFT URI and the mint `MemoData` for one signed contract. Pure: it does not verify the signatures. */\nexport function buildSignedContractSeal(terms: ContractTerms, sigs: ContractSigs) {\n  const seal = sealOf(terms, sigs);\n  const memoHex = encodeMintMemo({ lawyerPubA: terms.lawyerPubA, lawyerPubB: terms.lawyerPubB, ...sigs });\n  return { seal, uriHex: nftUri(seal), memoHex };\n}\n\n// The URI must be exactly hex(utf8(\"legx:sc:v1:\" + 64 uppercase hex)), all uppercase.\nfunction sealFromUri(uriHex: string): Uint8Array | undefined {\n  if (!/^(?:[0-9A-F]{2})+$/.test(uriHex)) return undefined;\n  const text = new TextDecoder().decode(hexToBytes(uriHex));\n  const m = /^legx:sc:v1:([0-9A-F]{64})$/.exec(text);\n  return m?.[1] === undefined ? undefined : hexToBytes(m[1]);\n}\n\nconst sameKey = (a: string, b: string) => {\n  try {\n    return equalBytes(hexToBytes(a), hexToBytes(b));\n  } catch {\n    return false;\n  }\n};\n\n/**\n * Checks a signed contract against the sealed lawyer keys (DESIGN 6.12): the memo carries exactly the sealed keys,\n * both signatures verify strictly, and the URI holds the recomputed seal. The caller must take `memoHex` and `uriHex`\n * from the validated mint transaction on the ledger, never from its own database (IMPLEMENTATION 1.5).\n */\nexport function verifySignedContract(terms: ContractTerms, memoHex: string, uriHex: string): Check {\n  const memo = decodeMintMemo(memoHex);\n  if (!memo.ok) return memo;\n  const m = memo.value;\n  if (!sameKey(m.lawyerPubA, terms.lawyerPubA) || !sameKey(m.lawyerPubB, terms.lawyerPubB))\n    return { ok: false, code: 'KEYS_NOT_SEALED' };\n  const { contractRoot: root, walletAddress: wallet } = terms;\n  if (!verifyXrplKeySig(m.lawyerPubA, contractSigMsg(root, wallet, 'LA'), up(m.sigLA)))\n    return { ok: false, code: 'SIG_LA_INVALID' };\n  if (!verifyXrplKeySig(m.lawyerPubB, contractSigMsg(root, wallet, 'LB'), up(m.sigLB)))\n    return { ok: false, code: 'SIG_LB_INVALID' };\n  const uriSeal = sealFromUri(uriHex);\n  if (!uriSeal) return { ok: false, code: 'URI_MALFORMED' };\n  if (!equalBytes(uriSeal, sealOf(terms, m))) return { ok: false, code: 'SEAL_MISMATCH' };\n  return { ok: true };\n}\n"
+    }
+  },
+  "schemaVersion": "1.0",
+  "thresholds": {
+    "high": 90,
+    "low": 85,
+    "break": 85
+  },
+  "testFiles": {
+    "packages/core/test/signedContract.test.ts": {
+      "tests": [
+        {
+          "id": "0",
+          "name": "T-U-13 verifySignedContract > T-U-13a passes with the sealed keys, the memo and the URI from buildSignedContractSeal",
+          "location": {
+            "start": {
+              "column": 3,
+              "line": 48
+            }
+          }
+        },
+        {
+          "id": "1",
+          "name": "T-U-13 verifySignedContract > T-U-13b one changed byte of root, wallet address, either key or either signature fails with its code",
+          "location": {
+            "start": {
+              "column": 3,
+              "line": 53
+            }
+          }
+        },
+        {
+          "id": "2",
+          "name": "T-U-13 verifySignedContract > T-U-13b a URI for another seal fails with SEAL_MISMATCH",
+          "location": {
+            "start": {
+              "column": 3,
+              "line": 88
+            }
+          }
+        },
+        {
+          "id": "3",
+          "name": "T-U-13 verifySignedContract > T-U-13c swapping LA and LB (keys and signatures) fails",
+          "location": {
+            "start": {
+              "column": 3,
+              "line": 94
+            }
+          }
+        },
+        {
+          "id": "4",
+          "name": "T-U-13 verifySignedContract > T-U-13d a memo whose keys are not the sealed lawyer keys fails with KEYS_NOT_SEALED",
+          "location": {
+            "start": {
+              "column": 3,
+              "line": 108
+            }
+          }
+        },
+        {
+          "id": "5",
+          "name": "T-U-13 verifySignedContract > T-U-13e a client's x-key signing in place of a lawyer fails with KEYS_NOT_SEALED",
+          "location": {
+            "start": {
+              "column": 3,
+              "line": 117
+            }
+          }
+        },
+        {
+          "id": "6",
+          "name": "T-U-13 verifySignedContract > a ZIP-215-only signature (small-order key) never passes, even when sealed",
+          "location": {
+            "start": {
+              "column": 3,
+              "line": 129
+            }
+          }
+        },
+        {
+          "id": "7",
+          "name": "signContract > refuses a signature that does not verify under the lawyer key (a broken FROST aggregate)",
+          "location": {
+            "start": {
+              "column": 3,
+              "line": 148
+            }
+          }
+        },
+        {
+          "id": "8",
+          "name": "T-U-15 mint memo > T-U-15a decodeMintMemo(encodeMintMemo(x)) equals x",
+          "location": {
+            "start": {
+              "column": 3,
+              "line": 167
+            }
+          }
+        },
+        {
+          "id": "9",
+          "name": "T-U-15 mint memo > T-U-15b the memo is exactly 195 bytes and the serialized Memos field is under 1024 bytes",
+          "location": {
+            "start": {
+              "column": 3,
+              "line": 172
+            }
+          }
+        },
+        {
+          "id": "10",
+          "name": "T-U-15 mint memo > P1.5-01 a wrong version byte or a length other than 195 is an error result",
+          "location": {
+            "start": {
+              "column": 3,
+              "line": 181
+            }
+          }
+        },
+        {
+          "id": "11",
+          "name": "T-U-15 mint memo > property: round trip for random keys and signatures",
+          "location": {
+            "start": {
+              "column": 3,
+              "line": 196
+            }
+          }
+        },
+        {
+          "id": "12",
+          "name": "P1.5-02 URI checks > a wrong prefix or lower-case hex fails with URI_MALFORMED",
+          "location": {
+            "start": {
+              "column": 3,
+              "line": 208
+            }
+          }
+        },
+        {
+          "id": "13",
+          "name": "P1.5-02 URI checks > the URI is 75 bytes, under the 256-byte NFTokenMint limit",
+          "location": {
+            "start": {
+              "column": 3,
+              "line": 226
+            }
+          }
+        },
+        {
+          "id": "14",
+          "name": "P1.5-03 golden vector and the Python cross-check > fixed keys and root give the committed seal, URI and memo",
+          "location": {
+            "start": {
+              "column": 3,
+              "line": 233
+            }
+          }
+        },
+        {
+          "id": "15",
+          "name": "P1.5-03 golden vector and the Python cross-check > matches tools/py-ref/vectors/signed_contract.json",
+          "location": {
+            "start": {
+              "column": 3,
+              "line": 246
+            }
+          }
+        },
+        {
+          "id": "16",
+          "name": "property: round trip and single-field mutations > random roots, wallets and lawyer keys verify; a mutated root, wallet or signature fails",
+          "location": {
+            "start": {
+              "column": 3,
+              "line": 275
+            }
+          }
+        }
+      ],
+      "source": "// Task 1.5: signed-contract seal and mint memo (DESIGN 6.12, IMPLEMENTATION 1.5).\nimport { ed25519 } from '@noble/curves/ed25519.js';\nimport { bytesToHex, hexToBytes } from '@noble/hashes/utils.js';\nimport fc from 'fast-check';\nimport { describe, expect, it } from 'vitest';\nimport * as xrpl from 'xrpl';\nimport {\n  buildSignedContractSeal,\n  type ContractTerms,\n  contractSigMsg,\n  decodeMintMemo,\n  encodeMintMemo,\n  MINT_MEMO_TYPE,\n  type MintMemo,\n  nftUri,\n  signContract,\n  verifySignedContract,\n} from '../src/signedContract.ts';\nimport { pyVector } from './helpers/pyref.ts';\n\nconst up = (b: Uint8Array) => bytesToHex(b).toUpperCase();\nconst edPub = (seed: Uint8Array) => `ED${up(ed25519.getPublicKey(seed))}`;\nconst utf8 = (s: string) => new TextEncoder().encode(s);\nconst flipByte = (b: Uint8Array, i: number) => {\n  const c = b.slice();\n  c[i % c.length] = (c[i % c.length] ?? 0) ^ 0x01;\n  return c;\n};\nconst flipHexByte = (h: string, i: number) => up(flipByte(hexToBytes(h), i));\n\n// A FROST signature is a plain Ed25519 signature (DESIGN 6.4), so a single Ed25519 key stands in for a lawyer slot.\nconst signer = (seed: Uint8Array) => async (msg: Uint8Array) => ed25519.sign(msg, seed);\n\nasync function makeDeal(seedA: Uint8Array, seedB: Uint8Array, contractRoot: Uint8Array, walletAddress: string) {\n  const terms: ContractTerms = { contractRoot, walletAddress, lawyerPubA: edPub(seedA), lawyerPubB: edPub(seedB) };\n  const sigLA = await signContract(signer(seedA), terms, 'LA');\n  const sigLB = await signContract(signer(seedB), terms, 'LB');\n  return { terms, sigLA, sigLB, ...buildSignedContractSeal(terms, { sigLA, sigLB }) };\n}\n\nconst SEED_LA = new Uint8Array(32).fill(0xa1);\nconst SEED_LB = new Uint8Array(32).fill(0xb2);\nconst SEED_CLIENT = new Uint8Array(32).fill(0xc3);\nconst ROOT = new Uint8Array(32).fill(0x11);\nconst WALLET = 'rHb9CJAWyB4rj91VRWn96DkukG4bwdtyTh';\n\ndescribe('T-U-13 verifySignedContract', () => {\n  it('T-U-13a passes with the sealed keys, the memo and the URI from buildSignedContractSeal', async () => {\n    const d = await makeDeal(SEED_LA, SEED_LB, ROOT, WALLET);\n    expect(verifySignedContract(d.terms, d.memoHex, d.uriHex)).toEqual({ ok: true });\n  });\n\n  it('T-U-13b one changed byte of root, wallet address, either key or either signature fails with its code', async () => {\n    const d = await makeDeal(SEED_LA, SEED_LB, ROOT, WALLET);\n    const m = decodeMintMemo(d.memoHex);\n    if (!m.ok) throw new Error('memo');\n    const memoWith = (p: Partial<MintMemo>) => encodeMintMemo({ ...m.value, ...p });\n    const check = (terms: ContractTerms, memoHex = d.memoHex) => verifySignedContract(terms, memoHex, d.uriHex);\n    // The signatures cover root and wallet, so a changed sealed root or wallet breaks the LA signature first.\n    expect(check({ ...d.terms, contractRoot: flipByte(ROOT, 7) })).toEqual({ ok: false, code: 'SIG_LA_INVALID' });\n    expect(check({ ...d.terms, walletAddress: 'rHb9CJAWyB4rj91VRWn96DkukG4bwdtyTi' })).toEqual({\n      ok: false,\n      code: 'SIG_LA_INVALID',\n    });\n    // A changed key, on the sealed side or in the memo, is a key that is not sealed.\n    expect(check({ ...d.terms, lawyerPubA: flipHexByte(d.terms.lawyerPubA, 9) })).toEqual({\n      ok: false,\n      code: 'KEYS_NOT_SEALED',\n    });\n    expect(check({ ...d.terms, lawyerPubB: flipHexByte(d.terms.lawyerPubB, 9) })).toEqual({\n      ok: false,\n      code: 'KEYS_NOT_SEALED',\n    });\n    expect(check(d.terms, memoWith({ lawyerPubA: flipHexByte(m.value.lawyerPubA, 9) }))).toEqual({\n      ok: false,\n      code: 'KEYS_NOT_SEALED',\n    });\n    expect(check(d.terms, memoWith({ sigLA: flipByte(m.value.sigLA, 5) }))).toEqual({\n      ok: false,\n      code: 'SIG_LA_INVALID',\n    });\n    expect(check(d.terms, memoWith({ sigLB: flipByte(m.value.sigLB, 40) }))).toEqual({\n      ok: false,\n      code: 'SIG_LB_INVALID',\n    });\n  });\n\n  it('T-U-13b a URI for another seal fails with SEAL_MISMATCH', async () => {\n    const d = await makeDeal(SEED_LA, SEED_LB, ROOT, WALLET);\n    const other = await makeDeal(SEED_LA, SEED_LB, flipByte(ROOT, 0), WALLET);\n    expect(verifySignedContract(d.terms, d.memoHex, other.uriHex)).toEqual({ ok: false, code: 'SEAL_MISMATCH' });\n  });\n\n  it('T-U-13c swapping LA and LB (keys and signatures) fails', async () => {\n    const d = await makeDeal(SEED_LA, SEED_LB, ROOT, WALLET);\n    const swappedMemo = encodeMintMemo({\n      lawyerPubA: d.terms.lawyerPubB,\n      sigLA: d.sigLB,\n      lawyerPubB: d.terms.lawyerPubA,\n      sigLB: d.sigLA,\n    });\n    expect(verifySignedContract(d.terms, swappedMemo, d.uriHex)).toEqual({ ok: false, code: 'KEYS_NOT_SEALED' });\n    const swappedTerms = { ...d.terms, lawyerPubA: d.terms.lawyerPubB, lawyerPubB: d.terms.lawyerPubA };\n    // Even if the sealed keys are swapped too, each signature names its role, so neither verifies.\n    expect(verifySignedContract(swappedTerms, swappedMemo, d.uriHex)).toEqual({ ok: false, code: 'SIG_LA_INVALID' });\n  });\n\n  it('T-U-13d a memo whose keys are not the sealed lawyer keys fails with KEYS_NOT_SEALED', async () => {\n    const d = await makeDeal(SEED_LA, SEED_LB, ROOT, WALLET);\n    const stranger = await makeDeal(new Uint8Array(32).fill(0xd4), new Uint8Array(32).fill(0xe5), ROOT, WALLET);\n    expect(verifySignedContract(d.terms, stranger.memoHex, stranger.uriHex)).toEqual({\n      ok: false,\n      code: 'KEYS_NOT_SEALED',\n    });\n  });\n\n  it(\"T-U-13e a client's x-key signing in place of a lawyer fails with KEYS_NOT_SEALED\", async () => {\n    const d = await makeDeal(SEED_LA, SEED_LB, ROOT, WALLET);\n    const clientTerms = { ...d.terms, lawyerPubB: edPub(SEED_CLIENT) };\n    const clientSig = await signContract(signer(SEED_CLIENT), clientTerms, 'LB');\n    const forged = buildSignedContractSeal(clientTerms, { sigLA: d.sigLA, sigLB: clientSig });\n    expect(verifySignedContract(clientTerms, forged.memoHex, forged.uriHex).ok).toBe(true); // self-consistent...\n    expect(verifySignedContract(d.terms, forged.memoHex, forged.uriHex)).toEqual({\n      ok: false,\n      code: 'KEYS_NOT_SEALED',\n    });\n  });\n\n  it('a ZIP-215-only signature (small-order key) never passes, even when sealed', () => {\n    const identity = `ED01${'00'.repeat(31)}`;\n    const s = 987654321n;\n    const sR = ed25519.Point.BASE.multiply(s).toBytes();\n    const sS = hexToBytes(s.toString(16).padStart(64, '0')).reverse();\n    const forgedSig = new Uint8Array([...sR, ...sS]);\n    const terms: ContractTerms = {\n      contractRoot: ROOT,\n      walletAddress: WALLET,\n      lawyerPubA: identity,\n      lawyerPubB: identity,\n    };\n    const built = buildSignedContractSeal(terms, { sigLA: forgedSig, sigLB: forgedSig });\n    expect(ed25519.verify(forgedSig, contractSigMsg(ROOT, WALLET, 'LA'), hexToBytes(identity.slice(2)))).toBe(true);\n    expect(verifySignedContract(terms, built.memoHex, built.uriHex)).toEqual({ ok: false, code: 'SIG_LA_INVALID' });\n  });\n});\n\ndescribe('signContract', () => {\n  it('refuses a signature that does not verify under the lawyer key (a broken FROST aggregate)', async () => {\n    const terms: ContractTerms = {\n      contractRoot: ROOT,\n      walletAddress: WALLET,\n      lawyerPubA: edPub(SEED_LA),\n      lawyerPubB: edPub(SEED_LB),\n    };\n    await expect(signContract(signer(SEED_LB), terms, 'LA')).rejects.toThrow(/does not verify/);\n  });\n});\n\ndescribe('T-U-15 mint memo', () => {\n  const sample = (): MintMemo => ({\n    lawyerPubA: edPub(SEED_LA),\n    sigLA: new Uint8Array(64).fill(0x31),\n    lawyerPubB: edPub(SEED_LB),\n    sigLB: new Uint8Array(64).fill(0x32),\n  });\n\n  it('T-U-15a decodeMintMemo(encodeMintMemo(x)) equals x', () => {\n    const x = sample();\n    expect(decodeMintMemo(encodeMintMemo(x))).toEqual({ ok: true, value: x });\n  });\n\n  it('T-U-15b the memo is exactly 195 bytes and the serialized Memos field is under 1024 bytes', () => {\n    const memoHex = encodeMintMemo(sample());\n    expect(memoHex.length / 2).toBe(195);\n    const memos = xrpl.encode({ Memos: [{ Memo: { MemoType: MINT_MEMO_TYPE, MemoData: memoHex } }] } as never);\n    expect(memos.length / 2).toBeLessThan(1024);\n    // Memos F9, Memo EA, MemoType 7C + 1 length byte + 21, MemoData 7D + 2 length bytes + 195, end markers E1 F1.\n    expect(memos.length / 2).toBe(225);\n  });\n\n  it('P1.5-01 a wrong version byte or a length other than 195 is an error result', () => {\n    const memoHex = encodeMintMemo(sample());\n    const bad = [\n      `02${memoHex.slice(2)}`,\n      `00${memoHex.slice(2)}`,\n      memoHex.slice(0, -2),\n      `${memoHex}00`,\n      '',\n      memoHex.toLowerCase(),\n      `01${'00'.repeat(194)}`, // keys without the ED prefix\n      'ZZ'.repeat(195),\n    ];\n    for (const b of bad) expect(decodeMintMemo(b)).toEqual({ ok: false, code: 'MEMO_MALFORMED' });\n  });\n\n  it('property: round trip for random keys and signatures', () => {\n    const b = (n: number) => fc.uint8Array({ minLength: n, maxLength: n });\n    fc.assert(\n      fc.property(b(32), b(64), b(32), b(64), (ka, sa, kb, sb) => {\n        const x = { lawyerPubA: `ED${up(ka)}`, sigLA: sa, lawyerPubB: `ED${up(kb)}`, sigLB: sb };\n        expect(decodeMintMemo(encodeMintMemo(x))).toEqual({ ok: true, value: x });\n      }),\n    );\n  });\n});\n\ndescribe('P1.5-02 URI checks', () => {\n  it('a wrong prefix or lower-case hex fails with URI_MALFORMED', async () => {\n    const d = await makeDeal(SEED_LA, SEED_LB, ROOT, WALLET);\n    const sealHex = up(d.seal);\n    const uri = (s: string) => up(utf8(s));\n    const bad = [\n      uri(`legx:sc:v2:${sealHex}`),\n      uri(`LEGX:SC:V1:${sealHex}`),\n      uri(`legx:sc:v1:${sealHex.toLowerCase()}`),\n      uri(`legx:sc:v1:${sealHex}00`),\n      uri(`legx:sc:v1:${sealHex}`).toLowerCase(),\n      uri(` legx:sc:v1:${sealHex}`),\n      '',\n      'XYZ',\n    ];\n    for (const u of bad)\n      expect(verifySignedContract(d.terms, d.memoHex, u)).toEqual({ ok: false, code: 'URI_MALFORMED' });\n  });\n\n  it('the URI is 75 bytes, under the 256-byte NFTokenMint limit', async () => {\n    const d = await makeDeal(SEED_LA, SEED_LB, ROOT, WALLET);\n    expect(d.uriHex.length / 2).toBe(75);\n  });\n});\n\ndescribe('P1.5-03 golden vector and the Python cross-check', () => {\n  it('fixed keys and root give the committed seal, URI and memo', async () => {\n    const d = await makeDeal(SEED_LA, SEED_LB, ROOT, WALLET);\n    // Values computed by tools/py-ref (legx_ref.py, written from DESIGN alone) from these keys and signatures;\n    // the Ed25519 signatures themselves were checked with Node crypto (OpenSSL). See build/status/1.4-1.7.md.\n    expect(d.terms.lawyerPubA).toBe(GOLDEN.lawyerPubA);\n    expect(d.terms.lawyerPubB).toBe(GOLDEN.lawyerPubB);\n    expect(up(d.sigLA)).toBe(GOLDEN.sigLA);\n    expect(up(d.sigLB)).toBe(GOLDEN.sigLB);\n    expect(bytesToHex(d.seal)).toBe(GOLDEN.seal);\n    expect(d.uriHex).toBe(GOLDEN.uri);\n    expect(d.memoHex).toBe(GOLDEN.memo);\n  });\n\n  it('matches tools/py-ref/vectors/signed_contract.json', () => {\n    const msg = pyVector('signed_contract', 'contractSigMsg');\n    const root = hexToBytes(msg.inputs.root as string);\n    expect(bytesToHex(contractSigMsg(root, msg.inputs.wallet as string, 'LA'))).toBe(msg.output);\n\n    const sv = pyVector('signed_contract', 'signedContractSeal');\n    const terms: ContractTerms = {\n      contractRoot: hexToBytes(sv.inputs.root as string),\n      walletAddress: sv.inputs.wallet as string,\n      lawyerPubA: sv.inputs.pubA as string,\n      lawyerPubB: sv.inputs.pubB as string,\n    };\n    const built = buildSignedContractSeal(terms, {\n      sigLA: hexToBytes(sv.inputs.sigLA as string),\n      sigLB: hexToBytes(sv.inputs.sigLB as string),\n    });\n    expect(bytesToHex(built.seal)).toBe(sv.output);\n\n    const uv = pyVector('signed_contract', 'nftUri');\n    expect(nftUri(hexToBytes(uv.inputs.seal as string))).toBe(uv.output);\n    expect(built.uriHex).toBe(uv.output);\n\n    const mv = pyVector<Record<string, string>, { MemoType: string; MemoData: string }>('signed_contract', 'mintMemo');\n    expect(MINT_MEMO_TYPE).toBe(mv.output.MemoType);\n    expect(built.memoHex).toBe(mv.output.MemoData);\n  });\n});\n\ndescribe('property: round trip and single-field mutations', () => {\n  it('random roots, wallets and lawyer keys verify; a mutated root, wallet or signature fails', async () => {\n    const b = (n: number) => fc.uint8Array({ minLength: n, maxLength: n });\n    await fc.assert(\n      fc.asyncProperty(b(32), b(32), b(32), b(32), fc.nat(), async (root, sa, sb, acct, i) => {\n        fc.pre(bytesToHex(sa) !== bytesToHex(sb));\n        const wallet = xrpl.encodeAccountID(acct.subarray(0, 20));\n        const d = await makeDeal(sa, sb, root, wallet);\n        expect(verifySignedContract(d.terms, d.memoHex, d.uriHex)).toEqual({ ok: true });\n        expect(verifySignedContract({ ...d.terms, contractRoot: flipByte(root, i) }, d.memoHex, d.uriHex).ok).toBe(\n          false,\n        );\n        const otherWallet = xrpl.encodeAccountID(flipByte(acct.subarray(0, 20), i));\n        expect(verifySignedContract({ ...d.terms, walletAddress: otherWallet }, d.memoHex, d.uriHex).ok).toBe(false);\n        const memo = hexToBytes(d.memoHex);\n        expect(verifySignedContract(d.terms, up(flipByte(memo, 1 + (i % 194))), d.uriHex).ok).toBe(false);\n      }),\n      { numRuns: 30 },\n    );\n  });\n});\n\nconst GOLDEN = {\n  lawyerPubA: 'EDBC7CBCB5636375FA1D82434D466724D92377F53B980695DD49D26D0CE12205A5',\n  lawyerPubB: 'ED55154F42065EA5A1BEA05463826BE2684EB92DF92C100027AABAAE57CA554207',\n  sigLA:\n    '362C5177B883F9C21A8EE24C8B34C8D95E2D39E9F134974B7E1430655788F1B59100C18370EA241490A42FD820A927736409B7988FE6BE7C2EC450AA028BEB07',\n  sigLB:\n    '1F7BDC7820C74B38B998F1EE7E8EFBBC515BA2B6F148DF3327CC4F2126D5BAA65620C8809158EEAFA3B24EAABDAF6593CFAF55D0A18518E9C58A3DAF9E78EA08',\n  seal: '03fa0a0010782f41dde2cd0a3c0abb6c650dc5657ebedf7eadc203568412177c',\n  uri: '6C6567783A73633A76313A30334641304130303130373832463431444445324344304133433041424236433635304443353635374542454446374541444332303335363834313231373743',\n  memo: '01EDBC7CBCB5636375FA1D82434D466724D92377F53B980695DD49D26D0CE12205A5362C5177B883F9C21A8EE24C8B34C8D95E2D39E9F134974B7E1430655788F1B59100C18370EA241490A42FD820A927736409B7988FE6BE7C2EC450AA028BEB07ED55154F42065EA5A1BEA05463826BE2684EB92DF92C100027AABAAE57CA5542071F7BDC7820C74B38B998F1EE7E8EFBBC515BA2B6F148DF3327CC4F2126D5BAA65620C8809158EEAFA3B24EAABDAF6593CFAF55D0A18518E9C58A3DAF9E78EA08',\n};\n"
+    }
+  },
+  "projectRoot": "/Users/sreeyashwanthsaivenkatesh/Workspace/Hackathon/pool/Pool",
+  "config": {
+    "testRunner": "vitest",
+    "plugins": [
+      "@stryker-mutator/vitest-runner"
+    ],
+    "vitest": {
+      "configFile": "tools/mutation/vitest.config.ts",
+      "related": true,
+      "pool": "threads"
+    },
+    "mutate": [
+      "packages/core/src/signedContract.ts"
+    ],
+    "coverageAnalysis": "perTest",
+    "concurrency": 2,
+    "tsconfigFile": "tools/mutation/no-tsconfig.json",
+    "incremental": true,
+    "incrementalFile": "tools/mutation/incremental-signedContract.json",
+    "reporters": [
+      "clear-text",
+      "json"
+    ],
+    "jsonReporter": {
+      "fileName": "tools/mutation/report-signedContract.json"
+    },
+    "thresholds": {
+      "high": 90,
+      "low": 85,
+      "break": 85
+    },
+    "timeoutMS": 60000,
+    "tempDirName": ".stryker-tmp",
+    "ignorePatterns": [
+      "build",
+      ".tools",
+      "apps",
+      "services",
+      "docs",
+      "tools/mutation/*.json",
+      "tools/mutation/*.log"
+    ],
+    "allowConsoleColors": true,
+    "checkers": [],
+    "checkerNodeArgs": [],
+    "commandRunner": {
+      "command": "npm test"
+    },
+    "clearTextReporter": {
+      "allowColor": true,
+      "allowEmojis": false,
+      "logTests": true,
+      "maxTestsToLog": 3,
+      "reportTests": true,
+      "reportMutants": true,
+      "reportScoreTable": true,
+      "skipFull": false
+    },
+    "dashboard": {
+      "baseUrl": "https://dashboard.stryker-mutator.io/api/reports",
+      "reportType": "full"
+    },
+    "dryRunOnly": false,
+    "eventReporter": {
+      "baseDir": "reports/mutation/events"
+    },
+    "ignoreStatic": false,
+    "force": false,
+    "fileLogLevel": "off",
+    "inPlace": false,
+    "logLevel": "info",
+    "maxConcurrentTestRunners": 9007199254740991,
+    "maxTestRunnerReuse": 0,
+    "mutator": {
+      "plugins": null,
+      "excludedMutations": []
+    },
+    "appendPlugins": [],
+    "htmlReporter": {
+      "fileName": "reports/mutation/mutation.html"
+    },
+    "disableTypeChecks": true,
+    "symlinkNodeModules": true,
+    "cleanTempDir": true,
+    "testRunnerNodeArgs": [],
+    "timeoutFactor": 1.5,
+    "dryRunTimeoutMinutes": 5,
+    "warnings": true,
+    "disableBail": false,
+    "allowEmpty": false,
+    "ignorers": [],
+    "testFiles": []
+  },
+  "framework": {
+    "name": "StrykerJS",
+    "version": "10.1.1",
+    "branding": {
+      "homepageUrl": "https://stryker-mutator.io",
+      "imageUrl": "data:image/svg+xml;utf8,%3Csvg viewBox='0 0 1458 1458' xmlns='http://www.w3.org/2000/svg' fill-rule='evenodd' clip-rule='evenodd' stroke-linejoin='round' stroke-miterlimit='2'%3E%3Cpath fill='none' d='M0 0h1458v1458H0z'/%3E%3CclipPath id='a'%3E%3Cpath d='M0 0h1458v1458H0z'/%3E%3C/clipPath%3E%3Cg clip-path='url(%23a)'%3E%3Cpath d='M1458 729c0 402.655-326.345 729-729 729S0 1131.655 0 729C0 326.445 326.345 0 729 0s729 326.345 729 729' fill='%23e74c3c' fill-rule='nonzero'/%3E%3Cpath d='M778.349 1456.15L576.6 1254.401l233-105 85-78.668v-64.332l-257-257-44-187-50-208 251.806-82.793L1076.6 389.401l380.14 379.15c-19.681 367.728-311.914 663.049-678.391 687.599z' fill-opacity='.3'/%3E%3Cpath d='M753.4 329.503c41.79 0 74.579 7.83 97.925 25.444 23.571 18.015 41.69 43.956 55.167 77.097l11.662 28.679 165.733-58.183-14.137-32.13c-26.688-60.655-64.896-108.61-114.191-144.011-49.329-35.423-117.458-54.302-204.859-54.302-50.78 0-95.646 7.376-134.767 21.542-40.093 14.671-74.09 34.79-102.239 60.259-28.84 26.207-50.646 57.06-65.496 92.701-14.718 35.052-22.101 72.538-22.101 112.401 0 72.536 20.667 133.294 61.165 182.704 38.624 47.255 98.346 88.037 179.861 121.291 42.257 17.475 78.715 33.125 109.227 46.994 27.193 12.361 49.294 26.124 66.157 41.751 15.309 14.186 26.497 30.584 33.63 49.258 7.721 20.214 11.16 45.69 11.16 76.402 0 28.021-4.251 51.787-13.591 71.219-8.832 18.374-20.171 33.178-34.523 44.219-14.787 11.374-31.193 19.591-49.393 24.466-19.68 5.359-39.14 7.993-58.69 7.993-29.359 0-54.387-3.407-75.182-10.747-20.112-7.013-37.144-16.144-51.259-27.486-13.618-11.009-24.971-23.766-33.744-38.279-9.64-15.8-17.272-31.924-23.032-48.408l-10.965-31.376-161.669 60.585 10.734 30.124c10.191 28.601 24.197 56.228 42.059 82.748 18.208 27.144 41.322 51.369 69.525 72.745 27.695 21.075 60.904 38.218 99.481 51.041 37.777 12.664 82.004 19.159 132.552 19.159 49.998 0 95.818-8.321 137.611-24.622 42.228-16.471 78.436-38.992 108.835-67.291 30.719-28.597 54.631-62.103 71.834-100.642 17.263-38.56 25.923-79.392 25.923-122.248 0-54.339-8.368-100.37-24.208-138.32-16.29-38.759-38.252-71.661-65.948-98.797-26.965-26.418-58.269-48.835-93.858-67.175-33.655-17.241-69.196-33.11-106.593-47.533-35.934-13.429-65.822-26.601-89.948-39.525-22.153-11.868-40.009-24.21-53.547-37.309-11.429-11.13-19.83-23.678-24.718-37.664-5.413-15.49-7.98-33.423-7.98-53.577 0-40.883 11.293-71.522 37.086-90.539 28.443-20.825 64.985-30.658 109.311-30.658z' fill='%23f1c40f' fill-rule='nonzero'/%3E%3Cpath d='M720 0h18v113h-18zM1458 738v-18h-113v18h113zM720 1345h18v113h-18zM113 738v-18H0v18h113z'/%3E%3C/g%3E%3C/svg%3E"
+    },
+    "dependencies": {
+      "typescript": "7.0.2"
+    }
+  }
+}

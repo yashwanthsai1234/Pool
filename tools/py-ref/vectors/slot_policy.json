@@ -1,0 +1,18 @@
+[
+ {
+  "fn": "slotPolicy",
+  "inputs": {
+   "slot": "A",
+   "roles": "phone,second-authenticator,recovery-agent"
+  },
+  "output": "03807ea8bd31fd576f25dde1eb2eb51287e278a16b5c7360a805a61016e70afa"
+ },
+ {
+  "fn": "slotPolicy",
+  "inputs": {
+   "slot": "LA",
+   "roles": "console,firm-hsm,partner"
+  },
+  "output": "d64652970ea45159e544edcc8489a2324fb49754eede0adc0b102841b978b951"
+ }
+]

@@ -1,0 +1,49 @@
+# Nightly ZK flow (T-I-12, task 2.9; issue I-2.9-a). It needs the network (Sepolia RPC for the registry roots and
+# ZKPassport's circuit CDN) to make and verify FRESH proofs, so it never runs on pull requests. Pull requests keep
+# task 1.17's offline test (packages/zk/test/offline.test.ts). To enable it, copy this file to .github/workflows/.
+# The recorded sets are re-recorded first: the adapter's one-day validity makes a recorded set fail the live check the
+# day after its recording (issue I-2.9-d).
+name: nightly-zk
+
+on:
+  schedule:
+    - cron: '47 3 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  PNPM_VERSION: 12.11.2
+
+jobs:
+  zk-flow:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      LEGX_LIVE_SEPOLIA: '1'
+      SEPOLIA_RPC_URL: ${{ secrets.SEPOLIA_RPC_URL }}
+      XRPLD_WS: ws://127.0.0.1:6006
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
+        with:
+          version: ${{ env.PNPM_VERSION }}
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24.22'
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Start standalone xrpld
+        run: |
+          docker run -d --platform linux/amd64 --name legx-xrpld \
+            -p 6006:6006 -v "$PWD/ci:/etc/xrpld/" \
+            rippleci/xrpld:3.4.1 --standalone
+      - run: node packages/xrpl/scripts/wait-ledger.ts
+      - name: Re-record the proof sets
+        run: node packages/zk/tools/record.ts
+      - name: ZK full flow (P2.9-01 and T-I-12)
+        run: pnpm vitest run --project integration packages/xrpl/test-int/zk
+      - name: Stop xrpld
+        if: always()
+        run: docker rm -f legx-xrpld || true

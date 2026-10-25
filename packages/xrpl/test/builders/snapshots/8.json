@@ -1,0 +1,9 @@
+{
+  "TransactionType": "Payment",
+  "Account": "rHhr2iRBgp3ZzzNH4YGQ59G7VAiGPEWj7f",
+  "Destination": "rpyd3a9kKmtD87F36hhmk4tcE9SB3oZZvo",
+  "DestinationTag": 12345,
+  "Amount": "50000000",
+  "Sequence": 77,
+  "Fee": "50"
+}

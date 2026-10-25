@@ -1,0 +1,19 @@
+body {
+  font:
+    14px / 1.4 system-ui,
+    sans-serif;
+  margin: 8px;
+}
+h1 {
+  font-size: 16px;
+  margin: 0 0 4px;
+}
+dd {
+  margin: 0 0 4px;
+  font-family: ui-monospace, monospace;
+  word-break: break-all;
+}
+.refused {
+  color: #b00020;
+  font-weight: 600;
+}

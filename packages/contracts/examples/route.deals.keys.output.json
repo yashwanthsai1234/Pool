@@ -1,0 +1,30 @@
+[
+  {
+    "keys": [
+      {
+        "role": "alice",
+        "xrpl_pubkey": "ED06895BEC3FDE4090F06D840770D888D49E3089B3757C4285E3851BC33964E0F9",
+        "xrpl_account": "r3sNTMefq5gsRumMYsNznnX6yzzxVH6dTC",
+        "commitment": "0303030303030303030303030303030303030303030303030303030303030303",
+        "binding_sig": "cdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcd",
+        "slot_policy": "0707070707070707070707070707070707070707070707070707070707070707",
+        "pq_key_hash": "0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b",
+        "id_method": "zkpassport"
+      },
+      {
+        "role": "lawyerB",
+        "xrpl_pubkey": "ED7B9E49FF65B0E2A2834771A03982C68FE301AE13AD8FE3C7D37D718DED4BE414",
+        "xrpl_account": "rfPaNmieF15VqV752Q8qAc6ugtkKhWsA2R",
+        "commitment": "0606060606060606060606060606060606060606060606060606060606060606",
+        "binding_sig": "cdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcd",
+        "slot_policy": "0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a",
+        "pq_key_hash": "0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e",
+        "contract_sig": "efefefefefefefefefefefefefefefefefefefefefefefefefefefefefefefefefefefefefefefefefefefefefefefefefefefefefefefefefefefefefefefef",
+        "ops_account": "rEhh6f9rj5UUBhFzGGaxS5zYU2CCqKFXBC",
+        "ops_pub": "038DC251C57CB83DC3CCC10E432F2E59397DB02B7E91FD4186C8B7DA549FB050DF",
+        "ops_bind_sig_ops": "3045ababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab",
+        "ops_bind_sig_lawyer": "cdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcd"
+      }
+    ]
+  }
+]

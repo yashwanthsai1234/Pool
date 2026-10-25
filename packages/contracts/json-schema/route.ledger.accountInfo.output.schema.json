@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "oneOf": [
+    {
+      "type": "object",
+      "properties": {
+        "exists": {
+          "type": "boolean",
+          "const": true
+        },
+        "ledgerIndex": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4294967295
+        },
+        "flags": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "sequence": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4294967295
+        },
+        "balanceDrops": {
+          "type": "string",
+          "pattern": "^(?:0|[1-9][0-9]{0,16}|100000000000000000)$"
+        }
+      },
+      "required": [
+        "exists",
+        "ledgerIndex",
+        "flags",
+        "sequence",
+        "balanceDrops"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "exists": {
+          "type": "boolean",
+          "const": false
+        },
+        "ledgerIndex": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4294967295
+        }
+      },
+      "required": [
+        "exists",
+        "ledgerIndex"
+      ],
+      "additionalProperties": false
+    }
+  ]
+}

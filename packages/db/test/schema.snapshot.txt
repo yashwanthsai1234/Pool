@@ -1,0 +1,594 @@
+-- columns
+attorney_credential.ops_account text NOT NULL
+attorney_credential.verification_sha256 bytea NOT NULL
+attorney_credential.create_tx_hash text NOT NULL
+attorney_credential.accept_tx_hash text
+attorney_credential.expiration bigint NOT NULL
+bar_deal_link.deal_id uuid NOT NULL
+bar_deal_link.role text NOT NULL
+bar_deal_link.envelope bytea NOT NULL
+bar_deal_link.verification_sha256 bytea NOT NULL
+bar_verification.envelope_sha256 bytea NOT NULL
+bar_verification.ops_account text NOT NULL
+bar_verification.envelope bytea NOT NULL
+bar_verification.status text NOT NULL
+bar_verification.checked_at_ledger bigint NOT NULL
+bar_verification.checked_at_ledger_hash text NOT NULL
+checkpoint_anchor.tree_size bigint NOT NULL
+checkpoint_anchor.root bytea NOT NULL
+checkpoint_anchor.checkpoint bytea NOT NULL
+checkpoint_anchor.anchor_tx_hash text
+checkpoint_anchor.anchor_ledger bigint
+checkpoint_anchor.rfc3161_token bytea
+deal.deal_id uuid NOT NULL DEFAULT uuidv7()
+deal.state text NOT NULL
+deal.was_locked boolean NOT NULL DEFAULT false
+deal.network text NOT NULL
+deal.contract_root bytea NOT NULL
+deal.deal_seal bytea
+deal.shell_address text
+deal.signed_contract_seal bytea
+deal.nft_token_id text
+deal.mint_tx_hash text
+deal.lawyer_ops_a text
+deal.lawyer_ops_b text
+deal.escrow_owner text
+deal.escrow_sequence bigint
+deal.condition_hex text
+deal.cancel_after bigint
+deal.exit_slot bigint
+deal.payout_a text NOT NULL
+deal.payout_b text NOT NULL
+deal.releaser_account text
+deal.amount_drops numeric(20,0) NOT NULL
+deal.created_at timestamp with time zone NOT NULL DEFAULT now()
+deal_head.deal_id uuid NOT NULL
+deal_head.head_seq bigint NOT NULL
+deal_head.head_hash bytea NOT NULL
+deal_key.deal_id uuid NOT NULL
+deal_key.role text NOT NULL
+deal_key.xrpl_pubkey text NOT NULL
+deal_key.xrpl_account text NOT NULL
+deal_key.commitment bytea NOT NULL
+deal_key.binding_sig bytea NOT NULL
+deal_key.slot_policy bytea NOT NULL
+deal_key.pq_key_hash bytea NOT NULL
+deal_key.pq_binding_sigs jsonb NOT NULL
+deal_key.pq_cross_sig bytea NOT NULL
+deal_key.id_method text
+deal_key.contract_sig bytea
+deal_key.ops_account text
+deal_key.ops_bind_sig_ops bytea
+deal_key.ops_bind_sig_lawyer bytea
+enrollment_key.key_id text NOT NULL
+enrollment_key.deal_id uuid NOT NULL
+enrollment_key.slot text NOT NULL
+enrollment_key.holder_role text NOT NULL
+enrollment_key.ed25519_pub bytea NOT NULL
+enrollment_key.mldsa65_pub bytea NOT NULL
+enrollment_key.valid_from bigint NOT NULL
+enrollment_key.valid_to bigint
+enrollment_key.evidence_event_id uuid NOT NULL
+evidence_event.event_id uuid NOT NULL DEFAULT uuidv7()
+evidence_event.deal_id uuid NOT NULL
+evidence_event.seq bigint NOT NULL
+evidence_event.prev_hash bytea NOT NULL
+evidence_event.envelope bytea NOT NULL
+evidence_event.leaf_hash bytea NOT NULL
+evidence_event.received_at timestamp with time zone NOT NULL DEFAULT now()
+evidence_log_entry.event_id uuid NOT NULL
+evidence_log_entry.log_index bigint NOT NULL
+firm_cosigner_approval_use.approval_id text NOT NULL
+firm_cosigner_audit.seq bigint NOT NULL DEFAULT nextval('firm_cosigner_audit_seq_seq'::regclass)
+firm_cosigner_audit.deal_id text NOT NULL
+firm_cosigner_audit.slot text NOT NULL
+firm_cosigner_audit.decision text NOT NULL
+firm_cosigner_audit.reason text NOT NULL
+firm_cosigner_audit.message_hash text NOT NULL
+firm_cosigner_audit.seal text NOT NULL
+firm_cosigner_audit.detail text NOT NULL
+firm_cosigner_audit.prev_hash text NOT NULL
+firm_cosigner_audit.entry_hash text NOT NULL
+firm_cosigner_credential.deal_id text NOT NULL
+firm_cosigner_credential.slot text NOT NULL
+firm_cosigner_credential.credential_id text NOT NULL
+firm_cosigner_credential.public_key bytea NOT NULL
+firm_cosigner_credential.counter bigint NOT NULL DEFAULT 0
+firm_cosigner_share.deal_id text NOT NULL
+firm_cosigner_share.slot text NOT NULL
+firm_cosigner_share.epoch integer NOT NULL
+firm_cosigner_share.group_pub text NOT NULL
+firm_cosigner_share.nonce bytea NOT NULL
+firm_cosigner_share.ciphertext bytea NOT NULL
+frost_nonce_use.key_id text NOT NULL
+frost_nonce_use.commitment_id text NOT NULL
+frost_nonce_use.deal_id uuid NOT NULL
+frost_nonce_use.message_hash bytea NOT NULL
+frost_nonce_use.used_at timestamp with time zone NOT NULL DEFAULT now()
+frost_relay_message.session_id text NOT NULL
+frost_relay_message.seq integer NOT NULL
+frost_relay_message.kind text NOT NULL
+frost_relay_message.from_id text NOT NULL
+frost_relay_message.to_id text NOT NULL
+frost_relay_message.signed jsonb NOT NULL
+frost_relay_session.session_id text NOT NULL
+frost_relay_session.deal_id text NOT NULL
+frost_relay_session.slot text NOT NULL
+frost_relay_session.purpose text NOT NULL
+frost_relay_session.participants jsonb NOT NULL
+frost_relay_session.status text NOT NULL
+frost_relay_session.attempt integer NOT NULL
+frost_relay_session.parent text
+frost_relay_session.pair jsonb
+frost_relay_session.deadline_ms bigint
+frost_relay_session.next_seq integer NOT NULL DEFAULT 0
+identity_box.deal_id uuid NOT NULL
+identity_box.side text NOT NULL
+identity_box.kind text NOT NULL
+identity_box.box jsonb NOT NULL
+lawyer.ops_account text NOT NULL
+lawyer.jurisdiction text NOT NULL
+lawyer.bar_number_sha256 bytea NOT NULL
+ledger_observation.tx_hash bytea NOT NULL
+ledger_observation.ledger_index bigint NOT NULL
+ledger_observation.tx_index integer NOT NULL
+ledger_observation.account text NOT NULL
+ledger_observation.tx_type text NOT NULL
+ledger_observation.result text NOT NULL
+ledger_observation.meta jsonb NOT NULL
+outbox.id uuid NOT NULL DEFAULT uuidv7()
+outbox.topic text NOT NULL
+outbox.payload bytea NOT NULL
+outbox.created_at timestamp with time zone NOT NULL DEFAULT now()
+outbox.sent_at timestamp with time zone
+outbox.deal_id uuid
+outbox.seq bigint
+passport_attestation.deal_id uuid NOT NULL
+passport_attestation.side text NOT NULL
+passport_attestation.envelope bytea NOT NULL
+passport_attestation.anchor_ledger bigint NOT NULL
+passport_attestation.leaf_hash bytea NOT NULL
+presence_request.deal_id uuid NOT NULL
+presence_request.side text NOT NULL
+presence_request.method text NOT NULL
+presence_request.lawyer_nonce text NOT NULL
+presence_request.ledger_hash text NOT NULL
+presence_request.ledger_index bigint NOT NULL
+presence_request.signature text
+recovery_agent_recovery.recovery_id text NOT NULL
+recovery_agent_recovery.deal_id text NOT NULL
+recovery_agent_recovery.slot text NOT NULL
+recovery_agent_recovery.new_key_id text NOT NULL
+recovery_agent_recovery.state jsonb NOT NULL
+recovery_agent_refresh.deal_id text NOT NULL
+recovery_agent_refresh.slot text NOT NULL
+recovery_agent_refresh.epoch integer NOT NULL
+recovery_agent_refresh.status text NOT NULL
+recovery_agent_refresh.missing jsonb NOT NULL
+recovery_agent_refresh.old_epoch_retired boolean NOT NULL
+recovery_agent_share.deal_id text NOT NULL
+recovery_agent_share.slot text NOT NULL
+recovery_agent_share.epoch integer NOT NULL
+recovery_agent_share.group_pub text NOT NULL
+recovery_agent_share.nonce bytea NOT NULL
+recovery_agent_share.ciphertext bytea NOT NULL
+release_gate.deal_id uuid NOT NULL
+release_gate.leaf_hash bytea NOT NULL
+release_gate.envelope bytea NOT NULL
+release_gate.ledger_index bigint NOT NULL
+signature.request_id uuid NOT NULL
+signature.role text NOT NULL
+signature.signer_blob text NOT NULL
+signature_request.request_id uuid NOT NULL DEFAULT uuidv7()
+signature_request.deal_id uuid NOT NULL
+signature_request.purpose text NOT NULL
+signature_request.unsigned_tx jsonb NOT NULL
+signature_request.last_ledger bigint NOT NULL
+signature_request.status text NOT NULL DEFAULT 'open'::text
+used_nonce.nonce bytea NOT NULL
+used_nonce.key_id text NOT NULL
+used_nonce.ledger_index bigint NOT NULL
+used_nonce.created_at timestamp with time zone NOT NULL DEFAULT now()
+watcher_cursor.account text NOT NULL
+watcher_cursor.last_validated_ledger bigint NOT NULL
+zk_proof.deal_id uuid NOT NULL
+zk_proof.side text NOT NULL
+zk_proof.stage text NOT NULL
+zk_proof.proof bytea NOT NULL
+zk_proof.registry_roots jsonb NOT NULL
+zk_proof.identifier_hash bytea NOT NULL
+
+-- constraints
+attorney_credential attorney_credential_create_tx_hash_not_null NOT NULL create_tx_hash
+attorney_credential attorney_credential_expiration_not_null NOT NULL expiration
+attorney_credential attorney_credential_ops_account_fkey FOREIGN KEY (ops_account) REFERENCES lawyer(ops_account)
+attorney_credential attorney_credential_ops_account_not_null NOT NULL ops_account
+attorney_credential attorney_credential_pkey PRIMARY KEY (ops_account, create_tx_hash)
+attorney_credential attorney_credential_verification_sha256_fkey FOREIGN KEY (verification_sha256) REFERENCES bar_verification(envelope_sha256)
+attorney_credential attorney_credential_verification_sha256_not_null NOT NULL verification_sha256
+bar_deal_link bar_deal_link_deal_id_fkey FOREIGN KEY (deal_id) REFERENCES deal(deal_id)
+bar_deal_link bar_deal_link_deal_id_not_null NOT NULL deal_id
+bar_deal_link bar_deal_link_envelope_not_null NOT NULL envelope
+bar_deal_link bar_deal_link_pkey PRIMARY KEY (deal_id, role, verification_sha256)
+bar_deal_link bar_deal_link_role_check CHECK ((role = ANY (ARRAY['lawyerA'::text, 'lawyerB'::text])))
+bar_deal_link bar_deal_link_role_not_null NOT NULL role
+bar_deal_link bar_deal_link_verification_sha256_fkey FOREIGN KEY (verification_sha256) REFERENCES bar_verification(envelope_sha256)
+bar_deal_link bar_deal_link_verification_sha256_not_null NOT NULL verification_sha256
+bar_verification bar_verification_checked_at_ledger_hash_not_null NOT NULL checked_at_ledger_hash
+bar_verification bar_verification_checked_at_ledger_not_null NOT NULL checked_at_ledger
+bar_verification bar_verification_envelope_not_null NOT NULL envelope
+bar_verification bar_verification_envelope_sha256_check CHECK ((length(envelope_sha256) = 32))
+bar_verification bar_verification_envelope_sha256_not_null NOT NULL envelope_sha256
+bar_verification bar_verification_ops_account_fkey FOREIGN KEY (ops_account) REFERENCES lawyer(ops_account)
+bar_verification bar_verification_ops_account_not_null NOT NULL ops_account
+bar_verification bar_verification_pkey PRIMARY KEY (envelope_sha256)
+bar_verification bar_verification_status_check CHECK ((status = ANY (ARRAY['active'::text, 'not_active'::text])))
+bar_verification bar_verification_status_not_null NOT NULL status
+checkpoint_anchor checkpoint_anchor_checkpoint_not_null NOT NULL checkpoint
+checkpoint_anchor checkpoint_anchor_pkey PRIMARY KEY (tree_size)
+checkpoint_anchor checkpoint_anchor_root_check CHECK ((length(root) = 32))
+checkpoint_anchor checkpoint_anchor_root_not_null NOT NULL root
+checkpoint_anchor checkpoint_anchor_tree_size_not_null NOT NULL tree_size
+deal deal_amount_drops_check CHECK ((amount_drops >= (0)::numeric))
+deal deal_amount_drops_not_null NOT NULL amount_drops
+deal deal_contract_root_check CHECK ((length(contract_root) = 32))
+deal deal_contract_root_not_null NOT NULL contract_root
+deal deal_created_at_not_null NOT NULL created_at
+deal deal_deal_id_not_null NOT NULL deal_id
+deal deal_deal_seal_check CHECK ((length(deal_seal) = 32))
+deal deal_network_check CHECK ((network = ANY (ARRAY['standalone'::text, 'testnet'::text, 'devnet'::text, 'mainnet'::text])))
+deal deal_network_not_null NOT NULL network
+deal deal_payout_a_not_null NOT NULL payout_a
+deal deal_payout_b_not_null NOT NULL payout_b
+deal deal_pkey PRIMARY KEY (deal_id)
+deal deal_releaser_is_ops_b CHECK (((releaser_account IS NULL) OR (NOT (releaser_account IS DISTINCT FROM lawyer_ops_b))))
+deal deal_signed_contract_seal_check CHECK ((length(signed_contract_seal) = 32))
+deal deal_state_check CHECK ((state = ANY (ARRAY['DRAFT'::text, 'CONTRACT_SIGNED'::text, 'SHELL_OPEN'::text, 'QUARANTINED'::text, 'KEYS_READY'::text, 'WALLET_LOCKED'::text, 'VERIFIED'::text, 'FUNDED'::text, 'PAID_OUT'::text, 'REFUNDED'::text, 'DISPUTED'::text, 'EXPIRED'::text, 'CLOSED'::text])))
+deal deal_state_not_null NOT NULL state
+deal deal_was_locked_not_null NOT NULL was_locked
+deal_head deal_head_deal_id_not_null NOT NULL deal_id
+deal_head deal_head_head_hash_check CHECK ((length(head_hash) = 32))
+deal_head deal_head_head_hash_not_null NOT NULL head_hash
+deal_head deal_head_head_seq_check CHECK ((head_seq >= '-1'::integer))
+deal_head deal_head_head_seq_not_null NOT NULL head_seq
+deal_head deal_head_pkey PRIMARY KEY (deal_id)
+deal_key deal_key_binding_sig_check CHECK ((length(binding_sig) = 64))
+deal_key deal_key_binding_sig_not_null NOT NULL binding_sig
+deal_key deal_key_commitment_check CHECK ((length(commitment) = 32))
+deal_key deal_key_commitment_not_null NOT NULL commitment
+deal_key deal_key_contract_sig_check CHECK ((length(contract_sig) = 64))
+deal_key deal_key_deal_id_fkey FOREIGN KEY (deal_id) REFERENCES deal(deal_id)
+deal_key deal_key_deal_id_not_null NOT NULL deal_id
+deal_key deal_key_id_method CHECK ((id_method = ANY (ARRAY['zkpassport'::text, 'nfc-chip'::text])))
+deal_key deal_key_id_method_clients_only CHECK (((role = ANY (ARRAY['alice'::text, 'bob'::text])) = (id_method IS NOT NULL)))
+deal_key deal_key_lawyer_fields CHECK (((role = ANY (ARRAY['lawyerA'::text, 'lawyerB'::text])) = ((contract_sig IS NOT NULL) AND (ops_account IS NOT NULL) AND (ops_bind_sig_ops IS NOT NULL) AND (ops_bind_sig_lawyer IS NOT NULL))))
+deal_key deal_key_ops_bind_sig_lawyer_check CHECK ((length(ops_bind_sig_lawyer) = 64))
+deal_key deal_key_ops_bind_sig_ops_check CHECK (((length(ops_bind_sig_ops) >= 64) AND (length(ops_bind_sig_ops) <= 72)))
+deal_key deal_key_pkey PRIMARY KEY (deal_id, role)
+deal_key deal_key_pq_binding_sigs_not_null NOT NULL pq_binding_sigs
+deal_key deal_key_pq_binding_sigs_two CHECK (((jsonb_typeof(pq_binding_sigs) = 'array'::text) AND (jsonb_array_length(pq_binding_sigs) = 2) AND ((pq_binding_sigs -> 0) ?& ARRAY['key_id'::text, 'sig'::text]) AND ((pq_binding_sigs -> 1) ?& ARRAY['key_id'::text, 'sig'::text])))
+deal_key deal_key_pq_cross_sig_check CHECK ((length(pq_cross_sig) = 64))
+deal_key deal_key_pq_cross_sig_not_null NOT NULL pq_cross_sig
+deal_key deal_key_pq_key_hash_32 CHECK ((length(pq_key_hash) = 32))
+deal_key deal_key_pq_key_hash_not_null NOT NULL pq_key_hash
+deal_key deal_key_role_check CHECK ((role = ANY (ARRAY['alice'::text, 'lawyerA'::text, 'bob'::text, 'lawyerB'::text])))
+deal_key deal_key_role_not_null NOT NULL role
+deal_key deal_key_slot_policy_check CHECK ((length(slot_policy) = 32))
+deal_key deal_key_slot_policy_not_null NOT NULL slot_policy
+deal_key deal_key_xrpl_account_not_null NOT NULL xrpl_account
+deal_key deal_key_xrpl_pubkey_check CHECK ((xrpl_pubkey ~ '^ED[0-9A-F]{64}$'::text))
+deal_key deal_key_xrpl_pubkey_not_null NOT NULL xrpl_pubkey
+enrollment_key enrollment_key_deal_id_fkey FOREIGN KEY (deal_id) REFERENCES deal(deal_id)
+enrollment_key enrollment_key_deal_id_not_null NOT NULL deal_id
+enrollment_key enrollment_key_ed25519_pub_check CHECK ((length(ed25519_pub) = 32))
+enrollment_key enrollment_key_ed25519_pub_not_null NOT NULL ed25519_pub
+enrollment_key enrollment_key_evidence_event_id_fkey FOREIGN KEY (evidence_event_id) REFERENCES evidence_event(event_id)
+enrollment_key enrollment_key_evidence_event_id_not_null NOT NULL evidence_event_id
+enrollment_key enrollment_key_holder_keys_key UNIQUE (deal_id, slot, holder_role, ed25519_pub, mldsa65_pub)
+enrollment_key enrollment_key_holder_role_check CHECK ((holder_role = ANY (ARRAY['phone'::text, 'second-authenticator'::text, 'passkey-same-device'::text, 'recovery-agent'::text, 'console'::text, 'firm-hsm'::text, 'partner'::text])))
+enrollment_key enrollment_key_holder_role_not_null NOT NULL holder_role
+enrollment_key enrollment_key_key_id_not_null NOT NULL key_id
+enrollment_key enrollment_key_mldsa65_pub_check CHECK ((length(mldsa65_pub) = 1952))
+enrollment_key enrollment_key_mldsa65_pub_not_null NOT NULL mldsa65_pub
+enrollment_key enrollment_key_pkey PRIMARY KEY (key_id)
+enrollment_key enrollment_key_slot_check CHECK ((slot = ANY (ARRAY['A'::text, 'LA'::text, 'B'::text, 'LB'::text])))
+enrollment_key enrollment_key_slot_not_null NOT NULL slot
+enrollment_key enrollment_key_valid_from_not_null NOT NULL valid_from
+evidence_event evidence_event_deal_id_not_null NOT NULL deal_id
+evidence_event evidence_event_deal_id_seq_key UNIQUE (deal_id, seq)
+evidence_event evidence_event_envelope_check CHECK ((length(envelope) > 0))
+evidence_event evidence_event_envelope_not_null NOT NULL envelope
+evidence_event evidence_event_event_id_not_null NOT NULL event_id
+evidence_event evidence_event_leaf_hash_check CHECK ((length(leaf_hash) = 32))
+evidence_event evidence_event_leaf_hash_key UNIQUE (leaf_hash)
+evidence_event evidence_event_leaf_hash_not_null NOT NULL leaf_hash
+evidence_event evidence_event_pkey PRIMARY KEY (event_id)
+evidence_event evidence_event_prev_hash_check CHECK ((length(prev_hash) = 32))
+evidence_event evidence_event_prev_hash_not_null NOT NULL prev_hash
+evidence_event evidence_event_received_at_not_null NOT NULL received_at
+evidence_event evidence_event_seq_check CHECK ((seq >= 0))
+evidence_event evidence_event_seq_not_null NOT NULL seq
+evidence_log_entry evidence_log_entry_event_id_fkey FOREIGN KEY (event_id) REFERENCES evidence_event(event_id)
+evidence_log_entry evidence_log_entry_event_id_not_null NOT NULL event_id
+evidence_log_entry evidence_log_entry_log_index_check CHECK ((log_index >= 0))
+evidence_log_entry evidence_log_entry_log_index_key UNIQUE (log_index)
+evidence_log_entry evidence_log_entry_log_index_not_null NOT NULL log_index
+evidence_log_entry evidence_log_entry_pkey PRIMARY KEY (event_id)
+firm_cosigner_approval_use firm_cosigner_approval_use_approval_id_not_null NOT NULL approval_id
+firm_cosigner_approval_use firm_cosigner_approval_use_pkey PRIMARY KEY (approval_id)
+firm_cosigner_audit firm_cosigner_audit_deal_id_not_null NOT NULL deal_id
+firm_cosigner_audit firm_cosigner_audit_decision_not_null NOT NULL decision
+firm_cosigner_audit firm_cosigner_audit_detail_not_null NOT NULL detail
+firm_cosigner_audit firm_cosigner_audit_entry_hash_not_null NOT NULL entry_hash
+firm_cosigner_audit firm_cosigner_audit_message_hash_not_null NOT NULL message_hash
+firm_cosigner_audit firm_cosigner_audit_pkey PRIMARY KEY (seq)
+firm_cosigner_audit firm_cosigner_audit_prev_hash_not_null NOT NULL prev_hash
+firm_cosigner_audit firm_cosigner_audit_reason_not_null NOT NULL reason
+firm_cosigner_audit firm_cosigner_audit_seal_not_null NOT NULL seal
+firm_cosigner_audit firm_cosigner_audit_seq_not_null NOT NULL seq
+firm_cosigner_audit firm_cosigner_audit_slot_not_null NOT NULL slot
+firm_cosigner_credential firm_cosigner_credential_counter_not_null NOT NULL counter
+firm_cosigner_credential firm_cosigner_credential_credential_id_not_null NOT NULL credential_id
+firm_cosigner_credential firm_cosigner_credential_deal_id_not_null NOT NULL deal_id
+firm_cosigner_credential firm_cosigner_credential_pkey PRIMARY KEY (deal_id, slot, credential_id)
+firm_cosigner_credential firm_cosigner_credential_public_key_not_null NOT NULL public_key
+firm_cosigner_credential firm_cosigner_credential_slot_not_null NOT NULL slot
+firm_cosigner_share firm_cosigner_share_ciphertext_not_null NOT NULL ciphertext
+firm_cosigner_share firm_cosigner_share_deal_id_not_null NOT NULL deal_id
+firm_cosigner_share firm_cosigner_share_epoch_not_null NOT NULL epoch
+firm_cosigner_share firm_cosigner_share_group_pub_not_null NOT NULL group_pub
+firm_cosigner_share firm_cosigner_share_nonce_not_null NOT NULL nonce
+firm_cosigner_share firm_cosigner_share_pkey PRIMARY KEY (deal_id, slot)
+firm_cosigner_share firm_cosigner_share_slot_not_null NOT NULL slot
+frost_nonce_use frost_nonce_use_commitment_id_not_null NOT NULL commitment_id
+frost_nonce_use frost_nonce_use_deal_id_not_null NOT NULL deal_id
+frost_nonce_use frost_nonce_use_key_id_not_null NOT NULL key_id
+frost_nonce_use frost_nonce_use_message_hash_check CHECK ((length(message_hash) = 32))
+frost_nonce_use frost_nonce_use_message_hash_not_null NOT NULL message_hash
+frost_nonce_use frost_nonce_use_pkey PRIMARY KEY (key_id, commitment_id)
+frost_nonce_use frost_nonce_use_used_at_not_null NOT NULL used_at
+frost_relay_message frost_relay_message_from_id_not_null NOT NULL from_id
+frost_relay_message frost_relay_message_kind_not_null NOT NULL kind
+frost_relay_message frost_relay_message_pkey PRIMARY KEY (session_id, seq)
+frost_relay_message frost_relay_message_seq_not_null NOT NULL seq
+frost_relay_message frost_relay_message_session_id_fkey FOREIGN KEY (session_id) REFERENCES frost_relay_session(session_id)
+frost_relay_message frost_relay_message_session_id_kind_from_id_to_id_key UNIQUE (session_id, kind, from_id, to_id)
+frost_relay_message frost_relay_message_session_id_not_null NOT NULL session_id
+frost_relay_message frost_relay_message_signed_not_null NOT NULL signed
+frost_relay_message frost_relay_message_to_id_not_null NOT NULL to_id
+frost_relay_session frost_relay_session_attempt_not_null NOT NULL attempt
+frost_relay_session frost_relay_session_deal_id_not_null NOT NULL deal_id
+frost_relay_session frost_relay_session_next_seq_not_null NOT NULL next_seq
+frost_relay_session frost_relay_session_participants_not_null NOT NULL participants
+frost_relay_session frost_relay_session_pkey PRIMARY KEY (session_id)
+frost_relay_session frost_relay_session_purpose_not_null NOT NULL purpose
+frost_relay_session frost_relay_session_session_id_not_null NOT NULL session_id
+frost_relay_session frost_relay_session_slot_not_null NOT NULL slot
+frost_relay_session frost_relay_session_status_not_null NOT NULL status
+identity_box identity_box_box_check CHECK ((jsonb_typeof(box) = 'object'::text))
+identity_box identity_box_box_not_null NOT NULL box
+identity_box identity_box_deal_id_fkey FOREIGN KEY (deal_id) REFERENCES deal(deal_id)
+identity_box identity_box_deal_id_not_null NOT NULL deal_id
+identity_box identity_box_kind_check CHECK ((kind = ANY (ARRAY['zk-salt'::text, 'zk-disclosure'::text])))
+identity_box identity_box_kind_not_null NOT NULL kind
+identity_box identity_box_pkey PRIMARY KEY (deal_id, side, kind)
+identity_box identity_box_side_check CHECK ((side = ANY (ARRAY['A'::text, 'B'::text])))
+identity_box identity_box_side_not_null NOT NULL side
+lawyer lawyer_bar_number_sha256_check CHECK ((length(bar_number_sha256) = 32))
+lawyer lawyer_bar_number_sha256_not_null NOT NULL bar_number_sha256
+lawyer lawyer_jurisdiction_not_null NOT NULL jurisdiction
+lawyer lawyer_ops_account_not_null NOT NULL ops_account
+lawyer lawyer_pkey PRIMARY KEY (ops_account)
+ledger_observation ledger_observation_account_not_null NOT NULL account
+ledger_observation ledger_observation_ledger_index_not_null NOT NULL ledger_index
+ledger_observation ledger_observation_meta_not_null NOT NULL meta
+ledger_observation ledger_observation_pkey PRIMARY KEY (tx_hash)
+ledger_observation ledger_observation_result_not_null NOT NULL result
+ledger_observation ledger_observation_tx_hash_check CHECK ((length(tx_hash) = 32))
+ledger_observation ledger_observation_tx_hash_not_null NOT NULL tx_hash
+ledger_observation ledger_observation_tx_index_not_null NOT NULL tx_index
+ledger_observation ledger_observation_tx_type_not_null NOT NULL tx_type
+outbox outbox_created_at_not_null NOT NULL created_at
+outbox outbox_deal_seq_both CHECK (((deal_id IS NULL) = (seq IS NULL)))
+outbox outbox_id_not_null NOT NULL id
+outbox outbox_payload_not_null NOT NULL payload
+outbox outbox_pkey PRIMARY KEY (id)
+outbox outbox_topic_not_null NOT NULL topic
+passport_attestation passport_attestation_anchor_ledger_not_null NOT NULL anchor_ledger
+passport_attestation passport_attestation_deal_id_fkey FOREIGN KEY (deal_id) REFERENCES deal(deal_id)
+passport_attestation passport_attestation_deal_id_not_null NOT NULL deal_id
+passport_attestation passport_attestation_envelope_not_null NOT NULL envelope
+passport_attestation passport_attestation_leaf_hash_check CHECK ((length(leaf_hash) = 32))
+passport_attestation passport_attestation_leaf_hash_key UNIQUE (leaf_hash)
+passport_attestation passport_attestation_leaf_hash_not_null NOT NULL leaf_hash
+passport_attestation passport_attestation_pkey PRIMARY KEY (deal_id, side, leaf_hash)
+passport_attestation passport_attestation_side_check CHECK ((side = ANY (ARRAY['A'::text, 'B'::text])))
+passport_attestation passport_attestation_side_not_null NOT NULL side
+presence_request presence_request_deal_id_fkey FOREIGN KEY (deal_id) REFERENCES deal(deal_id)
+presence_request presence_request_deal_id_not_null NOT NULL deal_id
+presence_request presence_request_lawyer_nonce_check CHECK ((lawyer_nonce ~ '^[0-9a-f]{64}$'::text))
+presence_request presence_request_lawyer_nonce_not_null NOT NULL lawyer_nonce
+presence_request presence_request_ledger_hash_check CHECK ((ledger_hash ~ '^[0-9A-F]{64}$'::text))
+presence_request presence_request_ledger_hash_not_null NOT NULL ledger_hash
+presence_request presence_request_ledger_index_not_null NOT NULL ledger_index
+presence_request presence_request_method_check CHECK ((method = ANY (ARRAY['zkpassport'::text, 'nfc-chip'::text])))
+presence_request presence_request_method_not_null NOT NULL method
+presence_request presence_request_pkey PRIMARY KEY (deal_id, side)
+presence_request presence_request_side_check CHECK ((side = ANY (ARRAY['A'::text, 'B'::text])))
+presence_request presence_request_side_not_null NOT NULL side
+presence_request presence_request_signature_check CHECK ((signature ~ '^[0-9a-f]{128}$'::text))
+recovery_agent_recovery recovery_agent_recovery_deal_id_not_null NOT NULL deal_id
+recovery_agent_recovery recovery_agent_recovery_new_key_id_not_null NOT NULL new_key_id
+recovery_agent_recovery recovery_agent_recovery_pkey PRIMARY KEY (recovery_id)
+recovery_agent_recovery recovery_agent_recovery_recovery_id_not_null NOT NULL recovery_id
+recovery_agent_recovery recovery_agent_recovery_slot_not_null NOT NULL slot
+recovery_agent_recovery recovery_agent_recovery_state_not_null NOT NULL state
+recovery_agent_refresh recovery_agent_refresh_deal_id_not_null NOT NULL deal_id
+recovery_agent_refresh recovery_agent_refresh_epoch_not_null NOT NULL epoch
+recovery_agent_refresh recovery_agent_refresh_missing_not_null NOT NULL missing
+recovery_agent_refresh recovery_agent_refresh_old_epoch_retired_not_null NOT NULL old_epoch_retired
+recovery_agent_refresh recovery_agent_refresh_pkey PRIMARY KEY (deal_id, slot, epoch)
+recovery_agent_refresh recovery_agent_refresh_slot_not_null NOT NULL slot
+recovery_agent_refresh recovery_agent_refresh_status_not_null NOT NULL status
+recovery_agent_share recovery_agent_share_ciphertext_not_null NOT NULL ciphertext
+recovery_agent_share recovery_agent_share_deal_id_not_null NOT NULL deal_id
+recovery_agent_share recovery_agent_share_epoch_not_null NOT NULL epoch
+recovery_agent_share recovery_agent_share_group_pub_not_null NOT NULL group_pub
+recovery_agent_share recovery_agent_share_nonce_not_null NOT NULL nonce
+recovery_agent_share recovery_agent_share_pkey PRIMARY KEY (deal_id, slot)
+recovery_agent_share recovery_agent_share_slot_not_null NOT NULL slot
+release_gate release_gate_deal_id_fkey FOREIGN KEY (deal_id) REFERENCES deal(deal_id)
+release_gate release_gate_deal_id_not_null NOT NULL deal_id
+release_gate release_gate_envelope_not_null NOT NULL envelope
+release_gate release_gate_leaf_hash_check CHECK ((length(leaf_hash) = 32))
+release_gate release_gate_leaf_hash_not_null NOT NULL leaf_hash
+release_gate release_gate_ledger_index_not_null NOT NULL ledger_index
+release_gate release_gate_pkey PRIMARY KEY (leaf_hash)
+signature signature_pkey PRIMARY KEY (request_id, role)
+signature signature_request_id_fkey FOREIGN KEY (request_id) REFERENCES signature_request(request_id)
+signature signature_request_id_not_null NOT NULL request_id
+signature signature_role_not_null NOT NULL role
+signature signature_signer_blob_not_null NOT NULL signer_blob
+signature_request signature_request_deal_id_fkey FOREIGN KEY (deal_id) REFERENCES deal(deal_id)
+signature_request signature_request_deal_id_not_null NOT NULL deal_id
+signature_request signature_request_last_ledger_not_null NOT NULL last_ledger
+signature_request signature_request_pkey PRIMARY KEY (request_id)
+signature_request signature_request_purpose_not_null NOT NULL purpose
+signature_request signature_request_request_id_not_null NOT NULL request_id
+signature_request signature_request_status_not_null NOT NULL status
+signature_request signature_request_unsigned_tx_not_null NOT NULL unsigned_tx
+used_nonce used_nonce_created_at_not_null NOT NULL created_at
+used_nonce used_nonce_key_id_not_null NOT NULL key_id
+used_nonce used_nonce_ledger_index_not_null NOT NULL ledger_index
+used_nonce used_nonce_nonce_check CHECK ((length(nonce) = 32))
+used_nonce used_nonce_nonce_not_null NOT NULL nonce
+used_nonce used_nonce_pkey PRIMARY KEY (nonce)
+watcher_cursor watcher_cursor_account_not_null NOT NULL account
+watcher_cursor watcher_cursor_last_validated_ledger_not_null NOT NULL last_validated_ledger
+watcher_cursor watcher_cursor_pkey PRIMARY KEY (account)
+zk_proof zk_proof_deal_id_fkey FOREIGN KEY (deal_id) REFERENCES deal(deal_id)
+zk_proof zk_proof_deal_id_not_null NOT NULL deal_id
+zk_proof zk_proof_identifier_hash_check CHECK ((length(identifier_hash) = 32))
+zk_proof zk_proof_identifier_hash_not_null NOT NULL identifier_hash
+zk_proof zk_proof_pkey PRIMARY KEY (deal_id, side, stage, identifier_hash)
+zk_proof zk_proof_proof_not_null NOT NULL proof
+zk_proof zk_proof_registry_roots_check CHECK ((jsonb_typeof(registry_roots) = 'object'::text))
+zk_proof zk_proof_registry_roots_not_null NOT NULL registry_roots
+zk_proof zk_proof_side_check CHECK ((side = ANY (ARRAY['A'::text, 'B'::text])))
+zk_proof zk_proof_side_not_null NOT NULL side
+zk_proof zk_proof_stage_check CHECK ((stage = ANY (ARRAY['onboarding'::text, 'release'::text])))
+zk_proof zk_proof_stage_not_null NOT NULL stage
+
+-- indexes
+CREATE UNIQUE INDEX attorney_credential_pkey ON public.attorney_credential USING btree (ops_account, create_tx_hash)
+CREATE UNIQUE INDEX bar_deal_link_pkey ON public.bar_deal_link USING btree (deal_id, role, verification_sha256)
+CREATE UNIQUE INDEX bar_verification_pkey ON public.bar_verification USING btree (envelope_sha256)
+CREATE UNIQUE INDEX checkpoint_anchor_pkey ON public.checkpoint_anchor USING btree (tree_size)
+CREATE UNIQUE INDEX deal_pkey ON public.deal USING btree (deal_id)
+CREATE UNIQUE INDEX deal_head_pkey ON public.deal_head USING btree (deal_id)
+CREATE UNIQUE INDEX deal_key_pkey ON public.deal_key USING btree (deal_id, role)
+CREATE INDEX enrollment_key_holder_idx ON public.enrollment_key USING btree (deal_id, slot, holder_role)
+CREATE UNIQUE INDEX enrollment_key_holder_keys_key ON public.enrollment_key USING btree (deal_id, slot, holder_role, ed25519_pub, mldsa65_pub)
+CREATE UNIQUE INDEX enrollment_key_pkey ON public.enrollment_key USING btree (key_id)
+CREATE UNIQUE INDEX evidence_event_deal_id_seq_key ON public.evidence_event USING btree (deal_id, seq)
+CREATE UNIQUE INDEX evidence_event_leaf_hash_key ON public.evidence_event USING btree (leaf_hash)
+CREATE UNIQUE INDEX evidence_event_pkey ON public.evidence_event USING btree (event_id)
+CREATE UNIQUE INDEX evidence_log_entry_log_index_key ON public.evidence_log_entry USING btree (log_index)
+CREATE UNIQUE INDEX evidence_log_entry_pkey ON public.evidence_log_entry USING btree (event_id)
+CREATE UNIQUE INDEX firm_cosigner_approval_use_pkey ON public.firm_cosigner_approval_use USING btree (approval_id)
+CREATE UNIQUE INDEX firm_cosigner_audit_pkey ON public.firm_cosigner_audit USING btree (seq)
+CREATE UNIQUE INDEX firm_cosigner_credential_pkey ON public.firm_cosigner_credential USING btree (deal_id, slot, credential_id)
+CREATE UNIQUE INDEX firm_cosigner_share_pkey ON public.firm_cosigner_share USING btree (deal_id, slot)
+CREATE UNIQUE INDEX frost_nonce_use_pkey ON public.frost_nonce_use USING btree (key_id, commitment_id)
+CREATE UNIQUE INDEX frost_relay_message_pkey ON public.frost_relay_message USING btree (session_id, seq)
+CREATE UNIQUE INDEX frost_relay_message_session_id_kind_from_id_to_id_key ON public.frost_relay_message USING btree (session_id, kind, from_id, to_id)
+CREATE UNIQUE INDEX frost_relay_session_pkey ON public.frost_relay_session USING btree (session_id)
+CREATE UNIQUE INDEX identity_box_pkey ON public.identity_box USING btree (deal_id, side, kind)
+CREATE UNIQUE INDEX lawyer_pkey ON public.lawyer USING btree (ops_account)
+CREATE UNIQUE INDEX ledger_observation_pkey ON public.ledger_observation USING btree (tx_hash)
+CREATE INDEX outbox_deal_seq_idx ON public.outbox USING btree (deal_id, seq)
+CREATE INDEX outbox_unsent_idx ON public.outbox USING btree (created_at, id) WHERE (sent_at IS NULL)
+CREATE UNIQUE INDEX outbox_pkey ON public.outbox USING btree (id)
+CREATE UNIQUE INDEX passport_attestation_leaf_hash_key ON public.passport_attestation USING btree (leaf_hash)
+CREATE UNIQUE INDEX passport_attestation_pkey ON public.passport_attestation USING btree (deal_id, side, leaf_hash)
+CREATE UNIQUE INDEX presence_request_pkey ON public.presence_request USING btree (deal_id, side)
+CREATE UNIQUE INDEX recovery_agent_recovery_open ON public.recovery_agent_recovery USING btree (deal_id, slot) WHERE ((state ->> 'status'::text) = ANY (ARRAY['pending'::text, 'authorized'::text]))
+CREATE UNIQUE INDEX recovery_agent_recovery_pkey ON public.recovery_agent_recovery USING btree (recovery_id)
+CREATE UNIQUE INDEX recovery_agent_refresh_pkey ON public.recovery_agent_refresh USING btree (deal_id, slot, epoch)
+CREATE UNIQUE INDEX recovery_agent_share_pkey ON public.recovery_agent_share USING btree (deal_id, slot)
+CREATE UNIQUE INDEX release_gate_pkey ON public.release_gate USING btree (leaf_hash)
+CREATE UNIQUE INDEX signature_pkey ON public.signature USING btree (request_id, role)
+CREATE UNIQUE INDEX signature_request_pkey ON public.signature_request USING btree (request_id)
+CREATE INDEX used_nonce_ledger_idx ON public.used_nonce USING btree (ledger_index)
+CREATE UNIQUE INDEX used_nonce_pkey ON public.used_nonce USING btree (nonce)
+CREATE UNIQUE INDEX watcher_cursor_pkey ON public.watcher_cursor USING btree (account)
+CREATE UNIQUE INDEX zk_proof_pkey ON public.zk_proof USING btree (deal_id, side, stage, identifier_hash)
+
+-- triggers
+attorney_credential CREATE TRIGGER attorney_credential_immutable BEFORE DELETE OR UPDATE ON public.attorney_credential FOR EACH ROW EXECUTE FUNCTION deny_mut()
+attorney_credential CREATE TRIGGER attorney_credential_no_truncate BEFORE TRUNCATE ON public.attorney_credential FOR EACH STATEMENT EXECUTE FUNCTION deny_mut()
+bar_deal_link CREATE TRIGGER bar_deal_link_immutable BEFORE DELETE OR UPDATE ON public.bar_deal_link FOR EACH ROW EXECUTE FUNCTION deny_mut()
+bar_deal_link CREATE TRIGGER bar_deal_link_no_truncate BEFORE TRUNCATE ON public.bar_deal_link FOR EACH STATEMENT EXECUTE FUNCTION deny_mut()
+bar_verification CREATE TRIGGER bar_verification_immutable BEFORE DELETE OR UPDATE ON public.bar_verification FOR EACH ROW EXECUTE FUNCTION deny_mut()
+bar_verification CREATE TRIGGER bar_verification_no_truncate BEFORE TRUNCATE ON public.bar_verification FOR EACH STATEMENT EXECUTE FUNCTION deny_mut()
+deal_head CREATE TRIGGER deal_head_no_truncate BEFORE TRUNCATE ON public.deal_head FOR EACH STATEMENT EXECUTE FUNCTION deny_mut()
+deal_head CREATE TRIGGER deal_head_step BEFORE DELETE OR UPDATE ON public.deal_head FOR EACH ROW EXECUTE FUNCTION deal_head_step()
+enrollment_key CREATE TRIGGER enrollment_key_immutable BEFORE DELETE OR UPDATE ON public.enrollment_key FOR EACH ROW EXECUTE FUNCTION deny_mut()
+enrollment_key CREATE TRIGGER enrollment_key_no_truncate BEFORE TRUNCATE ON public.enrollment_key FOR EACH STATEMENT EXECUTE FUNCTION deny_mut()
+evidence_event CREATE TRIGGER evidence_event_immutable BEFORE DELETE OR UPDATE ON public.evidence_event FOR EACH ROW EXECUTE FUNCTION deny_mut()
+evidence_event CREATE TRIGGER evidence_event_no_truncate BEFORE TRUNCATE ON public.evidence_event FOR EACH STATEMENT EXECUTE FUNCTION deny_mut()
+evidence_log_entry CREATE TRIGGER evidence_log_entry_immutable BEFORE DELETE OR UPDATE ON public.evidence_log_entry FOR EACH ROW EXECUTE FUNCTION deny_mut()
+evidence_log_entry CREATE TRIGGER evidence_log_entry_no_truncate BEFORE TRUNCATE ON public.evidence_log_entry FOR EACH STATEMENT EXECUTE FUNCTION deny_mut()
+firm_cosigner_approval_use CREATE TRIGGER firm_cosigner_approval_use_immutable BEFORE DELETE OR UPDATE ON public.firm_cosigner_approval_use FOR EACH ROW EXECUTE FUNCTION deny_mut()
+firm_cosigner_approval_use CREATE TRIGGER firm_cosigner_approval_use_no_truncate BEFORE TRUNCATE ON public.firm_cosigner_approval_use FOR EACH STATEMENT EXECUTE FUNCTION deny_mut()
+firm_cosigner_audit CREATE TRIGGER firm_cosigner_audit_immutable BEFORE DELETE OR UPDATE ON public.firm_cosigner_audit FOR EACH ROW EXECUTE FUNCTION deny_mut()
+firm_cosigner_audit CREATE TRIGGER firm_cosigner_audit_no_truncate BEFORE TRUNCATE ON public.firm_cosigner_audit FOR EACH STATEMENT EXECUTE FUNCTION deny_mut()
+frost_nonce_use CREATE TRIGGER frost_nonce_use_immutable BEFORE DELETE OR UPDATE ON public.frost_nonce_use FOR EACH ROW EXECUTE FUNCTION deny_mut()
+frost_nonce_use CREATE TRIGGER frost_nonce_use_no_truncate BEFORE TRUNCATE ON public.frost_nonce_use FOR EACH STATEMENT EXECUTE FUNCTION deny_mut()
+outbox CREATE TRIGGER outbox_notify AFTER INSERT ON public.outbox FOR EACH ROW EXECUTE FUNCTION outbox_notify()
+passport_attestation CREATE TRIGGER passport_attestation_immutable BEFORE DELETE OR UPDATE ON public.passport_attestation FOR EACH ROW EXECUTE FUNCTION deny_mut()
+passport_attestation CREATE TRIGGER passport_attestation_no_truncate BEFORE TRUNCATE ON public.passport_attestation FOR EACH STATEMENT EXECUTE FUNCTION deny_mut()
+release_gate CREATE TRIGGER release_gate_immutable BEFORE DELETE OR UPDATE ON public.release_gate FOR EACH ROW EXECUTE FUNCTION deny_mut()
+release_gate CREATE TRIGGER release_gate_no_truncate BEFORE TRUNCATE ON public.release_gate FOR EACH STATEMENT EXECUTE FUNCTION deny_mut()
+zk_proof CREATE TRIGGER zk_proof_immutable BEFORE DELETE OR UPDATE ON public.zk_proof FOR EACH ROW EXECUTE FUNCTION deny_mut()
+zk_proof CREATE TRIGGER zk_proof_no_truncate BEFORE TRUNCATE ON public.zk_proof FOR EACH STATEMENT EXECUTE FUNCTION deny_mut()
+
+-- functions
+deal_head_step()
+deny_mut()
+legx_make_append_only(t regclass)
+outbox_notify()
+
+-- app_rw privileges
+attorney_credential select,insert
+bar_deal_link select,insert
+bar_verification select,insert
+checkpoint_anchor select,insert,update,delete
+deal select,insert,update,delete
+deal_head select,insert,update,delete
+deal_key select,insert,update,delete
+enrollment_key select,insert
+evidence_event select,insert
+evidence_log_entry select,insert
+firm_cosigner_approval_use select,insert
+firm_cosigner_audit select,insert
+firm_cosigner_credential select,insert,update,delete
+firm_cosigner_share select,insert,update,delete
+frost_nonce_use select,insert
+frost_relay_message select,insert,update,delete
+frost_relay_session select,insert,update,delete
+identity_box select,insert
+lawyer select,insert,update,delete
+ledger_observation select,insert,update,delete
+outbox select,insert,update,delete
+passport_attestation select,insert
+presence_request select,insert,update
+recovery_agent_recovery select,insert,update,delete
+recovery_agent_refresh select,insert,update,delete
+recovery_agent_share select,insert,update,delete
+release_gate select,insert
+signature select,insert,update,delete
+signature_request select,insert,update,delete
+used_nonce select,insert,update,delete
+watcher_cursor select,insert,update,delete
+zk_proof select,insert

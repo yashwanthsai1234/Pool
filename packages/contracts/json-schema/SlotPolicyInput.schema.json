@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "slot": {
+      "type": "string",
+      "enum": [
+        "A",
+        "LA",
+        "B",
+        "LB"
+      ]
+    },
+    "threshold": {
+      "type": "number",
+      "const": 2
+    },
+    "participants": {
+      "type": "number",
+      "const": 3
+    },
+    "roles": {
+      "type": "array",
+      "prefixItems": [
+        {
+          "type": "string",
+          "enum": [
+            "phone",
+            "second-authenticator",
+            "passkey-same-device",
+            "recovery-agent",
+            "console",
+            "firm-hsm",
+            "partner"
+          ]
+        },
+        {
+          "type": "string",
+          "enum": [
+            "phone",
+            "second-authenticator",
+            "passkey-same-device",
+            "recovery-agent",
+            "console",
+            "firm-hsm",
+            "partner"
+          ]
+        },
+        {
+          "type": "string",
+          "enum": [
+            "phone",
+            "second-authenticator",
+            "passkey-same-device",
+            "recovery-agent",
+            "console",
+            "firm-hsm",
+            "partner"
+          ]
+        }
+      ],
+      "items": false,
+      "minItems": 3,
+      "maxItems": 3
+    }
+  },
+  "required": [
+    "slot",
+    "threshold",
+    "participants",
+    "roles"
+  ],
+  "additionalProperties": false
+}

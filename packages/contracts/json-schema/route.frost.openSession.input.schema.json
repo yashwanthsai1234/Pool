@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "dealId": {
+      "type": "string",
+      "format": "uuid",
+      "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$"
+    },
+    "slot": {
+      "type": "string",
+      "enum": [
+        "A",
+        "LA",
+        "B",
+        "LB"
+      ]
+    },
+    "purpose": {
+      "type": "string",
+      "enum": [
+        "dkg",
+        "sign",
+        "refresh",
+        "repair"
+      ]
+    },
+    "participants": {
+      "minItems": 3,
+      "maxItems": 3,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "identifier": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "keyId": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9._:/#-]{1,128}$"
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "phone",
+              "second-authenticator",
+              "passkey-same-device",
+              "recovery-agent",
+              "console",
+              "firm-hsm",
+              "partner"
+            ]
+          }
+        },
+        "required": [
+          "identifier",
+          "keyId",
+          "role"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "pair": {
+      "type": "array",
+      "prefixItems": [
+        {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      ],
+      "items": false,
+      "minItems": 2,
+      "maxItems": 2
+    }
+  },
+  "required": [
+    "dealId",
+    "slot",
+    "purpose",
+    "participants"
+  ],
+  "additionalProperties": false
+}

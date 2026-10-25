@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "envelope": {
+      "type": "string",
+      "maxLength": 87384,
+      "format": "base64",
+      "contentEncoding": "base64",
+      "pattern": "^$|^(?:[0-9a-zA-Z+/]{4})*(?:(?:[0-9a-zA-Z+/]{2}==)|(?:[0-9a-zA-Z+/]{3}=))?$"
+    }
+  },
+  "required": [
+    "envelope"
+  ],
+  "additionalProperties": false
+}

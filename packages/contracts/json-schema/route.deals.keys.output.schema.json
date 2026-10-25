@@ -1,0 +1,143 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "keys": {
+      "maxItems": 4,
+      "type": "array",
+      "items": {
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "xrpl_pubkey": {
+                "type": "string",
+                "pattern": "^ED[0-9A-F]{64}$"
+              },
+              "xrpl_account": {
+                "type": "string",
+                "pattern": "^r[1-9A-HJ-NP-Za-km-z]{24,34}$"
+              },
+              "commitment": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{64}$"
+              },
+              "binding_sig": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{128}$"
+              },
+              "slot_policy": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{64}$"
+              },
+              "pq_key_hash": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{64}$"
+              },
+              "role": {
+                "type": "string",
+                "enum": [
+                  "alice",
+                  "bob"
+                ]
+              },
+              "id_method": {
+                "type": "string",
+                "enum": [
+                  "zkpassport",
+                  "nfc-chip"
+                ]
+              }
+            },
+            "required": [
+              "xrpl_pubkey",
+              "xrpl_account",
+              "commitment",
+              "binding_sig",
+              "slot_policy",
+              "pq_key_hash",
+              "role",
+              "id_method"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "xrpl_pubkey": {
+                "type": "string",
+                "pattern": "^ED[0-9A-F]{64}$"
+              },
+              "xrpl_account": {
+                "type": "string",
+                "pattern": "^r[1-9A-HJ-NP-Za-km-z]{24,34}$"
+              },
+              "commitment": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{64}$"
+              },
+              "binding_sig": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{128}$"
+              },
+              "slot_policy": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{64}$"
+              },
+              "pq_key_hash": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{64}$"
+              },
+              "role": {
+                "type": "string",
+                "enum": [
+                  "lawyerA",
+                  "lawyerB"
+                ]
+              },
+              "contract_sig": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{128}$"
+              },
+              "ops_account": {
+                "type": "string",
+                "pattern": "^r[1-9A-HJ-NP-Za-km-z]{24,34}$"
+              },
+              "ops_pub": {
+                "type": "string",
+                "pattern": "^(?:ED|02|03)[0-9A-F]{64}$"
+              },
+              "ops_bind_sig_ops": {
+                "type": "string",
+                "pattern": "^(?:[0-9a-f]{2}){64,72}$"
+              },
+              "ops_bind_sig_lawyer": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{128}$"
+              }
+            },
+            "required": [
+              "xrpl_pubkey",
+              "xrpl_account",
+              "commitment",
+              "binding_sig",
+              "slot_policy",
+              "pq_key_hash",
+              "role",
+              "contract_sig",
+              "ops_account",
+              "ops_pub",
+              "ops_bind_sig_ops",
+              "ops_bind_sig_lawyer"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      }
+    }
+  },
+  "required": [
+    "keys"
+  ],
+  "additionalProperties": false
+}

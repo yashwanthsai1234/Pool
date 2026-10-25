@@ -1,0 +1,30 @@
+# Copy to .github/workflows/fuzz.yml (task 5.2 does not own that folder).
+# Pull requests: 30 seconds per target. Nightly: 10 minutes per target. One job per package, so targets run in parallel.
+name: fuzz
+on:
+  pull_request:
+  schedule:
+    - cron: '17 2 * * *'
+jobs:
+  fuzz:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        pkg: [core, contracts, zk]
+    env:
+      LEGX_FUZZ_SECONDS: ${{ github.event_name == 'schedule' && '600' || '30' }}
+      LEGX_FUZZ_PKG: ${{ matrix.pkg }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+      - run: corepack enable && pnpm install --frozen-lockfile
+      - run: pnpm vitest run --project unit tools/fuzz/test/fuzz.test.ts
+        timeout-minutes: 120
+      - if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: fuzz-crashes-${{ matrix.pkg }}
+          path: tools/fuzz/corpus

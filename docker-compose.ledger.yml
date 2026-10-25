@@ -1,0 +1,12 @@
+# Standalone xrpld for integration tests (task 2.1). Admin WebSocket 6006 inside, published on LEGX_LEDGER_PORT (default 6101).
+# Source: https://xrpl.org/docs/infrastructure/testing-and-auditing/run-private-network-with-docker
+services:
+  xrpld:
+    image: rippleci/xrpld:3.4.1
+    platform: linux/amd64
+    container_name: ${LEGX_LEDGER_NAME:-legx-2.1-xrpld}
+    command: ["--standalone"]
+    ports:
+      - "127.0.0.1:${LEGX_LEDGER_PORT:-6101}:6006"
+    volumes:
+      - ./ci:/etc/xrpld/:ro

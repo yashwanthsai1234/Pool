@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "stage": {
+      "type": "string",
+      "enum": [
+        "onboarding",
+        "release"
+      ]
+    },
+    "domain": {
+      "type": "string",
+      "maxLength": 253
+    },
+    "scope": {
+      "type": "string",
+      "maxLength": 128
+    },
+    "devMode": {
+      "type": "boolean"
+    },
+    "proofs": {
+      "minItems": 1,
+      "maxItems": 32,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "pattern": "^[a-z0-9_]{1,128}$"
+          },
+          "proof": {
+            "type": "string",
+            "maxLength": 131072,
+            "pattern": "^[0-9a-f]*$"
+          },
+          "vkeyHash": {
+            "type": "string",
+            "pattern": "^0x[0-9a-f]{64}$"
+          },
+          "version": {
+            "type": "string",
+            "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+          },
+          "index": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 31
+          },
+          "total": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 32
+          },
+          "committedInputs": {
+            "type": "object",
+            "propertyNames": {
+              "type": "string",
+              "maxLength": 64
+            },
+            "additionalProperties": {},
+            "x-legx-secret": true
+          }
+        },
+        "required": [
+          "name",
+          "proof",
+          "vkeyHash",
+          "version",
+          "index",
+          "total"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "originalQuery": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string",
+        "maxLength": 64
+      },
+      "additionalProperties": {}
+    },
+    "queryResult": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string",
+        "maxLength": 64
+      },
+      "additionalProperties": {},
+      "x-legx-secret": true
+    }
+  },
+  "required": [
+    "stage",
+    "domain",
+    "scope",
+    "devMode",
+    "proofs",
+    "originalQuery",
+    "queryResult"
+  ],
+  "additionalProperties": false
+}

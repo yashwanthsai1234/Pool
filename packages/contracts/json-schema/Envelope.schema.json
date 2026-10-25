@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "payloadType": {
+      "type": "string",
+      "enum": [
+        "application/vnd.legx.event+json;v=1",
+        "application/vnd.legx.attest+json;v=1"
+      ]
+    },
+    "payload": {
+      "type": "string",
+      "maxLength": 87384,
+      "format": "base64",
+      "contentEncoding": "base64",
+      "pattern": "^$|^(?:[0-9a-zA-Z+/]{4})*(?:(?:[0-9a-zA-Z+/]{2}==)|(?:[0-9a-zA-Z+/]{3}=))?$"
+    },
+    "signatures": {
+      "minItems": 1,
+      "maxItems": 8,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "keyid": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9._:/#-]{1,128}$"
+          },
+          "sig": {
+            "type": "string",
+            "maxLength": 10924,
+            "format": "base64",
+            "contentEncoding": "base64",
+            "pattern": "^$|^(?:[0-9a-zA-Z+/]{4})*(?:(?:[0-9a-zA-Z+/]{2}==)|(?:[0-9a-zA-Z+/]{3}=))?$"
+          }
+        },
+        "required": [
+          "keyid",
+          "sig"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "payloadType",
+    "payload",
+    "signatures"
+  ],
+  "additionalProperties": false
+}

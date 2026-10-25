@@ -1,0 +1,28 @@
+{
+  "name": "@legx/system-tests",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./support/stack.ts"
+  },
+  "dependencies": {
+    "@legx/contracts": "workspace:*",
+    "@legx/coordinator": "workspace:*",
+    "@legx/core": "workspace:*",
+    "@legx/db": "workspace:*",
+    "@legx/mock-bar-registry": "workspace:*",
+    "@legx/server": "workspace:*",
+    "@legx/signer": "workspace:*",
+    "@legx/xrpl": "workspace:*",
+    "@noble/curves": "2.4.0",
+    "pg": "8.23.0",
+    "playwright": "1.64.1",
+    "ws": "8.18.3",
+    "xrpl": "5.3.0"
+  },
+  "devDependencies": {
+    "@types/pg": "8.23.1",
+    "@types/ws": "8.18.1"
+  }
+}

@@ -1,0 +1,12 @@
+[
+  {
+    "slot": "LA",
+    "threshold": 2,
+    "participants": 3,
+    "roles": [
+      "console",
+      "firm-hsm",
+      "partner"
+    ]
+  }
+]

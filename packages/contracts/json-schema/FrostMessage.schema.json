@@ -1,0 +1,1181 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "oneOf": [
+    {
+      "type": "object",
+      "properties": {
+        "session_id": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "deal_id": {
+          "type": "string",
+          "format": "uuid",
+          "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$"
+        },
+        "slot": {
+          "type": "string",
+          "enum": [
+            "A",
+            "LA",
+            "B",
+            "LB"
+          ]
+        },
+        "from": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "kind": {
+          "type": "string",
+          "const": "dkg.round1"
+        },
+        "commitment": {
+          "type": "array",
+          "prefixItems": [
+            {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          ],
+          "items": false,
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "proof_of_knowledge": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{128}$"
+        },
+        "kem_pub": {
+          "type": "string",
+          "pattern": "^(?:[A-Za-z0-9+/]{4}){405}[A-Za-z0-9+/]{2}==$"
+        }
+      },
+      "required": [
+        "session_id",
+        "deal_id",
+        "slot",
+        "from",
+        "kind",
+        "commitment",
+        "proof_of_knowledge",
+        "kem_pub"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "session_id": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "deal_id": {
+          "type": "string",
+          "format": "uuid",
+          "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$"
+        },
+        "slot": {
+          "type": "string",
+          "enum": [
+            "A",
+            "LA",
+            "B",
+            "LB"
+          ]
+        },
+        "from": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "kind": {
+          "type": "string",
+          "const": "dkg.echo"
+        },
+        "transcript_hash": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "session_id",
+        "deal_id",
+        "slot",
+        "from",
+        "kind",
+        "transcript_hash"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "session_id": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "deal_id": {
+          "type": "string",
+          "format": "uuid",
+          "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$"
+        },
+        "slot": {
+          "type": "string",
+          "enum": [
+            "A",
+            "LA",
+            "B",
+            "LB"
+          ]
+        },
+        "from": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "kind": {
+          "type": "string",
+          "const": "dkg.round2"
+        },
+        "to": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "box": {
+          "type": "object",
+          "properties": {
+            "suite": {
+              "type": "string",
+              "const": "hpke-xwing-v1"
+            },
+            "recipient_key_id": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9._:/#-]{1,128}$"
+            },
+            "enc": {
+              "type": "string",
+              "pattern": "^(?:[A-Za-z0-9+/]{4}){373}[A-Za-z0-9+/]{2}==$"
+            },
+            "ciphertext": {
+              "type": "string",
+              "maxLength": 87384,
+              "format": "base64",
+              "contentEncoding": "base64",
+              "pattern": "^$|^(?:[0-9a-zA-Z+/]{4})*(?:(?:[0-9a-zA-Z+/]{2}==)|(?:[0-9a-zA-Z+/]{3}=))?$"
+            }
+          },
+          "required": [
+            "suite",
+            "recipient_key_id",
+            "enc",
+            "ciphertext"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "session_id",
+        "deal_id",
+        "slot",
+        "from",
+        "kind",
+        "to",
+        "box"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "session_id": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "deal_id": {
+          "type": "string",
+          "format": "uuid",
+          "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$"
+        },
+        "slot": {
+          "type": "string",
+          "enum": [
+            "A",
+            "LA",
+            "B",
+            "LB"
+          ]
+        },
+        "from": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "kind": {
+          "type": "string",
+          "const": "dkg.complaint"
+        },
+        "accused": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "accused_message": {
+          "type": "string",
+          "maxLength": 174764,
+          "format": "base64",
+          "contentEncoding": "base64",
+          "pattern": "^$|^(?:[0-9a-zA-Z+/]{4})*(?:(?:[0-9a-zA-Z+/]{2}==)|(?:[0-9a-zA-Z+/]{3}=))?$"
+        },
+        "kem_secret": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "decrypted_share": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "session_id",
+        "deal_id",
+        "slot",
+        "from",
+        "kind",
+        "accused",
+        "accused_message",
+        "kem_secret",
+        "decrypted_share"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "session_id": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "deal_id": {
+          "type": "string",
+          "format": "uuid",
+          "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$"
+        },
+        "slot": {
+          "type": "string",
+          "enum": [
+            "A",
+            "LA",
+            "B",
+            "LB"
+          ]
+        },
+        "from": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "kind": {
+          "type": "string",
+          "const": "sign.request"
+        },
+        "message": {
+          "type": "string",
+          "pattern": "^(?:[0-9a-f]{2}){32,16384}$"
+        },
+        "message_kind": {
+          "type": "string",
+          "enum": [
+            "xrpl-multisign",
+            "tagged"
+          ]
+        },
+        "commitments": {
+          "type": "array",
+          "prefixItems": [
+            {
+              "type": "object",
+              "properties": {
+                "identifier": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{64}$"
+                },
+                "hiding": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{64}$"
+                },
+                "binding": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{64}$"
+                }
+              },
+              "required": [
+                "identifier",
+                "hiding",
+                "binding"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "identifier": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{64}$"
+                },
+                "hiding": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{64}$"
+                },
+                "binding": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{64}$"
+                }
+              },
+              "required": [
+                "identifier",
+                "hiding",
+                "binding"
+              ],
+              "additionalProperties": false
+            }
+          ],
+          "items": false,
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "approval": {
+          "type": "object",
+          "properties": {
+            "credential_id": {
+              "type": "string",
+              "maxLength": 1368,
+              "format": "base64",
+              "contentEncoding": "base64",
+              "pattern": "^$|^(?:[0-9a-zA-Z+/]{4})*(?:(?:[0-9a-zA-Z+/]{2}==)|(?:[0-9a-zA-Z+/]{3}=))?$"
+            },
+            "authenticator_data": {
+              "type": "string",
+              "maxLength": 1368,
+              "format": "base64",
+              "contentEncoding": "base64",
+              "pattern": "^$|^(?:[0-9a-zA-Z+/]{4})*(?:(?:[0-9a-zA-Z+/]{2}==)|(?:[0-9a-zA-Z+/]{3}=))?$"
+            },
+            "client_data_json": {
+              "type": "string",
+              "maxLength": 5464,
+              "format": "base64",
+              "contentEncoding": "base64",
+              "pattern": "^$|^(?:[0-9a-zA-Z+/]{4})*(?:(?:[0-9a-zA-Z+/]{2}==)|(?:[0-9a-zA-Z+/]{3}=))?$"
+            },
+            "signature": {
+              "type": "string",
+              "maxLength": 684,
+              "format": "base64",
+              "contentEncoding": "base64",
+              "pattern": "^$|^(?:[0-9a-zA-Z+/]{4})*(?:(?:[0-9a-zA-Z+/]{2}==)|(?:[0-9a-zA-Z+/]{3}=))?$"
+            },
+            "message_hash": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "credential_id",
+            "authenticator_data",
+            "client_data_json",
+            "signature",
+            "message_hash"
+          ],
+          "additionalProperties": false
+        },
+        "tagged": {
+          "type": "object",
+          "properties": {
+            "tag": {
+              "type": "string",
+              "pattern": "^legx\\/[a-z0-9-]{1,64}\\/v[0-9]{1,3}$"
+            },
+            "parts": {
+              "maxItems": 16,
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^(?:[0-9a-f]{2}){0,16384}$"
+              }
+            }
+          },
+          "required": [
+            "tag",
+            "parts"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "session_id",
+        "deal_id",
+        "slot",
+        "from",
+        "kind",
+        "message",
+        "message_kind",
+        "commitments"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "session_id": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "deal_id": {
+          "type": "string",
+          "format": "uuid",
+          "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$"
+        },
+        "slot": {
+          "type": "string",
+          "enum": [
+            "A",
+            "LA",
+            "B",
+            "LB"
+          ]
+        },
+        "from": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "kind": {
+          "type": "string",
+          "const": "sign.begin"
+        },
+        "message": {
+          "type": "string",
+          "pattern": "^(?:[0-9a-f]{2}){32,16384}$"
+        },
+        "message_kind": {
+          "type": "string",
+          "enum": [
+            "xrpl-multisign",
+            "tagged"
+          ]
+        },
+        "commitment": {
+          "type": "object",
+          "properties": {
+            "identifier": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "hiding": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "binding": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "identifier",
+            "hiding",
+            "binding"
+          ],
+          "additionalProperties": false
+        },
+        "approval": {
+          "type": "object",
+          "properties": {
+            "credential_id": {
+              "type": "string",
+              "maxLength": 1368,
+              "format": "base64",
+              "contentEncoding": "base64",
+              "pattern": "^$|^(?:[0-9a-zA-Z+/]{4})*(?:(?:[0-9a-zA-Z+/]{2}==)|(?:[0-9a-zA-Z+/]{3}=))?$"
+            },
+            "authenticator_data": {
+              "type": "string",
+              "maxLength": 1368,
+              "format": "base64",
+              "contentEncoding": "base64",
+              "pattern": "^$|^(?:[0-9a-zA-Z+/]{4})*(?:(?:[0-9a-zA-Z+/]{2}==)|(?:[0-9a-zA-Z+/]{3}=))?$"
+            },
+            "client_data_json": {
+              "type": "string",
+              "maxLength": 5464,
+              "format": "base64",
+              "contentEncoding": "base64",
+              "pattern": "^$|^(?:[0-9a-zA-Z+/]{4})*(?:(?:[0-9a-zA-Z+/]{2}==)|(?:[0-9a-zA-Z+/]{3}=))?$"
+            },
+            "signature": {
+              "type": "string",
+              "maxLength": 684,
+              "format": "base64",
+              "contentEncoding": "base64",
+              "pattern": "^$|^(?:[0-9a-zA-Z+/]{4})*(?:(?:[0-9a-zA-Z+/]{2}==)|(?:[0-9a-zA-Z+/]{3}=))?$"
+            },
+            "message_hash": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "credential_id",
+            "authenticator_data",
+            "client_data_json",
+            "signature",
+            "message_hash"
+          ],
+          "additionalProperties": false
+        },
+        "tagged": {
+          "type": "object",
+          "properties": {
+            "tag": {
+              "type": "string",
+              "pattern": "^legx\\/[a-z0-9-]{1,64}\\/v[0-9]{1,3}$"
+            },
+            "parts": {
+              "maxItems": 16,
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^(?:[0-9a-f]{2}){0,16384}$"
+              }
+            }
+          },
+          "required": [
+            "tag",
+            "parts"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "session_id",
+        "deal_id",
+        "slot",
+        "from",
+        "kind",
+        "message",
+        "message_kind",
+        "commitment"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "session_id": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "deal_id": {
+          "type": "string",
+          "format": "uuid",
+          "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$"
+        },
+        "slot": {
+          "type": "string",
+          "enum": [
+            "A",
+            "LA",
+            "B",
+            "LB"
+          ]
+        },
+        "from": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "kind": {
+          "type": "string",
+          "const": "sign.commit"
+        },
+        "message_hash": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "commitment": {
+          "type": "object",
+          "properties": {
+            "identifier": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "hiding": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "binding": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "identifier",
+            "hiding",
+            "binding"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "session_id",
+        "deal_id",
+        "slot",
+        "from",
+        "kind",
+        "message_hash",
+        "commitment"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "session_id": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "deal_id": {
+          "type": "string",
+          "format": "uuid",
+          "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$"
+        },
+        "slot": {
+          "type": "string",
+          "enum": [
+            "A",
+            "LA",
+            "B",
+            "LB"
+          ]
+        },
+        "from": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "kind": {
+          "type": "string",
+          "const": "sign.share"
+        },
+        "message_hash": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "commitments_hash": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "share": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "session_id",
+        "deal_id",
+        "slot",
+        "from",
+        "kind",
+        "message_hash",
+        "commitments_hash",
+        "share"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "session_id": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "deal_id": {
+          "type": "string",
+          "format": "uuid",
+          "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$"
+        },
+        "slot": {
+          "type": "string",
+          "enum": [
+            "A",
+            "LA",
+            "B",
+            "LB"
+          ]
+        },
+        "from": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "kind": {
+          "type": "string",
+          "const": "refresh.commit"
+        },
+        "epoch": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "commitment": {
+          "type": "array",
+          "prefixItems": [
+            {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          ],
+          "items": false,
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "kem_pub": {
+          "type": "string",
+          "pattern": "^(?:[A-Za-z0-9+/]{4}){405}[A-Za-z0-9+/]{2}==$"
+        }
+      },
+      "required": [
+        "session_id",
+        "deal_id",
+        "slot",
+        "from",
+        "kind",
+        "epoch",
+        "commitment",
+        "kem_pub"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "session_id": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "deal_id": {
+          "type": "string",
+          "format": "uuid",
+          "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$"
+        },
+        "slot": {
+          "type": "string",
+          "enum": [
+            "A",
+            "LA",
+            "B",
+            "LB"
+          ]
+        },
+        "from": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "kind": {
+          "type": "string",
+          "const": "refresh.subshare"
+        },
+        "epoch": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "to": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "box": {
+          "type": "object",
+          "properties": {
+            "suite": {
+              "type": "string",
+              "const": "hpke-xwing-v1"
+            },
+            "recipient_key_id": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9._:/#-]{1,128}$"
+            },
+            "enc": {
+              "type": "string",
+              "pattern": "^(?:[A-Za-z0-9+/]{4}){373}[A-Za-z0-9+/]{2}==$"
+            },
+            "ciphertext": {
+              "type": "string",
+              "maxLength": 87384,
+              "format": "base64",
+              "contentEncoding": "base64",
+              "pattern": "^$|^(?:[0-9a-zA-Z+/]{4})*(?:(?:[0-9a-zA-Z+/]{2}==)|(?:[0-9a-zA-Z+/]{3}=))?$"
+            }
+          },
+          "required": [
+            "suite",
+            "recipient_key_id",
+            "enc",
+            "ciphertext"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "session_id",
+        "deal_id",
+        "slot",
+        "from",
+        "kind",
+        "epoch",
+        "to",
+        "box"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "session_id": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "deal_id": {
+          "type": "string",
+          "format": "uuid",
+          "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$"
+        },
+        "slot": {
+          "type": "string",
+          "enum": [
+            "A",
+            "LA",
+            "B",
+            "LB"
+          ]
+        },
+        "from": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "kind": {
+          "type": "string",
+          "const": "refresh.deleted"
+        },
+        "epoch": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "old_shares_hash": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "new_shares_hash": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "session_id",
+        "deal_id",
+        "slot",
+        "from",
+        "kind",
+        "epoch",
+        "old_shares_hash",
+        "new_shares_hash"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "session_id": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "deal_id": {
+          "type": "string",
+          "format": "uuid",
+          "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$"
+        },
+        "slot": {
+          "type": "string",
+          "enum": [
+            "A",
+            "LA",
+            "B",
+            "LB"
+          ]
+        },
+        "from": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "kind": {
+          "type": "string",
+          "const": "repair.hello"
+        },
+        "kem_pub": {
+          "type": "string",
+          "pattern": "^(?:[A-Za-z0-9+/]{4}){405}[A-Za-z0-9+/]{2}==$"
+        }
+      },
+      "required": [
+        "session_id",
+        "deal_id",
+        "slot",
+        "from",
+        "kind",
+        "kem_pub"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "session_id": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "deal_id": {
+          "type": "string",
+          "format": "uuid",
+          "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$"
+        },
+        "slot": {
+          "type": "string",
+          "enum": [
+            "A",
+            "LA",
+            "B",
+            "LB"
+          ]
+        },
+        "from": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "kind": {
+          "type": "string",
+          "const": "repair.delta"
+        },
+        "to": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "box": {
+          "type": "object",
+          "properties": {
+            "suite": {
+              "type": "string",
+              "const": "hpke-xwing-v1"
+            },
+            "recipient_key_id": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9._:/#-]{1,128}$"
+            },
+            "enc": {
+              "type": "string",
+              "pattern": "^(?:[A-Za-z0-9+/]{4}){373}[A-Za-z0-9+/]{2}==$"
+            },
+            "ciphertext": {
+              "type": "string",
+              "maxLength": 87384,
+              "format": "base64",
+              "contentEncoding": "base64",
+              "pattern": "^$|^(?:[0-9a-zA-Z+/]{4})*(?:(?:[0-9a-zA-Z+/]{2}==)|(?:[0-9a-zA-Z+/]{3}=))?$"
+            }
+          },
+          "required": [
+            "suite",
+            "recipient_key_id",
+            "enc",
+            "ciphertext"
+          ],
+          "additionalProperties": false
+        },
+        "delta_commitments": {
+          "type": "array",
+          "prefixItems": [
+            {
+              "type": "object",
+              "properties": {
+                "to": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{64}$"
+                },
+                "commitment": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{64}$"
+                }
+              },
+              "required": [
+                "to",
+                "commitment"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "to": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{64}$"
+                },
+                "commitment": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{64}$"
+                }
+              },
+              "required": [
+                "to",
+                "commitment"
+              ],
+              "additionalProperties": false
+            }
+          ],
+          "items": false,
+          "minItems": 2,
+          "maxItems": 2
+        }
+      },
+      "required": [
+        "session_id",
+        "deal_id",
+        "slot",
+        "from",
+        "kind",
+        "to",
+        "box",
+        "delta_commitments"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "session_id": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "deal_id": {
+          "type": "string",
+          "format": "uuid",
+          "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$"
+        },
+        "slot": {
+          "type": "string",
+          "enum": [
+            "A",
+            "LA",
+            "B",
+            "LB"
+          ]
+        },
+        "from": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "kind": {
+          "type": "string",
+          "const": "repair.sigma"
+        },
+        "to": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "box": {
+          "type": "object",
+          "properties": {
+            "suite": {
+              "type": "string",
+              "const": "hpke-xwing-v1"
+            },
+            "recipient_key_id": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9._:/#-]{1,128}$"
+            },
+            "enc": {
+              "type": "string",
+              "pattern": "^(?:[A-Za-z0-9+/]{4}){373}[A-Za-z0-9+/]{2}==$"
+            },
+            "ciphertext": {
+              "type": "string",
+              "maxLength": 87384,
+              "format": "base64",
+              "contentEncoding": "base64",
+              "pattern": "^$|^(?:[0-9a-zA-Z+/]{4})*(?:(?:[0-9a-zA-Z+/]{2}==)|(?:[0-9a-zA-Z+/]{3}=))?$"
+            }
+          },
+          "required": [
+            "suite",
+            "recipient_key_id",
+            "enc",
+            "ciphertext"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "session_id",
+        "deal_id",
+        "slot",
+        "from",
+        "kind",
+        "to",
+        "box"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "session_id": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "deal_id": {
+          "type": "string",
+          "format": "uuid",
+          "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$"
+        },
+        "slot": {
+          "type": "string",
+          "enum": [
+            "A",
+            "LA",
+            "B",
+            "LB"
+          ]
+        },
+        "from": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "kind": {
+          "type": "string",
+          "const": "abort"
+        },
+        "reason": {
+          "type": "string",
+          "pattern": "^[A-Z_]{1,64}$"
+        }
+      },
+      "required": [
+        "session_id",
+        "deal_id",
+        "slot",
+        "from",
+        "kind",
+        "reason"
+      ],
+      "additionalProperties": false
+    }
+  ]
+}

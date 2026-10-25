@@ -1,0 +1,34 @@
+/* Design tokens: one source of truth. Phone theme is the default; the dashboard projector theme is [data-theme='projector'].
+   Contrast is enforced by test/theme.browser.test.ts (phone >= 4.5:1, projector >= 7:1). */
+:root {
+  --bg: #ffffff;
+  --fg: #0b1220;
+  --muted: #475569;
+  --line: #64748b;
+  --primary: #1d4ed8;
+  --primary-fg: #ffffff;
+  --pass: #166534;
+  --fail: #b91c1c;
+}
+
+[data-theme="projector"] {
+  --bg: #000000;
+  --fg: #ffffff;
+  --muted: #d1d5db;
+  --line: #9ca3af;
+  --primary: #93c5fd;
+  --primary-fg: #000000;
+  --pass: #4ade80;
+  --fail: #ff8a8a;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-primary: var(--primary);
+  --color-primary-fg: var(--primary-fg);
+  --color-pass: var(--pass);
+  --color-fail: var(--fail);
+}

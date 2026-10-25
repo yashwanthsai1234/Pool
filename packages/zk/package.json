@@ -1,0 +1,19 @@
+{
+  "name": "@legx/zk",
+  "type": "module",
+  "exports": {
+    "./*": "./src/*.ts"
+  },
+  "dependencies": {
+    "@legx/contracts": "workspace:*",
+    "@legx/core": "workspace:*",
+    "@noble/hashes": "2.4.0",
+    "@zkpassport/registry": "0.15.3",
+    "@zkpassport/sdk": "0.19.2",
+    "@zkpassport/utils": "0.40.0-beta.2"
+  },
+  "devDependencies": {
+    "@aztec/bb.js": "5.0.0",
+    "@noir-lang/noir_js": "1.0.0-beta.22"
+  }
+}

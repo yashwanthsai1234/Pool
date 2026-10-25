@@ -1,0 +1,21 @@
+/* The only motion on the dashboard: a short highlight when an item turns PASS or a log row arrives.
+   `prefers-reduced-motion: reduce` removes every animation and transition (P4.5-06). */
+@keyframes legx-flash {
+  from {
+    background-color: var(--primary);
+    color: var(--primary-fg);
+  }
+}
+.legx-flash {
+  animation: legx-flash 900ms ease-out;
+}
+.legx-meter {
+  transition: width 400ms ease-out;
+}
+@media (prefers-reduced-motion: reduce) {
+  .legx-flash,
+  .legx-meter {
+    animation-name: none;
+    transition: none;
+  }
+}

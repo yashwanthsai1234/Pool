@@ -1,0 +1,173 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "deal_id": {
+      "type": "string",
+      "format": "uuid",
+      "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$"
+    },
+    "deal_seal": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "ledger": {
+      "type": "object",
+      "properties": {
+        "ledger_index": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4294967295
+        },
+        "ledger_hash": {
+          "type": "string",
+          "pattern": "^[0-9A-F]{64}$"
+        }
+      },
+      "required": [
+        "ledger_index",
+        "ledger_hash"
+      ],
+      "additionalProperties": false
+    },
+    "findings": {
+      "minItems": 15,
+      "maxItems": 256,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "level": {
+            "type": "string",
+            "enum": [
+              "block",
+              "warn"
+            ]
+          },
+          "code": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "LOCK_OK",
+                  "CONTRACT_SEAL_OK",
+                  "PASSPORT_A_OK",
+                  "PASSPORT_B_OK",
+                  "BAR_A_OK",
+                  "BAR_B_OK",
+                  "ATTORNEY_CREDENTIAL_A_OK",
+                  "ATTORNEY_CREDENTIAL_B_OK",
+                  "RELEASER_SEALED",
+                  "OPS_BINDINGS_OK",
+                  "ONBOARDING_OK",
+                  "IDS_DISTINCT",
+                  "IDENTITY_POLICY_OK",
+                  "PQ_BINDINGS_OK",
+                  "SLOT_SETUP_OK"
+                ]
+              },
+              {
+                "type": "string",
+                "const": "DEMO_NO_FACE_MATCH"
+              },
+              {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "enum": [
+                      "MASTER_DISABLED",
+                      "DEPOSIT_AUTH_ON",
+                      "DISALLOW_NFT_OFFER",
+                      "DISALLOW_CHECK",
+                      "DISALLOW_PAYCHAN",
+                      "DISALLOW_TRUSTLINE",
+                      "NO_REGULARKEY",
+                      "NO_NFTOKENMINTER",
+                      "NO_MINTEDNFTOKENS",
+                      "NO_AMMID",
+                      "NO_VAULTID",
+                      "NO_LOANBROKERID",
+                      "NO_SPONSOR",
+                      "NO_SPONSORINGOWNERCOUNT",
+                      "NO_SPONSORINGACCOUNTCOUNT",
+                      "DOMAIN_IS_SEAL",
+                      "RELEASER_IS_OPS_B",
+                      "ONE_SIGNER_LIST",
+                      "SIGNERS_MATCH_KEYS",
+                      "QUORUM_MATCH",
+                      "QUORUM_NEEDS_EVERY_SIGNER",
+                      "ONE_PREAUTH",
+                      "PREAUTH_ONLY_RELEASER",
+                      "CREDENTIAL_SUBJECT_EXPECTED",
+                      "CREDENTIAL_ACCEPTED",
+                      "TICKET_ALLOWED",
+                      "OWNER_COUNT_MATCHES",
+                      "QUARANTINE_PRESENT",
+                      "ESCROW_AMOUNT_AND_CONDITION",
+                      "NO_FINISH_DELAY_TRAP",
+                      "CANCEL_AFTER_MARGIN",
+                      "FOREIGN_INCOMING_ESCROW"
+                    ]
+                  },
+                  {
+                    "type": "string",
+                    "pattern": "^(?:UNEXPECTED_OWNED|INCOMING)_[A-Z0-9_]{1,64}$"
+                  }
+                ]
+              }
+            ]
+          },
+          "detail": {
+            "type": "string",
+            "maxLength": 1024
+          }
+        },
+        "required": [
+          "ok",
+          "level",
+          "code"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "relied_on": {
+      "minItems": 1,
+      "maxItems": 256,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 128
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        },
+        "required": [
+          "name",
+          "sha256"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "slot_lb_sig": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{128}$"
+    }
+  },
+  "required": [
+    "deal_id",
+    "deal_seal",
+    "ledger",
+    "findings",
+    "relied_on",
+    "slot_lb_sig"
+  ],
+  "additionalProperties": false
+}

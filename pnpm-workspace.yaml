@@ -1,0 +1,16 @@
+packages:
+  - packages/*
+  - services/*
+  - apps/*
+  - tools/*
+  - tests/*
+# Supply-chain guard (IMPLEMENTATION 4): refuse versions younger than 3 days.
+# Exceptions are listed with their reason in IMPLEMENTATION section 4.
+allowBuilds:
+  protobufjs: false
+  msgpackr-extract: false
+  esbuild: false
+minimumReleaseAge: 4320
+minimumReleaseAgeExclude:
+  - '@stryker-mutator/*'
+  - '@zkpassport/*'

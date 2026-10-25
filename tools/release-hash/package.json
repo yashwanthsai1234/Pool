@@ -1,0 +1,22 @@
+{
+  "name": "@legx/release-hash",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./*": "./src/*.ts"
+  },
+  "bin": { "release-hash": "./src/cli.ts" },
+  "dependencies": {
+    "@legx/contracts": "workspace:*",
+    "@legx/core": "workspace:*",
+    "@legx/signer": "workspace:*",
+    "@noble/curves": "2.4.0",
+    "@noble/hashes": "2.4.0",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "fast-check": "4.10.2"
+  }
+}

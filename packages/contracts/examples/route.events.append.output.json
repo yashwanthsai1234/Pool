@@ -1,0 +1,15 @@
+[
+  {
+    "status": "stored",
+    "seq": 4,
+    "leafHash": "b3b3b3b3b3b3b3b3b3b3b3b3b3b3b3b3b3b3b3b3b3b3b3b3b3b3b3b3b3b3b3b3",
+    "state": "KEYS_READY"
+  },
+  {
+    "status": "seq_taken",
+    "head": {
+      "nextSeq": 5,
+      "prevHash": "b3b3b3b3b3b3b3b3b3b3b3b3b3b3b3b3b3b3b3b3b3b3b3b3b3b3b3b3b3b3b3b3"
+    }
+  }
+]

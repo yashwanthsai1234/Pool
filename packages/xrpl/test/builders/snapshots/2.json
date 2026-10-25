@@ -1,0 +1,7 @@
+{
+  "TransactionType": "Payment",
+  "Account": "rfPaNmieF15VqV752Q8qAc6ugtkKhWsA2R",
+  "Destination": "rHhr2iRBgp3ZzzNH4YGQ59G7VAiGPEWj7f",
+  "Amount": "2500000",
+  "Fee": "10"
+}

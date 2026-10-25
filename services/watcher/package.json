@@ -1,0 +1,21 @@
+{
+  "name": "@legx/watcher",
+  "type": "module",
+  "private": true,
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@legx/contracts": "workspace:*",
+    "@legx/core": "workspace:*",
+    "@legx/db": "workspace:*",
+    "@legx/xrpl": "workspace:*",
+    "kysely": "0.29.7",
+    "pg": "8.23.0"
+  },
+  "devDependencies": {
+    "@noble/hashes": "2.4.0",
+    "@types/pg": "8.23.1",
+    "xrpl": "5.3.0"
+  }
+}

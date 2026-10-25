@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "dealId": {
+      "type": "string",
+      "format": "uuid",
+      "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$"
+    },
+    "role": {
+      "type": "string",
+      "enum": [
+        "LA",
+        "LB"
+      ]
+    },
+    "lawyerPub": {
+      "type": "string",
+      "pattern": "^ED[0-9A-F]{64}$"
+    },
+    "barCommitment": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "barNumber": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9-]{1,32}$",
+      "x-legx-secret": true
+    },
+    "barSalt": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$",
+      "x-legx-secret": true
+    },
+    "opsAccount": {
+      "type": "string",
+      "pattern": "^r[1-9A-HJ-NP-Za-km-z]{24,34}$"
+    },
+    "verificationSha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  },
+  "required": [
+    "dealId",
+    "role",
+    "lawyerPub",
+    "barCommitment",
+    "barNumber",
+    "barSalt",
+    "opsAccount",
+    "verificationSha256"
+  ],
+  "additionalProperties": false
+}

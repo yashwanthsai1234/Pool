@@ -1,0 +1,50 @@
+# Generated from packages/observability/src/allowlist.ts by collectorConfig(); a test fails if this file drifts.
+receivers:
+  otlp:
+    protocols:
+      http:
+        endpoint: 0.0.0.0:4318
+
+processors:
+  redaction:
+    allow_all_keys: false
+    allowed_keys:
+      - "deal.id"
+      - "deal.state"
+      - "deal.phase"
+      - "xrpl.tx_hash"
+      - "xrpl.ledger_index"
+      - "xrpl.engine_result"
+      - "http.route"
+      - "http.response.status_code"
+      - "gate.result"
+      - "gate.finding_code"
+      - "attest.side"
+      - "attest.result"
+      - "attest.chip_auth"
+      - "bar.result"
+      - "bar.source_kind"
+      - "credential.result"
+    blocked_values:
+      - "[\\w.+-]+@[\\w-]+\\.[\\w.]+"
+      - "\\bs[1-9A-HJ-NP-Za-km-z]{25,}\\b"
+      - "P<[A-Z<]{5,}"
+      - "[A-Z0-9<]{9}[0-9][A-Z<]{3}[0-9]{6}"
+      - "\\b[0-9a-fA-F]{128,}\\b"
+      - "[A-Za-z0-9+/]{120,}={0,2}"
+      - "-----BEGIN [A-Z ]+-----"
+    hash_function: hmac-sha256
+    # The key must be at least 32 bytes for hmac-sha256 (the Collector refuses to start otherwise).
+    hmac_key: "${env:LEGX_REDACTION_HMAC_KEY}"
+    summary: info
+
+exporters:
+  debug:
+    verbosity: detailed
+
+service:
+  pipelines:
+    traces:
+      receivers: [otlp]
+      processors: [redaction]
+      exporters: [debug]

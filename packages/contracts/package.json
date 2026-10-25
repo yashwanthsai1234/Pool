@@ -1,0 +1,14 @@
+{
+  "name": "@legx/contracts",
+  "type": "module",
+  "private": true,
+  "exports": {
+    ".": "./src/index.ts",
+    "./*": "./src/*.ts"
+  },
+  "dependencies": {
+    "@noble/hashes": "2.4.0",
+    "@orpc/contract": "1.16.0",
+    "zod": "4.6.7"
+  }
+}

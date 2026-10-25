@@ -1,0 +1,43 @@
+[
+  {
+    "stage": "release",
+    "domain": "legx.app",
+    "scope": "legx/v1/0192f0c8-3c4e-7a2b-8c3d-4e5f6a7b8c9d",
+    "devMode": false,
+    "proofs": [
+      {
+        "name": "sig_check_dsc_tbs_700_rsa_pkcs_2048_sha256",
+        "proof": "abababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab",
+        "vkeyHash": "0x4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d",
+        "version": "0.21.1",
+        "index": 0,
+        "total": 5,
+        "committedInputs": {
+          "compare_age": {
+            "minAge": 18,
+            "maxAge": 0
+          }
+        }
+      }
+    ],
+    "originalQuery": {
+      "age": {
+        "gte": 18
+      },
+      "bind": {
+        "custom_data": "2222222222222222222222222222222222222222222222222222222222222222"
+      }
+    },
+    "queryResult": {
+      "age": {
+        "gte": {
+          "expected": 18,
+          "result": true
+        }
+      },
+      "bind": {
+        "custom_data": "2222222222222222222222222222222222222222222222222222222222222222"
+      }
+    }
+  }
+]

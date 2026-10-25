@@ -1,0 +1,19 @@
+{
+  "name": "@legx/storage",
+  "type": "module",
+  "private": true,
+  "exports": {
+    ".": "./src/index.ts",
+    "./*": "./src/*.ts"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "3.1149.0",
+    "@legx/contracts": "workspace:*",
+    "@legx/core": "workspace:*",
+    "@legx/signer": "workspace:*",
+    "@noble/curves": "2.4.0",
+    "@noble/hashes": "2.4.0",
+    "@noble/post-quantum": "0.7.1",
+    "zod": "4.6.7"
+  }
+}

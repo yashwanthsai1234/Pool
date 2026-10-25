@@ -1,0 +1,13 @@
+[
+  {
+    "exists": true,
+    "ledgerIndex": 1234567,
+    "flags": 8388608,
+    "sequence": 7,
+    "balanceDrops": "25000000"
+  },
+  {
+    "exists": false,
+    "ledgerIndex": 1234567
+  }
+]

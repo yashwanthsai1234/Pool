@@ -1,0 +1,11 @@
+# Reproducible build of the vault bundle in a clean container (P4.10-01). NOT RUN in task 4.10 (disk budget):
+#   docker build -f tools/release-hash/Dockerfile.build -t legx-vault-build . && docker run --rm -v "$PWD/out:/out" legx-vault-build
+# then compare `out/` with a host build: `node apps/vault-host/scripts/build.ts` gives the same manifest hash.
+# The Node version is the one in .nvmrc; the lockfile is frozen, so no dependency can float.
+FROM node:24.22.1-trixie-slim
+RUN corepack enable
+WORKDIR /src
+COPY . .
+RUN pnpm install --frozen-lockfile
+ENV LEGX_RELEASE_URL=""
+CMD ["node", "apps/vault-host/scripts/build.ts"]

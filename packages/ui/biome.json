@@ -1,0 +1,6 @@
+{
+  "root": false,
+  "extends": "//",
+  "css": { "parser": { "tailwindDirectives": true } },
+  "files": { "includes": ["**", "!**/node_modules", "!**/dist", "!**/.vitest", "!**/*.json", "!**/public", "!src/routeTree.gen.ts"] }
+}

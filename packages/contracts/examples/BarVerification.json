@@ -1,0 +1,22 @@
+[
+  {
+    "jurisdiction": "US-CA",
+    "bar_number_sha256": "5151515151515151515151515151515151515151515151515151515151515151",
+    "status": "active",
+    "source": {
+      "kind": "manual",
+      "url": "https://registry.example.org/lawyer/123",
+      "evidence_sha256": "5252525252525252525252525252525252525252525252525252525252525252"
+    },
+    "ops_account": "rHhr2iRBgp3ZzzNH4YGQ59G7VAiGPEWj7f",
+    "checked_at_ledger": {
+      "ledger_index": 1234567,
+      "ledger_hash": "ABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABAB"
+    },
+    "verifier_key_id": "svc/verifier",
+    "sig_algs": [
+      "ed25519",
+      "ml-dsa-65"
+    ]
+  }
+]

@@ -1,0 +1,49 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.5.15/schema.json",
+  "files": {
+    "includes": ["**", "!**/node_modules", "!.tools", "!build", "!**/dist", "!**/vectors/**", "!**/*.json"]
+  },
+  "formatter": {
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineWidth": 120
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "single"
+    }
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "preset": "recommended"
+    }
+  },
+  "overrides": [
+    {
+      "includes": [
+        "services/**",
+        "apps/server/**",
+        "packages/signer/**",
+        "packages/storage/**",
+        "!**/test/**",
+        "!**/test-int/**"
+      ],
+      "linter": {
+        "rules": {
+          "style": {
+            "noRestrictedImports": {
+              "level": "error",
+              "options": {
+                "paths": {
+                  "@noble/post-quantum": "Servers use Node's built-in ML-DSA or KMS (DESIGN 6.13); noble post-quantum is browser-only.",
+                  "@noble/post-quantum/ml-dsa.js": "Servers use Node's built-in ML-DSA or KMS (DESIGN 6.13)."
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

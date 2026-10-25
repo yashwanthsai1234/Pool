@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "seq": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9007199254740991
+          },
+          "leafHash": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "envelope": {
+            "type": "string",
+            "maxLength": 87384,
+            "format": "base64",
+            "contentEncoding": "base64",
+            "pattern": "^$|^(?:[0-9a-zA-Z+/]{4})*(?:(?:[0-9a-zA-Z+/]{2}==)|(?:[0-9a-zA-Z+/]{3}=))?$"
+          },
+          "checks": {
+            "type": "object",
+            "properties": {
+              "signature": {
+                "type": "boolean"
+              },
+              "chain": {
+                "type": "boolean"
+              },
+              "ledger": {
+                "type": "string",
+                "enum": [
+                  "linked",
+                  "none",
+                  "mismatch"
+                ]
+              }
+            },
+            "required": [
+              "signature",
+              "chain",
+              "ledger"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "seq",
+          "leafHash",
+          "envelope",
+          "checks"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "records"
+  ],
+  "additionalProperties": false
+}

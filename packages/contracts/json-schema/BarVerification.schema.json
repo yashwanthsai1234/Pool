@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "jurisdiction": {
+      "type": "string",
+      "pattern": "^[A-Z]{2}(?:-[A-Z0-9]{1,3})?$"
+    },
+    "bar_number_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "not_active"
+      ]
+    },
+    "source": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": [
+            "registry-api",
+            "registry-page",
+            "manual"
+          ]
+        },
+        "url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "evidence_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "kind",
+        "url",
+        "evidence_sha256"
+      ],
+      "additionalProperties": false
+    },
+    "ops_account": {
+      "type": "string",
+      "pattern": "^r[1-9A-HJ-NP-Za-km-z]{24,34}$"
+    },
+    "checked_at_ledger": {
+      "type": "object",
+      "properties": {
+        "ledger_index": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4294967295
+        },
+        "ledger_hash": {
+          "type": "string",
+          "pattern": "^[0-9A-F]{64}$"
+        }
+      },
+      "required": [
+        "ledger_index",
+        "ledger_hash"
+      ],
+      "additionalProperties": false
+    },
+    "verifier_key_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9._:/#-]{1,128}$"
+    },
+    "sig_algs": {
+      "minItems": 1,
+      "maxItems": 4,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "ed25519",
+          "ml-dsa-65"
+        ]
+      }
+    }
+  },
+  "required": [
+    "jurisdiction",
+    "bar_number_sha256",
+    "status",
+    "source",
+    "ops_account",
+    "checked_at_ledger",
+    "verifier_key_id",
+    "sig_algs"
+  ],
+  "additionalProperties": false
+}

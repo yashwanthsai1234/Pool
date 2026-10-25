@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "slot": {
+      "type": "string",
+      "enum": [
+        "A",
+        "LA",
+        "B",
+        "LB"
+      ]
+    },
+    "deal_seal": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "slot_pub": {
+      "type": "string",
+      "pattern": "^ED[0-9A-F]{64}$"
+    },
+    "pq_key_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "holder_sigs": {
+      "type": "array",
+      "prefixItems": [
+        {
+          "type": "object",
+          "properties": {
+            "key_id": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9._:/#-]{1,128}$"
+            },
+            "sig": {
+              "type": "string",
+              "pattern": "^(?:[A-Za-z0-9+/]{4}){1103}$"
+            }
+          },
+          "required": [
+            "key_id",
+            "sig"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "key_id": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9._:/#-]{1,128}$"
+            },
+            "sig": {
+              "type": "string",
+              "pattern": "^(?:[A-Za-z0-9+/]{4}){1103}$"
+            }
+          },
+          "required": [
+            "key_id",
+            "sig"
+          ],
+          "additionalProperties": false
+        }
+      ],
+      "items": false,
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "cross_sig": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{128}$"
+    }
+  },
+  "required": [
+    "slot",
+    "deal_seal",
+    "slot_pub",
+    "pq_key_hash",
+    "holder_sigs",
+    "cross_sig"
+  ],
+  "additionalProperties": false
+}

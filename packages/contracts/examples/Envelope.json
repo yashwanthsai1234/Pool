@@ -1,0 +1,12 @@
+[
+  {
+    "payloadType": "application/vnd.legx.attest+json;v=1",
+    "payload": "e30=",
+    "signatures": [
+      {
+        "keyid": "svc/evidence#ed25519",
+        "sig": "AQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQ=="
+      }
+    ]
+  }
+]

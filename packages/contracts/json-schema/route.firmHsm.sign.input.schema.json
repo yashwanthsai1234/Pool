@@ -1,0 +1,190 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "dealId": {
+      "type": "string",
+      "format": "uuid",
+      "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$"
+    },
+    "slot": {
+      "type": "string",
+      "enum": [
+        "LA",
+        "LB"
+      ]
+    },
+    "sessionId": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "pair": {
+      "type": "array",
+      "prefixItems": [
+        {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 3
+        },
+        {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 3
+        }
+      ],
+      "items": false,
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "seal": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "operator": {
+      "type": "object",
+      "properties": {
+        "opsPub": {
+          "type": "string",
+          "pattern": "^(?:ED|02|03)[0-9A-F]{64}$"
+        },
+        "sig": {
+          "type": "string",
+          "pattern": "^(?:[0-9a-f]{2}){64,72}$"
+        }
+      },
+      "required": [
+        "opsPub",
+        "sig"
+      ],
+      "additionalProperties": false
+    },
+    "message": {
+      "type": "string",
+      "pattern": "^(?:[0-9a-f]{2}){32,16384}$"
+    },
+    "request": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "xrpl-multisign"
+            },
+            "tx": {
+              "type": "object",
+              "propertyNames": {
+                "type": "string"
+              },
+              "additionalProperties": {}
+            }
+          },
+          "required": [
+            "kind",
+            "tx"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "tagged"
+            },
+            "tag": {
+              "type": "string",
+              "pattern": "^legx\\/[a-z0-9-]{1,64}\\/v[0-9]{1,3}$"
+            },
+            "parts": {
+              "maxItems": 16,
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^(?:[0-9a-f]{2}){0,16384}$"
+              }
+            }
+          },
+          "required": [
+            "kind",
+            "tag",
+            "parts"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "gate-record"
+            },
+            "envelope": {
+              "type": "string",
+              "pattern": "^(?:[0-9a-f]{2}){1,65536}$"
+            }
+          },
+          "required": [
+            "kind",
+            "envelope"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "approval": {
+      "type": "object",
+      "properties": {
+        "credential_id": {
+          "type": "string",
+          "maxLength": 1368,
+          "format": "base64",
+          "contentEncoding": "base64",
+          "pattern": "^$|^(?:[0-9a-zA-Z+/]{4})*(?:(?:[0-9a-zA-Z+/]{2}==)|(?:[0-9a-zA-Z+/]{3}=))?$"
+        },
+        "authenticator_data": {
+          "type": "string",
+          "maxLength": 1368,
+          "format": "base64",
+          "contentEncoding": "base64",
+          "pattern": "^$|^(?:[0-9a-zA-Z+/]{4})*(?:(?:[0-9a-zA-Z+/]{2}==)|(?:[0-9a-zA-Z+/]{3}=))?$"
+        },
+        "client_data_json": {
+          "type": "string",
+          "maxLength": 5464,
+          "format": "base64",
+          "contentEncoding": "base64",
+          "pattern": "^$|^(?:[0-9a-zA-Z+/]{4})*(?:(?:[0-9a-zA-Z+/]{2}==)|(?:[0-9a-zA-Z+/]{3}=))?$"
+        },
+        "signature": {
+          "type": "string",
+          "maxLength": 684,
+          "format": "base64",
+          "contentEncoding": "base64",
+          "pattern": "^$|^(?:[0-9a-zA-Z+/]{4})*(?:(?:[0-9a-zA-Z+/]{2}==)|(?:[0-9a-zA-Z+/]{3}=))?$"
+        },
+        "message_hash": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "credential_id",
+        "authenticator_data",
+        "client_data_json",
+        "signature",
+        "message_hash"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "dealId",
+    "slot",
+    "sessionId",
+    "pair",
+    "seal",
+    "operator"
+  ],
+  "additionalProperties": false
+}

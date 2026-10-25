@@ -1,0 +1,32 @@
+{
+  "TransactionType": "SignerListSet",
+  "Account": "rHhr2iRBgp3ZzzNH4YGQ59G7VAiGPEWj7f",
+  "SignerQuorum": 4,
+  "SignerEntries": [
+    {
+      "SignerEntry": {
+        "Account": "rEhh6f9rj5UUBhFzGGaxS5zYU2CCqKFXBC",
+        "SignerWeight": 1
+      }
+    },
+    {
+      "SignerEntry": {
+        "Account": "rE8zrHvNYHxxEAhzbXzigXbrf8bDMTbipP",
+        "SignerWeight": 1
+      }
+    },
+    {
+      "SignerEntry": {
+        "Account": "rKkznkpLz382kkhgwqiGWjvAbgGRvknrF6",
+        "SignerWeight": 1
+      }
+    },
+    {
+      "SignerEntry": {
+        "Account": "r9yW3N9Rh66iMHy5nevJLFQy3qU1v732GM",
+        "SignerWeight": 1
+      }
+    }
+  ],
+  "Fee": "10"
+}

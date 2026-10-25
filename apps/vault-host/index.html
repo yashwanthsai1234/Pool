@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="referrer" content="no-referrer" />
+    <title>Signing vault</title>
+  </head>
+  <body>
+    <main>
+      <h1>Signing vault</h1>
+      <p id="state">Checking the code against the published release...</p>
+      <dl id="facts" hidden>
+        <dt>Vault origin</dt>
+        <dd id="origin"></dd>
+        <dt>Version</dt>
+        <dd id="version"></dd>
+        <dt>Code hash</dt>
+        <dd id="hash"></dd>
+      </dl>
+      <p id="limit" hidden>
+        Compare this hash with the one published for the release. This check protects against a changed coordinator, not
+        against whoever controls this origin itself. Rebuilding the release yourself gives the same hash.
+      </p>
+    </main>
+    <script type="module" src="./src/frame.ts"></script>
+  </body>
+</html>

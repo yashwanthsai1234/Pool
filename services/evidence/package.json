@@ -1,0 +1,28 @@
+{
+  "name": "@legx/evidence",
+  "type": "module",
+  "private": true,
+  "exports": {
+    ".": "./src/index.ts",
+    "./*": "./src/*.ts"
+  },
+  "dependencies": {
+    "@legx/contracts": "workspace:*",
+    "@legx/coordinator": "workspace:*",
+    "@legx/core": "workspace:*",
+    "@legx/db": "workspace:*",
+    "@legx/xrpl": "workspace:*",
+    "@noble/curves": "2.4.0",
+    "@noble/hashes": "2.4.0",
+    "asn1js": "3.1.0",
+    "canonicalize": "5.1.0",
+    "pg-boss": "12.38.0",
+    "pkijs": "3.4.3"
+  },
+  "devDependencies": {
+    "@cloudflare/signed-note-wasm": "0.3.0",
+    "@legx/signer": "workspace:*",
+    "@legx/storage": "workspace:*",
+    "kysely": "0.29.7"
+  }
+}

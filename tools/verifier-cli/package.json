@@ -1,0 +1,28 @@
+{
+  "name": "@legx/verifier-cli",
+  "type": "module",
+  "private": true,
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "bin": {
+    "legx-verify": "./src/bin.ts"
+  },
+  "scripts": {
+    "bundle": "node scripts/bundle.ts"
+  },
+  "dependencies": {
+    "@legx/contracts": "workspace:*",
+    "@legx/core": "workspace:*",
+    "@legx/evidence": "workspace:*",
+    "@legx/zk": "workspace:*",
+    "@noble/curves": "2.4.0",
+    "@noble/hashes": "2.4.0",
+    "asn1js": "3.1.0",
+    "pkijs": "3.4.3"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2",
+    "fast-check": "4.10.2"
+  }
+}

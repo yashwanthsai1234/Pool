@@ -1,0 +1,220 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "oneOf": [
+    {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "const": "complete"
+        },
+        "publicData": {
+          "type": "object",
+          "properties": {
+            "contractRoot": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "signedContractSeal": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "walletAddress": {
+              "type": "string",
+              "pattern": "^r[1-9A-HJ-NP-Za-km-z]{24,34}$"
+            },
+            "xPubA": {
+              "type": "string",
+              "pattern": "^ED[0-9A-F]{64}$"
+            },
+            "xPubB": {
+              "type": "string",
+              "pattern": "^ED[0-9A-F]{64}$"
+            },
+            "commitmentA": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "commitmentB": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "idMethodA": {
+              "type": "string",
+              "enum": [
+                "zkpassport",
+                "nfc-chip"
+              ]
+            },
+            "idMethodB": {
+              "type": "string",
+              "enum": [
+                "zkpassport",
+                "nfc-chip"
+              ]
+            },
+            "identityPolicy": {
+              "type": "string",
+              "enum": [
+                "zk",
+                "zk-or-chip",
+                "chip"
+              ]
+            },
+            "lawyerPubA": {
+              "type": "string",
+              "pattern": "^ED[0-9A-F]{64}$"
+            },
+            "lawyerPubB": {
+              "type": "string",
+              "pattern": "^ED[0-9A-F]{64}$"
+            },
+            "lawyerCommitmentA": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "lawyerCommitmentB": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "lawyerOpsA": {
+              "type": "string",
+              "pattern": "^r[1-9A-HJ-NP-Za-km-z]{24,34}$"
+            },
+            "lawyerOpsB": {
+              "type": "string",
+              "pattern": "^r[1-9A-HJ-NP-Za-km-z]{24,34}$"
+            },
+            "releaserAccount": {
+              "type": "string",
+              "pattern": "^r[1-9A-HJ-NP-Za-km-z]{24,34}$"
+            },
+            "slotPolicyA": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "slotPolicyLA": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "slotPolicyB": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "slotPolicyLB": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "pqKeyHashA": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "pqKeyHashLA": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "pqKeyHashB": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "pqKeyHashLB": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "signerAccounts": {
+              "minItems": 4,
+              "maxItems": 4,
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^r[1-9A-HJ-NP-Za-km-z]{24,34}$"
+              }
+            },
+            "quorum": {
+              "type": "number",
+              "const": 4
+            },
+            "payoutA": {
+              "type": "string",
+              "pattern": "^r[1-9A-HJ-NP-Za-km-z]{24,34}(?::(?:0|[1-9][0-9]{0,9}))?$"
+            },
+            "payoutB": {
+              "type": "string",
+              "pattern": "^r[1-9A-HJ-NP-Za-km-z]{24,34}(?::(?:0|[1-9][0-9]{0,9}))?$"
+            }
+          },
+          "required": [
+            "contractRoot",
+            "signedContractSeal",
+            "walletAddress",
+            "xPubA",
+            "xPubB",
+            "commitmentA",
+            "commitmentB",
+            "idMethodA",
+            "idMethodB",
+            "identityPolicy",
+            "lawyerPubA",
+            "lawyerPubB",
+            "lawyerCommitmentA",
+            "lawyerCommitmentB",
+            "lawyerOpsA",
+            "lawyerOpsB",
+            "releaserAccount",
+            "slotPolicyA",
+            "slotPolicyLA",
+            "slotPolicyB",
+            "slotPolicyLB",
+            "pqKeyHashA",
+            "pqKeyHashLA",
+            "pqKeyHashB",
+            "pqKeyHashLB",
+            "signerAccounts",
+            "quorum",
+            "payoutA",
+            "payoutB"
+          ],
+          "additionalProperties": false
+        },
+        "dealSeal": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "domain": {
+          "type": "string",
+          "pattern": "^01[0-9A-F]{128}$"
+        }
+      },
+      "required": [
+        "status",
+        "publicData",
+        "dealSeal",
+        "domain"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "const": "incomplete"
+        },
+        "missing": {
+          "minItems": 1,
+          "maxItems": 29,
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 64
+          }
+        }
+      },
+      "required": [
+        "status",
+        "missing"
+      ],
+      "additionalProperties": false
+    }
+  ]
+}
