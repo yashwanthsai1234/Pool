@@ -10,6 +10,7 @@ allowBuilds:
   protobufjs: false
   msgpackr-extract: false
   esbuild: false
+  '@swc/core': false
 minimumReleaseAge: 4320
 minimumReleaseAgeExclude:
   - '@stryker-mutator/*'
