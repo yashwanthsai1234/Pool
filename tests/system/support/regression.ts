@@ -33,7 +33,8 @@ export function pins(id: string): { system: string[]; package: string[] } {
   )
     .trim()
     .split('\n')
-    .filter(Boolean);
+    .filter(Boolean)
+    .sort();
   return {
     system: files.filter((f) => f.startsWith('tests/system/')),
     package: files.filter((f) => !f.startsWith('tests/system/')),

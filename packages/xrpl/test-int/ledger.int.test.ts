@@ -141,13 +141,16 @@ describe('standalone ledger', () => {
   });
 
   it('P2.1-03 a config without the Credentials stanza fails and names Credentials', async () => {
-    const { mkdtempSync, readFileSync, writeFileSync } = await import('node:fs');
+    const { chmodSync, mkdtempSync, readFileSync, writeFileSync } = await import('node:fs');
     const { tmpdir } = await import('node:os');
     const dir = mkdtempSync(`${tmpdir()}/legx-nocred-`);
     writeFileSync(
       `${dir}/xrpld.cfg`,
       readFileSync(`${process.cwd()}/ci/xrpld.cfg`, 'utf8').replace(/^Credentials$/m, ''),
     );
+    // mkdtemp makes the folder 0700; the container's own user must read the mounted config (Linux CI).
+    chmodSync(dir, 0o755);
+    chmodSync(`${dir}/xrpld.cfg`, 0o644);
     const bare = await startExtra('legx-2.1-xrpld-nocred', dir);
     try {
       await expect(assertAmendments(bare.client)).rejects.toThrow(/Credentials/);

@@ -22,7 +22,7 @@ Every issue of `build/ISSUES.md` and the test that pins it. Regenerate with `nod
 | I-11 | packages/core/hybridEnvelope | - | - | none |
 | I-12 | evidence `pq.bound` | - | - | none |
 | I-13 | services/evidence | - | - | none |
-| I-14 | services/coordinator | `wiring.test.ts`, `sys.test.ts` | - | system |
+| I-14 | services/coordinator | `sys.test.ts`, `wiring.test.ts` | - | system |
 | I-15 | services/zk-verifier | - | - | none |
 | I-16 | packages/core/releaseGate | - | `packages/core/test/mutation-releaseGate.test.ts` | package |
 | I-17 | packages/core frost allow-list | - | `packages/core/test/browser/core.browser.test.ts` | package |
@@ -72,12 +72,12 @@ Every issue of `build/ISSUES.md` and the test that pins it. Regenerate with `nod
 | I-3.7-d | contracts `api.ts` | `wiring.test.ts` | - | system |
 | I-3.7-e | coordinator `keys.ts`, evidence `keys.ts`, `rec... | - | `services/evidence/test/helpers/world.ts` | package |
 | I-3.7-f | recovery-agent `routes.ts` | - | `services/recovery-agent/test/http.test.ts` | package |
-| I-3.7-g | gate, zk, agents | `wiring.test.ts` | `apps/server/test/gate.test.ts`, `apps/server/test/production.test.ts`, `apps/server/test-int/stack.int.test.ts` | system |
+| I-3.7-g | gate, zk, agents | `wiring.test.ts` | `apps/server/test-int/stack.int.test.ts`, `apps/server/test/gate.test.ts`, `apps/server/test/production.test.ts` | system |
 | I-3.7-h | evidence | - | - | none |
 | I-28 | contracts, coordinator/frost, recovery-agent | - | `packages/vault/test/frost/ceremony-frame.browser.test.ts`, `services/firm-cosigner/test/routes.test.ts`, `services/recovery-agent/test/http.test.ts` | package |
 | I-29 | contracts, apps/web | - | `apps/web/test/party/pq-binding.browser.test.tsx` | package |
 | I-30 | packages/core/passport, apps/web | - | - | none |
-| I-31 | apps/web, contracts, apps/server | `sys.test.ts`, `ui.test.ts` | `services/coordinator/test/f1routes.test.ts`, `apps/web/test/party/services.browser.test.tsx` | system |
+| I-31 | apps/web, contracts, apps/server | `sys.test.ts`, `ui.test.ts` | `apps/web/test/party/services.browser.test.tsx`, `services/coordinator/test/f1routes.test.ts` | system |
 | I-D-1 | apps/server `compose.ts`, contracts `keys.regis... | - | - | none |
 | I-D-2 | apps/server `/deals` | - | - | none |
 | I-D-3 | apps/server `/ws` | - | - | none |
@@ -89,7 +89,7 @@ Every issue of `build/ISSUES.md` and the test that pins it. Regenerate with `nod
 | I-D-9 | scripts/demo/check.ts | - | - | none |
 | I-S-G1 | core `releaseGate.ts` `idsDistinct`, `attest.ts... | - | `packages/core/test/attest.test.ts` | package |
 | I-S-G2 | core `releaseGate.ts` `boundKeyIds` (OD-21) | - | `packages/core/test/releaseGate.test.ts` | package |
-| I-S-G3 | core `attest.ts` `zkReleaseRules` | - | `packages/core/test/zkIdentity.attest.test.ts`, `packages/core/test/e2e-paper-deal.test.ts`, `packages/core/test/attest.test.ts` (+2) | package |
+| I-S-G3 | core `attest.ts` `zkReleaseRules` | - | `apps/web/test/lawyers/passport.browser.test.tsx`, `packages/core/test/attest.test.ts`, `packages/core/test/e2e-paper-deal.test.ts` (+2) | package |
 | I-S-G4 | core `attest.ts` `verifyOnboarding` | - | `packages/core/test/attest.test.ts` | package |
 | I-S-G5 | core `attest.ts` `CHIP_SHAPE` | - | `packages/core/test/attest.test.ts` | package |
 | I-S-A1 | coordinator `auth.ts` `resolveKey`/`authorize`;... | - | - | none |
@@ -98,7 +98,7 @@ Every issue of `build/ISSUES.md` and the test that pins it. Regenerate with `nod
 | I-S-F1 | core `frostRules.ts` `recoveryStart` (lawyer pa... | - | `packages/core/test/frost.rules.test.ts`, `services/recovery-agent/test/http.test.ts`, `services/recovery-agent/test/lawyer.test.ts` | package |
 | I-S-F2 | core `frostRules.ts` `recoveryCancelMessage` | - | `packages/core/test/frost.rules.test.ts` | package |
 | I-S-F3 | core `frostRules.ts` `approvalCheck` (second au... | - | `packages/core/test/frost.rules.test.ts` | package |
-| I-S-P1 | core `hybridEnvelope.ts` `verifyHybrid`; eviden... | - | `packages/core/test/hybridEnvelope.test.ts`, `packages/core/test/attest.test.ts`, `packages/xrpl/test-int/roles.ts` | package |
+| I-S-P1 | core `hybridEnvelope.ts` `verifyHybrid`; eviden... | - | `packages/core/test/attest.test.ts`, `packages/core/test/hybridEnvelope.test.ts`, `packages/xrpl/test-int/roles.ts` | package |
 | I-S-E1 | evidence `tsa.ts` `verifyTimestampToken` | - | - | none |
 | I-S-E2 | verifier-cli `checkManifestSignature` | - | `tools/verifier-cli/test/cli.test.ts` | package |
 | I-S-E3 | verifier-cli `checkTimestamps` | - | `tools/verifier-cli/test/cli.test.ts` | package |
@@ -109,15 +109,15 @@ Every issue of `build/ISSUES.md` and the test that pins it. Regenerate with `nod
 | I-S-M3 | coordinator `escrow.cancelled` | - | - | none |
 | I-S-M4 | coordinator `key.bound`, `identity.onboarded`, ... | - | - | none |
 | I-S-X1 | apps/server, OD-31 | - | `apps/server/test/observer.test.ts` | package |
-| I-W-1 | apps/server `routes.ts` (`keys.register` answer... | `wiring.test.ts`, `sys.test.ts` | `services/coordinator/test/f1routes.test.ts` | system |
+| I-W-1 | apps/server `routes.ts` (`keys.register` answer... | `sys.test.ts`, `wiring.test.ts` | `services/coordinator/test/f1routes.test.ts` | system |
 | I-W-2 | apps/web `vite.config.ts` proxy, `lib/paths.ts`... | `ui.test.ts` | - | system |
 | I-W-4 | apps/server `demo.ts` (watcher) | `wiring.test.ts` | - | system |
-| I-W-5 | contracts `ws.ts` `OutboxTopic`, apps/web `lib/... | `wiring.test.ts` | `packages/db/test/support/suite.ts`, `services/coordinator/test/restart.test.ts`, `services/coordinator/test/exits.test.ts` | system |
+| I-W-5 | contracts `ws.ts` `OutboxTopic`, apps/web `lib/... | `wiring.test.ts` | `packages/db/test/support/suite.ts`, `services/coordinator/test/exits.test.ts`, `services/coordinator/test/restart.test.ts` | system |
 | I-W-6 | services/evidence, apps/server `evidence.ts` | `wiring.test.ts` | `services/coordinator/test/events.test.ts` | system |
 | I-W-7 | apps/server `demo.ts`, evidence `tsa.ts` | `wiring.test.ts` | - | system |
 | I-W-8 | apps/server `demo.ts` `evidence: { records }` | `sys.test.ts` | - | system |
 | I-W-9 | apps/server `demo.ts` `operatorKeys: () => unde... | `wiring.test.ts` | - | system |
-| I-W-10 | apps/web `routes/lawyers/-console/ui.tsx` | `console.test.ts`, `ui.test.ts` | `packages/vault/test/frost/slot-frame.browser.test.ts`, `packages/vault/test/signer.browser.test.ts`, `services/coordinator/test/f1routes.test.ts` (+2) | system |
+| I-W-10 | apps/web `routes/lawyers/-console/ui.tsx` | `console.test.ts`, `ui.test.ts` | `apps/web/test/lawyers/deals.browser.test.tsx`, `apps/web/test/lawyers/services.browser.test.tsx`, `packages/vault/test/frost/slot-frame.browser.test.ts` (+2) | system |
 | I-W-11 | apps/server, apps/web `lib/live.ts` | `ui.test.ts` | - | system |
 | I-W-12 | apps/server `demo.ts` | `sys.test.ts` | - | system |
 | I-W-13 | apps/server `agents.ts` | - | `apps/server/test/agents.test.ts` | package |

@@ -22,6 +22,8 @@ jobs:
   checks:
     name: lint, typecheck and unit (node ${{ matrix.node }})
     runs-on: ubuntu-latest
+    # Node 26 is advisory: the pinned target is Node 24.22 (.nvmrc), and P1.15-23 asserts it.
+    continue-on-error: ${{ matrix.node == '26' }}
     strategy:
       fail-fast: false
       matrix:
@@ -36,6 +38,8 @@ jobs:
           node-version: ${{ matrix.node }}
           cache: pnpm
       - run: pnpm install --frozen-lockfile
+      # The differential A/B tests run the Python reference (tools/py-ref) through uv.
+      - uses: astral-sh/setup-uv@v6
       - run: pnpm lint
       - run: pnpm typecheck
       # OpenSSL 3 is needed by the fixtures test (P1.8-04, `openssl cms -verify`).
@@ -48,6 +52,8 @@ jobs:
   browser:
     name: browser (node ${{ matrix.node }})
     runs-on: ubuntu-latest
+    # Node 26 is advisory: the pinned target is Node 24.22 (.nvmrc), and P1.15-23 asserts it.
+    continue-on-error: ${{ matrix.node == '26' }}
     strategy:
       fail-fast: false
       matrix:
@@ -72,6 +78,8 @@ jobs:
   integration:
     name: integration (node ${{ matrix.node }})
     runs-on: ubuntu-latest
+    # Node 26 is advisory: the pinned target is Node 24.22 (.nvmrc), and P1.15-23 asserts it.
+    continue-on-error: ${{ matrix.node == '26' }}
     strategy:
       fail-fast: false
       matrix:

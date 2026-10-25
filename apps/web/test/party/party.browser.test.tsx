@@ -13,7 +13,7 @@ import { QueryClientProvider } from '@tanstack/react-query';
 import axe from 'axe-core';
 import { HttpResponse, http } from 'msw';
 import { afterAll, afterEach, beforeAll, describe, expect, it, vi } from 'vitest';
-import { page } from 'vitest/browser';
+import { page, server } from 'vitest/browser';
 import { render } from 'vitest-browser-react';
 import {
   containsSecret,
@@ -524,9 +524,11 @@ describe('accessibility and snapshots (P4.3-08)', () => {
       expect(
         results.violations.filter((v) => v.impact === 'serious' || v.impact === 'critical').map((v) => v.id),
       ).toEqual([]);
-      await expect
-        .element(page.getByRole('main'))
-        .toMatchScreenshot(`party-${(label ?? 'home').toLowerCase().replace(/ /g, '-')}`);
+      // The baselines are macOS renders; fonts differ on other platforms, so the pixel comparison runs only there.
+      if (server.platform === 'darwin')
+        await expect
+          .element(page.getByRole('main'))
+          .toMatchScreenshot(`party-${(label ?? 'home').toLowerCase().replace(/ /g, '-')}`);
     });
   }
 });
